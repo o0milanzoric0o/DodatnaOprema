@@ -1,0 +1,21 @@
+/* TODO Create new packages for activities, fragments, adapters, requests... */
+/* TODO Add Volley and GSON (or Jackson) dependencies */
+
+/* http://masinealati.rs/parametri.php?action=sveKategorije */
+/* http://masinealati.rs/parametri.php?action=artNaAkciji */
+
+/*TODO Jelena
+    1. Add dependencies for GSON and Volley
+    2. Customize navigation drawer
+    3. Make web requests
+    */
+/*TODO Mirna
+    1. Create Main screen scrolling listView
+    2. Create packets structure according to README (URGENT!!!)
+     */
+
+/*TODO Milan
+    1. Create Carousel from Main screen
+    2. ...
+    3. ...
+*/

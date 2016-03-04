@@ -1,0 +1,39 @@
+***************************************************************************************************
+* DEVELOPER GUIDELINES
+***************************************************************************************************
+- Use Gradle and its recommended project structure
+- Put passwords and sensitive data in gradle.properties
+- Use the Jackson library to parse JSON data
+- Don't write your own HTTP client, use Volley or OkHttp libraries
+- Avoid Guava and use only a few libraries due to the 65k method limit
+- Use Fragments to represent a UI screen
+- Use Activities just to manage Fragments
+- Layout XMLs are code, organize them well
+- Use styles to avoid duplicate attributes in layout XMLs
+- Use multiple style files to avoid a single huge one
+- Keep your colors.xml short and DRY, just define the palette
+- Also keep dimens.xml DRY, define generic constants
+- Do not make a deep hierarchy of ViewGroups
+- Avoid client-side processing for WebViews, and beware of leaks
+- Use Robolectric for unit tests, Robotium for connected (UI) tests
+- Use Genymotion as your emulator
+- Always use ProGuard or DexGuard
+- Use SharedPreferences for simple persistence, otherwise ContentProviders
+- Use Stetho to debug your application
+
+***************************************************************************************************
+* EXAMPLE PROJECT STRUCTURE
+***************************************************************************************************
+rs.dodatnaoprema.dodatnaoprema
+├─ network
+├─ models
+├─ managers
+├─ utils
+├─ fragments
+└─ views
+   ├─ adapters
+   ├─ actionbar
+   ├─ widgets
+   └─ notifications
+
+Ordered from the closest-to-backend to the closest-to-the-user.
