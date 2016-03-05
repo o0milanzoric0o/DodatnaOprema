@@ -5,7 +5,7 @@
 /* http://masinealati.rs/parametri.php?action=artNaAkciji */
 
 /*TODO Jelena
-    1. Add dependencies for GSON and Volley
+    1. Add dependencies for GSON and Volley (DONE, added classes for JSON objects, added INTERNET permission)
     2. Customize navigation drawer
     3. Make web requests
     */
