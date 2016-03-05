@@ -2,16 +2,23 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import rs.dodatnaoprema.dodatnaoprema.models.categories.Kategorije;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
+import rs.dodatnaoprema.dodatnaoprema.network.PullAllCategories;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 // mirko svemirko komentar
 public class MainActivity extends AppCompatActivity
@@ -43,6 +50,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        PullAllCategories pal=new PullAllCategories(this);
+        pal.setCallbackListener(new WebRequestCallbackInterface() {
+            @Override
+            public void webRequestSuccess(boolean success, SveKategorije allCategories) {
+                if (success) {
+                    Log.d("Lala","Success");
+                    //successfully loaded sensor list
+                    String textResult = "";
+                    for(int i=0; i<allCategories.getKategorije().size(); i++){
+
+                        Kategorije productItem = allCategories.getKategorije().get(i);
+                        textResult += "Name: " + productItem.getKatsrblat() + "\n";
+
+                    }
+                    Toast.makeText(getApplicationContext(), textResult, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        pal.pullCategoriesList("http://masinealati.rs/parametri.php?action=sveKategorije");
+
     }
 
     @Override
