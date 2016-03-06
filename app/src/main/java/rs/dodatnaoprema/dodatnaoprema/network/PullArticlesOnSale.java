@@ -11,52 +11,52 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
-import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
+import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
 import rs.dodatnaoprema.dodatnaoprema.utils.AppConfig;
 
 
-public class PullAllCategories {
+public class PullArticlesOnSale {
 
-    public PullAllCategories.WebRequestCallbackInterface webRequestCallbackInterface;
+    public PullArticlesOnSale.WebRequestCallbackInterface webRequestCallbackInterface;
     private Context context;
 
-    public PullAllCategories(Activity context) {
+    public PullArticlesOnSale(Activity context) {
         this.context = context;
         webRequestCallbackInterface = null;
     }
 
-    public void setCallbackListener(PullAllCategories.WebRequestCallbackInterface listener) {
+    public void setCallbackSalesListener(PullArticlesOnSale.WebRequestCallbackInterface listener) {
         this.webRequestCallbackInterface = listener;
     }
 
     /**
-     * function to pull list of all categories form web server
+     * function to pull list of articles on sale form web server
      */
-    public void pullCategoriesList(final String url) {
+    public void pullSalesList(final String url) {
         // Tag used to cancel the request
-        String tag_string_req = "req_pull_all_categories";
+        String tag_string_req = "req_pull_articles_on_sale";
 
 
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest gsonRequest = new GsonRequest(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
+        final GsonRequest gsonRequest = new GsonRequest(url, ArtikliNaAkciji.class, null, new Response.Listener<ArtikliNaAkciji>() {
 
             @Override
-            public void onResponse(SveKategorije categories) {
+            public void onResponse(ArtikliNaAkciji articles) {
 
-                if (categories != null) {
-                    AppConfig.logInfo("pullCategoriesResp:", "Nije null");
-                    AppConfig.logInfo("pullCategoriesResp:", categories.toString());
+                if (articles != null) {
+                    AppConfig.logInfo("pullSalesResp:", "Nije null");
+                    AppConfig.logInfo("pullSalesResp:", articles.toString());
 
 
-                    if (categories.getSuccess()) {
-                        webRequestCallbackInterface.webRequestSuccess(true, categories);
+                    if (articles.getSuccess()) {
+                        webRequestCallbackInterface.webRequestSuccess(true, articles);
                     } else {
-                        webRequestCallbackInterface.webRequestSuccess(false, categories);
+                        webRequestCallbackInterface.webRequestSuccess(false, articles);
                     }
                 } else {
-                    AppConfig.logDebug("pullCategoriesResp", "NULL RESPONSE");
+                    AppConfig.logDebug("pullSalesResp", "NULL RESPONSE");
                 }
 
             }
@@ -74,7 +74,7 @@ public class PullAllCategories {
             protected Map<String, String> getParams() {
                 // Post params
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "povuciSveKategorijeUrl");
+                params.put("action", "povuciArtikleNaAkciji");
                 params.put("id", url);
                 return params;
             }
@@ -87,8 +87,10 @@ public class PullAllCategories {
 
     public interface WebRequestCallbackInterface {
 
-        void webRequestSuccess(boolean success, SveKategorije allCategories);
+        void webRequestSuccess(boolean success, ArtikliNaAkciji artikliNaAkciji);
 
         void webRequestError(String error);
     }
+
+
 }

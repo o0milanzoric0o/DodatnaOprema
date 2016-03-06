@@ -22,7 +22,7 @@ public class ArtikliNaAkciji {
     private String errorMsg;
     @SerializedName("kategorije")
     @Expose
-    private List<Kategorije> kategorije = new ArrayList<>();
+    private List<KategorijeSales> kategorije = new ArrayList<>();
 
     /**
      * @return The tag
@@ -83,14 +83,14 @@ public class ArtikliNaAkciji {
     /**
      * @return The kategorije
      */
-    public List<Kategorije> getKategorije() {
+    public List<KategorijeSales> getKategorije() {
         return kategorije;
     }
 
     /**
      * @param kategorije The kategorije
      */
-    public void setKategorije(List<Kategorije> kategorije) {
+    public void setKategorije(List<KategorijeSales> kategorije) {
         this.kategorije = kategorije;
     }
 
