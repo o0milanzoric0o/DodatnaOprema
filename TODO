@@ -8,6 +8,7 @@
     1. Add dependencies for GSON and Volley (DONE, added classes for JSON objects, added INTERNET permission)
     2. Customize navigation drawer
     3. Make web requests
+    4. Figure out better class names (in English) for data models.
     */
 /*TODO Mirna
     1. Create Main screen and scrolling listView
@@ -15,7 +16,7 @@
      */
 
 /*TODO Milan
-    1. Create Carousel from Main screen
+    1. Create custom component for circle page indicator from Main screen
     2. ...
     3. ...
 */
