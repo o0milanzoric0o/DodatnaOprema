@@ -18,7 +18,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
 
 public class PullAllCategories {
 
-    public PullAllCategories.WebRequestCallbackInterface webRequestCallbackInterface;
+    public WebRequestCallbackInterface<SveKategorije> webRequestCallbackInterface;
     private Context context;
 
     public PullAllCategories(Activity context) {
@@ -26,7 +26,7 @@ public class PullAllCategories {
         webRequestCallbackInterface = null;
     }
 
-    public void setCallbackListener(PullAllCategories.WebRequestCallbackInterface listener) {
+    public void setCallbackListener(WebRequestCallbackInterface<SveKategorije> listener) {
         this.webRequestCallbackInterface = listener;
     }
 
@@ -86,10 +86,4 @@ public class PullAllCategories {
         requestQueue.add(gsonRequest);
     }
 
-    public interface WebRequestCallbackInterface {
-
-        void webRequestSuccess(boolean success, SveKategorije allCategories);
-
-        void webRequestError(String error);
-    }
 }

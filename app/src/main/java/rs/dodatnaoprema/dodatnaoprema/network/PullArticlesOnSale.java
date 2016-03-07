@@ -11,13 +11,14 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
-import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
 
 
 public class PullArticlesOnSale {
 
-    public PullArticlesOnSale.WebRequestCallbackInterface webRequestCallbackInterface;
+    public WebRequestCallbackInterface<ArtikliNaAkciji> webRequestCallbackInterface;
     private Context context;
 
     public PullArticlesOnSale(Activity context) {
@@ -25,7 +26,7 @@ public class PullArticlesOnSale {
         webRequestCallbackInterface = null;
     }
 
-    public void setCallbackSalesListener(PullArticlesOnSale.WebRequestCallbackInterface listener) {
+    public void setCallbackSalesListener(WebRequestCallbackInterface<ArtikliNaAkciji> listener) {
         this.webRequestCallbackInterface = listener;
     }
 
@@ -46,8 +47,8 @@ public class PullArticlesOnSale {
             public void onResponse(ArtikliNaAkciji articles) {
 
                 if (articles != null) {
-                    AppConfig.logInfo("pullSalesResp:", "Nije null");
-                    AppConfig.logInfo("pullSalesResp:", articles.toString());
+                    Log.logInfo("pullSalesResp:", "Nije null");
+                    Log.logInfo("pullSalesResp:", articles.toString());
 
 
                     if (articles.getSuccess()) {
@@ -56,7 +57,7 @@ public class PullArticlesOnSale {
                         webRequestCallbackInterface.webRequestSuccess(false, articles);
                     }
                 } else {
-                    AppConfig.logDebug("pullSalesResp", "NULL RESPONSE");
+                    Log.logDebug("pullSalesResp", "NULL RESPONSE");
                 }
 
             }
@@ -83,13 +84,6 @@ public class PullArticlesOnSale {
         gsonRequest.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_TIMEOUT_MS, AppConfig.DEFAULT_MAX_RETRIES, AppConfig.DEFAULT_BACKOFF_MULT));
         // Adding request to  queue
         requestQueue.add(gsonRequest);
-    }
-
-    public interface WebRequestCallbackInterface {
-
-        void webRequestSuccess(boolean success, ArtikliNaAkciji artikliNaAkciji);
-
-        void webRequestError(String error);
     }
 
 
