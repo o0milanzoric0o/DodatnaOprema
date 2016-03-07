@@ -13,6 +13,7 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
 import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
 
 
@@ -41,7 +42,7 @@ public class PullArticlesOnSale {
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest gsonRequest = new GsonRequest(url, ArtikliNaAkciji.class, null, new Response.Listener<ArtikliNaAkciji>() {
+        final GsonRequest<ArtikliNaAkciji> gsonRequest = new GsonRequest<ArtikliNaAkciji>(url, ArtikliNaAkciji.class, null, new Response.Listener<ArtikliNaAkciji>() {
 
             @Override
             public void onResponse(ArtikliNaAkciji articles) {

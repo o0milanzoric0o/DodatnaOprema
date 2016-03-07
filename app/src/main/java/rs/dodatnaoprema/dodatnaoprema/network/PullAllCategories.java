@@ -41,7 +41,7 @@ public class PullAllCategories {
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest gsonRequest = new GsonRequest(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
+        final GsonRequest<SveKategorije> gsonRequest = new GsonRequest<SveKategorije>(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
 
             @Override
             public void onResponse(SveKategorije categories) {
