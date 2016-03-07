@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- layout for one product on main page-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <!-- layout for image -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +20,7 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
+    <!-- layout for text (prices). it contains one TextView, but can contain more than one TextView (in future) -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
