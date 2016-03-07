@@ -11,8 +11,9 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
-import rs.dodatnaoprema.dodatnaoprema.utils.AppConfig;
 
 
 public class PullAllCategories {
@@ -46,8 +47,8 @@ public class PullAllCategories {
             public void onResponse(SveKategorije categories) {
 
                 if (categories != null) {
-                    AppConfig.logInfo("pullCategoriesResp:", "Nije null");
-                    AppConfig.logInfo("pullCategoriesResp:", categories.toString());
+                    Log.logInfo("pullCategoriesResp:", "Nije null");
+                    Log.logInfo("pullCategoriesResp:", categories.toString());
 
 
                     if (categories.getSuccess()) {
@@ -56,7 +57,7 @@ public class PullAllCategories {
                         webRequestCallbackInterface.webRequestSuccess(false, categories);
                     }
                 } else {
-                    AppConfig.logDebug("pullCategoriesResp", "NULL RESPONSE");
+                    Log.logDebug("pullCategoriesResp", "NULL RESPONSE");
                 }
 
             }

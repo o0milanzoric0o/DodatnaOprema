@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
-import rs.dodatnaoprema.dodatnaoprema.utils.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 
 
 public class PullArticlesOnSale {
