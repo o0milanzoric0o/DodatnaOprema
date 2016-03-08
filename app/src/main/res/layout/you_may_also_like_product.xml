@@ -2,22 +2,32 @@
 <!-- layout with two independent columns-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="match_parent"
               android:orientation="horizontal"
               android:baselineAligned="false">
 
-    <GridLayout
+    <FrameLayout
         android:id="@+id/productLeft"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight=".50">
-    </GridLayout>
 
-    <GridLayout
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"/>
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/productRight"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight=".50">
-    </GridLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView2"/>
+    </FrameLayout>
 
 </LinearLayout>
