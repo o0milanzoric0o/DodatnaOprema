@@ -5,4 +5,22 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- Navigation drawer menu -->
+    <string name="login">Prijavite se</string>
+    <string name="home">Home</string>
+    <string name="cart">Korpa</string>
+
+    <string name="recommendation">Izdvajamo</string>
+
+    <string name="best_selling">Najprodavanije</string>
+    <string name="new_products">Novi proizvodi</string>
+    <string name="sale">Na popustu</string>
+
+    <string name="info">Informacije</string>
+
+    <string name="help_center">Postavite pitanje</string>
+    <string name="how_to_buy">Kako kupiti</string>
+    <string name="contact">Kontakt</string>
+
 </resources>
