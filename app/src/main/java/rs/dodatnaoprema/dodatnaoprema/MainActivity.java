@@ -51,15 +51,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        PullAllCategories pal=new PullAllCategories(this);
-        pal.setCallbackListener(new WebRequestCallbackInterface() {
+        PullAllCategories pal = new PullAllCategories(this);
+        pal.setCallbackListener(new WebRequestCallbackInterface<SveKategorije>() {
             @Override
             public void webRequestSuccess(boolean success, SveKategorije allCategories) {
                 if (success) {
-                    Log.d("Lala","Success");
+                    Log.d("Lala", "Success");
                     //successfully loaded sensor list
                     String textResult = "";
-                    for(int i=0; i<allCategories.getKategorije().size(); i++){
+                    // SveKategorije sk = (SveKategorije)allCategories;
+                    for (int i = 0; i < allCategories.getKategorije().size(); i++) {
 
                         Kategorije productItem = allCategories.getKategorije().get(i);
                         textResult += "Name: " + productItem.getKatsrblat() + "\n";

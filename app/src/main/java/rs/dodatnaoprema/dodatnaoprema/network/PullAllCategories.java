@@ -11,13 +11,14 @@ import com.android.volley.VolleyError;
 import java.util.HashMap;
 import java.util.Map;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
-import rs.dodatnaoprema.dodatnaoprema.utils.AppConfig;
 
 
 public class PullAllCategories {
 
-    public PullAllCategories.WebRequestCallbackInterface webRequestCallbackInterface;
+    public WebRequestCallbackInterface<SveKategorije> webRequestCallbackInterface;
     private Context context;
 
     public PullAllCategories(Activity context) {
@@ -25,7 +26,7 @@ public class PullAllCategories {
         webRequestCallbackInterface = null;
     }
 
-    public void setCallbackListener(PullAllCategories.WebRequestCallbackInterface listener) {
+    public void setCallbackListener(WebRequestCallbackInterface<SveKategorije> listener) {
         this.webRequestCallbackInterface = listener;
     }
 
@@ -40,14 +41,14 @@ public class PullAllCategories {
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest gsonRequest = new GsonRequest(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
+        final GsonRequest<SveKategorije> gsonRequest = new GsonRequest<SveKategorije>(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
 
             @Override
             public void onResponse(SveKategorije categories) {
 
                 if (categories != null) {
-                    AppConfig.logInfo("pullCategoriesResp:", "Nije null");
-                    AppConfig.logInfo("pullCategoriesResp:", categories.toString());
+                    Log.logInfo("pullCategoriesResp:", "Nije null");
+                    Log.logInfo("pullCategoriesResp:", categories.toString());
 
 
                     if (categories.getSuccess()) {
@@ -56,7 +57,7 @@ public class PullAllCategories {
                         webRequestCallbackInterface.webRequestSuccess(false, categories);
                     }
                 } else {
-                    AppConfig.logDebug("pullCategoriesResp", "NULL RESPONSE");
+                    Log.logDebug("pullCategoriesResp", "NULL RESPONSE");
                 }
 
             }
@@ -85,10 +86,4 @@ public class PullAllCategories {
         requestQueue.add(gsonRequest);
     }
 
-    public interface WebRequestCallbackInterface {
-
-        void webRequestSuccess(boolean success, SveKategorije allCategories);
-
-        void webRequestError(String error);
-    }
 }
