@@ -1,7 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema.common.config;
 
-import android.util.Log;
-
 public class AppConfig {
     /**
      * The default socket timeout in milliseconds

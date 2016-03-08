@@ -13,7 +13,6 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
 import rs.dodatnaoprema.dodatnaoprema.models.sales.ArtikliNaAkciji;
 
 
