@@ -3,34 +3,49 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_nav_login"
+            android:title="@string/login" />
+        <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_nav_home"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_chart"
+            android:icon="@drawable/ic_nav_cart"
+            android:title="@string/cart" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/recommendation">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_best"
+                android:icon="@drawable/ic_nav_best"
+                android:title="@string/best_selling" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_new"
+                android:icon="@drawable/ic_nav_new"
+                android:title="@string/new_products" />
+            <item
+                android:id="@+id/nav_sale"
+                android:icon="@drawable/ic_nav_sale"
+                android:title="@string/sale" />
         </menu>
     </item>
-
+    <item android:title="@string/info">
+        <menu>
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_nav_question"
+                android:title="@string/help_center" />
+            <item
+                android:id="@+id/nav_how_to_buy"
+                android:icon="@drawable/ic_nav_info"
+                android:title="@string/how_to_buy" />
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_nav_contact"
+                android:title="@string/contact" />
+        </menu>
+    </item>
 </menu>

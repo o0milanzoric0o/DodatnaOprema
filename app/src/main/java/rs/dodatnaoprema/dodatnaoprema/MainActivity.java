@@ -24,8 +24,6 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //comment test jelena
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -59,7 +57,6 @@ public class MainActivity extends AppCompatActivity
                     Log.d("Lala", "Success");
                     //successfully loaded sensor list
                     String textResult = "";
-                    // SveKategorije sk = (SveKategorije)allCategories;
                     for (int i = 0; i < allCategories.getKategorije().size(); i++) {
 
                         Kategorije productItem = allCategories.getKategorije().get(i);
@@ -118,17 +115,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_account) {
+            // Handle the login action
+        } else if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_chart) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_best) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_new) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_sale) {
+
+        } else if (id == R.id.nav_how_to_buy) {
+
+        } else if (id == R.id.nav_help) {
+
+        } else if (id == R.id.nav_contact) {
 
         }
 
