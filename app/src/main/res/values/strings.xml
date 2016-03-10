@@ -27,4 +27,12 @@
     <string name="price">xx.xx rsd</string>
     <string name="image_description">slika proizvoda</string>
 
+    <!-- Tabs labels -->
+    <string name="first_tab">Tab1</string>
+    <string name="second_tab">Tab2</string>
+
+    <!-- Tab specs -->
+    <string name="first_tab_spec">tab1</string>
+    <string name="second_tab_spec">tab2</string>
+
 </resources>
