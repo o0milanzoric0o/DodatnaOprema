@@ -8,14 +8,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".35">
-        <!--milanov deo -->
+        android:layout_weight=".35"
+        android:id="@+id/dotIndicator">
+        <!--TODO milanov deo ide ovde-->
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".65">
-        <!--ovde ide product_row.xml i ako treba jos nesto.... ne znam sta????? -->
+        android:layout_weight=".65"
+        android:id="@+id/productsLayout">
+        <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
     </FrameLayout>
 </LinearLayout>
