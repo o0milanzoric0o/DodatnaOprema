@@ -7,55 +7,36 @@
               android:baselineAligned="false"
               android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:baselineAligned="false"
-                  android:orientation="horizontal">
-
-        <FrameLayout
-            android:id="@+id/productFirst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25">
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/productSecond"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25">
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/productThird"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25">
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/productFourth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25">
-        </FrameLayout>
-
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/standard_padding">
 
         <TextView
+            android:id="@+id/group_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/view_more"
             android:layout_gravity="center"
-            android:id="@+id/textView3"/>
+            android:text="@string/view_more"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+    </FrameLayout>
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="4"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_padding">
+
+        <Button
+            android:id="@+id/buttonViewMore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/view_more"/>
     </FrameLayout>
 
 
