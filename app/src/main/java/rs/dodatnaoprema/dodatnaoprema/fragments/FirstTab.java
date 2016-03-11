@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import rs.dodatnaoprema.dodatnaoprema.CustomProgressDialog;
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomListView;
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
@@ -17,7 +18,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import views.adapters.AllCategoriesAdapter;
 
 public class FirstTab extends Fragment {
-    private ListView listView;
+    private CustomListView listView;
     private AllCategoriesAdapter adapter;
     private CustomProgressDialog progressDialog;
     private PullAllCategories pal;
@@ -26,7 +27,7 @@ public class FirstTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_tab, container, false);
-        listView = (ListView) view.findViewById(R.id.listView);
+        listView = (CustomListView) view.findViewById(R.id.listView);
 
 
         // Progress dialog

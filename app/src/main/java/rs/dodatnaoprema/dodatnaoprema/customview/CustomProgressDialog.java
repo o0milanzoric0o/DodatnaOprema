@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema;
+package rs.dodatnaoprema.dodatnaoprema.customview;
 
 
 import android.app.ProgressDialog;

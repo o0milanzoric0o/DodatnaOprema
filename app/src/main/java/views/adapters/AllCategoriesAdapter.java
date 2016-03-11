@@ -8,18 +8,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomGridView;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
 
-public class AllCategoriesAdapter extends BaseAdapter{
+public class AllCategoriesAdapter extends BaseAdapter {
     private AllCategories allCategories;
     private Context context;
     private TextView categoryName;
+    private CustomGridView gridView;
+    private AllCategoriesGridAdapter gridAdapter;
 
-    public AllCategoriesAdapter(Context context, AllCategories allCategories){
-        this.allCategories=allCategories;
-        this.context=context;
+    public AllCategoriesAdapter(Context context, AllCategories allCategories) {
+        this.allCategories = allCategories;
+        this.context = context;
     }
+
     @Override
     public int getCount() {
         return allCategories.getKategorije().size();
@@ -44,8 +48,14 @@ public class AllCategoriesAdapter extends BaseAdapter{
         } else {
             row = convertView;
         }
-        categoryName= (TextView) row.findViewById(R.id.categoryName);
+        categoryName = (TextView) row.findViewById(R.id.categoryName);
         categoryName.setText(allCategories.getKategorije().get(position).getKatsrblat());
+
+        gridView = (CustomGridView) row.findViewById(R.id.gridView);
+        gridAdapter = new AllCategoriesGridAdapter(context, allCategories.getKategorije().get(position));
+        gridView.setAdapter(gridAdapter);
+
+
         return row;
     }
 }
