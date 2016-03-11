@@ -8,8 +8,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 
 public class AllCategoriesGridAdapter extends BaseAdapter {
@@ -24,7 +29,6 @@ public class AllCategoriesGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.d("Lala",""+category.getChild().size());
         return category.getChild().size();
     }
 
@@ -50,6 +54,11 @@ public class AllCategoriesGridAdapter extends BaseAdapter {
         }
         TextView subCategoryName = (TextView) row.findViewById(R.id.subcategoryName);
         subCategoryName.setText(category.getChild().get(position).getKatsrblat());
+
+        ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
+
+        NetworkImageView productImg = (NetworkImageView) row.findViewById(R.id.productImage);
+        productImg.setImageUrl(category.getChild().get(position).getKategorijaArtikalaSlika(), mImageLoader);
 
         return row;
     }

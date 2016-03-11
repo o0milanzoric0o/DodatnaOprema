@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true">
     <!-- Here you put the rest of your current view-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-
-    <FrameLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".35"
-        android:id="@+id/dotIndicator">
-        <!--TODO milanov deo ide ovde-->
-    </FrameLayout>
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".65"
-        android:id="@+id/productsLayout">
-        <include layout="@layout/list_view"/>
-        <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
-    </FrameLayout>
-</LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/dotIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".35">
+            <!--TODO milanov deo ide ovde-->
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/productsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".65">
+
+            <include layout="@layout/list_view" />
+            <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
+        </FrameLayout>
+    </LinearLayout>
 </ScrollView>

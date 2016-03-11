@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +22,8 @@ public class FirstTab extends Fragment {
     private CustomListView listView;
     private AllCategoriesAdapter adapter;
     private CustomProgressDialog progressDialog;
-    private PullAllCategories pal;
     private boolean loaded = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class FirstTab extends Fragment {
         progressDialog = new CustomProgressDialog(getActivity());
         progressDialog.showDialog(getResources().getString(R.string.progress_dialog_message));
 
-        pal = new PullAllCategories(getActivity());
+        PullAllCategories pal = new PullAllCategories(getActivity());
         pal.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
             @Override
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
@@ -50,13 +51,11 @@ public class FirstTab extends Fragment {
             @Override
             public void webRequestError(String error) {
                 progressDialog.hideDialog();
-
-
             }
         });
         pal.pullCategoriesList(AppConfig.URL_ALL_CATEGORIES);
 
-
         return view;
     }
+
 }

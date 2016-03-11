@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 
-public class CustomGridView extends GridView{
+public class CustomGridView extends GridView {
     public CustomGridView(Context context) {
         super(context);
     }
@@ -17,6 +17,7 @@ public class CustomGridView extends GridView{
     public CustomGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int heightSpec;
@@ -27,8 +28,7 @@ public class CustomGridView extends GridView{
             // a special meaning, hence we can't use them to describe height.
             heightSpec = MeasureSpec.makeMeasureSpec(
                     Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        }
-        else {
+        } else {
             // Any other height should be respected as is.
             heightSpec = heightMeasureSpec;
         }

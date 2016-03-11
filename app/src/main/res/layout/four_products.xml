@@ -2,10 +2,10 @@
 
 <!-- layout for 4 products on main page-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:baselineAligned="false"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
 
     <FrameLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/group_name"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </FrameLayout>
 
     <rs.dodatnaoprema.dodatnaoprema.customview.CustomGridView
@@ -40,7 +40,7 @@
             android:id="@+id/buttonViewMore"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/view_more"/>
+            android:text="@string/view_more" />
     </FrameLayout>
 
 

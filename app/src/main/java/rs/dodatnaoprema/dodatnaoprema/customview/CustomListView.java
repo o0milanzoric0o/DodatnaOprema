@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 
-public class CustomListView extends ListView{
+public class CustomListView extends ListView {
     public CustomListView(Context context) {
         super(context);
     }
@@ -17,9 +17,9 @@ public class CustomListView extends ListView{
     public CustomListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
     @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int heightSpec;
         if (getLayoutParams().height == LayoutParams.WRAP_CONTENT) {
             // Calculate entire height by providing a very large height hint.
@@ -28,8 +28,7 @@ public class CustomListView extends ListView{
 
             heightSpec = MeasureSpec.makeMeasureSpec(
                     Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        }
-        else {
+        } else {
             // Any other height should be respected as is.
             heightSpec = heightMeasureSpec;
         }

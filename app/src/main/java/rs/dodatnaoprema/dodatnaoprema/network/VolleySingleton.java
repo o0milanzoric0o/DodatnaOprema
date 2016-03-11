@@ -1,10 +1,13 @@
 package rs.dodatnaoprema.dodatnaoprema.network;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 public class VolleySingleton {
@@ -12,10 +15,20 @@ public class VolleySingleton {
     private RequestQueue mRequestQueue;
     private static VolleySingleton sInstance = null;
     private static Context mCtx;
+    private ImageLoader mImageLoader;
 
     private VolleySingleton(Context context) {
         mCtx = context;
         mRequestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        mImageLoader = new ImageLoader(this.mRequestQueue, new ImageLoader.ImageCache() {
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            public void putBitmap(String url, Bitmap bitmap) {
+                mCache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return mCache.get(url);
+            }
+        });
     }
 
     public static synchronized VolleySingleton getsInstance(Context context) {
@@ -49,5 +62,9 @@ public class VolleySingleton {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public ImageLoader getImageLoader() {
+        return this.mImageLoader;
     }
 }
