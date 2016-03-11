@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Kategorije {
+public class Category {
 
     @SerializedName("KategorijaArtikalaId")
     @Expose

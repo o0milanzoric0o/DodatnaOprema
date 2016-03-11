@@ -26,7 +26,10 @@
     <string name="view_more">još</string>
     <string name="price">xx.xx rsd</string>
     <string name="image_description">slika proizvoda</string>
-    <string name="group_name">ime grupe</string>
+    <string name="group_name">Naziv kategorije</string>
+
+    <!-- Progress dialog message -->
+    <string name="progress_dialog_message">Učitavanje podataka ...</string>
 
     <!-- Tabs labels -->
     <string name="first_tab">Tab1</string>

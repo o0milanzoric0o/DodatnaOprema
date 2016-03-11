@@ -16,5 +16,10 @@ public class AppConfig {
      */
     public static final float DEFAULT_BACKOFF_MULT = 1f;
 
+    /**
+     * Urls for json docs
+     */
+    public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
+
 
 }

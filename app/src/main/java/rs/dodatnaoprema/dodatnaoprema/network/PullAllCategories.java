@@ -13,12 +13,12 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.SveKategorije;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
 
 
 public class PullAllCategories {
 
-    public WebRequestCallbackInterface<SveKategorije> webRequestCallbackInterface;
+    public WebRequestCallbackInterface<AllCategories> webRequestCallbackInterface;
     private Context context;
 
     public PullAllCategories(Activity context) {
@@ -26,7 +26,7 @@ public class PullAllCategories {
         webRequestCallbackInterface = null;
     }
 
-    public void setCallbackListener(WebRequestCallbackInterface<SveKategorije> listener) {
+    public void setCallbackListener(WebRequestCallbackInterface<AllCategories> listener) {
         this.webRequestCallbackInterface = listener;
     }
 
@@ -41,10 +41,10 @@ public class PullAllCategories {
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest<SveKategorije> gsonRequest = new GsonRequest<SveKategorije>(url, SveKategorije.class, null, new Response.Listener<SveKategorije>() {
+        final GsonRequest<AllCategories> gsonRequest = new GsonRequest<AllCategories>(url, AllCategories.class, null, new Response.Listener<AllCategories>() {
 
             @Override
-            public void onResponse(SveKategorije categories) {
+            public void onResponse(AllCategories categories) {
 
                 if (categories != null) {
                     Log.logInfo("pullCategoriesResp:", "Nije null");

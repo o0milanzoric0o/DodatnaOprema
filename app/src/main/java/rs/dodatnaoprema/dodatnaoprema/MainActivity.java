@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 
+import rs.dodatnaoprema.dodatnaoprema.fragments.FirstTab;
+import rs.dodatnaoprema.dodatnaoprema.fragments.SecondTab;
+
 // mirko svemirko komentar
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,32 +48,6 @@ public class MainActivity extends FragmentActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-     /*   PullAllCategories pal = new PullAllCategories(this);
-        pal.setCallbackListener(new WebRequestCallbackInterface<SveKategorije>() {
-            @Override
-            public void webRequestSuccess(boolean success, SveKategorije allCategories) {
-                if (success) {
-                    Log.d("Lala", "Success");
-                    //successfully loaded sensor list
-                    String textResult = "";
-                    for (int i = 0; i < allCategories.getKategorije().size(); i++) {
-
-                        Kategorije productItem = allCategories.getKategorije().get(i);
-                        textResult += "Name: " + productItem.getKatsrblat() + "\n";
-
-                    }
-                    Toast.makeText(getApplicationContext(), textResult, Toast.LENGTH_SHORT).show();
-
-                }
-            }
-
-            @Override
-            public void webRequestError(String error) {
-
-            }
-        });
-        pal.pullCategoriesList("http://masinealati.rs/parametri.php?action=sveKategorije");*/
 
         initializeTabs();
 

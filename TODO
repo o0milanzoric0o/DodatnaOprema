@@ -6,9 +6,10 @@
 
 /*TODO Jelena
     1. Add dependencies for GSON and Volley (DONE, added classes for JSON objects, added INTERNET permission)
-    2. Customize navigation drawer
-    3. Make web requests
-    4. Figure out better class names (in English) for data models.
+    2. Customize navigation drawer (DONE)
+    3. Make web requests (DONE)
+    4. Figure out better class names (in English) for data models.(DONE)
+    5. Make adapter for GridView for AllCategories data
     */
 /*TODO Mirna
     1. Create Main screen and scrolling listView

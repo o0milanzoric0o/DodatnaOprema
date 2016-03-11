@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SveKategorije {
+public class AllCategories {
 
     @SerializedName("tag")
     @Expose
@@ -23,7 +23,7 @@ public class SveKategorije {
     private String errorMsg;
     @SerializedName("kategorije")
     @Expose
-    private List<Kategorije> kategorije = new ArrayList<>();
+    private List<Category> kategorije = new ArrayList<>();
 
     /**
      * @return The tag
@@ -84,14 +84,14 @@ public class SveKategorije {
     /**
      * @return The kategorije
      */
-    public List<Kategorije> getKategorije() {
+    public List<Category> getKategorije() {
         return kategorije;
     }
 
     /**
      * @param kategorije The kategorije
      */
-    public void setKategorije(List<Kategorije> kategorije) {
+    public void setKategorije(List<Category> kategorije) {
         this.kategorije = kategorije;
     }
 

@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_weight=".65"
         android:id="@+id/productsLayout">
+        <include layout="@layout/list_view"/>
         <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
     </FrameLayout>
 </LinearLayout>
