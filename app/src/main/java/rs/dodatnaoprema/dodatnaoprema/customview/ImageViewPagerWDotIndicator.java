@@ -130,8 +130,9 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item, container, false);
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.img_pager_item);
-            imageView.setImageResource(mbitmapArray.get(position).getRowBytes());
 
+            //imageView.setImageResource(mbitmapArray.get(position).getRowBytes());
+            imageView.setImageBitmap(mbitmapArray.get(position));
             container.addView(itemView);
 
             return itemView;

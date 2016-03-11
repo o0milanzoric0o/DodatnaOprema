@@ -5,19 +5,25 @@
     android:fillViewport="true">
     <!-- Here you put the rest of your current view-->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="200dp"
 
-
-        <FrameLayout
-            android:id="@+id/dotIndicator"
-            android:layout_width="match_parent"
+        android:id="@+id/dotIndicator">
+        <!--TODO milanov deo ide ovde-->
+        <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".35">
-            <!--TODO milanov deo ide ovde-->
-        </FrameLayout>
+            android:id="@+id/view_pager_dot_ind"
+            />
+
+    </FrameLayout>
 
         <FrameLayout
             android:id="@+id/productsLayout"
