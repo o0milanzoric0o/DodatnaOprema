@@ -4,7 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +14,24 @@ import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.customview.CustomListView;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
 import rs.dodatnaoprema.dodatnaoprema.network.PullAllCategories;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
-import views.adapters.AllCategoriesAdapter;
+import views.adapters.RecyclerViewAdapterAllCategories;
 
 public class FirstTab extends Fragment {
 
-    private CustomListView mCustomListView;
-    private AllCategoriesAdapter mAdapter;
     private CustomProgressDialog mProgressDialog;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
+    private RecyclerView mRecyclerView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.first_tab, container, false);
-        mCustomListView = (CustomListView) mView.findViewById(R.id.listView);
+        final View mView = inflater.inflate(R.layout.first_tab, container, false);
+        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_view);
 
         imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
 
@@ -53,11 +53,17 @@ public class FirstTab extends Fragment {
             @Override
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
+
+                    mRecyclerView.setHasFixedSize(true);
+
+                    // use a linear layout manager
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+
+                    // specify an adapter
+                    RecyclerViewAdapterAllCategories mAdapter = new RecyclerViewAdapterAllCategories(allCategories.getKategorije(),getActivity());
+                    mRecyclerView.setAdapter(mAdapter);
                     mProgressDialog.hideDialog();
-                    Log.d("Lala", "Success");
-                    //successfully loaded sensor list
-                    mAdapter = new AllCategoriesAdapter(getActivity(), allCategories);
-                    mCustomListView.setAdapter(mAdapter);
                 }
             }
 

@@ -24,6 +24,10 @@ public class AppConfig {
      * Number of tabs
      */
     public static final int TAB_NUMBER = 2;
+    /**
+     * Number of grid items
+     */
+    public static final int NUMBER_OF_ITEMS = 4;
 
 
 }
