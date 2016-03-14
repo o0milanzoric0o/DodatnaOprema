@@ -1,34 +1,33 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TabHost;
 
-import rs.dodatnaoprema.dodatnaoprema.fragments.FirstTab;
-import rs.dodatnaoprema.dodatnaoprema.fragments.SecondTab;
+import views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private FragmentTabHost tabHost;
+    private FragmentTabHost mTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -42,7 +41,7 @@ public class MainActivity extends FragmentActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -54,19 +53,33 @@ public class MainActivity extends FragmentActivity
     }
 
     public void initializeTabs() {
-        tabHost = (FragmentTabHost) findViewById(R.id.tabHost);
-        tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
-        Resources resources = getResources();
+        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.first_tab)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.second_tab)));
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        TabHost.TabSpec tab1 = tabHost.newTabSpec(resources.getString(R.string.first_tab_spec));
-        TabHost.TabSpec tab2 = tabHost.newTabSpec(resources.getString(R.string.second_tab_spec));
+        final ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        final ViewPagerAdapter adapter = new ViewPagerAdapter
+                (getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
 
-        tab1.setIndicator(resources.getString(R.string.first_tab), null);
-        tab2.setIndicator(resources.getString(R.string.second_tab), null);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-        tabHost.addTab(tab1, FirstTab.class, null);
-        tabHost.addTab(tab2, SecondTab.class, null);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override

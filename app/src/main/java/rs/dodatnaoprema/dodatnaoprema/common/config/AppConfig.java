@@ -20,6 +20,10 @@ public class AppConfig {
      * Urls for json docs
      */
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
+    /**
+     * Number of tabs
+     */
+    public static final int TAB_NUMBER = 2;
 
 
 }

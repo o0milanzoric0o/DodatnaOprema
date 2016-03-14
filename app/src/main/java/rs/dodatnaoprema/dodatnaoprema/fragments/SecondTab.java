@@ -13,7 +13,7 @@ public class SecondTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.you_may_also_like_product, container, false);
-        return view;
+        View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
+        return mView;
     }
 }

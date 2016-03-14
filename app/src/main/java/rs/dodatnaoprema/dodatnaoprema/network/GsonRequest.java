@@ -15,16 +15,16 @@ import java.util.Map;
 
 public class GsonRequest<T> extends Request<T> {
 
-    private final Gson gson = new Gson();
+    private final Gson mGson = new Gson();
     private final Class<T> mClass;
     private final Map<String, String> headers;
     private final Response.Listener<T> listener;
 
-    public GsonRequest(String url, Class<T> mClass, Map<String, String> headers,
+    public GsonRequest(String url, Class<T> mClass, Map<String, String> mHeaders,
                        Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
         this.mClass = mClass;
-        this.headers = headers;
+        this.headers = mHeaders;
         this.listener = listener;
     }
 
@@ -36,8 +36,8 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
-            String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(gson.fromJson(json, mClass),
+            String mJson = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            return Response.success(mGson.fromJson(mJson, mClass),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
