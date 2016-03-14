@@ -21,11 +21,10 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </FrameLayout>
 
-    <rs.dodatnaoprema.dodatnaoprema.customview.CustomGridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"/>
+        android:layout_height="wrap_content"/>
 
     <FrameLayout
         android:layout_width="match_parent"
