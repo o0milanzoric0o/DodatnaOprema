@@ -1,17 +1,16 @@
 package views.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.customview.CustomGridView;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.Category;
 
 
@@ -19,22 +18,31 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
     private List<Category> allCategories;
     private TextView categoryName;
-    private GridView gridView;
+
     private Context context;
+    private RecyclerView mRecyclerView;
+
+    private RecyclerViewAdapterSubcategories mAdapter;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View view) {
             super(view);
+
             categoryName = (TextView) view.findViewById(R.id.categoryName);
-            gridView = (CustomGridView) view.findViewById(R.id.gridView);
+
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
+
+            GridLayoutManager mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
         }
     }
 
 
     public RecyclerViewAdapterAllCategories(List<Category> allCategories, Context context) {
         this.allCategories = allCategories;
-        this.context=context;
+        this.context = context;
     }
 
     @Override
@@ -47,10 +55,13 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
     @Override
     public void onBindViewHolder(RecyclerViewAdapterAllCategories.MyViewHolder holder, int position) {
+
         Category category = allCategories.get(position);
         categoryName.setText(category.getKatsrblat());
-        AllCategoriesGridAdapter gridAdapter = new AllCategoriesGridAdapter(context, category.getChild());
-        gridView.setAdapter(gridAdapter);
+
+        mAdapter = new RecyclerViewAdapterSubcategories(context, allCategories.get(position).getChild());
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 
 
@@ -58,4 +69,7 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
     public int getItemCount() {
         return allCategories.size();
     }
+
+
+
 }
