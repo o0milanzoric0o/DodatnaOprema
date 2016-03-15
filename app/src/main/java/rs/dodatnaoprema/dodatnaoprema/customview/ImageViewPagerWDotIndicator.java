@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.pagetransformers.DepthPageTransformer;
+import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ZoomOutPageTransformer;
 
 /**
 
@@ -78,6 +80,8 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
 
             }
         });
+
+        mViewPager.setPageTransformer(true, new DepthPageTransformer());
 
     }
 

@@ -10,7 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_weight=".65"
         android:id="@+id/dotIndicator">
-        <!--TODO milanov deo ide ovde-->
+        <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:id="@+id/view_pager_dot_ind"
+            />
     </FrameLayout>
 
     <FrameLayout

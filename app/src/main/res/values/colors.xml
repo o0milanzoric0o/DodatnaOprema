@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="view.pager.nonselected.item.color">#3F51B5</color>
+    <color name="view.pager.nonselected.item.color">#ffffff</color>
     <color name="view.pager.selected.item.color" >#FF4081</color>
 </resources>
