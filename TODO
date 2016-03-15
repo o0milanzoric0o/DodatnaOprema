@@ -18,10 +18,13 @@
 
 /*TODO Milan
     1. Create custom component for circle page indicator from Main screen
-    2. ...
+    2. Create custom drop down list with subcategories
     3. ...
 */
 
 /*TODO Milan, Jelena ,Mirna
     m prefix for member variable (mTextFileld, mDate,... )
+    Main page not scrolling smoothly...We should fix this
+    Use Cards for 4 products as well?
+    Make it look like aliexpress...
 */

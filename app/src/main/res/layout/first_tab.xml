@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
 
         android:id="@+id/dotIndicator">
-        <!--TODO milanov deo ide ovde-->
         <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
             android:layout_width="match_parent"
             android:layout_height="200dip"
