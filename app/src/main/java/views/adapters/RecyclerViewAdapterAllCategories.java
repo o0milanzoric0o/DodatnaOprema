@@ -1,6 +1,7 @@
 package views.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,16 +25,25 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
     private RecyclerViewAdapterSubcategories mAdapter;
 
+    private GridLayoutManager mLayoutManager;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View view) {
+
             super(view);
 
             categoryName = (TextView) view.findViewById(R.id.categoryName);
 
             mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
 
-            GridLayoutManager mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
+
+            }else {
+                mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);}
+
+
             mRecyclerView.setLayoutManager(mLayoutManager);
 
         }
