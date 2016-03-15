@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import rs.dodatnaoprema.dodatnaoprema.R;
 
 /**
+
  * Created by 1 on 3/8/2016.
  */
 public class ImageViewPagerWDotIndicator extends RelativeLayout{
@@ -51,6 +52,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
 
         // Get views
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
+
         mImageView = (ImageView) findViewById(R.id.img_pager_item);
         mDotsLayout = (LinearLayout) findViewById(R.id.viewPagerCountDots);
 
@@ -101,8 +103,10 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
 
 
         dots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
+
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);
+
     }
 
     private class ViewPagerAdapter extends PagerAdapter {
@@ -126,6 +130,12 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
         }
 
         @Override
+        public float getPageWidth(int position) {
+            return super.getPageWidth(position);
+
+        }
+
+        @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item, container, false);
 
@@ -141,6 +151,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((LinearLayout) object);
+
         }
     }
 

@@ -8,18 +8,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="match_parent"
+              android:fillViewport="true">
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
 
         android:id="@+id/dotIndicator">
         <!--TODO milanov deo ide ovde-->
         <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
             android:id="@+id/view_pager_dot_ind"
             />
 
@@ -28,7 +29,7 @@
         <FrameLayout
             android:id="@+id/productsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dip"
             android:layout_weight=".65">
 
             <include layout="@layout/recycler_view" />

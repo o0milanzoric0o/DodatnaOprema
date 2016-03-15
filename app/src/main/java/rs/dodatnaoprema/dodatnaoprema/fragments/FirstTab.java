@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
@@ -26,6 +28,7 @@ public class FirstTab extends Fragment {
     private CustomProgressDialog mProgressDialog;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
     private RecyclerView mRecyclerView;
+    ArrayList<Bitmap> bitmaps;
 
 
     @Override
@@ -35,14 +38,18 @@ public class FirstTab extends Fragment {
 
         imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
 
-        ArrayList<Bitmap> bitmaps = new ArrayList<>();
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc1));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc2));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc3));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc4));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc5));
-        bitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.abc6));
+        int h = 200;
+        int w = 320;
+
+        bitmaps = new ArrayList<>();
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6,w,h));
         imageViewPagerWDotIndicator.setBitmapList(bitmaps);
+
 
         // Progress dialog
         mProgressDialog = new CustomProgressDialog(getActivity());
@@ -75,6 +82,16 @@ public class FirstTab extends Fragment {
         pal.pullCategoriesList(AppConfig.URL_ALL_CATEGORIES);
 
         return mView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        for (int i= 0; i< bitmaps.size(); i++){
+            bitmaps.get(i).recycle();
+            bitmaps.set(i, null);
+        }
+    Log.logInfo("DODATNA OP","onDestroyView...");
+        super.onDestroyView();
     }
 
 }
