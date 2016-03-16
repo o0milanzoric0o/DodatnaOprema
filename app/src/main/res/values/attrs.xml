@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <declare-styleable name="ImageViewPagerWDotIndicatorOptions">
+    <declare-styleable name="ImageViewPagerWDotIndicator">
         <attr name="titleText" format="string" localization="suggested" />
-        <attr name="valueColor" format="color" />
+        <attr name="valueColor" format="color"/>
+        <attr name="slideInterval" format="integer"/>
     </declare-styleable>
 </resources>

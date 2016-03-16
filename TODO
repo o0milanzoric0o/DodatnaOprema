@@ -10,10 +10,18 @@
     3. Make web requests (DONE)
     4. Figure out better class names (in English) for data models.(DONE)
     5. Make adapter for GridView for AllCategories data
+    6. Smooth Scrolling
+    7. http://masinealati.rs/parametri.php?action=kategorijePoId&id=6
+    8. http://masinealati.rs/parametri.php?action=artikliPoKateg&id=1623&od=2&do=5&valutasession=rsd&jezik=srblat&brend=35&sortKontrole=2
     */
 /*TODO Mirna
     1. Create Main screen and scrolling listView
     2. Create packets structure according to README (URGENT!!!)
+    3. Prepravke na layoutu four_products
+    4. http://masinealati.rs/parametri.php?action=artNaAkciji&id=6&od=1&do=2
+    5. http://masinealati.rs/parametri.php?action=artNaAkciji&id=7&od=0&do=5
+    6. http://masinealati.rs/parametri.php?action=artNaAkciji&id=8&od=0&do=25
+
      */
 
 /*TODO Milan

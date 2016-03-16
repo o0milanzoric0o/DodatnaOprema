@@ -3,6 +3,7 @@ package rs.dodatnaoprema.dodatnaoprema.customview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,13 +19,12 @@ import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.DepthPageTransformer;
-import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ZoomOutPageTransformer;
+import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
 
 /**
-
  * Created by 1 on 3/8/2016.
  */
-public class ImageViewPagerWDotIndicator extends RelativeLayout{
+public class ImageViewPagerWDotIndicator extends RelativeLayout {
 
     private ImageView mImageView = null;
     private LinearLayout mDotsLayout = null;
@@ -32,8 +32,11 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
     private ViewPagerAdapter mAdapter = null;
     private ArrayList<Bitmap> mBitmapList = null;
     private Context mcontext;
-    private int dotsCount;
-    private ImageView[] dots;
+    private int mdotsCount;
+    private ImageView[] mdots;
+    private final Handler mhandler = new Handler();
+    private int slideInterval;
+    private Runnable mRunnable;
 
     public ImageViewPagerWDotIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,10 +44,11 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
 
         // Get attributes
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.ImageViewPagerWDotIndicatorOptions, 0, 0);
+                R.styleable.ImageViewPagerWDotIndicator, 0, 0);
         //String titleText = a.getString(R.styleable.ColorOptionsView_titleText);
         //int valueColor = a.getColor(R.styleable.ColorOptionsView_valueColor,
         //       android.R.color.holo_blue_light);
+        slideInterval = a.getInteger(R.styleable.ImageViewPagerWDotIndicator_slideInterval, 6000);
 
         a.recycle();
 
@@ -69,10 +73,10 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
             public void onPageSelected(int position) {
                 int dotsCount = mAdapter.getCount();
                 for (int i = 0; i < dotsCount; i++) {
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.nonselecteditem_dot));
+                    mdots[i].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.nonselecteditem_dot));
                 }
 
-                dots[position].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
+                mdots[position].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
             }
 
             @Override
@@ -81,19 +85,19 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
             }
         });
 
-        mViewPager.setPageTransformer(true, new DepthPageTransformer());
+        mViewPager.setPageTransformer(true, new ExperimentalPageTransformer());
 
     }
 
-    public void setBitmapList(ArrayList<Bitmap> bitmapList){
+    public void setBitmapList(ArrayList<Bitmap> bitmapList) {
         mBitmapList = bitmapList;
         mAdapter = new ViewPagerAdapter(mcontext, mBitmapList);
-        dotsCount = mAdapter.getCount();
-        dots = new ImageView[dotsCount];
+        mdotsCount = mAdapter.getCount();
+        mdots = new ImageView[mdotsCount];
 
-        for (int i = 0; i < dotsCount; i++) {
-            dots[i] = new ImageView(mcontext);
-            dots[i].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.nonselecteditem_dot));
+        for (int i = 0; i < mdotsCount; i++) {
+            mdots[i] = new ImageView(mcontext);
+            mdots[i].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.nonselecteditem_dot));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -102,15 +106,36 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
 
             params.setMargins(4, 0, 4, 0);
 
-            mDotsLayout.addView(dots[i], params);
+            mDotsLayout.addView(mdots[i], params);
         }
 
 
-        dots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
+        mdots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
 
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);
+        mRunnable = new Runnable() {
+            int item_count = 0;
 
+            @Override
+            public void run() {
+                item_count = mViewPager.getCurrentItem();
+                item_count++;
+                if (item_count == mdotsCount) {
+                    item_count = 0;
+                }
+                mViewPager.setCurrentItem(item_count, true); // set current item with smooth scroll
+                mhandler.postDelayed(this, slideInterval);
+            }
+        };
+        mhandler.postDelayed(mRunnable, slideInterval);
+
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        mhandler.removeCallbacks(mRunnable);
+        super.finalize();
     }
 
     private class ViewPagerAdapter extends PagerAdapter {
@@ -136,7 +161,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout{
         @Override
         public float getPageWidth(int position) {
             return super.getPageWidth(position);
-
+            //return 0.8f;
         }
 
         @Override
