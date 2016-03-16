@@ -6,4 +6,7 @@
 
     <color name="view.pager.nonselected.item.color">#ffffff</color>
     <color name="view.pager.selected.item.color" >#FF4081</color>
+
+    <color name="background_white" >#FFFFFF</color>
+    <color name="background_gray" >#ECEFF1</color>
 </resources>

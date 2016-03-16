@@ -37,12 +37,11 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
             mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
 
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
                 mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
 
-            } else {
-                mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
-            }
+            }else {
+                mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);}
 
 
             mRecyclerView.setLayoutManager(mLayoutManager);
@@ -80,6 +79,7 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
     public int getItemCount() {
         return allCategories.size();
     }
+
 
 
 }
