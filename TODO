@@ -5,14 +5,11 @@
 /* http://masinealati.rs/parametri.php?action=artNaAkciji */
 
 /*TODO Jelena
-    1. Add dependencies for GSON and Volley (DONE, added classes for JSON objects, added INTERNET permission)
-    2. Customize navigation drawer (DONE)
-    3. Make web requests (DONE)
-    4. Figure out better class names (in English) for data models.(DONE)
-    5. Make adapter for GridView for AllCategories data
-    6. Smooth Scrolling
-    7. http://masinealati.rs/parametri.php?action=kategorijePoId&id=6
-    8. http://masinealati.rs/parametri.php?action=artikliPoKateg&id=1623&od=2&do=5&valutasession=rsd&jezik=srblat&brend=35&sortKontrole=2
+
+    1. Smooth Scrolling
+    2. http://masinealati.rs/parametri.php?action=kategorijePoId&id=6
+    3. http://masinealati.rs/parametri.php?action=artikliPoKateg&id=1623&od=2&do=5&valutasession=rsd&jezik=srblat&brend=35&sortKontrole=2
+
     */
 /*TODO Mirna
     1. Create Main screen and scrolling listView

@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema.models.categories;
+package rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

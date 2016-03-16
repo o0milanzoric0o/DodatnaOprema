@@ -13,7 +13,7 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
 
 
 public class PullAllCategories {
