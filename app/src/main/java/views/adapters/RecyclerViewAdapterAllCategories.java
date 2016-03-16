@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 
 
 public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<RecyclerViewAdapterAllCategories.MyViewHolder> {

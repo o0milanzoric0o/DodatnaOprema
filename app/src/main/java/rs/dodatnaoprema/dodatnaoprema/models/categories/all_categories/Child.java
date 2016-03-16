@@ -1,20 +1,17 @@
-package rs.dodatnaoprema.dodatnaoprema.models.categories;
+package rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
 
-
-public class Category {
+public class Child {
 
     @SerializedName("KategorijaArtikalaId")
     @Expose
     private Integer KategorijaArtikalaId;
     @SerializedName("ParentKategorijaArtikalaId")
     @Expose
-    private Object ParentKategorijaArtikalaId;
+    private Integer ParentKategorijaArtikalaId;
     @SerializedName("Katsrblat")
     @Expose
     private String Katsrblat;
@@ -30,9 +27,6 @@ public class Category {
     @SerializedName("KategorijaArtikalaActiveMasine")
     @Expose
     private Integer KategorijaArtikalaActiveMasine;
-    @SerializedName("child")
-    @Expose
-    private List<Child> child = new ArrayList<>();
 
     /**
      * @return The KategorijaArtikalaId
@@ -51,14 +45,14 @@ public class Category {
     /**
      * @return The ParentKategorijaArtikalaId
      */
-    public Object getParentKategorijaArtikalaId() {
+    public Integer getParentKategorijaArtikalaId() {
         return ParentKategorijaArtikalaId;
     }
 
     /**
      * @param ParentKategorijaArtikalaId The ParentKategorijaArtikalaId
      */
-    public void setParentKategorijaArtikalaId(Object ParentKategorijaArtikalaId) {
+    public void setParentKategorijaArtikalaId(Integer ParentKategorijaArtikalaId) {
         this.ParentKategorijaArtikalaId = ParentKategorijaArtikalaId;
     }
 
@@ -130,20 +124,6 @@ public class Category {
      */
     public void setKategorijaArtikalaActiveMasine(Integer KategorijaArtikalaActiveMasine) {
         this.KategorijaArtikalaActiveMasine = KategorijaArtikalaActiveMasine;
-    }
-
-    /**
-     * @return The child
-     */
-    public List<Child> getChild() {
-        return child;
-    }
-
-    /**
-     * @param child The child
-     */
-    public void setChild(List<Child> child) {
-        this.child = child;
     }
 
 }

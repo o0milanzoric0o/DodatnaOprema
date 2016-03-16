@@ -23,6 +23,7 @@ public class AppConfig {
 
     public static final String URL_CHAR_QUESTION = "?";
     public static final String URL_CHAR_EQUAL = "=";
+    public static final String URL_CHAR_AMPERSAND = "&";
 
     public static final String URL_PARAM_ACTION = "action";
     public static final String URL_PARAM_ID = "id";
@@ -30,19 +31,18 @@ public class AppConfig {
     public static final String URL_PARAM_TO = "do";
     public static final String URL_PARAM_CURRENCY = "valutasession";
     public static final String URL_PARAM_LANGUAGE = "jezik";
+    public static final String URL_PARAM_BRAND = "brend";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
 
     public static final String URL_VALUE_ALL_CATEGORIES= "sveKategorije";
     public static final String URL_VALUE_LANGUAGE_SRB_LAT= "srblat";
-    public static final String URL_VALUE_ARTICLES_CATEGORY= "artikliPoKateg";
+    public static final String URL_VALUE_CATEGORIES_BY_ID= "kategorijePoId";
+    public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";
 
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
 
-
-   // http://masinealati.rs/parametri.php?action=kategorijePoId&id=6
-    //http://masinealati.rs/parametri.php?action=artikliPoKateg&id=1623&od=2&do=5&valutasession=rsd&jezik=srblat&brend=35&sortKontrole=2
     /**
      * Number of tabs
      */

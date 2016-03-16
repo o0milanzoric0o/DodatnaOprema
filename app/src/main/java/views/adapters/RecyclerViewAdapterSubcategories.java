@@ -13,7 +13,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 public class RecyclerViewAdapterSubcategories extends RecyclerView.Adapter<RecyclerViewAdapterSubcategories.MyViewHolder>{
