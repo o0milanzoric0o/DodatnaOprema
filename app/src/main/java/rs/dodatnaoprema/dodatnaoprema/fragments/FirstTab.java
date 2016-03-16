@@ -10,14 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.AllCategories;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.PullAllCategories;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import views.adapters.RecyclerViewAdapterAllCategories;
@@ -28,6 +29,7 @@ public class FirstTab extends Fragment {
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
     private RecyclerView mRecyclerView;
     ArrayList<Bitmap> bitmaps;
+    List<Category> categories;
 
 
     @Override
@@ -41,12 +43,12 @@ public class FirstTab extends Fragment {
         int w = 320;
 
         bitmaps = new ArrayList<>();
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1,w,h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2,w,h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3,w,h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4,w,h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5,w,h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6,w,h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6, w, h));
         imageViewPagerWDotIndicator.setBitmapList(bitmaps);
 
 
@@ -67,7 +69,8 @@ public class FirstTab extends Fragment {
                     mRecyclerView.setLayoutManager(mLayoutManager);
 
                     // specify an adapter
-                    RecyclerViewAdapterAllCategories mAdapter = new RecyclerViewAdapterAllCategories(allCategories.getKategorije(),getActivity());
+                    RecyclerViewAdapterAllCategories mAdapter = new RecyclerViewAdapterAllCategories(allCategories.getKategorije(), getActivity());
+                    setCategoriesList(allCategories.getKategorije());
                     mRecyclerView.setAdapter(mAdapter);
                     mProgressDialog.hideDialog();
                 }
@@ -78,19 +81,24 @@ public class FirstTab extends Fragment {
                 mProgressDialog.hideDialog();
             }
         });
-        pal.pullCategoriesList(AppConfig.URL_ALL_CATEGORIES);
+        pal.pullCategoriesList();
+
 
         return mView;
     }
 
     @Override
     public void onDestroyView() {
-        for (int i= 0; i< bitmaps.size(); i++){
+        for (int i = 0; i < bitmaps.size(); i++) {
             bitmaps.get(i).recycle();
             bitmaps.set(i, null);
         }
-    Log.logInfo("DODATNA OP","onDestroyView...");
+        Log.logInfo("DODATNA OP", "onDestroyView...");
         super.onDestroyView();
+    }
+
+    private void setCategoriesList(List<Category> categories) {
+        this.categories = categories;
     }
 
 }

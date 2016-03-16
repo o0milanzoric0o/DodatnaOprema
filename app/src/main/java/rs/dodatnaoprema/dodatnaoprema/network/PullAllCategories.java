@@ -20,10 +20,12 @@ public class PullAllCategories {
 
     public WebRequestCallbackInterface<AllCategories> webRequestCallbackInterface;
     private Context context;
+    private String url;
 
     public PullAllCategories(Activity context) {
         this.context = context;
         webRequestCallbackInterface = null;
+        url = Endpoints.getRequestUrlAllCategories();
     }
 
     public void setCallbackListener(WebRequestCallbackInterface<AllCategories> listener) {
@@ -33,7 +35,7 @@ public class PullAllCategories {
     /**
      * function to pull list of all categories form web server
      */
-    public void pullCategoriesList(final String url) {
+    public void pullCategoriesList() {
         // Tag used to cancel the request
         String tag_string_req = "req_pull_all_categories";
 
@@ -47,7 +49,8 @@ public class PullAllCategories {
             public void onResponse(AllCategories categories) {
 
                 if (categories != null) {
-                    Log.logInfo("pullCategoriesResp:", "Nije null");
+
+                    Log.logInfo("pullCategoriesResp:", "NOT NULL");
                     Log.logInfo("pullCategoriesResp:", categories.toString());
 
 
