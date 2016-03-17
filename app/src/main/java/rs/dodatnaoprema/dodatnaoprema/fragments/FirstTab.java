@@ -68,6 +68,8 @@ public class FirstTab extends Fragment {
 
                     // use a linear layout manager
                     LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                    mLayoutManager.setAutoMeasureEnabled(true);
+
                     mRecyclerView.setLayoutManager(mLayoutManager);
 
                     // specify an adapter

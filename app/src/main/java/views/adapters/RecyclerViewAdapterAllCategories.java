@@ -41,10 +41,13 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(4, spacing, 0));
                 mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
+                mLayoutManager.setAutoMeasureEnabled(true);
 
             } else {
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacing, 0));
                 mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+                mLayoutManager.setAutoMeasureEnabled(true);
+
             }
 
 
