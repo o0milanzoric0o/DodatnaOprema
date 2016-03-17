@@ -36,8 +36,7 @@ public class Endpoints {
 
         return URL_MACHINES_AND_TOOLS
                 + URL_CHAR_QUESTION
-                + URL_PARAM_ACTION + URL_CHAR_EQUAL
-                + URL_VALUE_CATEGORIES_BY_ID
+                + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_CATEGORIES_BY_ID
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_ID + URL_CHAR_EQUAL + id;
 
@@ -53,16 +52,16 @@ public class Endpoints {
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_ID + URL_CHAR_EQUAL + id
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_FROM + from
+                + URL_PARAM_FROM + URL_CHAR_EQUAL + from
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_TO + to
+                + URL_PARAM_TO + URL_CHAR_EQUAL + to
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_CURRENCY + currency
+                + URL_PARAM_CURRENCY + URL_CHAR_EQUAL + currency
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_LANGUAGE + language
+                + URL_PARAM_LANGUAGE + URL_CHAR_EQUAL + language
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_BRAND + brand
+                + URL_PARAM_BRAND + URL_CHAR_EQUAL + brand
                 + URL_CHAR_AMPERSAND
-                + URL_PARAM_SORT_CONTROL + sort;
+                + URL_PARAM_SORT_CONTROL + URL_CHAR_EQUAL + sort;
     }
 }

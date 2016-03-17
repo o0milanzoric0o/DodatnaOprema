@@ -13,32 +13,33 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
+import rs.dodatnaoprema.dodatnaoprema.models.atricles.articles_filter_category.ArticlesFilteredByCategory;
 
 
-public class PullCategoriesById {
-
-    public WebRequestCallbackInterface<CategoriesByID> webRequestCallbackInterface;
+public class PullArticlesFilteredByCategory {
+    public WebRequestCallbackInterface<ArticlesFilteredByCategory> webRequestCallbackInterface;
     private Context context;
     private String url;
 
 
-    public PullCategoriesById(Activity context, int id) {
+    public PullArticlesFilteredByCategory(Activity context, int id, int from, int to, String currency, String language, int brand, int sort) {
 
         this.context = context;
         webRequestCallbackInterface = null;
-        url = Endpoints.getRequestUrlCategoriesById(id);
+        url = Endpoints.getRequestUrlSearchArticlesByCategory(id, from, to, currency, language, brand, sort);
+        Log.logInfo("pullCategoriesByIDResp:", url);
+
 
     }
 
-    public void setCallbackListener(WebRequestCallbackInterface<CategoriesByID> listener) {
+    public void setCallbackListener(WebRequestCallbackInterface<ArticlesFilteredByCategory> listener) {
         this.webRequestCallbackInterface = listener;
     }
 
     /**
-     * function to pull list of all categories filtered by id form web server
+     * function to pull articles filtered by category from server
      */
-    public void pullCategoriesFilteredByIDList() {
+    public void pullArticlesList() {
         // Tag used to cancel the request
         String tag_string_req = "req_pull_all_categories";
 
@@ -46,24 +47,24 @@ public class PullCategoriesById {
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest<CategoriesByID> gsonRequest = new GsonRequest<CategoriesByID>(url, CategoriesByID.class, null, new Response.Listener<CategoriesByID>() {
+        final GsonRequest<ArticlesFilteredByCategory> gsonRequest = new GsonRequest<ArticlesFilteredByCategory>(url, ArticlesFilteredByCategory.class, null, new Response.Listener<ArticlesFilteredByCategory>() {
 
             @Override
-            public void onResponse(CategoriesByID categories) {
+            public void onResponse(ArticlesFilteredByCategory articles) {
 
-                if (categories != null) {
+                if (articles != null) {
 
-                    Log.logInfo("pullCategoriesByIDResp:", "NOT NULL");
-                    Log.logInfo("pullCategoriesByIDResp:", categories.toString());
+                    Log.logInfo("pullCategoriesResp:", "NOT NULL");
+                    Log.logInfo("pullCategoriesResp:", articles.toString());
 
 
-                    if (categories.getSuccess()) {
-                        webRequestCallbackInterface.webRequestSuccess(true, categories);
+                    if (articles.getSuccess()) {
+                        webRequestCallbackInterface.webRequestSuccess(true, articles);
                     } else {
-                        webRequestCallbackInterface.webRequestSuccess(false, categories);
+                        webRequestCallbackInterface.webRequestSuccess(false, articles);
                     }
                 } else {
-                    Log.logDebug("pullCategoriesByIDResp", "NULL RESPONSE");
+                    Log.logDebug("pullCategoriesResp", "NULL RESPONSE");
                 }
 
             }
@@ -81,7 +82,7 @@ public class PullCategoriesById {
             protected Map<String, String> getParams() {
                 // Post params
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "povuciSveKategorijePoIDuUrl");
+                params.put("action", "povuciSveKategorijeUrl");
                 params.put("id", url);
                 return params;
             }

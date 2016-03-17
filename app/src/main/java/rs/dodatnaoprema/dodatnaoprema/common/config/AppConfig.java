@@ -36,6 +36,7 @@ public class AppConfig {
 
 
     public static final String URL_VALUE_ALL_CATEGORIES= "sveKategorije";
+    public static final String URL_VALUE_CURRENCY= "rsd";
     public static final String URL_VALUE_LANGUAGE_SRB_LAT= "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID= "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";

@@ -22,10 +22,14 @@ public class PullAllCategories {
     private Context context;
     private String url;
 
+
+
     public PullAllCategories(Activity context) {
+
         this.context = context;
         webRequestCallbackInterface = null;
         url = Endpoints.getRequestUrlAllCategories();
+
     }
 
     public void setCallbackListener(WebRequestCallbackInterface<AllCategories> listener) {

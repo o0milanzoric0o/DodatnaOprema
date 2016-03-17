@@ -35,12 +35,6 @@ public class Child {
         return KategorijaArtikalaId;
     }
 
-    /**
-     * @param KategorijaArtikalaId The KategorijaArtikalaId
-     */
-    public void setKategorijaArtikalaId(Integer KategorijaArtikalaId) {
-        this.KategorijaArtikalaId = KategorijaArtikalaId;
-    }
 
     /**
      * @return The ParentKategorijaArtikalaId
@@ -49,12 +43,6 @@ public class Child {
         return ParentKategorijaArtikalaId;
     }
 
-    /**
-     * @param ParentKategorijaArtikalaId The ParentKategorijaArtikalaId
-     */
-    public void setParentKategorijaArtikalaId(Integer ParentKategorijaArtikalaId) {
-        this.ParentKategorijaArtikalaId = ParentKategorijaArtikalaId;
-    }
 
     /**
      * @return The Katsrblat
@@ -63,12 +51,6 @@ public class Child {
         return Katsrblat;
     }
 
-    /**
-     * @param Katsrblat The Katsrblat
-     */
-    public void setKatsrblat(String Katsrblat) {
-        this.Katsrblat = Katsrblat;
-    }
 
     /**
      * @return The KategorijeVidljivZaMP
@@ -77,12 +59,6 @@ public class Child {
         return KategorijeVidljivZaMP;
     }
 
-    /**
-     * @param KategorijeVidljivZaMP The KategorijeVidljivZaMP
-     */
-    public void setKategorijeVidljivZaMP(Integer KategorijeVidljivZaMP) {
-        this.KategorijeVidljivZaMP = KategorijeVidljivZaMP;
-    }
 
     /**
      * @return The KategorijaArtikalaSlika
@@ -91,12 +67,6 @@ public class Child {
         return KategorijaArtikalaSlika;
     }
 
-    /**
-     * @param KategorijaArtikalaSlika The KategorijaArtikalaSlika
-     */
-    public void setKategorijaArtikalaSlika(String KategorijaArtikalaSlika) {
-        this.KategorijaArtikalaSlika = KategorijaArtikalaSlika;
-    }
 
     /**
      * @return The KategorijaArtikalaLink
@@ -105,12 +75,6 @@ public class Child {
         return KategorijaArtikalaLink;
     }
 
-    /**
-     * @param KategorijaArtikalaLink The KategorijaArtikalaLink
-     */
-    public void setKategorijaArtikalaLink(String KategorijaArtikalaLink) {
-        this.KategorijaArtikalaLink = KategorijaArtikalaLink;
-    }
 
     /**
      * @return The KategorijaArtikalaActiveMasine
@@ -118,12 +82,6 @@ public class Child {
     public Integer getKategorijaArtikalaActiveMasine() {
         return KategorijaArtikalaActiveMasine;
     }
-
-    /**
-     * @param KategorijaArtikalaActiveMasine The KategorijaArtikalaActiveMasine
-     */
-    public void setKategorijaArtikalaActiveMasine(Integer KategorijaArtikalaActiveMasine) {
-        this.KategorijaArtikalaActiveMasine = KategorijaArtikalaActiveMasine;
-    }
+    
 
 }

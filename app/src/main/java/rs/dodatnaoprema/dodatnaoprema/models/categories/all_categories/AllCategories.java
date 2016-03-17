@@ -33,24 +33,10 @@ public class AllCategories {
     }
 
     /**
-     * @param tag The tag
-     */
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    /**
      * @return The success
      */
     public Boolean getSuccess() {
         return success;
-    }
-
-    /**
-     * @param success The success
-     */
-    public void setSuccess(Boolean success) {
-        this.success = success;
     }
 
     /**
@@ -61,24 +47,10 @@ public class AllCategories {
     }
 
     /**
-     * @param error The error
-     */
-    public void setError(Integer error) {
-        this.error = error;
-    }
-
-    /**
      * @return The errorMsg
      */
     public String getErrorMsg() {
         return errorMsg;
-    }
-
-    /**
-     * @param errorMsg The error_msg
-     */
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
     }
 
     /**
@@ -88,11 +60,5 @@ public class AllCategories {
         return kategorije;
     }
 
-    /**
-     * @param kategorije The kategorije
-     */
-    public void setKategorije(List<Category> kategorije) {
-        this.kategorije = kategorije;
-    }
 
 }
