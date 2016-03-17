@@ -49,6 +49,12 @@ public class AppConfig {
      */
     public static final int TAB_NUMBER = 2;
     /**
+     * Scrolling speed
+     * between 0 for no fling, and 1 for normal fling, or more for faster fling
+     */
+    public static final int FLING_SCALE_DOWN_FACTOR = 10;
+
+    /**
      * Number of grid items
      */
     public static final int NUMBER_OF_ITEMS = 4;
