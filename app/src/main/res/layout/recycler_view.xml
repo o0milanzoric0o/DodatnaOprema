@@ -9,7 +9,8 @@
     tools:showIn="@layout/first_tab"
     tools:context=".FirstTab">
 
-    <android.support.v7.widget.RecyclerView
+   <!-- <android.support.v7.widget.RecyclerView-->
+    <rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
