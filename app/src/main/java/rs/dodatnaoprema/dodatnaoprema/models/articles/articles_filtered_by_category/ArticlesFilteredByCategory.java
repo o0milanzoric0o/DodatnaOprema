@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema.models.atricles.articles_filter_category;
+package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

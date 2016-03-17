@@ -13,7 +13,7 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.atricles.articles_filter_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 
 
 public class PullArticlesFilteredByCategory {

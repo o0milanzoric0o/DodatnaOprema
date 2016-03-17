@@ -62,6 +62,8 @@ public class FirstTab extends Fragment {
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
 
+                    mRecyclerView.setNestedScrollingEnabled(false);
+
                     mRecyclerView.setHasFixedSize(true);
 
                     // use a linear layout manager

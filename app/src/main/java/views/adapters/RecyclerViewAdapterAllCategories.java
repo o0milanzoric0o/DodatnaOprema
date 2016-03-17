@@ -74,6 +74,9 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
         categoryName.setText(category.getKatsrblat());
 
         mAdapter = new RecyclerViewAdapterSubcategories(context, allCategories.get(position).getChild());
+
+        mRecyclerView.setNestedScrollingEnabled(false);
+
         mRecyclerView.setAdapter(mAdapter);
 
     }
