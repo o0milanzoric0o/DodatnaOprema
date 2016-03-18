@@ -12,9 +12,9 @@ public class Child {
     @SerializedName("ParentKategorijaArtikalaId")
     @Expose
     private Integer ParentKategorijaArtikalaId;
-    @SerializedName("Katsrblat")
+    @SerializedName("KatIme")
     @Expose
-    private String Katsrblat;
+    private String KatIme;
     @SerializedName("KategorijeVidljivZaMP")
     @Expose
     private Integer KategorijeVidljivZaMP;
@@ -47,8 +47,8 @@ public class Child {
     /**
      * @return The Katsrblat
      */
-    public String getKatsrblat() {
-        return Katsrblat;
+    public String getKatIme() {
+        return KatIme;
     }
 
 
