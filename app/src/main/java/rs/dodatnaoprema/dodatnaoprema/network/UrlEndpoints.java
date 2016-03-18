@@ -17,7 +17,7 @@ import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_A
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORIES_BY_ID;
 
 
-public class Endpoints {
+public class UrlEndpoints {
 
     public static String getRequestUrlAllCategories() {
 

@@ -13,57 +13,54 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
 
 
-public class PullCategoriesById {
+public class PullWebContent<T> {
 
-    public WebRequestCallbackInterface<CategoriesByID> webRequestCallbackInterface;
+    public WebRequestCallbackInterface<T> webRequestCallbackInterface;
     private Context context;
     private String url;
+    private Class<T> t;
 
 
-    public PullCategoriesById(Activity context, int id) {
+    public PullWebContent(Activity context, Class<T> mClass, String url) {
 
         this.context = context;
         webRequestCallbackInterface = null;
-        url = Endpoints.getRequestUrlCategoriesById(id);
+        this.url = url;
+        this.t = mClass;
 
     }
 
-    public void setCallbackListener(WebRequestCallbackInterface<CategoriesByID> listener) {
+    public void setCallbackListener(WebRequestCallbackInterface<T> listener) {
         this.webRequestCallbackInterface = listener;
+
     }
 
     /**
-     * function to pull list of all categories filtered by id form web server
+     * function to pull list of all categories form web server
      */
-    public void pullCategoriesFilteredByIDList() {
+    public void pullCategoriesList() {
         // Tag used to cancel the request
-        String tag_string_req = "req_pull_all_categories";
+        String tag_string_req = "req_" + url;
 
 
         RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
-        final GsonRequest<CategoriesByID> gsonRequest = new GsonRequest<CategoriesByID>(url, CategoriesByID.class, null, new Response.Listener<CategoriesByID>() {
+        final GsonRequest<T> gsonRequest = new GsonRequest<T>(url, t, null, new Response.Listener<T>() {
 
             @Override
-            public void onResponse(CategoriesByID categories) {
+            public void onResponse(T categories) {
 
                 if (categories != null) {
+                    webRequestCallbackInterface.webRequestSuccess(true, categories);
+                    Log.logInfo("tag_string_req", "NOT NULL");
+                    Log.logInfo("tag_string_req", categories.toString());
 
-                    Log.logInfo("pullCategoriesByIDResp:", "NOT NULL");
-                    Log.logInfo("pullCategoriesByIDResp:", categories.toString());
-
-
-                    if (categories.getSuccess()) {
-                        webRequestCallbackInterface.webRequestSuccess(true, categories);
-                    } else {
-                        webRequestCallbackInterface.webRequestSuccess(false, categories);
-                    }
                 } else {
-                    Log.logDebug("pullCategoriesByIDResp", "NULL RESPONSE");
+                    Log.logDebug("pullCategoriesResp", "NULL RESPONSE");
+                    webRequestCallbackInterface.webRequestSuccess(false, categories);
                 }
 
             }
@@ -81,7 +78,7 @@ public class PullCategoriesById {
             protected Map<String, String> getParams() {
                 // Post params
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "povuciSveKategorijePoIDuUrl");
+                params.put("action", "pull " + t.getName());
                 params.put("id", url);
                 return params;
             }
@@ -91,5 +88,4 @@ public class PullCategoriesById {
         // Adding request to  queue
         requestQueue.add(gsonRequest);
     }
-
 }
