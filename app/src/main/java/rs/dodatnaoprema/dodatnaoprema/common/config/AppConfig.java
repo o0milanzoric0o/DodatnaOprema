@@ -40,6 +40,7 @@ public class AppConfig {
     public static final String URL_VALUE_LANGUAGE_SRB_LAT= "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID= "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";
+    public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
