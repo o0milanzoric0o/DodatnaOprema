@@ -15,9 +15,11 @@ import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_T
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ALL_CATEGORIES;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ARTICLES_BY_CATEGORY;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORIES_BY_ID;
+import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ARTICLES_ON_SALE;
 
 
-public class Endpoints {
+public class UrlEndpoints {
+
 
     public static String getRequestUrlAllCategories() {
 
@@ -63,5 +65,22 @@ public class Endpoints {
                 + URL_PARAM_BRAND + URL_CHAR_EQUAL + brand
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_SORT_CONTROL + URL_CHAR_EQUAL + sort;
+    }
+
+    public static String getRequestUrlSearchOnSale(int id, int from, int to) {
+
+        // http://masinealati.rs/parametri.php?action=artNaAkciji&id=6&od=1&do=2
+        // http://masinealati.rs/parametri.php?action=artNaAkciji&id=7&od=0&do=5
+        // http://masinealati.rs/parametri.php?action=artNaAkciji&id=8&od=0&do=25
+
+        return URL_MACHINES_AND_TOOLS
+                + URL_CHAR_QUESTION
+                + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_ARTICLES_ON_SALE
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_ID + URL_CHAR_EQUAL + id
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_FROM + URL_CHAR_EQUAL + from
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_TO + URL_CHAR_EQUAL + to;
     }
 }

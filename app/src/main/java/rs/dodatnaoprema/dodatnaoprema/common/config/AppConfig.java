@@ -40,6 +40,7 @@ public class AppConfig {
     public static final String URL_VALUE_LANGUAGE_SRB_LAT= "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID= "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";
+    public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
@@ -48,6 +49,12 @@ public class AppConfig {
      * Number of tabs
      */
     public static final int TAB_NUMBER = 2;
+    /**
+     * Scrolling speed
+     * between 0 for no fling, and 1 for normal fling, or more for faster fling
+     */
+    public static final int FLING_SCALE_DOWN_FACTOR = 10;
+
     /**
      * Number of grid items
      */

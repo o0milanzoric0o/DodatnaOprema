@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id;
+package rs.dodatnaoprema.dodatnaoprema.models.categories;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,9 +11,9 @@ public class SubCategory {
     @SerializedName("ParentKategorijaArtikalaId")
     @Expose
     private Integer ParentKategorijaArtikalaId;
-    @SerializedName("Katime")
+    @SerializedName("KatIme")
     @Expose
-    private String Katime;
+    private String KatIme;
     @SerializedName("KategorijeVidljivZaMP")
     @Expose
     private Integer KategorijeVidljivZaMP;
@@ -69,7 +69,7 @@ public class SubCategory {
      * The Katime
      */
     public String getKatime() {
-        return Katime;
+        return KatIme;
     }
 
     /**
@@ -78,7 +78,7 @@ public class SubCategory {
      * The Katime
      */
     public void setKatime(String Katime) {
-        this.Katime = Katime;
+        this.KatIme = Katime;
     }
 
     /**

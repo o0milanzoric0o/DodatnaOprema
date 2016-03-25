@@ -15,9 +15,9 @@ public class Category {
     @SerializedName("ParentKategorijaArtikalaId")
     @Expose
     private Object ParentKategorijaArtikalaId;
-    @SerializedName("Katsrblat")
+    @SerializedName("KatIme")
     @Expose
-    private String Katsrblat;
+    private String KatIme;
     @SerializedName("KategorijeVidljivZaMP")
     @Expose
     private Integer KategorijeVidljivZaMP;
@@ -52,7 +52,7 @@ public class Category {
      * @return The Katsrblat
      */
     public String getKatsrblat() {
-        return Katsrblat;
+        return KatIme;
     }
 
     /**
