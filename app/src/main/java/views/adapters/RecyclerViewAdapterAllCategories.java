@@ -37,7 +37,7 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
             mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
 
-            int spacing = R.dimen.recycler_view_space;
+            int spacing = context.getResources().getDimensionPixelSize(R.dimen.recycler_view_space);
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(4, spacing, 0));
                 mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
