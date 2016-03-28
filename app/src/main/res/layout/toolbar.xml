@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="@dimen/toolbar_items_padding"
+        android:text="@string/Title"
+        android:textSize="@dimen/toolbar_text_size"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="#00ffffff"
+        android:padding="@dimen/toolbar_items_padding"
+        android:src="@drawable/ic_nav_cart"/>
+</android.support.v7.widget.Toolbar>
