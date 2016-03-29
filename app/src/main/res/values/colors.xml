@@ -10,4 +10,6 @@
     <color name="background_white" >#FFFFFF</color>
     <color name="background_gray" >#EEEEEE</color>
     <color name="view_more_colour" >#FAFAFA</color>
+
+    <color name="gray">#444440</color>
 </resources>
