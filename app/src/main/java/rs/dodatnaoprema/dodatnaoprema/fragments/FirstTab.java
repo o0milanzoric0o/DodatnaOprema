@@ -98,11 +98,11 @@ public class FirstTab extends Fragment {
 
     @Override
     public void onDestroyView() {
-        for (int i = 0; i < bitmaps.size(); i++) {
+/*        for (int i = 0; i < bitmaps.size(); i++) {
             bitmaps.get(i).recycle();
             bitmaps.set(i, null);
         }
-        Log.logInfo("DODATNA OP", "onDestroyView...");
+        Log.logInfo("DODATNA OP", "onDestroyView...");*/
         super.onDestroyView();
     }
 
