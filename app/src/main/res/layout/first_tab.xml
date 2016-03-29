@@ -14,19 +14,19 @@
         android:orientation="vertical">
 
 
-        <FrameLayout
-            android:id="@+id/dotIndicator"
-            android:layout_width="match_parent"
+        <!--<FrameLayout-->
+            <!--android:id="@+id/dotIndicator"-->
+            <!--android:layout_width="match_parent"-->
 
-            android:layout_height="wrap_content">
+            <!--android:layout_height="wrap_content">-->
 
-            <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
-                android:id="@+id/view_pager_dot_ind"
-                android:layout_width="match_parent"
-                android:layout_height="200dip"
-                custom:slideInterval="5000" />
+            <!--&lt;!&ndash;<rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/view_pager_dot_ind"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="200dip"&ndash;&gt;-->
+                <!--&lt;!&ndash;custom:slideInterval="5000" />&ndash;&gt;-->
 
-        </FrameLayout>
+        <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
 
         <FrameLayout
             android:id="@+id/productsLayout"
