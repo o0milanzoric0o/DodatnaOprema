@@ -50,19 +50,19 @@ public class FirstTab extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
-
-        int h = 200;
-        int w = 320;
-
-        bitmaps = new ArrayList<>();
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1, w, h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2, w, h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3, w, h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4, w, h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5, w, h));
-        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6, w, h));
-        imageViewPagerWDotIndicator.setBitmapList(bitmaps);
+//        imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
+//
+//        int h = 200;
+//        int w = 320;
+//
+//        bitmaps = new ArrayList<>();
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1, w, h));
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2, w, h));
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3, w, h));
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4, w, h));
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5, w, h));
+//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6, w, h));
+//        imageViewPagerWDotIndicator.setBitmapList(bitmaps);
 
 
         // Progress dialog
@@ -98,11 +98,11 @@ public class FirstTab extends Fragment {
 
     @Override
     public void onDestroyView() {
-        for (int i = 0; i < bitmaps.size(); i++) {
+/*        for (int i = 0; i < bitmaps.size(); i++) {
             bitmaps.get(i).recycle();
             bitmaps.set(i, null);
         }
-        Log.logInfo("DODATNA OP", "onDestroyView...");
+        Log.logInfo("DODATNA OP", "onDestroyView...");*/
         super.onDestroyView();
     }
 
