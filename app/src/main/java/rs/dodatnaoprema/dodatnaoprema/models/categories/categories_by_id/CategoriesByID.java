@@ -6,8 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.categories.SubCategory;
-
 public class CategoriesByID {
 
     @SerializedName("tag")

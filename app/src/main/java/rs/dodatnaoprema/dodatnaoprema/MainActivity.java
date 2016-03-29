@@ -20,7 +20,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.ViewPagerAdapter;
 
