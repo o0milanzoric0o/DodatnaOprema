@@ -27,5 +27,17 @@
         android:layout_gravity="right"
         android:background="#00ffffff"
         android:padding="@dimen/toolbar_items_padding"
-        android:src="@drawable/ic_nav_cart"/>
+        android:src="@drawable/ic_search_white_24dp"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:background="#00ffffff"
+        android:padding="@dimen/toolbar_items_padding"
+        android:src="@drawable/ic_shopping_cart_white_24dp"
+        />
 </android.support.v7.widget.Toolbar>
