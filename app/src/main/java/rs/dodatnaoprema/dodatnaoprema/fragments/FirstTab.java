@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
@@ -28,19 +29,17 @@ public class FirstTab extends Fragment {
 
     private CustomProgressDialog mProgressDialog;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
-    private rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView mRecyclerView;
 
     ArrayList<Bitmap> bitmaps;
     List<Category> categories;
-
-    private List<Category> mAllCategories = new ArrayList<>();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View mView = inflater.inflate(R.layout.first_tab, container, false);
+        MainActivity mainActivity = (MainActivity) getActivity();
 
-        mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
+        CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
@@ -66,10 +65,9 @@ public class FirstTab extends Fragment {
 
 
         // Progress dialog
-        mProgressDialog = new CustomProgressDialog(getActivity());
-        mProgressDialog.showDialog(getResources().getString(R.string.progress_dialog_message));
+      //  mProgressDialog = new CustomProgressDialog(getActivity());
 
-        PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(getActivity(), AllCategories.class, UrlEndpoints.getRequestUrlAllCategories());
+     /*   PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(getActivity(), AllCategories.class, UrlEndpoints.getRequestUrlAllCategories());
 
         content.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
             @Override
@@ -89,7 +87,11 @@ public class FirstTab extends Fragment {
                 mProgressDialog.hideDialog();
             }
         });
-        content.pullCategoriesList();
+        content.pullCategoriesList();*/
+        List<Category> mAllCategories = mainActivity.getCategoriesList();
+        RecyclerViewAdapterAllCategories mAdapter = new RecyclerViewAdapterAllCategories(mAllCategories, getActivity());
+        mRecyclerView.setAdapter(mAdapter);
+        //mProgressDialog.hideDialog();
 
 
         return mView;

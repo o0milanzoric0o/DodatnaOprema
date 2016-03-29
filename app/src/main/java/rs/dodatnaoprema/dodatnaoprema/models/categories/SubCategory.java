@@ -3,7 +3,9 @@ package rs.dodatnaoprema.dodatnaoprema.models.categories;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SubCategory {
+import java.io.Serializable;
+
+public class SubCategory implements Serializable{
 
     @SerializedName("KategorijaArtikalaId")
     @Expose

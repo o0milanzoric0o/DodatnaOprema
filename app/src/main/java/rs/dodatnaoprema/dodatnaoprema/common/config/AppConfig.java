@@ -42,6 +42,10 @@ public class AppConfig {
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
+    public static final String URL_VALUE_ID_ARTICLES_ON_SALE ="6";
+    public static final String URL_VALUE_ID_NEW_PRODUCTS ="7";
+    public static final String URL_VALUE_ID_BEST_SEllING ="8";
+
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
 

@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,12 +17,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FragmentTabHost mTabHost;
+    private List<Category> mAllCategories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +57,12 @@ public class MainActivity extends FragmentActivity
 
         initializeTabs();
 
+
     }
 
     public void initializeTabs() {
+        Intent intent = getIntent();
+        mAllCategories=(List<Category>) intent.getSerializableExtra("AllCategories");
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.first_tab)));
@@ -143,5 +153,10 @@ public class MainActivity extends FragmentActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public List<Category> getCategoriesList() {
+
+        return mAllCategories;
     }
 }
