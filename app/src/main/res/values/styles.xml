@@ -6,8 +6,6 @@
         <item name="colorPrimary">@color/tablayout.primary.color</item>
         <item name="colorPrimaryDark">@color/tablayout.primary.color</item>
         <item name="colorAccent">@color/tablayout.accent.color</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColorSecondary">@color/tablayout.accent.color</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
@@ -16,9 +14,29 @@
     </style>
 
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <!-- Customize TabLayout theme. -->
         <item name="tabBackground">@color/tablayout.primary.color</item>
         <item name="tabIndicatorColor">@color/tablayout.accent.color</item>
-        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/CustomTabTextStyle</item>
+    </style>
+    <style name="CustomTabTextStyle" parent="TextAppearance.Design.Tab">
+        <!-- Customize Tab Text Style. -->
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#8AFFFFFF</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="CustomNavigationDrawerLayout" parent="Widget.Design.NavigationView">
+        <!-- Customize List Item theme. -->
+        <item name="android:itemTextAppearance">@style/NavigatonListItemTextStyle</item>
+        <item name="tabTextAppearance">@style/CustomTabTextStyle</item>
+    </style>
+    <style name="NavigatonListItemTextStyle" parent="TextAppearance.Design.Tab">
+        <!-- Customize Tab Text Style. -->
+        <item name="android:textSize">@dimen/list_item_text_size</item>
+        <item name="android:textColor">@color/listItemColor</item>
+        <item name="textAllCaps">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
