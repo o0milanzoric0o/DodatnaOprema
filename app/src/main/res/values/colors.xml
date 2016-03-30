@@ -10,7 +10,7 @@
     <!--
         <color name="s">#E7E7E7</color>
     -->
-    <color name="splashScreen.gray">#444440</color>
+    <color name="splashScreen.gray">#A09FDF</color>
 
     <color name="view.pager.nonselected.item.color">#ffffff</color>
     <color name="view.pager.selected.item.color">#FF4081</color>
