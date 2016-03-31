@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.android.volley.RequestQueue;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +21,14 @@ import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCatego
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 public class SplashActivity extends AppCompatActivity {
 
     private List<Category> mAllCategories = new ArrayList<>();
 
-
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +39,15 @@ public class SplashActivity extends AppCompatActivity {
         AnimationDrawable rocketAnimation = (AnimationDrawable) image.getBackground();
         rocketAnimation.start();
 
-        PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(this, AllCategories.class, UrlEndpoints.getRequestUrlAllCategories());
+        RequestQueue requestQueue = VolleySingleton.getsInstance(this).getRequestQueue();
+        intent = new Intent(getApplicationContext(), MainActivity.class);
+        PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(this, AllCategories.class, UrlEndpoints.getRequestUrlAllCategories(), requestQueue);
         content.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
             @Override
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
                     // specify an adapter
                     mAllCategories = allCategories.getKategorije();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("AllCategories", (Serializable) mAllCategories);
                     startActivity(intent);
                     finish();

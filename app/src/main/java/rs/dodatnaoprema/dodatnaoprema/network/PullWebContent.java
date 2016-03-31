@@ -21,14 +21,16 @@ public class PullWebContent<T> {
     private Context context;
     private String url;
     private Class<T> t;
+    private RequestQueue requestQueue;
 
 
-    public PullWebContent(Activity context, Class<T> mClass, String url) {
+    public PullWebContent(Activity context, Class<T> mClass, String url, RequestQueue requestQueue) {
 
         this.context = context;
         webRequestCallbackInterface = null;
         this.url = url;
         this.t = mClass;
+        this.requestQueue = requestQueue;
 
     }
 
@@ -43,9 +45,6 @@ public class PullWebContent<T> {
     public void pullCategoriesList() {
         // Tag used to cancel the request
         String tag_string_req = "req_" + url;
-
-
-        RequestQueue requestQueue = VolleySingleton.getsInstance(context).getRequestQueue();
 
 
         final GsonRequest<T> gsonRequest = new GsonRequest<T>(url, t, null, new Response.Listener<T>() {
