@@ -74,7 +74,7 @@ public class FirstTab extends Fragment {
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
                     // specify an adapter
-                    mAllCategories = allCategories.getKategorije();
+                    mAllCategories = allCategories.getCategories();
                     RecyclerViewAdapterAllCategories mAdapter = new RecyclerViewAdapterAllCategories(mAllCategories, getActivity());
                     setCategoriesList(mAllCategories);
                     mRecyclerView.setAdapter(mAdapter);

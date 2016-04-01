@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Slike;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
 
 public class Artikli {
     @SerializedName("ArtikalId")
@@ -39,9 +39,9 @@ public class Artikli {
     @SerializedName("spec")
     @Expose
     private List<Object> spec = new ArrayList<Object>();
-    @SerializedName("slike")
+    @SerializedName("pictures")
     @Expose
-    private List<Slike> slike = new ArrayList<Slike>();
+    private List<Pictures> pictures = new ArrayList<Pictures>();
 
     /**
      *
@@ -226,19 +226,19 @@ public class Artikli {
     /**
      *
      * @return
-     * The slike
+     * The pictures
      */
-    public List<Slike> getSlike() {
-        return slike;
+    public List<Pictures> getPictures() {
+        return pictures;
     }
 
     /**
      *
-     * @param slike
-     * The slike
+     * @param pictures
+     * The pictures
      */
-    public void setSlike(List<Slike> slike) {
-        this.slike = slike;
+    public void setPictures(List<Pictures> pictures) {
+        this.pictures = pictures;
     }
 
 }

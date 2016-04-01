@@ -17,6 +17,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -27,6 +29,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class SplashActivity extends AppCompatActivity {
 
     private List<Category> mAllCategories = new ArrayList<>();
+    private List<Category> mbest = new ArrayList<>();
 
     Intent intent;
     @Override
@@ -58,7 +61,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestError(String error) {
             }
         });
-        content.pullCategoriesList();
+        content.pullList();
 
     }
 }

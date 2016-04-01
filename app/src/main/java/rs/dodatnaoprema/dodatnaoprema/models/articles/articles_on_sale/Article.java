@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Slike;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
 
-public class KategorijeSales {
+public class Article {
 
     @SerializedName("ArtikalId")
     @Expose
@@ -31,120 +31,215 @@ public class KategorijeSales {
     @SerializedName("pozovite")
     @Expose
     private Object pozovite;
-    @SerializedName("slike")
+    @SerializedName("brend")
     @Expose
-    private List<Slike> slike = new ArrayList<>();
+    private Object brend;
+    @SerializedName("stanje")
+    @Expose
+    private Integer stanje;
+    @SerializedName("spec")
+    @Expose
+    private List<Object> spec = new ArrayList<Object>();
+    @SerializedName("picures")
+    @Expose
+    private List<Pictures> picures = new ArrayList<Pictures>();
 
     /**
-     * @return The ArtikalId
+     *
+     * @return
+     * The ArtikalId
      */
     public Integer getArtikalId() {
         return ArtikalId;
     }
 
     /**
-     * @param ArtikalId The ArtikalId
+     *
+     * @param ArtikalId
+     * The ArtikalId
      */
     public void setArtikalId(Integer ArtikalId) {
         this.ArtikalId = ArtikalId;
     }
 
     /**
-     * @return The ArtikalNaziv
+     *
+     * @return
+     * The ArtikalNaziv
      */
     public String getArtikalNaziv() {
         return ArtikalNaziv;
     }
 
     /**
-     * @param ArtikalNaziv The ArtikalNaziv
+     *
+     * @param ArtikalNaziv
+     * The ArtikalNaziv
      */
     public void setArtikalNaziv(String ArtikalNaziv) {
         this.ArtikalNaziv = ArtikalNaziv;
     }
 
     /**
-     * @return The NaAkciji
+     *
+     * @return
+     * The NaAkciji
      */
     public Integer getNaAkciji() {
         return NaAkciji;
     }
 
     /**
-     * @param NaAkciji The NaAkciji
+     *
+     * @param NaAkciji
+     * The NaAkciji
      */
     public void setNaAkciji(Integer NaAkciji) {
         this.NaAkciji = NaAkciji;
     }
 
     /**
-     * @return The urlArtiklaLink
+     *
+     * @return
+     * The urlArtiklaLink
      */
     public String getUrlArtiklaLink() {
         return urlArtiklaLink;
     }
 
     /**
-     * @param urlArtiklaLink The urlArtiklaLink
+     *
+     * @param urlArtiklaLink
+     * The urlArtiklaLink
      */
     public void setUrlArtiklaLink(String urlArtiklaLink) {
         this.urlArtiklaLink = urlArtiklaLink;
     }
 
     /**
-     * @return The cenaBroj
+     *
+     * @return
+     * The cenaBroj
      */
     public String getCenaBroj() {
         return cenaBroj;
     }
 
     /**
-     * @param cenaBroj The cenaBroj
+     *
+     * @param cenaBroj
+     * The cenaBroj
      */
     public void setCenaBroj(String cenaBroj) {
         this.cenaBroj = cenaBroj;
     }
 
     /**
-     * @return The pravaMpSmall
+     *
+     * @return
+     * The pravaMpSmall
      */
     public String getPravaMpSmall() {
         return pravaMpSmall;
     }
 
     /**
-     * @param pravaMpSmall The pravaMpSmall
+     *
+     * @param pravaMpSmall
+     * The pravaMpSmall
      */
     public void setPravaMpSmall(String pravaMpSmall) {
         this.pravaMpSmall = pravaMpSmall;
     }
 
     /**
-     * @return The pozovite
+     *
+     * @return
+     * The pozovite
      */
     public Object getPozovite() {
         return pozovite;
     }
 
     /**
-     * @param pozovite The pozovite
+     *
+     * @param pozovite
+     * The pozovite
      */
     public void setPozovite(Object pozovite) {
         this.pozovite = pozovite;
     }
 
     /**
-     * @return The slike
+     *
+     * @return
+     * The brend
      */
-    public List<Slike> getSlike() {
-        return slike;
+    public Object getBrend() {
+        return brend;
     }
 
     /**
-     * @param slike The slike
+     *
+     * @param brend
+     * The brend
      */
-    public void setSlike(List<Slike> slike) {
-        this.slike = slike;
+    public void setBrend(Object brend) {
+        this.brend = brend;
+    }
+
+    /**
+     *
+     * @return
+     * The stanje
+     */
+    public Integer getStanje() {
+        return stanje;
+    }
+
+    /**
+     *
+     * @param stanje
+     * The stanje
+     */
+    public void setStanje(Integer stanje) {
+        this.stanje = stanje;
+    }
+
+    /**
+     *
+     * @return
+     * The spec
+     */
+    public List<Object> getSpec() {
+        return spec;
+    }
+
+    /**
+     *
+     * @param spec
+     * The spec
+     */
+    public void setSpec(List<Object> spec) {
+        this.spec = spec;
+    }
+
+    /**
+     *
+     * @return
+     * The picures
+     */
+    public List<Pictures> getPicures() {
+        return picures;
+    }
+
+    /**
+     *
+     * @param picures
+     * The picures
+     */
+    public void setPicures(List<Pictures> picures) {
+        this.picures = picures;
     }
 
 }

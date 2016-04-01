@@ -42,7 +42,7 @@ public class PullWebContent<T> {
     /**
      * function to pull list of all categories form web server
      */
-    public void pullCategoriesList() {
+    public void pullList() {
         // Tag used to cancel the request
         String tag_string_req = "req_" + url;
 

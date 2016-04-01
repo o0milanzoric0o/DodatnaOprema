@@ -3,7 +3,7 @@ package rs.dodatnaoprema.dodatnaoprema.models.articles;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Slike {
+public class Pictures {
 
     @SerializedName("IdArtikliSlike")
     @Expose
