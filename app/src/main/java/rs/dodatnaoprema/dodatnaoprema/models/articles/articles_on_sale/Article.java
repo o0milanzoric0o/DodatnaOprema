@@ -3,12 +3,13 @@ package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
 
-public class Article {
+public class Article implements Serializable {
 
     @SerializedName("ArtikalId")
     @Expose
@@ -40,9 +41,9 @@ public class Article {
     @SerializedName("spec")
     @Expose
     private List<Object> spec = new ArrayList<Object>();
-    @SerializedName("picures")
+    @SerializedName("slike")
     @Expose
-    private List<Pictures> picures = new ArrayList<Pictures>();
+    private List<Pictures> slike = new ArrayList<Pictures>();
 
     /**
      *
@@ -227,19 +228,20 @@ public class Article {
     /**
      *
      * @return
-     * The picures
+     * The slike
      */
-    public List<Pictures> getPicures() {
-        return picures;
+    public List<Pictures> getSlike() {
+        return slike;
     }
 
     /**
      *
-     * @param picures
-     * The picures
+     * @param slike
+     * The slike
      */
-    public void setPicures(List<Pictures> picures) {
-        this.picures = picures;
+    public void setSlike(List<Pictures> slike) {
+        this.slike = slike;
     }
+
 
 }

@@ -9,21 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
 
 
-public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<RecyclerViewAdapterAllCategories.MyViewHolder> {
+public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerViewAdapterFirstTab.MyViewHolder> {
 
-    private List<Category> allCategories;
+    HashMap<String,List<Article>> items = new HashMap<>();
     private TextView categoryName;
 
     private Context context;
     private RecyclerView mRecyclerView;
 
-    private RecyclerViewAdapterSubcategories mAdapter;
+    private RecyclerViewSelectedProducts mAdapter;
 
     private GridLayoutManager mLayoutManager;
 
@@ -57,8 +59,8 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
     }
 
 
-    public RecyclerViewAdapterAllCategories(List<Category> allCategories, Context context) {
-        this.allCategories = allCategories;
+    public RecyclerViewAdapterFirstTab(HashMap<String,List<Article>> items, Context context) {
+        this.items = items;
         this.context = context;
     }
 
@@ -71,14 +73,15 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapterAllCategories.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAdapterFirstTab.MyViewHolder holder, int position) {
+        String category="";
 
-        Category category = allCategories.get(position);
-        categoryName.setText(category.getKatsrblat());
+      //  Category category = items.
+        categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position]);
 
-        mAdapter = new RecyclerViewAdapterSubcategories(context, allCategories.get(position).getChild());
+        mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position]));
 
-        mRecyclerView.hasFixedSize();
+       mRecyclerView.hasFixedSize();
 
         mRecyclerView.setNestedScrollingEnabled(false);
 
@@ -89,7 +92,7 @@ public class RecyclerViewAdapterAllCategories extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return allCategories.size();
+        return AppConfig.FIRST_TAB_ITEMS.length;
     }
 
 

@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,16 +17,24 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private FragmentTabHost mTabHost;
+
     private List<Category> mAllCategories = new ArrayList<>();
+    private List<Article> mBestSelling = new ArrayList<>();
+    private List<Article> mProductsOnSale = new ArrayList<>();
+    private List<Article> mNewProducts = new ArrayList<>();
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +66,10 @@ public class MainActivity extends FragmentActivity
     }
 
     public void initializeTabs() {
-        Intent intent = getIntent();
-        mAllCategories=(List<Category>) intent.getSerializableExtra("AllCategories");
+        intent = getIntent();
+        mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
+
+        getIntentExtras();
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.first_tab)));
@@ -156,5 +165,37 @@ public class MainActivity extends FragmentActivity
     public List<Category> getCategoriesList() {
 
         return mAllCategories;
+    }
+
+    public List<Article> getProductsOnSale() {
+        mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
+        return mProductsOnSale;
+    }
+
+    public List<Article> getNewProducts() {
+        mBestSelling = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
+        return mBestSelling;
+    }
+
+    public List<Article> getBestSellingProducts() {
+        mBestSelling = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[2]);
+        return mBestSelling;
+    }
+
+    private void getIntentExtras() {
+        getProductsOnSale();
+        getNewProducts();
+        getBestSellingProducts();
+
+    }
+
+    public HashMap<String, List<Article>> getFirstTabItems() {
+
+        HashMap<String, List<Article>> productsOnSale = new HashMap<>();
+        productsOnSale.put(AppConfig.FIRST_TAB_ITEMS[0], getProductsOnSale());
+        productsOnSale.put(AppConfig.FIRST_TAB_ITEMS[1], getNewProducts());
+        productsOnSale.put(AppConfig.FIRST_TAB_ITEMS[2], getBestSellingProducts());
+        return productsOnSale;
+
     }
 }

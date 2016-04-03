@@ -16,7 +16,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
-public class RecyclerViewAdapterSubcategories extends RecyclerView.Adapter<RecyclerViewAdapterSubcategories.MyViewHolder>{
+public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerViewAllCategories.MyViewHolder>{
 
     private List<Child> subcategories;
     private List<Child> displaySubcategories;
@@ -33,7 +33,7 @@ public class RecyclerViewAdapterSubcategories extends RecyclerView.Adapter<Recyc
     }
 
 
-    public RecyclerViewAdapterSubcategories(Context context, List<Child> subcategories) {
+    public RecyclerViewAllCategories(Context context, List<Child> subcategories) {
         this.displaySubcategories = subcategories.subList(0,4);
         this.subcategories=subcategories;
         this.context=context;
@@ -48,7 +48,7 @@ public class RecyclerViewAdapterSubcategories extends RecyclerView.Adapter<Recyc
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapterSubcategories.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewAllCategories.MyViewHolder holder, int position) {
 
         subCategoryName.setText(subcategories.get(position).getKatIme());
 

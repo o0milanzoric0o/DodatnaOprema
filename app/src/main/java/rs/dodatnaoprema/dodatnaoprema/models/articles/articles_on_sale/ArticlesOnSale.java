@@ -3,10 +3,11 @@ package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticlesOnSale {
+public class ArticlesOnSale implements Serializable {
 
     @SerializedName("tag")
     @Expose

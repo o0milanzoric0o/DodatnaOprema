@@ -3,7 +3,9 @@ package rs.dodatnaoprema.dodatnaoprema.models.articles;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Pictures {
+import java.io.Serializable;
+
+public class Pictures implements Serializable{
 
     @SerializedName("IdArtikliSlike")
     @Expose
@@ -22,73 +24,94 @@ public class Pictures {
     private String velikaSlika;
 
     /**
-     * @return The IdArtikliSlike
+     *
+     * @return
+     * The IdArtikliSlike
      */
     public Integer getIdArtikliSlike() {
         return IdArtikliSlike;
     }
 
     /**
-     * @param IdArtikliSlike The IdArtikliSlike
+     *
+     * @param IdArtikliSlike
+     * The IdArtikliSlike
      */
     public void setIdArtikliSlike(Integer IdArtikliSlike) {
         this.IdArtikliSlike = IdArtikliSlike;
     }
 
     /**
-     * @return The glavna
+     *
+     * @return
+     * The glavna
      */
     public Integer getGlavna() {
         return glavna;
     }
 
     /**
-     * @param glavna The glavna
+     *
+     * @param glavna
+     * The glavna
      */
     public void setGlavna(Integer glavna) {
         this.glavna = glavna;
     }
 
     /**
-     * @return The malaSlika
+     *
+     * @return
+     * The malaSlika
      */
     public String getMalaSlika() {
         return malaSlika;
     }
 
     /**
-     * @param malaSlika The mala_slika
+     *
+     * @param malaSlika
+     * The mala_slika
      */
     public void setMalaSlika(String malaSlika) {
         this.malaSlika = malaSlika;
     }
 
     /**
-     * @return The srednjaSlika
+     *
+     * @return
+     * The srednjaSlika
      */
     public String getSrednjaSlika() {
         return srednjaSlika;
     }
 
     /**
-     * @param srednjaSlika The srednja_slika
+     *
+     * @param srednjaSlika
+     * The srednja_slika
      */
     public void setSrednjaSlika(String srednjaSlika) {
         this.srednjaSlika = srednjaSlika;
     }
 
     /**
-     * @return The velikaSlika
+     *
+     * @return
+     * The velikaSlika
      */
     public String getVelikaSlika() {
         return velikaSlika;
     }
 
     /**
-     * @param velikaSlika The velika_slika
+     *
+     * @param velikaSlika
+     * The velika_slika
      */
     public void setVelikaSlika(String velikaSlika) {
         this.velikaSlika = velikaSlika;
     }
+
 
 }
