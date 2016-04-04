@@ -39,10 +39,19 @@
 TODO iz maila
 Dodatna oprema
 Na tabu br. 2:
-1. Dropdown box, sa okruglastim dugmićima pomoću kojih se biraju potkategorije. To može da se uradi pomoću FrameLayout-a u kome se nalaze RelativeLayout i RecycleView. U RelativeLayout-u se dinamički instanciraju dugmići. RecyleView prikazuje sličke sa proizvodima u 2 kolone koje su nezavisne. RelativeLayout nestaje i pojavljuje se klikom na dugme.
-2. RecycleView sa adapterom za prikaz proizvoda u drugom tab-u.
-3. Kad se skroluje na dole da nestanu toolbari...
-4. Promena boje toolbar-a kad se prelazi sa jednog taba na drugi.
-5. Kad se stigne do dna na prvom tab-u, da se prebaci na drugi tab.
-6. Ubiti floating button na prvom tabu, ne treba nam.
-7. Layout koji prikazuje pojedinačan proizvod. */
+Milan
+    1. Dropdown box, sa okruglastim dugmićima pomoću kojih se biraju potkategorije. To može da se uradi pomoću FrameLayout-a u kome se nalaze RelativeLayout i RecycleView. U RelativeLayout-u se dinamički instanciraju dugmići. RecyleView prikazuje sličke sa proizvodima u 2 kolone koje su nezavisne. RelativeLayout nestaje i pojavljuje se klikom na dugme.
+?????
+    2. RecycleView sa adapterom za prikaz proizvoda u drugom tab-u.
+Mirna
+    3. Kad se skroluje na dole da nestanu toolbari...
+?????
+    4. Promena boje toolbar-a kad se prelazi sa jednog taba na drugi.
+Jeca
+    5. Kad se stigne do dna na prvom tab-u, da se prebaci na drugi tab.
+Mirna
+    6. Ubiti floating button na prvom tabu, ne treba nam.
+Jos uvek ne znamo sta treba
+    7. Layout koji prikazuje pojedinačan proizvod.
+Jeca
+    8. Popravak prvi tab*/
