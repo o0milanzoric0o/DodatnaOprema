@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +19,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
-import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 
 public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -119,9 +116,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             //cast holder to VHHeader and set data for header.
             int h = 200;
             int w = 320;
-
-            ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
-            //productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
 
             bitmaps = new ArrayList<>();
             bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc1, w, h));

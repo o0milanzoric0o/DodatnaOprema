@@ -17,5 +17,4 @@
         android:adjustViewBounds="true"
         android:clickable="false"
         android:layout_gravity="center"/>
-
 </LinearLayout>

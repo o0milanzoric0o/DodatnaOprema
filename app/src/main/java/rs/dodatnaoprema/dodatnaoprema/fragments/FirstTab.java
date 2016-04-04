@@ -16,6 +16,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomScrollView;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.RecyclerViewAdapterFirstTab;
@@ -25,6 +26,8 @@ public class FirstTab extends Fragment {
     private CustomProgressDialog mProgressDialog;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
 
+    private CustomScrollView mScrollView;
+
     ArrayList<Bitmap> bitmaps;
     List<Category> categories;
 
@@ -32,11 +35,20 @@ public class FirstTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View mView = inflater.inflate(R.layout.first_tab, container, false);
-        MainActivity mainActivity = (MainActivity) getActivity();
-
-        Log.logInfo("Lalala", "njnj" + String.valueOf(mainActivity.getFirstTabItems().size()));
+        final MainActivity mainActivity = (MainActivity) getActivity();
 
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
+        mScrollView = (CustomScrollView) mView.findViewById(R.id.scrollView);
+        mScrollView.setOnBottomReachedListener(
+                new CustomScrollView.OnBottomReachedListener() {
+                    @Override
+                    public void onBottomReached() {
+                        // do something
+                        mainActivity.moveToNextTab();
+                        Log.logInfo("La", "Bottom");
+                    }
+                }
+        );
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
@@ -44,7 +56,6 @@ public class FirstTab extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
 
 //        imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
 //
@@ -62,29 +73,8 @@ public class FirstTab extends Fragment {
 
 
         // Progress dialog
-      //  mProgressDialog = new CustomProgressDialog(getActivity());
+        //  mProgressDialog = new CustomProgressDialog(getActivity());
 
-     /*   PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(getActivity(), AllCategories.class, UrlEndpoints.getRequestUrlAllCategories());
-
-        content.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
-            @Override
-            public void webRequestSuccess(boolean success, AllCategories allCategories) {
-                if (success) {
-                    // specify an adapter
-                    mAllCategories = allCategories.getCategories();
-                    RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mAllCategories, getActivity());
-                    setCategoriesList(mAllCategories);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mProgressDialog.hideDialog();
-                }
-            }
-
-            @Override
-            public void webRequestError(String error) {
-                mProgressDialog.hideDialog();
-            }
-        });
-        content.pullCategoriesList();*/
         List<Category> mAllCategories = mainActivity.getCategoriesList();
         RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity());
         mRecyclerView.setAdapter(mAdapter);
@@ -108,5 +98,6 @@ public class FirstTab extends Fragment {
     private void setCategoriesList(List<Category> categories) {
         this.categories = categories;
     }
+
 
 }

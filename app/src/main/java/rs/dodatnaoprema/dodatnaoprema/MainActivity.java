@@ -30,6 +30,9 @@ public class MainActivity extends FragmentActivity
     private List<Article> mBestSelling = new ArrayList<>();
     private List<Article> mProductsOnSale = new ArrayList<>();
     private List<Article> mNewProducts = new ArrayList<>();
+    private ViewPager mViewPager;
+
+    TabLayout mTabLayout;
 
     private Intent intent;
 
@@ -60,12 +63,12 @@ public class MainActivity extends FragmentActivity
 
         getIntentExtras();
 
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.first_tab)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getResources().getString(R.string.second_tab)));
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
         final ViewPagerAdapter adapter = new ViewPagerAdapter
                 (getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
@@ -186,6 +189,12 @@ public class MainActivity extends FragmentActivity
         productsOnSale.put(AppConfig.FIRST_TAB_ITEMS[1], getNewProducts());
         productsOnSale.put(AppConfig.FIRST_TAB_ITEMS[2], getBestSellingProducts());
         return productsOnSale;
+
+    }
+
+    public void moveToNextTab() {
+
+        mViewPager.setCurrentItem(mTabLayout.getSelectedTabPosition() + 1);
 
     }
 }
