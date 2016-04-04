@@ -6,7 +6,10 @@
     xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/four_products_margine"
+    android:layout_marginLeft="@dimen/four_products_margine_left_right"
+    android:layout_marginRight="@dimen/four_products_margine_left_right"
+    android:layout_marginTop="@dimen/four_products_margine_top_bottom"
+    android:layout_marginBottom="@dimen/four_products_margine_top_bottom"
     android:background="@color/background_gray"
     card_view:cardCornerRadius="@dimen/card_rounding">
 
