@@ -14,6 +14,7 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -46,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
         getBestSellingProducts();
         getProductsOnSale();
         getNewProducts();
-        //   getAllCategories();
+        getAllCategories();
 
 
     }
@@ -62,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-  /*  private void getAllCategories() {
+    private void getAllCategories() {
         PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(this, AllCategories.class, UrlEndpoints.getRequestUrlAllCategories(), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
             @Override
@@ -80,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
         content.pullList();
-    }*/
+    }
   private void getProductsOnSale() {
       PullWebContent<ArticlesOnSale> content =
               new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE, 0, 4), mVolleySingleton);
