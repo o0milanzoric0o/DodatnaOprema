@@ -32,8 +32,8 @@
     <string name="progress_dialog_message">Učitavanje podataka ...</string>
 
     <!-- Tabs labels -->
-    <string name="first_tab">Tab1</string>
-    <string name="second_tab">Tab2</string>
+    <string name="first_tab">TOP proizvodi</string>
+    <string name="second_tab">Ponuda</string>
 
     <!-- Tab specs -->
     <string name="first_tab_spec">tab1</string>
