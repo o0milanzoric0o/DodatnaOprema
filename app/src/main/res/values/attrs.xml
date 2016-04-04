@@ -6,4 +6,9 @@
         <attr name="valueColor" format="color"/>
         <attr name="slideInterval" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="paddingVertical" format="integer"/>
+        <attr name="paddingHorizontal" format="integer"/>
+    </declare-styleable>
 </resources>

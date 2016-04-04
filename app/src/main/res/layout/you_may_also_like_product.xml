@@ -1,61 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- layout with two independent columns-->
+<?xml version="1.0" encoding="utf-8"?><!-- layout with two independent columns-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:baselineAligned="false"
-              android:orientation="horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
-    <Button
+    <RelativeLayout
+        android:id="@+id/dropdown_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Toggle list"
-        android:id="@+id/button" />
+        android:background="@drawable/dropdown_border">
 
-    <org.apmem.tools.layouts.FlowLayout
-        android:id="@+id/flow_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <Button
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tog1"
-            android:id="@+id/button2" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tog2"
-            android:id="@+id/button3" />
-    </org.apmem.tools.layouts.FlowLayout>
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/img_drop_arrow"
+            android:layout_toStartOf="@id/img_drop_arrow"
+            android:text="New Text" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+        <ImageView
+            android:id="@+id/img_drop_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+    </RelativeLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
+            android:id="@+id/flow_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:padding="10dp"
+            android:paddingBottom="20dp"
+            app:paddingHorizontal="20"
+            app:paddingVertical="20">
 
-            <FrameLayout
-                android:id="@+id/productLeft"
+            <Button
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".50">
+                android:background="@drawable/rounded_btn_normal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Bušilice"
+                android:textAllCaps="false"
+                android:textColor="#373737"
+                android:textSize="13sp" />
 
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/productRight"
+            <Button
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".50">
+                android:background="@drawable/rounded_btn_normal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Burgije"
+                android:textAllCaps="false"
+                android:textColor="#373737"
+                android:textSize="13sp" />
 
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_btn_normal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Testere"
+                android:textAllCaps="false"
+                android:textColor="#373737"
+                android:textSize="13sp" />
 
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_btn_normal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="Alatke"
+                android:textAllCaps="false"
+                android:textColor="#373737"
+                android:textSize="13sp" />
+        </rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout>
 
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/productLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50">
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/productRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50">
+
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
 </LinearLayout>

@@ -3,37 +3,68 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
-import org.apmem.tools.layouts.FlowLayout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 
 public class SecondTab extends Fragment {
-
+    ViewGroup drop_down;
+    RelativeLayout dropdown_layout;
+    ImageView dropdown_image;
+    RotateAnimation rotateUp;
+    RotateAnimation rotateDown;
+    Animation slide_down;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
+        drop_down = (ViewGroup) mView.findViewById(R.id.flow_layout);
+        dropdown_layout = (RelativeLayout) mView.findViewById(R.id.dropdown_layout);
+        dropdown_image = (ImageView) mView.findViewById(R.id.img_drop_arrow);
 
-        FlowLayout flowLayout =(FlowLayout) mView.findViewById(R.id.flow_layout);
-        Button btn1 = new Button(container.getContext());
-        Button btn2 = new Button(container.getContext());
-        Button btn3 = new Button(container.getContext());
-        Button btn4 = new Button(container.getContext());
-        Button btn5 = new Button(container.getContext());
-        Log.logInfo("DODATNA OPREMA","Adding buttons");
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        drop_down.setVisibility(ViewGroup.GONE);
 
-        flowLayout.addView(btn1, lp);
-        flowLayout.addView(btn2, lp);
-        flowLayout.addView(btn3, lp);
-        flowLayout.addView(btn4, lp);
-        flowLayout.addView(btn5, lp);
+        rotateUp = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateUp.setDuration(300);
+        rotateUp.setFillAfter(true);
+        rotateUp.setFillEnabled(true);
+        rotateUp.setInterpolator(new LinearInterpolator());
+
+        rotateDown = new RotateAnimation(180, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateDown.setDuration(300);
+        rotateDown.setFillAfter(true);
+        rotateDown.setFillEnabled(true);
+        rotateDown.setInterpolator(new LinearInterpolator());
+
+        slide_down = AnimationUtils.loadAnimation(container.getContext(),
+                R.anim.slide_down);
+
+        dropdown_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("DODATNA OPREMA", "ON TOGGLE CLICK");
+//                drop_down.setVisibility(ViewGroup.GONE);
+                if (drop_down.getVisibility() != ViewGroup.GONE) {
+                    dropdown_image.startAnimation(rotateDown);
+                    drop_down.setVisibility(ViewGroup.GONE);
+                } else {
+                    drop_down.startAnimation(slide_down);
+                    drop_down.setVisibility(ViewGroup.VISIBLE);
+
+                    dropdown_image.startAnimation(rotateUp);
+                }
+            }
+        });
+
         return mView;
     }
 }
