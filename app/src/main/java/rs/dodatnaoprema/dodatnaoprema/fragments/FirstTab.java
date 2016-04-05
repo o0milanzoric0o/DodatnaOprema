@@ -75,7 +75,6 @@ public class FirstTab extends Fragment {
         // Progress dialog
         //  mProgressDialog = new CustomProgressDialog(getActivity());
 
-        List<Category> mAllCategories = mainActivity.getCategoriesList();
         RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity());
         mRecyclerView.setAdapter(mAdapter);
         //mProgressDialog.hideDialog();

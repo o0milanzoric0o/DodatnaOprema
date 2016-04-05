@@ -21,5 +21,7 @@
 
     <color name="listItemColor">#DE000000</color>
 
+    <color name="btnTextColor">#373737</color>
+
 
 </resources>

@@ -13,7 +13,7 @@
         android:background="@drawable/dropdown_border">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txt_drop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -33,92 +33,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
-            android:id="@+id/flow_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:paddingBottom="20dp"
-            app:paddingHorizontal="20"
-            app:paddingVertical="20">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_btn_normal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="Bušilice"
-                android:textAllCaps="false"
-                android:textColor="#373737"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_btn_normal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="Burgije"
-                android:textAllCaps="false"
-                android:textColor="#373737"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_btn_normal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="Testere"
-                android:textAllCaps="false"
-                android:textColor="#373737"
-                android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_btn_normal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:text="Alatke"
-                android:textAllCaps="false"
-                android:textColor="#373737"
-                android:textSize="13sp" />
-        </rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout>
-
         <ScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2"
+            android:focusable="true">
 
-            <LinearLayout
+            <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
+                android:id="@+id/flow_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:padding="10dp"
+                app:paddingHorizontal="10"
+                app:paddingVertical="10">
 
-                <FrameLayout
-                    android:id="@+id/productLeft"
+                <Button
+                    android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".50">
+                    android:background="@drawable/rounded_btn_normal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Bušilice"
+                    android:textAllCaps="false"
+                    android:textColor="#373737"
+                    android:textSize="13sp"
+                    android:minHeight="40sp"/>
 
-                </FrameLayout>
 
-                <FrameLayout
-                    android:id="@+id/productRight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".50">
-
-                </FrameLayout>
-            </LinearLayout>
+            </rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout>
         </ScrollView>
+
+        <!--<ScrollView-->
+            <!--android:id="@+id/scrollView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:baselineAligned="false"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<FrameLayout-->
+                    <!--android:id="@+id/productLeft"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight=".50">-->
+
+                <!--</FrameLayout>-->
+
+                <!--<FrameLayout-->
+                    <!--android:id="@+id/productRight"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight=".50">-->
+
+                <!--</FrameLayout>-->
+            <!--</LinearLayout>-->
+        <!--</ScrollView>-->
 
     </FrameLayout>
 </LinearLayout>

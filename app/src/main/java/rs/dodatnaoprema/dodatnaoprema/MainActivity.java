@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.ViewPagerAdapter;
@@ -59,8 +60,6 @@ public class MainActivity extends FragmentActivity
 
     public void initializeTabs() {
         intent = getIntent();
-        mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
-
         getIntentExtras();
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -155,7 +154,7 @@ public class MainActivity extends FragmentActivity
     }
 
     public List<Category> getCategoriesList() {
-
+        mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         return mAllCategories;
     }
 
@@ -179,6 +178,7 @@ public class MainActivity extends FragmentActivity
         getProductsOnSale();
         getNewProducts();
         getBestSellingProducts();
+        getCategoriesList();
 
     }
 
