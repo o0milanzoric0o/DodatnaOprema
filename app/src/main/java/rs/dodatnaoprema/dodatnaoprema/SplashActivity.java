@@ -82,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
     }
   private void getProductsOnSale() {
       PullWebContent<ArticlesOnSale> content =
-              new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE, 0, 4), mVolleySingleton);
+              new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE, AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), mVolleySingleton);
       content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
           @Override
           public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
@@ -103,7 +103,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getNewProducts() {
         PullWebContent<ArticlesOnSale> content =
-                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_NEW_PRODUCTS, 0, 4), mVolleySingleton);
+                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_NEW_PRODUCTS, AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
@@ -125,7 +125,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getBestSellingProducts() {
         PullWebContent<ArticlesOnSale> content =
-                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_BEST_SEllING, 0, 4), mVolleySingleton);
+                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_BEST_SEllING, AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
