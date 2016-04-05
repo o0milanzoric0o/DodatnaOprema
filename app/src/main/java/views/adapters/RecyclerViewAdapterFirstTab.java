@@ -17,6 +17,7 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
 
@@ -147,4 +148,13 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         return position == 0;
     }
 
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        for (int i = 0; i < bitmaps.size(); i++) {
+            bitmaps.get(i).recycle();
+            bitmaps.set(i, null);
+        }
+        Log.logInfo("DODATNA OP", "onDestroyView...");
+        super.onDetachedFromRecyclerView(recyclerView);
+    }
 }

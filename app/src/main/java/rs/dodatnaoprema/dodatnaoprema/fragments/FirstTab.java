@@ -28,6 +28,8 @@ public class FirstTab extends Fragment {
 
     private CustomScrollView mScrollView;
 
+    private MainActivity mainActivity;
+
     ArrayList<Bitmap> bitmaps;
     List<Category> categories;
 
@@ -35,7 +37,7 @@ public class FirstTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View mView = inflater.inflate(R.layout.first_tab, container, false);
-        final MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity = (MainActivity) getActivity();
 
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
         mScrollView = (CustomScrollView) mView.findViewById(R.id.scrollView);
@@ -72,17 +74,10 @@ public class FirstTab extends Fragment {
 //        imageViewPagerWDotIndicator.setBitmapList(bitmaps);
 
 
-        // Progress dialog
-        //  mProgressDialog = new CustomProgressDialog(getActivity());
-
         RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        //mProgressDialog.hideDialog();
-
-
         return mView;
     }
-
 
     @Override
     public void onDestroyView() {
