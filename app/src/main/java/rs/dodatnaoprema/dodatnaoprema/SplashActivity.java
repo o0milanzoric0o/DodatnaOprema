@@ -54,12 +54,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private void response() {
         requestCounter++;
-        final int numberOfRequests = 3;
+        final int numberOfRequests = 4;
         if (requestCounter == numberOfRequests) {
             startActivity(intent);
             finish();
-
-
         }
     }
 
