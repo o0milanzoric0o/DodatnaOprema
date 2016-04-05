@@ -49,8 +49,6 @@ public class SecondTab extends Fragment {
         drop_down.setVisibility(ViewGroup.GONE);
         List<Category> categories = mainActivity.getCategoriesList();
 
-        if (categories == null) Log.e("DODATNA OPREMA", "NEMA KATEGORIJA! YOU SUCK!");
-
         // creating buttons
         for (Category category : categories
                 ) {
