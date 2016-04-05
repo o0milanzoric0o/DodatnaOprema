@@ -29,6 +29,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private static final int TYPE_FOOTER = 2;
 
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
 
@@ -77,6 +78,12 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
         }
     }
+    class ViewHolderFooter extends RecyclerView.ViewHolder {
+
+        public ViewHolderFooter(View itemView) {
+            super(itemView);
+        }
+    }
 
 
     public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context) {
@@ -95,6 +102,11 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.dot_indicator, parent, false);
             return new ViewHolderHeader(itemView);
+        }
+        else if (viewType == TYPE_FOOTER){
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.recyclerview_footer, parent, false);
+            return new ViewHolderFooter(itemView);
         }
 
         throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
@@ -133,19 +145,25 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return AppConfig.FIRST_TAB_ITEMS.length + 1;
+        return AppConfig.FIRST_TAB_ITEMS.length + 2;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isPositionHeader(position))
             return TYPE_HEADER;
+        if (isPositionFooter(position))
+            return TYPE_FOOTER;
 
         return TYPE_ITEM;
     }
 
     private boolean isPositionHeader(int position) {
         return position == 0;
+    }
+
+    private boolean isPositionFooter(int position) {
+        return position == (getItemCount() - 1);
     }
 
     @Override
