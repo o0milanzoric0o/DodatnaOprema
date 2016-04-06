@@ -19,7 +19,9 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/img_drop_arrow"
             android:layout_toStartOf="@id/img_drop_arrow"
-            android:text="New Text" />
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="" />
 
         <ImageView
             android:id="@+id/img_drop_arrow"
@@ -46,21 +48,6 @@
                 android:padding="10dp"
                 app:paddingHorizontal="10"
                 app:paddingVertical="10">
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_btn_normal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Bušilice"
-                    android:textAllCaps="false"
-                    android:textColor="#373737"
-                    android:textSize="13sp"
-                    android:minHeight="40sp"/>
-
-
             </rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout>
         </ScrollView>
 

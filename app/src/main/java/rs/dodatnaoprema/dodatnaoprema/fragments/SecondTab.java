@@ -4,7 +4,6 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +34,7 @@ public class SecondTab extends Fragment {
     Animation slide_down;
     Animation slide_up;
     View last_clicked_btn;
+    ViewGroup.LayoutParams param;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,38 +49,23 @@ public class SecondTab extends Fragment {
         drop_down.setVisibility(ViewGroup.GONE);
         List<Category> categories = mainActivity.getCategoriesList();
 
+        param = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+        //add button for showing all products
+        Button btn =  addNewButton("Svi proizvodi");
+        dropdown_text.setText("Svi proizvodi");
+        btn.setSelected(true);
+        last_clicked_btn = btn;
+
         // creating buttons
         for (Category category : categories
                 ) {
             for (Child child : category.getChild()
                     ) {
-                Button btn = new Button(drop_down.getContext());
-                btn.setBackgroundResource(R.drawable.rounded_btn_normal);
-                btn.setPadding(10, 0, 10, 0);
-                btn.setText(child.getKatIme());
-                btn.setAllCaps(false);
-                btn.setTextColor(ContextCompat.getColor(drop_down.getContext(), R.color.btnTextColor));
-                btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-                btn.setMinHeight(40);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (last_clicked_btn != null)
-                            last_clicked_btn.setSelected(false);
-                        v.setSelected(true);
-                        last_clicked_btn = v;
-
-                        // Set selection
-                        dropdown_text.setText(((Button) v).getText());
-                        // Roll up
-                        drop_down.startAnimation(slide_up);
-                        drop_down.setVisibility(ViewGroup.GONE);
-                        dropdown_image.startAnimation(rotateDown);
-
-                    }
-
-                });
-                drop_down.addView(btn);
+                addNewButton(child.getKatIme());
             }
         }
 
@@ -104,8 +89,6 @@ public class SecondTab extends Fragment {
         dropdown_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("DODATNA OPREMA", "ON TOGGLE CLICK");
-//                drop_down.setVisibility(ViewGroup.GONE);
                 if (drop_down.getVisibility() != ViewGroup.GONE) {
                     drop_down.startAnimation(slide_up);
                     drop_down.setVisibility(ViewGroup.GONE);
@@ -119,5 +102,38 @@ public class SecondTab extends Fragment {
         });
 
         return mView;
+    }
+
+    private Button addNewButton(String text) {
+        Button btn = new Button(drop_down.getContext());
+        btn.setLayoutParams(param);
+        btn.setBackgroundResource(R.drawable.rounded_btn_normal);
+        btn.setPadding(10, 0, 10, 0);
+
+        btn.setText(text);
+        btn.setAllCaps(false);
+        btn.setTextColor(ContextCompat.getColor(drop_down.getContext(), R.color.btnTextColor));
+        btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        btn.setMinHeight(80);
+        btn.setMinimumHeight(80);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (last_clicked_btn != null)
+                    last_clicked_btn.setSelected(false);
+                v.setSelected(true);
+                last_clicked_btn = v;
+
+                // Set selection
+                dropdown_text.setText(((Button) v).getText());
+                // Roll up
+                drop_down.startAnimation(slide_up);
+                drop_down.setVisibility(ViewGroup.GONE);
+                dropdown_image.startAnimation(rotateDown);
+
+            }
+        });
+        drop_down.addView(btn);
+        return btn;
     }
 }
