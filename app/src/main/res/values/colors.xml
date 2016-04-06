@@ -23,5 +23,6 @@
 
     <color name="btnTextColor">#373737</color>
 
-
+    <color name="blue">#00abea</color>
+    <color name="white">#ffffff</color>
 </resources>

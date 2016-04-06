@@ -1,6 +1,9 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -13,40 +16,54 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.models.ImageItem;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import views.adapters.GridViewAdapter;
 
 public class SecondTab extends Fragment {
-    ViewGroup drop_down;
-    RelativeLayout dropdown_layout;
-    ImageView dropdown_image;
-    TextView dropdown_text;
-    RotateAnimation rotateUp;
-    RotateAnimation rotateDown;
-    Animation slide_down;
-    Animation slide_up;
-    View last_clicked_btn;
-    ViewGroup.LayoutParams param;
+    private ViewGroup drop_down;
+    private RelativeLayout dropdown_layout;
+    private ScrollView flow_layout_scroll;
+    private ImageView dropdown_image;
+    private TextView dropdown_text;
+    private RotateAnimation rotateUp;
+    private RotateAnimation rotateDown;
+    private Animation slide_down;
+    private Animation slide_up;
+    private View last_clicked_btn;
+    private ViewGroup.LayoutParams param;
+
+    private GridView gridView;
+    private GridViewAdapter gridAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
+        gridView = (GridView) mView.findViewById(R.id.gridView);
+        gridAdapter = new GridViewAdapter(mView.getContext(), R.layout.grid_item_layout, getData());
+        gridView.setAdapter(gridAdapter);
+
         final MainActivity mainActivity = (MainActivity) getActivity();
 
         drop_down = (ViewGroup) mView.findViewById(R.id.flow_layout);
+        flow_layout_scroll = (ScrollView) mView.findViewById(R.id.flow_layout_scroll);
         dropdown_layout = (RelativeLayout) mView.findViewById(R.id.dropdown_layout);
         dropdown_image = (ImageView) mView.findViewById(R.id.img_drop_arrow);
         dropdown_text = (TextView) mView.findViewById(R.id.txt_drop);
 
-        drop_down.setVisibility(ViewGroup.GONE);
+        flow_layout_scroll.setVisibility(ViewGroup.GONE);
         List<Category> categories = mainActivity.getCategoriesList();
 
         param = new ViewGroup.LayoutParams(
@@ -55,7 +72,7 @@ public class SecondTab extends Fragment {
 
 
         //add button for showing all products
-        Button btn =  addNewButton("Svi proizvodi");
+        Button btn = addNewButton("Svi proizvodi");
         dropdown_text.setText("Svi proizvodi");
         btn.setSelected(true);
         last_clicked_btn = btn;
@@ -89,13 +106,13 @@ public class SecondTab extends Fragment {
         dropdown_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (drop_down.getVisibility() != ViewGroup.GONE) {
-                    drop_down.startAnimation(slide_up);
-                    drop_down.setVisibility(ViewGroup.GONE);
+                if (flow_layout_scroll.getVisibility() != ViewGroup.GONE) {
+                    flow_layout_scroll.startAnimation(slide_up);
+                    flow_layout_scroll.setVisibility(ViewGroup.GONE);
                     dropdown_image.startAnimation(rotateDown);
                 } else {
-                    drop_down.startAnimation(slide_down);
-                    drop_down.setVisibility(ViewGroup.VISIBLE);
+                    flow_layout_scroll.startAnimation(slide_down);
+                    flow_layout_scroll.setVisibility(ViewGroup.VISIBLE);
                     dropdown_image.startAnimation(rotateUp);
                 }
             }
@@ -127,13 +144,24 @@ public class SecondTab extends Fragment {
                 // Set selection
                 dropdown_text.setText(((Button) v).getText());
                 // Roll up
-                drop_down.startAnimation(slide_up);
-                drop_down.setVisibility(ViewGroup.GONE);
+                flow_layout_scroll.startAnimation(slide_up);
+                flow_layout_scroll.setVisibility(ViewGroup.GONE);
                 dropdown_image.startAnimation(rotateDown);
 
             }
         });
         drop_down.addView(btn);
         return btn;
+    }
+
+    // Prepare some dummy data for gridview
+    private ArrayList<ImageItem> getData() {
+        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        for (int i = 0; i < imgs.length(); i++) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+            imageItems.add(new ImageItem(bitmap, "Image#" + i));
+        }
+        return imageItems;
     }
 }
