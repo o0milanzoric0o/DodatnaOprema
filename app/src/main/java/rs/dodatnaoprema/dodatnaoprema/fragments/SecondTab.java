@@ -141,6 +141,8 @@ public class SecondTab extends Fragment {
                 v.setSelected(true);
                 last_clicked_btn = v;
 
+                // JECO OVDE MOZE DA SE PRAVI REQUEST
+
                 // Set selection
                 dropdown_text.setText(((Button) v).getText());
                 // Roll up
