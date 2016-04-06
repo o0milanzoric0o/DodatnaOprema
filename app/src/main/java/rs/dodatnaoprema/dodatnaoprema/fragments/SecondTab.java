@@ -27,9 +27,16 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.ImageItem;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.Artikli;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import views.adapters.GridViewAdapter;
 
 public class SecondTab extends Fragment {
@@ -45,8 +52,12 @@ public class SecondTab extends Fragment {
     private View last_clicked_btn;
     private ViewGroup.LayoutParams param;
 
+    private List<Artikli> mArticles;
+
     private GridView gridView;
     private GridViewAdapter gridAdapter;
+
+    VolleySingleton mVolleySingleton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +65,9 @@ public class SecondTab extends Fragment {
         gridView = (GridView) mView.findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(mView.getContext(), R.layout.grid_item_layout, getData());
         gridView.setAdapter(gridAdapter);
+
+        mVolleySingleton = VolleySingleton.getsInstance(getContext());
+        mArticles = new ArrayList<>();
 
         final MainActivity mainActivity = (MainActivity) getActivity();
 
@@ -165,5 +179,26 @@ public class SecondTab extends Fragment {
             imageItems.add(new ImageItem(bitmap, "Image#" + i));
         }
         return imageItems;
+    }
+
+    private List<Artikli> searchArticlesByCategory(int id, int brand, int from, int to, int sort) {
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, brand, sort), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
+            @Override
+            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
+                if (success) {
+                    mArticles = articlesFilteredByCategory.getArtikli();
+
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        content.pullList();
+
+        return mArticles;
     }
 }
