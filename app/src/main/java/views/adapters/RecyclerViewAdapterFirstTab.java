@@ -19,7 +19,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
 
 public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

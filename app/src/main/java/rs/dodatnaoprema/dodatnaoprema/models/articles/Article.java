@@ -1,14 +1,14 @@
-package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category;
+package rs.dodatnaoprema.dodatnaoprema.models.articles;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
+public class Article implements Serializable {
 
-public class Artikli {
     @SerializedName("ArtikalId")
     @Expose
     private Integer ArtikalId;
@@ -32,16 +32,16 @@ public class Artikli {
     private Object pozovite;
     @SerializedName("brend")
     @Expose
-    private String brend;
+    private Object brend;
     @SerializedName("stanje")
     @Expose
     private Integer stanje;
     @SerializedName("spec")
     @Expose
     private List<Object> spec = new ArrayList<Object>();
-    @SerializedName("pictures")
+    @SerializedName("slike")
     @Expose
-    private List<Pictures> pictures = new ArrayList<Pictures>();
+    private List<Pictures> slike = new ArrayList<Pictures>();
 
     /**
      *
@@ -174,7 +174,7 @@ public class Artikli {
      * @return
      * The brend
      */
-    public String getBrend() {
+    public Object getBrend() {
         return brend;
     }
 
@@ -183,7 +183,7 @@ public class Artikli {
      * @param brend
      * The brend
      */
-    public void setBrend(String brend) {
+    public void setBrend(Object brend) {
         this.brend = brend;
     }
 
@@ -226,19 +226,20 @@ public class Artikli {
     /**
      *
      * @return
-     * The pictures
+     * The slike
      */
-    public List<Pictures> getPictures() {
-        return pictures;
+    public List<Pictures> getSlike() {
+        return slike;
     }
 
     /**
      *
-     * @param pictures
-     * The pictures
+     * @param slike
+     * The slike
      */
-    public void setPictures(List<Pictures> pictures) {
-        this.pictures = pictures;
+    public void setSlike(List<Pictures> slike) {
+        this.slike = slike;
     }
+
 
 }

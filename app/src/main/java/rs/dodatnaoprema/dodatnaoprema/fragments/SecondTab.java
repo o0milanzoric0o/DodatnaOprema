@@ -29,8 +29,8 @@ import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.ImageItem;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.Artikli;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -52,7 +52,7 @@ public class SecondTab extends Fragment {
     private View last_clicked_btn;
     private ViewGroup.LayoutParams param;
 
-    private List<Artikli> mArticles;
+    private List<Article> mArticles;
 
     private GridView gridView;
     private GridViewAdapter gridAdapter;
@@ -61,6 +61,8 @@ public class SecondTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.SecondFragment);
+
         View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
         gridView = (GridView) mView.findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(mView.getContext(), R.layout.grid_item_layout, getData());
@@ -181,12 +183,13 @@ public class SecondTab extends Fragment {
         return imageItems;
     }
 
-    private List<Artikli> searchArticlesByCategory(int id, int from, int to, int sort) {
+    private List<Article> searchArticlesByCategory(int id, int from, int to, int sort) {
         PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
+
                     mArticles = articlesFilteredByCategory.getArtikli();
 
                 }

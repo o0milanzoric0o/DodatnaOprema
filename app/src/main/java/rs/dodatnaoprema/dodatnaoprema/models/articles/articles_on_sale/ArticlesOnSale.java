@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+
 public class ArticlesOnSale implements Serializable {
 
     @SerializedName("tag")
