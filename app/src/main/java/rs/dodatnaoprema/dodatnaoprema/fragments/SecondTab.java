@@ -105,7 +105,7 @@ public class SecondTab extends Fragment {
 
         //add button for showing all products
         ///Button btn = addNewButton("Svi proizvodi");
-        //dropdown_text.setText("Svi proizvodi");
+        dropdown_text.setText("Izaberite kategoriju...");
         ///btn.setSelected(true);
         //last_clicked_btn = btn;
 
