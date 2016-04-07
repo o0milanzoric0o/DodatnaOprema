@@ -5,7 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="toolbar.primary.color">#5856D6</color>
-    <color name="tablayout.primary.color">#5856D6</color>
+    <color name="appbar.first.tab">#5856D6</color>
+    <color name="appbar.second.tab">#A09FDF</color>
     <color name="tablayout.accent.color">#A09FDF</color>
     <!--
         <color name="s">#E7E7E7</color>

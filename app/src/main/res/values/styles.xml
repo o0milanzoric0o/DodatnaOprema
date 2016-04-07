@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/tablayout.primary.color</item>
-        <item name="colorPrimaryDark">@color/tablayout.primary.color</item>
+        <item name="colorPrimary">@color/appbar.first.tab</item>
+        <item name="colorPrimaryDark">@color/appbar.first.tab</item>
         <item name="colorAccent">@color/tablayout.accent.color</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
@@ -13,13 +13,6 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
-        <!-- Customize TabLayout theme. -->
-        <item name="tabBackground">@color/tablayout.primary.color</item>
-        <item name="tabIndicatorColor">@color/tablayout.accent.color</item>
-        <item name="tabSelectedTextColor">@android:color/white</item>
-        <item name="tabTextAppearance">@style/CustomTabTextStyle</item>
-    </style>
     <style name="CustomTabTextStyle" parent="TextAppearance.Design.Tab">
         <!-- Customize Tab Text Style. -->
         <item name="android:textSize">14sp</item>

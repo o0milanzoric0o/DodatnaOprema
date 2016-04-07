@@ -1,10 +1,13 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +36,8 @@ public class MainActivity extends FragmentActivity
     private List<Article> mNewProducts = new ArrayList<>();
     private ViewPager mViewPager;
 
+    AppBarLayout mAppBar;
+
     TabLayout mTabLayout;
 
     private Intent intent;
@@ -55,6 +60,8 @@ public class MainActivity extends FragmentActivity
         navigationView.setNavigationItemSelectedListener(this);
         initializeTabs();
 
+        mAppBar = (AppBarLayout) findViewById(R.id.appBar);
+
 
     }
 
@@ -76,6 +83,11 @@ public class MainActivity extends FragmentActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0) {
+                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.appbar_first_tab));
+                } else if (tab.getPosition() == 1) {
+                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.appbar_second_tab));
+                }
             }
 
             @Override
