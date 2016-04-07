@@ -40,6 +40,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import views.adapters.GridViewAdapter;
 
 public class SecondTab extends Fragment {
+    VolleySingleton mVolleySingleton;
     private ViewGroup drop_down;
     private RelativeLayout dropdown_layout;
     private ScrollView flow_layout_scroll;
@@ -51,21 +52,36 @@ public class SecondTab extends Fragment {
     private Animation slide_up;
     private View last_clicked_btn;
     private ViewGroup.LayoutParams param;
-
-    private List<Article> mArticles;
-
+    private List<Article> mArticles = new ArrayList<>();
     private GridView gridView;
     private GridViewAdapter gridAdapter;
 
-    VolleySingleton mVolleySingleton;
+    private void searchArticlesByCategory(int id, int from, int to, int sort) {
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
+            @Override
+            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
+                if (success) {
+                    mArticles = articlesFilteredByCategory.getArtikli();
+                    gridAdapter.updateContent(mArticles);
+
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        content.pullList();
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getActivity().setTheme(R.style.SecondFragment);
-
         View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
         gridView = (GridView) mView.findViewById(R.id.gridView);
-        gridAdapter = new GridViewAdapter(mView.getContext(), R.layout.grid_item_layout, getData());
+        gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, mArticles);
         gridView.setAdapter(gridAdapter);
 
         mVolleySingleton = VolleySingleton.getsInstance(getContext());
@@ -88,17 +104,17 @@ public class SecondTab extends Fragment {
 
 
         //add button for showing all products
-        Button btn = addNewButton("Svi proizvodi");
-        dropdown_text.setText("Svi proizvodi");
-        btn.setSelected(true);
-        last_clicked_btn = btn;
+        ///Button btn = addNewButton("Svi proizvodi");
+        //dropdown_text.setText("Svi proizvodi");
+        ///btn.setSelected(true);
+        //last_clicked_btn = btn;
 
         // creating buttons
         for (Category category : categories
                 ) {
             for (Child child : category.getChild()
                     ) {
-                addNewButton(child.getKatIme());
+                addNewButton(child);
             }
         }
 
@@ -133,22 +149,22 @@ public class SecondTab extends Fragment {
                 }
             }
         });
-
         return mView;
     }
 
-    private Button addNewButton(String text) {
+    private Button addNewButton(Child child) {
         Button btn = new Button(drop_down.getContext());
         btn.setLayoutParams(param);
         btn.setBackgroundResource(R.drawable.rounded_btn_normal);
         btn.setPadding(10, 0, 10, 0);
 
-        btn.setText(text);
+        btn.setText(child.getKatIme());
         btn.setAllCaps(false);
         btn.setTextColor(ContextCompat.getColor(drop_down.getContext(), R.color.btnTextColor));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
         btn.setMinHeight(80);
         btn.setMinimumHeight(80);
+        btn.setId(child.getKategorijaArtikalaId());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +173,8 @@ public class SecondTab extends Fragment {
                 v.setSelected(true);
                 last_clicked_btn = v;
 
-                // JECO OVDE MOZE DA SE PRAVI REQUEST
+                int id = v.getId();
+                searchArticlesByCategory(id, 1, 100, 2);
 
                 // Set selection
                 dropdown_text.setText(((Button) v).getText());
@@ -173,35 +190,14 @@ public class SecondTab extends Fragment {
     }
 
     // Prepare some dummy data for gridview
-    private ArrayList<ImageItem> getData() {
-        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+    private List<ImageItem> getData() {
+        final List<ImageItem> imageItems = new ArrayList<>();
         TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
         for (int i = 0; i < imgs.length(); i++) {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
             imageItems.add(new ImageItem(bitmap, "Image#" + i));
         }
+        imgs.recycle();
         return imageItems;
-    }
-
-    private List<Article> searchArticlesByCategory(int id, int from, int to, int sort) {
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
-        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
-            @Override
-            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
-                if (success) {
-
-                    mArticles = articlesFilteredByCategory.getArtikli();
-
-                }
-            }
-
-            @Override
-            public void webRequestError(String error) {
-
-            }
-        });
-        content.pullList();
-
-        return mArticles;
     }
 }
