@@ -27,7 +27,6 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextAppearance="@style/CustomTabTextStyle" />
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />

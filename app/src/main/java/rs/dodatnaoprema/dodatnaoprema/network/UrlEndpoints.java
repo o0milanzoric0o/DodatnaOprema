@@ -44,7 +44,7 @@ public class UrlEndpoints {
 
     }
 
-    public static String getRequestUrlSearchArticlesByCategory(int id, int from, int to, String currency, String language, int brand, int sort) {
+    public static String getRequestUrlSearchArticlesByCategory(int id, int from, int to, String currency, String language, int sort) {
 
         //http://masinealati.rs/parametri.php?action=artikliPoKateg&id=1623&od=2&do=5&valutasession=rsd&jezik=srblat&brend=35&sortKontrole=2
 
@@ -61,8 +61,6 @@ public class UrlEndpoints {
                 + URL_PARAM_CURRENCY + URL_CHAR_EQUAL + currency
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_LANGUAGE + URL_CHAR_EQUAL + language
-                + URL_CHAR_AMPERSAND
-                + URL_PARAM_BRAND + URL_CHAR_EQUAL + brand
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_SORT_CONTROL + URL_CHAR_EQUAL + sort;
     }

@@ -181,8 +181,8 @@ public class SecondTab extends Fragment {
         return imageItems;
     }
 
-    private List<Artikli> searchArticlesByCategory(int id, int brand, int from, int to, int sort) {
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, brand, sort), mVolleySingleton);
+    private List<Artikli> searchArticlesByCategory(int id, int from, int to, int sort) {
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {

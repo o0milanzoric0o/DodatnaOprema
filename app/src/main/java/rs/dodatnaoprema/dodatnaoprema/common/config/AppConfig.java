@@ -35,18 +35,18 @@ public class AppConfig {
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
 
-    public static final String URL_VALUE_ALL_CATEGORIES= "sveKategorije";
-    public static final String URL_VALUE_CURRENCY_RSD= "rsd";
-    public static final String URL_VALUE_LANGUAGE_SRB_LAT= "srblat";
-    public static final String URL_VALUE_CATEGORIES_BY_ID= "kategorijePoId";
-    public static final String URL_VALUE_ARTICLES_BY_CATEGORY= "artikliPoKateg";
+    public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
+    public static final String URL_VALUE_CURRENCY_RSD = "rsd";
+    public static final String URL_VALUE_LANGUAGE_SRB_LAT = "srblat";
+    public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
+    public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
-    public static final int URL_VALUE_ID_ARTICLES_ON_SALE =6;
-    public static final int URL_VALUE_ID_NEW_PRODUCTS =7;
-    public static final int URL_VALUE_ID_BEST_SEllING =8;
+    public static final int URL_VALUE_ID_ARTICLES_ON_SALE = 6;
+    public static final int URL_VALUE_ID_NEW_PRODUCTS = 7;
+    public static final int URL_VALUE_ID_BEST_SEllING = 8;
 
-    public static final String[] FIRST_TAB_ITEMS ={"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
+    public static final String[] FIRST_TAB_ITEMS = {"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
 
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";

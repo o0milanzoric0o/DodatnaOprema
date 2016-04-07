@@ -45,7 +45,7 @@ Milan
     2. RecycleView sa adapterom za prikaz proizvoda u drugom tab-u.
 Mirna
     3. Kad se skroluje na dole da nestanu toolbari...
-?????
+DONE
     4. Promena boje toolbar-a kad se prelazi sa jednog taba na drugi.
 Jeca
     5. Kad se stigne do dna na prvom tab-u, da se prebaci na drugi tab.
