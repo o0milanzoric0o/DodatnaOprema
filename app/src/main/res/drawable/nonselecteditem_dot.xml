@@ -5,5 +5,5 @@
 
     <size android:height="6dip" android:width="6dip"/>
 
-    <solid android:color="@color/view.pager.nonselected.item.color"/>
+    <solid android:color="@color/icons"/>
 </shape>

@@ -82,9 +82,9 @@ public class MainActivity extends FragmentActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
-                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.appbar_first_tab));
+                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.primary_dark));
                 } else if (tab.getPosition() == 1) {
-                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.appbar_second_tab));
+                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.primary));
                 }
             }
 

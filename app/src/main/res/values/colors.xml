@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+   <!-- <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FF4081</color>-->
 
-    <color name="toolbar.primary.color">#5856D6</color>
-    <color name="appbar.first.tab">#5856D6</color>
-    <color name="appbar.second.tab">#A09FDF</color>
-    <color name="tablayout.accent.color">#A09FDF</color>
+    <!--<color name="toolbar.primary.color">#3f51b5</color>-->
+<!--    <color name="appbar.first.tab">#3f51b5</color>
+    <color name="appbar.second.tab">#7986cb</color>-->
+    <!--<color name="tablayout.accent.color">#e8eaf6</color>-->
     <!--
         <color name="s">#E7E7E7</color>
     -->
-    <color name="splashScreen.gray">#A09FDF</color>
+    <!--<color name="splashScreen.gray">#A09FDF</color>-->
 
-    <color name="view.pager.nonselected.item.color">#ffffff</color>
-    <color name="view.pager.selected.item.color">#FF4081</color>
+<!--    <color name="view.pager.nonselected.item.color">#ffffff</color>
+    <color name="view.pager.selected.item.color">#FF4081</color>-->
 
     <color name="background_white">#FFFFFF</color>
     <color name="background_gray">#FEFEFE</color>
@@ -25,5 +25,15 @@
     <color name="btnTextColor">#373737</color>
 
     <color name="blue">#00abea</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#ffffff</color>-->
+
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#00BCD4</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
 </resources>

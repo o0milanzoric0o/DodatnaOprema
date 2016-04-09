@@ -131,12 +131,15 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             int w = 320;
 
             bitmaps = new ArrayList<>();
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc1, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc2, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc3, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc4, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc5, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.abc6, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.agm_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.bosch_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.dremel_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.makita_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.marker_srafovi_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.skill_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.stanley_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.villager_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.wolfcraft_172, w, h));
             imageViewPagerWDotIndicator.setBitmapList(bitmaps);
         }
 
