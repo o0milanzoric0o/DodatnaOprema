@@ -4,30 +4,31 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
-import rs.dodatnaoprema.dodatnaoprema.customview.CustomScrollView;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
+import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;
+import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.RecyclerViewAdapterFirstTab;
 
-public class FirstTab extends Fragment {
+public class FirstTab extends Fragment implements OnLoadMoreListener {
 
     private CustomProgressDialog mProgressDialog;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
 
-    private CustomScrollView mScrollView;
+    private ScrollView mScrollView;
+    private SwipeableLayout mSwipeableLayout;
 
     private MainActivity mainActivity;
 
@@ -40,27 +41,15 @@ public class FirstTab extends Fragment {
         final View mView = inflater.inflate(R.layout.first_tab, container, false);
         mainActivity = (MainActivity) getActivity();
 
+        mSwipeableLayout= (SwipeableLayout) mView.findViewById(R.id.swipeToLoadLayout);
+        mSwipeableLayout.setOnLoadMoreListener(this);
+
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
-        mScrollView = (CustomScrollView) mView.findViewById(R.id.scrollView);
-        mScrollView.setOnBottomReachedListener(
-                new CustomScrollView.OnBottomReachedListener() {
-                    @Override
-                    public void onBottomReached() {
-                        // do something
-                        mainActivity.moveToNextTab();
-                        Log.logInfo("La", "Bottom");
-                    }
-                }
-        );
+        mScrollView = (ScrollView) mView.findViewById(R.id.scrollView);
+
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                Log.logInfo("DRAG","DRAG");
-                return false;
-            }
-        });
+
 
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -87,6 +76,7 @@ public class FirstTab extends Fragment {
         return mView;
     }
 
+
     @Override
     public void onDestroyView() {
 /*        for (int i = 0; i < bitmaps.size(); i++) {
@@ -97,8 +87,12 @@ public class FirstTab extends Fragment {
         super.onDestroyView();
     }
 
-    private void setCategoriesList(List<Category> categories) {
-        this.categories = categories;
+
+    @Override
+    public void onLoadMore() {
+        mSwipeableLayout.setLoadingMore(true);
+        mSwipeableLayout.setLoadingMore(false);
+        mainActivity.moveToNextTab();
     }
 
 

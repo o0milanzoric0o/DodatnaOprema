@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<rs.dodatnaoprema.dodatnaoprema.customview.CustomScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:refresh_enabled="false"
+    app:load_more_enabled="true"
+    android:id="@+id/swipeToLoadLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fillViewport="true">
     <!-- Here you put the rest of your current view-->
 
@@ -42,6 +49,6 @@
             <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
         </FrameLayout>
     </LinearLayout>
-</rs.dodatnaoprema.dodatnaoprema.customview.CustomScrollView>
-
-
+</ScrollView>
+<include layout="@layout/first_tab_footer"/>
+</rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout>

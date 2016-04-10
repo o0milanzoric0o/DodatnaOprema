@@ -1,13 +1,13 @@
-package rs.dodatnaoprema.dodatnaoprema.customview;
+package rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Scroller;
@@ -47,9 +47,7 @@ public class SwipeableLayout extends ViewGroup {
 
     private static final int INVALID_COORDINATE = -1;
 
-
     private OnRefreshListener mRefreshListener;
-
 
     private View mHeaderView;
 
@@ -299,8 +297,8 @@ public class SwipeableLayout extends ViewGroup {
             a.recycle();
         }
 
-        //  mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        //  mAutoScroller = new AutoScroller();
+          mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+          mAutoScroller = new AutoScroller();
     }
 
     /**
@@ -351,7 +349,7 @@ public class SwipeableLayout extends ViewGroup {
      * set refresh header view, the view must at lease be an implement of {@code SwipeRefreshTrigger}.
      * the view can also implement {@code SwipeTrigger} for more extension functions
      *
-     * @param view
+     * @param view*/
 
     public void setRefreshHeaderView(View view) {
     if (view instanceof SwipeRefreshTrigger) {
@@ -366,14 +364,14 @@ public class SwipeableLayout extends ViewGroup {
     Log.logInfo(TAG, "Refresh header view must be an implement of SwipeRefreshTrigger");
     }
     }
-     */
+
     /**
      * set load more footer view, the view must at least be an implement of SwipeLoadTrigger
      * the view can also implement {@code SwipeTrigger} for more extension functions
      *
      * @param view*/
 
-    /**  public void setLoadMoreFooterView(View view) {
+     public void setLoadMoreFooterView(View view) {
      if (view instanceof SwipeLoadMoreTrigger) {
      if (mFooterView != null && mFooterView != view) {
      removeView(mFooterView);
@@ -385,7 +383,7 @@ public class SwipeableLayout extends ViewGroup {
      } else {
      Log.logInfo(TAG, "Load more footer view must be an implement of SwipeLoadTrigger");
      }
-     }*/
+     }
 
     /**
      * switch refresh function on or off
@@ -700,8 +698,8 @@ public class SwipeableLayout extends ViewGroup {
             return;
         } else if (0 < childNum && childNum < 4) {
             //  mHeaderView = findViewById(R.id.swipe_refresh_header);
-            //   mTargetView = findViewById(R.id.swipe_target);
-            //  mFooterView = findViewById(R.id.swipe_load_more_footer);
+                mTargetView = findViewById(R.id.scrollView);
+                mFooterView = findViewById(R.id.swipe_load_more_footer);
         } else {
             // more than three children: unsupported!
             throw new IllegalStateException("Children num must equal or less than 3");
@@ -1328,7 +1326,7 @@ public class SwipeableLayout extends ViewGroup {
                 finish();
             } else {
                 mmLastY = currY;
-                // updateScroll(yDiff);
+                updateScroll(yDiff);
                 post(this);
             }
         }
@@ -1370,6 +1368,7 @@ public class SwipeableLayout extends ViewGroup {
             mmLastY = 0;
             if (!mScroller.isFinished()) {
                 mScroller.forceFinished(true);
+
             }
             mScroller.startScroll(0, 0, 0, yScrolled, duration);
             post(this);

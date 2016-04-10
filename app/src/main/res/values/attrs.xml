@@ -11,6 +11,7 @@
         <attr name="paddingVertical" format="integer"/>
         <attr name="paddingHorizontal" format="integer"/>
     </declare-styleable>
+
     <declare-styleable name="SwipeableLayout">
         <attr name="refresh_enabled" format="boolean"/>
         <attr name="load_more_enabled" format="boolean"/>
@@ -28,4 +29,5 @@
         <attr name="load_more_complete_to_default_scrolling_duration" format="integer"/>
         <attr name="default_to_loading_more_scrolling_duration" format="integer"/>
     </declare-styleable>
+
 </resources>
