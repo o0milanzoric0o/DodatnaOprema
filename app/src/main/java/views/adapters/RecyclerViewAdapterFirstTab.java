@@ -16,8 +16,6 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
@@ -86,9 +84,10 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     }
 
 
-    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context) {
+    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, ArrayList<Bitmap> bitmaps) {
         this.items = items;
         this.context = context;
+        this.bitmaps=bitmaps;
     }
 
     @Override
@@ -118,29 +117,17 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
         if (holder instanceof MyViewHolder) {
             String category = "";
-
             //  Category category = items.
             categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position - 1]);
             mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]));
             mRecyclerView.hasFixedSize();
             mRecyclerView.setNestedScrollingEnabled(false);
             mRecyclerView.setAdapter(mAdapter);
-        } else if (holder instanceof ViewHolderHeader) {
-            //cast holder to VHHeader and set data for header.
-            int h = 200;
-            int w = 320;
 
-            bitmaps = new ArrayList<>();
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.agm_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.bosch_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.dremel_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.makita_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.marker_srafovi_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.skill_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.stanley_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.villager_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(context.getResources(), R.drawable.wolfcraft_172, w, h));
+        } else if (holder instanceof ViewHolderHeader) {
+
             imageViewPagerWDotIndicator.setBitmapList(bitmaps);
+
         }
 
     }
@@ -169,13 +156,4 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         return position == (getItemCount() - 1);
     }
 
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        for (int i = 0; i < bitmaps.size(); i++) {
-            bitmaps.get(i).recycle();
-            bitmaps.set(i, null);
-        }
-        Log.logInfo("DODATNA OP", "onDestroyView...");
-        super.onDetachedFromRecyclerView(recyclerView);
-    }
 }

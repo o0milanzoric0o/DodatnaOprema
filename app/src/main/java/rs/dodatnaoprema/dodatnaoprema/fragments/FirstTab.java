@@ -14,6 +14,8 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
@@ -35,6 +37,25 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
     ArrayList<Bitmap> bitmaps;
     List<Category> categories;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+            int h = 200;
+            int w = 320;
+
+            bitmaps = new ArrayList<>();
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.agm_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.bosch_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.dremel_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.makita_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.marker_srafovi_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.skill_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.stanley_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.villager_172, w, h));
+            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.wolfcraft_172, w, h));
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,33 +78,25 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 //        imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
-//
-//        int h = 200;
-//        int w = 320;
-//
-//        bitmaps = new ArrayList<>();
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc1, w, h));
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc2, w, h));
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc3, w, h));
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc4, w, h));
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc5, w, h));
-//        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.abc6, w, h));
-//        imageViewPagerWDotIndicator.setBitmapList(bitmaps);
 
-
-        RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity());
+        RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity(), bitmaps);
         mRecyclerView.setAdapter(mAdapter);
         return mView;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("Bitmaps", bitmaps);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onDestroyView() {
-/*        for (int i = 0; i < bitmaps.size(); i++) {
+        for (int i = 0; i < bitmaps.size(); i++) {
             bitmaps.get(i).recycle();
             bitmaps.set(i, null);
         }
-        Log.logInfo("DODATNA OP", "onDestroyView...");*/
+        Log.logInfo("DODATNA OP", "onDestroyView...");
         super.onDestroyView();
     }
 
