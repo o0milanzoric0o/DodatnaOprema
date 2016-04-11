@@ -99,7 +99,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             return new MyViewHolder(itemView);
         } else if (viewType == TYPE_HEADER) {
             View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.dot_indicator, parent, false);
+                    .inflate(R.layout.first_tab_header, parent, false);
             return new ViewHolderHeader(itemView);
         }
         else if (viewType == TYPE_FOOTER){

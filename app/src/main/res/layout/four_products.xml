@@ -24,10 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_white"
-            android:gravity="center"
+            android:gravity="start|center"
             android:padding="@dimen/standard_padding"
             android:text="@string/group_name"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#000000"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/gridView"

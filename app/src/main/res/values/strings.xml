@@ -28,6 +28,9 @@
     <string name="image_description">slika proizvoda</string>
     <string name="group_name">Naziv categories</string>
 
+    <!-- Round buttons labels (first tab) -->
+    <string name="fourth_button_text">Sve kategorije</string>
+
     <!-- Progress dialog message -->
     <string name="progress_dialog_message">Učitavanje podataka ...</string>
 
