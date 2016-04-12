@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -206,5 +207,11 @@ public class MainActivity extends FragmentActivity
 
         mViewPager.setCurrentItem(mTabLayout.getSelectedTabPosition() + 1);
 
+    }
+    public void viewAllCategories(){
+
+        intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
+        intent.putExtra("SveKategorije", (Serializable) mAllCategories);
+        startActivity(intent);
     }
 }

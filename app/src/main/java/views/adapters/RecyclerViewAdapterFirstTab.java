@@ -3,19 +3,23 @@ package views.adapters;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.support.v7.widget.GridLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
@@ -39,6 +43,10 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private RecyclerViewSelectedProducts mAdapter;
 
     private GridLayoutManager mLayoutManager;
+
+    private GridLayout mFourButtonsHolder;
+
+    RelativeLayout mFourthButton;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -72,6 +80,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         public ViewHolderHeader(View itemView) {
             super(itemView);
             imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind);
+            mFourButtonsHolder= (GridLayout) itemView.findViewById(R.id.four_buttons);
+
+            mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
 
 
         }
@@ -125,8 +136,15 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView.setAdapter(mAdapter);
 
         } else if (holder instanceof ViewHolderHeader) {
-
             imageViewPagerWDotIndicator.setBitmapList(bitmaps);
+
+            mFourthButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.logInfo("Fourth_Button", "Clicked");
+                    ((MainActivity)context).viewAllCategories();
+                }
+            });
 
         }
 

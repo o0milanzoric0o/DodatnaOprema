@@ -109,6 +109,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/fourth_round_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -119,7 +120,7 @@
         grid:layout_rowSpan="1">
 
         <ImageView
-            android:id="@+id/fourth_round_button"
+            android:id="@+id/img_fourth_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -131,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/fourth_round_button"
+            android:layout_below="@+id/img_fourth_round_button"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:paddingBottom="10dp"

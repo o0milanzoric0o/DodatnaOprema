@@ -1,7 +1,9 @@
 package views.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,36 +15,35 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
-public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerViewAllCategories.MyViewHolder>{
+public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerViewAllCategories.MyViewHolder> {
 
-    private List<Child> subcategories;
-    private List<Child> displaySubcategories;
+    private List<Category> categories;
     private NetworkImageView productImg;
-    TextView subCategoryName;
+    TextView categoryName;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View view) {
             super(view);
-            subCategoryName = (TextView) view.findViewById(R.id.subcategoryName);
-            productImg = (NetworkImageView) view.findViewById(R.id.productImage);        }
+            categoryName = (TextView) view.findViewById(R.id.categoryText);
+            productImg = (NetworkImageView) view.findViewById(R.id.categoryImage);
+        }
     }
 
 
-    public RecyclerViewAllCategories(Context context, List<Child> subcategories) {
-        this.displaySubcategories = subcategories.subList(0,4);
-        this.subcategories=subcategories;
-        this.context=context;
+    public RecyclerViewAllCategories(Context context, List<Category> categories) {
+        this.categories = categories;
+        this.context = context;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product, parent, false);
+                .inflate(R.layout.category, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -50,17 +51,23 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerViewAllCategories.MyViewHolder holder, int position) {
 
-        subCategoryName.setText(subcategories.get(position).getKatIme());
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+            StaggeredGridLayoutManager.LayoutParams sglp = (StaggeredGridLayoutManager.LayoutParams) lp;
+            sglp.setFullSpan(position == 0);
+            holder.itemView.setLayoutParams(sglp);
+        }
+        categoryName.setText(categories.get(position).getKatsrblat());
 
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
 
-        productImg.setImageUrl(subcategories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
+        productImg.setImageUrl(categories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
     }
 
 
     @Override
     public int getItemCount() {
-        return displaySubcategories.size();
+        return categories.size();
     }
 
 }

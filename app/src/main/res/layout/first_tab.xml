@@ -36,6 +36,7 @@
 
         <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
 
+
         <FrameLayout
             android:id="@+id/productsLayout"
             android:layout_width="match_parent"
