@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.MenuItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,15 @@ public class AllCategoriesActivity extends AppCompatActivity {
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerViewAllCategories mAdapter = new RecyclerViewAllCategories(this, allCategories);
+        RecyclerViewAllCategories mAdapter = new RecyclerViewAllCategories(this, allCategories, new RecyclerViewAllCategories.OnItemClickListener() {
+            @Override
+            public void onItemClick(Category item) {
+
+                Intent intent = new Intent(getApplicationContext(),SubCategoriesActivity.class);
+                intent.putExtra("Potkategorije", (Serializable) item);
+                startActivity(intent);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
 

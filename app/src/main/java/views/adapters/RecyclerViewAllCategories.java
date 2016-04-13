@@ -24,6 +24,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     private NetworkImageView productImg;
     TextView categoryName;
     private Context context;
+    private final OnItemClickListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,12 +33,21 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             categoryName = (TextView) view.findViewById(R.id.categoryText);
             productImg = (NetworkImageView) view.findViewById(R.id.categoryImage);
         }
+        public void bind(final Category item, final OnItemClickListener listener) {
+            //   ...
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
+        }
     }
 
 
-    public RecyclerViewAllCategories(Context context, List<Category> categories) {
+    public RecyclerViewAllCategories(Context context, List<Category> categories, OnItemClickListener listener) {
         this.categories = categories;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -50,6 +60,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerViewAllCategories.MyViewHolder holder, int position) {
+        holder.bind(categories.get(position), listener);
 
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
@@ -68,6 +79,12 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     @Override
     public int getItemCount() {
         return categories.size();
+    }
+
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Category item);
     }
 
 }
