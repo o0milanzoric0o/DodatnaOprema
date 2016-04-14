@@ -12,16 +12,16 @@ import rs.dodatnaoprema.dodatnaoprema.R;
  * Created by milan on 4/4/2016.
  */
 public class FlowLayout extends ViewGroup {
-    private int paddingVertical;
-    private int paddingHorizontal;
+    private float paddingVertical;
+    private float paddingHorizontal;
 
     public FlowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         // Get attributes
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.FlowLayout, 0, 0);
-        paddingVertical = a.getInteger(R.styleable.FlowLayout_paddingVertical, 10);
-        paddingHorizontal = a.getInteger(R.styleable.FlowLayout_paddingHorizontal, 10);
+        paddingVertical = a.getDimension(R.styleable.FlowLayout_paddingVertical, 10);
+        paddingHorizontal = a.getDimension(R.styleable.FlowLayout_paddingHorizontal, 10);
         a.recycle();
     }
 

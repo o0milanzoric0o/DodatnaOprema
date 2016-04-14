@@ -15,7 +15,7 @@
             android:layout_centerHorizontal="true"
 
             android:fitsSystemWindows="true"
-            tools:listitem="@layout/view_pager_item" />
+            tools:listitem="@layout/view_pager_item_tripple_version" />
 
         <!--<RelativeLayout
             android:id="@+id/viewPagerIndicator"

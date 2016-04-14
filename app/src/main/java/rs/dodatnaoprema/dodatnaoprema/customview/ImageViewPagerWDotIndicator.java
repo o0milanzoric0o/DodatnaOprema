@@ -18,13 +18,15 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.pagetransformers.DepthPageTransformer;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
 
 /**
  * Created by 1 on 3/8/2016.
  */
 public class ImageViewPagerWDotIndicator extends RelativeLayout {
+
+    public static final int TYPE_DOUBLE = 0;
+    public static final int TYPE_TRIPPLE = 1;
 
     private ImageView mImageView = null;
     private LinearLayout mDotsLayout = null;
@@ -36,6 +38,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
     private ImageView[] mdots;
     private final Handler mhandler = new Handler();
     private int slideInterval;
+    private int type;
     private Runnable mRunnable;
 
     public ImageViewPagerWDotIndicator(Context context, AttributeSet attrs) {
@@ -50,16 +53,18 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
         //       android.R.color.holo_blue_light);
         slideInterval = a.getInteger(R.styleable.ImageViewPagerWDotIndicator_slideInterval, 6000);
 
+        type = a.getInt(R.styleable.ImageViewPagerWDotIndicator_sildeType, TYPE_DOUBLE);
+
         a.recycle();
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.dot_indicator_view_pager, this, true);
+        inflater.inflate(R.layout.dot_indicator_view_pager_tripple_version, this, true);
 
         // Get views
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
-        mImageView = (ImageView) findViewById(R.id.img_pager_item);
+        //mImageView = (ImageView) findViewById(R.id.img_pager_item);
         mDotsLayout = (LinearLayout) findViewById(R.id.viewPagerCountDots);
 
 
@@ -166,12 +171,22 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item, container, false);
-
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.img_pager_item);
+            View itemView;
+            if (type == TYPE_TRIPPLE)
+                itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_tripple_version, container, false);
+            else
+                itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_double_version, container, false);
+            ImageView imageView_left = (ImageView) itemView.findViewById(R.id.img_pager_item_1);
+            ImageView imageView_middle = (ImageView) itemView.findViewById(R.id.img_pager_item_2);
+            ImageView imageView_right = null;
+            if (type == TYPE_TRIPPLE)
+                imageView_right = (ImageView) itemView.findViewById(R.id.img_pager_item_3);
 
             //imageView.setImageResource(mbitmapArray.get(position).getRowBytes());
-            imageView.setImageBitmap(mbitmapArray.get(position));
+            imageView_left.setImageBitmap(mbitmapArray.get(position >= 1 ? position - 1 : mbitmapArray.size() - 1));
+            imageView_middle.setImageBitmap(mbitmapArray.get(position));
+            if (type == TYPE_TRIPPLE && imageView_right != null)
+                imageView_right.setImageBitmap(mbitmapArray.get(position < mbitmapArray.size() - 1 ? position + 1 : 0));
             container.addView(itemView);
 
             return itemView;

@@ -33,7 +33,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_FOOTER = 2;
 
-    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
+    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_three_imgs;
+    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_two_imgs;
 
     ArrayList<Bitmap> bitmaps;
 
@@ -79,7 +80,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
         public ViewHolderHeader(View itemView) {
             super(itemView);
-            imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind);
+            imageViewPagerWDotIndicator_three_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_0);
+            imageViewPagerWDotIndicator_two_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_1);
             mFourButtonsHolder= (GridLayout) itemView.findViewById(R.id.four_buttons);
 
             mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
@@ -136,7 +138,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView.setAdapter(mAdapter);
 
         } else if (holder instanceof ViewHolderHeader) {
-            imageViewPagerWDotIndicator.setBitmapList(bitmaps);
+            imageViewPagerWDotIndicator_three_imgs.setBitmapList(bitmaps);
+            imageViewPagerWDotIndicator_two_imgs.setBitmapList(bitmaps);
 
             mFourthButton.setOnClickListener(new View.OnClickListener() {
                 @Override

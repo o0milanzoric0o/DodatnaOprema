@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dotIndicator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
-        android:id="@+id/view_pager_dot_ind"
+        android:id="@+id/view_pager_dot_ind_0"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        app:sildeType="three_images"
+        app:slideInterval="5000" />
+
+    <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
+        android:id="@+id/view_pager_dot_ind_1"
         android:layout_width="match_parent"
         android:layout_height="200dip"
-        custom:slideInterval="5000" />
+        app:sildeType="two_images"
+        app:slideInterval="5000" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -2,14 +2,16 @@
 
 <resources>
     <declare-styleable name="ImageViewPagerWDotIndicator">
-        <attr name="titleText" format="string" localization="suggested" />
-        <attr name="valueColor" format="color"/>
+        <attr name="sildeType" format="enum">
+            <enum name="two_images" value="0"/>
+            <enum name="three_images" value="1"/>
+        </attr>
         <attr name="slideInterval" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="FlowLayout">
-        <attr name="paddingVertical" format="integer"/>
-        <attr name="paddingHorizontal" format="integer"/>
+        <attr name="paddingVertical" format="dimension"/>
+        <attr name="paddingHorizontal" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="SwipeableLayout">

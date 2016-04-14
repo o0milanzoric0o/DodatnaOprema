@@ -61,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:background="@color/background_white"
-                app:paddingHorizontal="10"
-                app:paddingVertical="10">
+                app:paddingHorizontal="5dp"
+                app:paddingVertical="5dp">
             </rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout>
         </ScrollView>
 
