@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +17,31 @@ import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import views.adapters.RecyclerViewSubCategories;
 
-/**
- * Created by Win 7 on 14.4.2016.
- */
 public class SubCategoriesActivity extends AppCompatActivity {
-    private Category item;
-    private List<Child> subCategories;
-    private GridLayoutManager mLayoutManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subcategories_activity);
 
+        Intent intent = getIntent();
+        List<Child> subCategories = new ArrayList<>();
+        Category item = (Category) intent.getSerializableExtra("Potkategorije");
+        subCategories = item.getChild();
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTextView = (TextView) findViewById(R.id.title);
+        mTextView.setText(item.getKatsrblat());
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-        subCategories = new ArrayList<>();
-        item = (Category) intent.getSerializableExtra("Potkategorije");
-        getSupportActionBar().setTitle(item.getKatsrblat());
-        subCategories = item.getChild();
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_subcategories);
 
-       // mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(false);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setHasFixedSize(true);
 
+        GridLayoutManager mLayoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // use a linear layout manager
             mLayoutManager = new GridLayoutManager(this, 6, GridLayoutManager.VERTICAL, false);

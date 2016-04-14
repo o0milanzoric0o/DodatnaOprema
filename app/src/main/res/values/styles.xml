@@ -3,15 +3,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/primary_dark</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="android:textColorSecondary">@color/secondary_text</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
+
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="HomeAsUpIndicator">
         <item name="color">@android:color/white</item>
     </style>
 
@@ -27,6 +33,7 @@
         <item name="android:itemTextAppearance">@style/NavigatonListItemTextStyle</item>
         <item name="tabTextAppearance">@style/CustomTabTextStyle</item>
     </style>
+
     <style name="NavigatonListItemTextStyle" parent="TextAppearance.Design.Tab">
         <!-- Customize Tab Text Style. -->
         <item name="android:textSize">@dimen/list_item_text_size</item>
@@ -39,9 +46,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.NoActionBar" />
+
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
 

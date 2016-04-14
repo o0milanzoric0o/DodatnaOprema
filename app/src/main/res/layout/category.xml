@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_white"
-    card_view:cardCornerRadius="@dimen/card_no_rounding"
-   >
+    card_view:cardCornerRadius="@dimen/card_no_rounding">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

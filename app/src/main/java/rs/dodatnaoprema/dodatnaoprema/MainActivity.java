@@ -14,6 +14,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,8 +48,9 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
+        ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
 
+        icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,7 +87,7 @@ public class MainActivity extends FragmentActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
-                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.primary_dark));
+                    mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.primary_dark));
                 } else if (tab.getPosition() == 1) {
                     mAppBar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.primary));
                 }
@@ -209,7 +212,8 @@ public class MainActivity extends FragmentActivity
         mViewPager.setCurrentItem(mTabLayout.getSelectedTabPosition() + 1);
 
     }
-    public void viewAllCategories(){
+
+    public void viewAllCategories() {
 
         intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
         intent.putExtra("SveKategorije", (Serializable) mAllCategories);

@@ -54,6 +54,8 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerViewSubCategories.MyViewHolder holder, int position) {
 
+        holder.setIsRecyclable(false);
+
         subcategoryName.setText(subcategories.get(position).getKatIme());
 
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();

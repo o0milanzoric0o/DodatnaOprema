@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include
-        layout="@layout/toolbar"
+        layout="@layout/app_bar_others"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_all_categories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
 

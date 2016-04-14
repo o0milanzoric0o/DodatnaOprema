@@ -1,11 +1,9 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -23,7 +21,7 @@ import views.adapters.RecyclerViewAllCategories;
 /**
  * Created by Win 7 on 12.4.2016.
  */
-public class AllCategoriesActivity extends AppCompatActivity {
+public class AllCategoriesActivity extends AppCompatActivity{
 
     private AppBarLayout mAppBar;
     private List<Category> allCategories;
@@ -48,7 +46,7 @@ public class AllCategoriesActivity extends AppCompatActivity {
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_categories);
 
-        mRecyclerView.setNestedScrollingEnabled(false);
+      //  mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -85,4 +83,6 @@ public class AllCategoriesActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
