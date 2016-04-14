@@ -57,6 +57,7 @@ public class MainActivity extends FragmentActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         initializeTabs();
 
         mAppBar = (AppBarLayout) findViewById(R.id.appBar);

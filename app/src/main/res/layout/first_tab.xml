@@ -43,9 +43,7 @@
             android:layout_height="0dip"
             android:layout_weight=".65">
 
-
             <include layout="@layout/recycler_view" />
-
 
             <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
         </FrameLayout>

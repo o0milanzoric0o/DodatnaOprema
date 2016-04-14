@@ -1,13 +1,17 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,8 +38,13 @@ public class AllCategoriesActivity extends AppCompatActivity {
         allCategories = new ArrayList<>();
         allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTextView = (TextView) findViewById(R.id.title);
+        mTextView.setText("Sve kategorije");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Sve kategorije");
+
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_categories);
 
