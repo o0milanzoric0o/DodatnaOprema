@@ -47,7 +47,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private GridLayout mFourButtonsHolder;
 
-    RelativeLayout mFourthButton;
+    private RelativeLayout mFourthButton;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -85,7 +85,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mFourButtonsHolder= (GridLayout) itemView.findViewById(R.id.four_buttons);
 
             mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
-
 
         }
     }
@@ -144,8 +143,10 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mFourthButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mFourthButton.setSelected(true);
                     Log.logInfo("Fourth_Button", "Clicked");
                     ((MainActivity)context).viewAllCategories();
+                   // mFourthButton.setSelected(false);
                 }
             });
 

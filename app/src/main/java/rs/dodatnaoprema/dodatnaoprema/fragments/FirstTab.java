@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
@@ -37,23 +38,25 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
     ArrayList<Bitmap> bitmaps;
     List<Category> categories;
 
+    private RelativeLayout mFourthButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            int h = 200;
-            int w = 320;
+        int h = 200;
+        int w = 320;
 
-            bitmaps = new ArrayList<>();
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.agm_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.bosch_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.dremel_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.makita_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.marker_srafovi_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.skill_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.stanley_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.villager_172, w, h));
-            bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.wolfcraft_172, w, h));
+        bitmaps = new ArrayList<>();
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.agm_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.bosch_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.dremel_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.makita_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.marker_srafovi_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.skill_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.stanley_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.villager_172, w, h));
+        bitmaps.add(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.wolfcraft_172, w, h));
 
     }
 
@@ -62,7 +65,7 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         final View mView = inflater.inflate(R.layout.first_tab, container, false);
         mainActivity = (MainActivity) getActivity();
 
-        mSwipeableLayout= (SwipeableLayout) mView.findViewById(R.id.swipeToLoadLayout);
+        mSwipeableLayout = (SwipeableLayout) mView.findViewById(R.id.swipeToLoadLayout);
         mSwipeableLayout.setOnLoadMoreListener(this);
 
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
@@ -108,6 +111,14 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mainActivity.moveToNextTab();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mFourthButton = (RelativeLayout) getView().findViewById(R.id.fourth_round_button);
+        if (mFourthButton != null) {
+            mFourthButton.setSelected(false);
+        }
 
+    }
 
 }

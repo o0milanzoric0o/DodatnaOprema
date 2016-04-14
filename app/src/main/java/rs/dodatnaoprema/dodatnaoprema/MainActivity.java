@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class MainActivity extends FragmentActivity
     private List<Article> mNewProducts = new ArrayList<>();
     private ViewPager mViewPager;
 
+    RelativeLayout mFourthButton;
+
     AppBarLayout mAppBar;
 
     TabLayout mTabLayout;
@@ -49,6 +52,8 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+
+        mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 
         icMore.setVisibility(View.GONE);
 
@@ -67,6 +72,7 @@ public class MainActivity extends FragmentActivity
 
 
     }
+
 
     public void initializeTabs() {
         intent = getIntent();
@@ -217,6 +223,9 @@ public class MainActivity extends FragmentActivity
 
         intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
         intent.putExtra("SveKategorije", (Serializable) mAllCategories);
+
         startActivity(intent);
     }
+
+
 }
