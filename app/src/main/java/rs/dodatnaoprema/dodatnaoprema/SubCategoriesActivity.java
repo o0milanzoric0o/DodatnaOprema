@@ -3,11 +3,14 @@ package rs.dodatnaoprema.dodatnaoprema;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import views.adapters.RecyclerViewSubCategories;
 
 public class SubCategoriesActivity extends AppCompatActivity {
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +55,13 @@ public class SubCategoriesActivity extends AppCompatActivity {
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerViewSubCategories mAdapter = new RecyclerViewSubCategories(this, subCategories);
+        RecyclerViewSubCategories mAdapter = new RecyclerViewSubCategories(this, subCategories, new RecyclerViewSubCategories.OnItemClickListener() {
+            @Override
+            public void onItemClick(Child item, final View view) {
+                Log.d("Lala", item.getKatIme());
+
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
 
     }

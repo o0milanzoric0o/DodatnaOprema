@@ -7,38 +7,29 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.customview.CustomProgressDialog;
+
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
-import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+
 import views.adapters.RecyclerViewAdapterFirstTab;
 
 public class FirstTab extends Fragment implements OnLoadMoreListener {
 
-    private CustomProgressDialog mProgressDialog;
-    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator;
 
-    private ScrollView mScrollView;
     private SwipeableLayout mSwipeableLayout;
 
     private MainActivity mainActivity;
 
     ArrayList<Bitmap> bitmaps;
-    List<Category> categories;
 
-    private RelativeLayout mFourthButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +60,6 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mSwipeableLayout.setOnLoadMoreListener(this);
 
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) mView.findViewById(R.id.recycler_view);
-        mScrollView = (ScrollView) mView.findViewById(R.id.scrollView);
 
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
@@ -79,8 +69,6 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-//        imageViewPagerWDotIndicator = (ImageViewPagerWDotIndicator) mView.findViewById(R.id.view_pager_dot_ind);
 
         RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity(), bitmaps);
         mRecyclerView.setAdapter(mAdapter);
@@ -99,10 +87,9 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
             bitmaps.get(i).recycle();
             bitmaps.set(i, null);
         }
-        Log.logInfo("DODATNA OP", "onDestroyView...");
+
         super.onDestroyView();
     }
-
 
     @Override
     public void onLoadMore() {
@@ -110,15 +97,4 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mSwipeableLayout.setLoadingMore(false);
         mainActivity.moveToNextTab();
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mFourthButton = (RelativeLayout) getView().findViewById(R.id.fourth_round_button);
-        if (mFourthButton != null) {
-            mFourthButton.setSelected(false);
-        }
-
-    }
-
 }

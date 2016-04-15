@@ -2,6 +2,7 @@ package views.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -33,11 +34,19 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             categoryName = (TextView) view.findViewById(R.id.categoryText);
             productImg = (NetworkImageView) view.findViewById(R.id.categoryImage);
         }
+
         public void bind(final Category item, final OnItemClickListener listener) {
             //   ...
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     listener.onItemClick(item);
+                    itemView.setSelected(true);
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            itemView.setSelected(false);
+                        }
+                    }, 1000);
                 }
             });
         }
@@ -80,7 +89,6 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     public int getItemCount() {
         return categories.size();
     }
-
 
 
     public interface OnItemClickListener {

@@ -3,7 +3,7 @@ package views.adapters;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.support.v7.widget.GridLayout;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +19,6 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
@@ -41,11 +40,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private Context context;
     private RecyclerView mRecyclerView;
 
-    private RecyclerViewSelectedProducts mAdapter;
-
     private GridLayoutManager mLayoutManager;
-
-    private GridLayout mFourButtonsHolder;
 
     private RelativeLayout mFourthButton;
 
@@ -82,7 +77,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             super(itemView);
             imageViewPagerWDotIndicator_three_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_0);
             imageViewPagerWDotIndicator_two_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_1);
-            mFourButtonsHolder= (GridLayout) itemView.findViewById(R.id.four_buttons);
 
             mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
 
@@ -128,10 +122,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof MyViewHolder) {
-            String category = "";
-            //  Category category = items.
+
             categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position - 1]);
-            mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]));
+            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]));
             mRecyclerView.hasFixedSize();
             mRecyclerView.setNestedScrollingEnabled(false);
             mRecyclerView.setAdapter(mAdapter);
@@ -144,9 +137,14 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                 @Override
                 public void onClick(View v) {
                     mFourthButton.setSelected(true);
-                    Log.logInfo("Fourth_Button", "Clicked");
                     ((MainActivity)context).viewAllCategories();
-                   // mFourthButton.setSelected(false);
+                   new Handler().postDelayed(new Runnable()
+                    {
+                        public void run()
+                        {
+                            mFourthButton.setSelected(false);
+                        }
+                    }, 1000);
                 }
             });
 

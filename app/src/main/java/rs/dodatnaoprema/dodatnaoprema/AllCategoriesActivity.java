@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -18,14 +19,9 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.RecyclerViewAllCategories;
 
-/**
- * Created by Win 7 on 12.4.2016.
- */
-public class AllCategoriesActivity extends AppCompatActivity{
+public class AllCategoriesActivity extends AppCompatActivity {
 
     private AppBarLayout mAppBar;
-    private List<Category> allCategories;
-    private StaggeredGridLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +29,7 @@ public class AllCategoriesActivity extends AppCompatActivity{
 
         setContentView(R.layout.all_categories_activity);
         Intent intent = getIntent();
-        allCategories = new ArrayList<>();
+        List<Category> allCategories = new ArrayList<>();
         allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,9 +42,10 @@ public class AllCategoriesActivity extends AppCompatActivity{
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_categories);
 
-      //  mRecyclerView.setNestedScrollingEnabled(false);
+        //  mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
+        StaggeredGridLayoutManager mLayoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // use a linear layout manager
             mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
@@ -62,14 +59,13 @@ public class AllCategoriesActivity extends AppCompatActivity{
             @Override
             public void onItemClick(Category item) {
 
-                Intent intent = new Intent(getApplicationContext(),SubCategoriesActivity.class);
-                intent.putExtra("Potkategorije", (Serializable) item);
+                Intent intent = new Intent(getApplicationContext(), SubCategoriesActivity.class);
+                intent.putExtra("Potkategorije", item);
                 startActivity(intent);
+
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-
-
     }
 
     @Override
