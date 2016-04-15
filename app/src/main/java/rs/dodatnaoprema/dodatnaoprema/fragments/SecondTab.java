@@ -110,13 +110,14 @@ public class SecondTab extends Fragment {
         //last_clicked_btn = btn;
 
         // creating buttons
-        for (Category category : categories
-                ) {
-            for (Child child : category.getChild()
+
+            for (Category category : categories
                     ) {
-                addNewButton(child);
+                for (Child child : category.getChild()
+                        ) {
+                    addNewButton(child);
+                }
             }
-        }
 
         rotateUp = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateUp.setDuration(300);
