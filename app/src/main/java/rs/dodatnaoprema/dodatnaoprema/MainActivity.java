@@ -40,6 +40,7 @@ import rs.dodatnaoprema.dodatnaoprema.gcm.QuickstartPreferences;
 import rs.dodatnaoprema.dodatnaoprema.gcm.RegistrationIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
 import views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
@@ -73,6 +74,14 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
+        icCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 

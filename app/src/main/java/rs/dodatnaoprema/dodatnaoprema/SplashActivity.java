@@ -23,13 +23,11 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 public class SplashActivity extends AppCompatActivity {
 
+    Intent intent;
     private List<Category> mAllCategories = new ArrayList<>();
     private List<Article> mProducts = new ArrayList<>();
-
     private int requestCounter = 0;
     private VolleySingleton mVolleySingleton;
-
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,26 +78,27 @@ public class SplashActivity extends AppCompatActivity {
         });
         content.pullList();
     }
-  private void getProductsOnSale() {
-      PullWebContent<ArticlesOnSale> content =
-              new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE, AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), mVolleySingleton);
-      content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
-          @Override
-          public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
-              if (success) {
-                  mProducts = articles.getKategorije();
-                  intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mProducts);
-                  response();
-              }
-          }
 
-          @Override
-          public void webRequestError(String error) {
-              response();
-          }
-      });
-      content.pullList();
-  }
+    private void getProductsOnSale() {
+        PullWebContent<ArticlesOnSale> content =
+                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSale(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE, AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
+            @Override
+            public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
+                if (success) {
+                    mProducts = articles.getKategorije();
+                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mProducts);
+                    response();
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
+    }
 
     private void getNewProducts() {
         PullWebContent<ArticlesOnSale> content =

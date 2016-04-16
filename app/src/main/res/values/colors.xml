@@ -41,4 +41,12 @@
     <color name="selected_button">#D7D7D7</color>
     <color name="circle_stroke">#BDBDBD</color>
     <color name="button_holder_background">#EDEDED</color>
+
+    <!-- SignIn activity colors-->
+    <color name="blue_grey_500">#607D8B</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="blue_grey_900">#263238</color>
+
 </resources>

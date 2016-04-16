@@ -15,7 +15,20 @@
           "certificate_hash": []
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "125491094864-e5bug34gsv3dtqo9ld23425bmb3bfgm4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rs.dodatnaoprema.dodatnaoprema",
+            "certificate_hash": "59774CEEFD957E755ADC7B7F869B54E5CB541830"
+          }
+        },
+        {
+          "client_id": "125491094864-52ni0oamchjp3l66hl8uukijbvvep63d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [],
       "services": {
         "analytics_service": {
@@ -30,7 +43,7 @@
           "other_platform_oauth_client": []
         },
         "google_signin_service": {
-          "status": 1
+          "status": 2
         },
         "ads_service": {
           "status": 1
