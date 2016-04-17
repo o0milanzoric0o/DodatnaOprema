@@ -3,8 +3,6 @@ package rs.dodatnaoprema.dodatnaoprema;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -14,12 +12,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import views.adapters.RecyclerViewAllCategories;
 
-public class AllCategoriesActivity extends AppCompatActivity {
+public class AllCategoriesActivity extends BaseActivity {
 
-    private AppBarLayout mAppBar;
     List<Category> allCategories = new ArrayList<>();
 
     @Override
@@ -28,6 +26,7 @@ public class AllCategoriesActivity extends AppCompatActivity {
 
         setContentView(R.layout.all_categories_activity);
         Intent intent = getIntent();
+
 
         allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
 

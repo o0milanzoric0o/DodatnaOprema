@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/standard_padding"
-            android:text="Da li ste sigurni da zelite da izbriste istoriju pregleda?" />
+            android:text="@string/delete_history_question" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,9 +20,10 @@
 
             <Button
                 android:id="@+id/deleteBtn"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Obrisi istoriju"
+                android:text="@string/delete_txt"
                 android:textAllCaps="true"
                 android:textColor="@color/primary"
                 android:layout_alignParentTop="true"
@@ -33,12 +34,13 @@
 
             <Button
                 android:id="@+id/cancelBtn"
+                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Obustavi"
+                android:text="@string/cancel_txt"
                 android:textAllCaps="true"
                 android:textColor="@color/primary"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/deleteBtn"
                 android:layout_toStartOf="@+id/deleteBtn"

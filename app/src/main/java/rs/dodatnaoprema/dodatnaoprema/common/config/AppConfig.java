@@ -47,7 +47,10 @@ public class AppConfig {
     public static final int URL_VALUE_ID_BEST_SEllING = 8;
 
     public static final String[] FIRST_TAB_ITEMS = {"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
-
+    /**
+     * History Shared Preferences
+     */
+    public static final String HISTORY_KEY = "History";
 
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
 

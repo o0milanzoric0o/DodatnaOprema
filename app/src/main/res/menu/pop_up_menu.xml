@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_home"
+        android:title="@string/home"
+        android:visible="true" />
+    <item
+        android:id="@+id/item_signing"
+        android:title="@string/login"
+        android:visible="true" />
+    <item
+        android:id="@+id/item_sale"
+        android:title="@string/sale"
+        android:visible="true" />
+    <item
+        android:id="@+id/item_question"
+        android:title="@string/help_center"
+        android:visible="true" />
+    <item
+        android:id="@+id/item_instructions"
+        android:title="@string/how_to_buy"
+        android:visible="true" />
+
+</menu>

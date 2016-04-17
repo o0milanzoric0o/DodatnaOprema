@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+       // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
         ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity
 
         mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 
-        icMore.setVisibility(View.GONE);
+      //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

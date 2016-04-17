@@ -44,6 +44,9 @@
 
     <!-- Subcategory history -->
     <string name="history">Istorija</string>
+    <string name="delete_history_question">Da li ste sigurni da želite da obrišete istoriju pregleda?</string>
+    <string name="delete_txt">Obriši istoriju</string>
+    <string name="cancel_txt">Odustani</string>
 
     <string name="Title">Mašine i alati</string>
 

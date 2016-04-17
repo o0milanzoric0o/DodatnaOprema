@@ -25,7 +25,7 @@
         <!-- Customize Tab Text Style. -->
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#8AFFFFFF</item>
-        <item name="textAllCaps">false</item>
+        <item name="textAllCaps">true</item>
     </style>
 
     <style name="CustomNavigationDrawerLayout" parent="Widget.Design.NavigationView">

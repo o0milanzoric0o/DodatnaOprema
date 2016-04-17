@@ -1,11 +1,8 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,16 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import views.adapters.RecyclerViewSubCategories;
 
-public class SubCategoriesActivity extends AppCompatActivity {
+public class SubCategoriesActivity extends BaseActivity {
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,37 +59,22 @@ public class SubCategoriesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Child item, final View view) {
 
-                SharedPreferences prefs = getSharedPreferences("Kliknuo", Context.MODE_PRIVATE);
-                ArrayList<String> currentTasks = new ArrayList<>();
-                try {
-                    currentTasks = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString("Kliknuo", ObjectSerializer.serialize(new ArrayList<String>())));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                if (currentTasks.contains(item.getKatIme())) {
-                    currentTasks.remove(item.getKatIme());
-                    currentTasks.add(0, item.getKatIme());
+                ArrayList<String> mHistory;
+                mHistory = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_KEY);
+
+                if (mHistory.contains(item.getKatIme())) {
+                    mHistory.remove(item.getKatIme());
+                    mHistory.add(0, item.getKatIme());
                 } else {
-                    currentTasks.add(0, item.getKatIme());
+                    mHistory.add(0, item.getKatIme());
                 }
 
-
-                SharedPreferences.Editor editor = prefs.edit();
-
-                editor.remove("Kliknuo");
-                editor.apply();
-
-
-                try {
-                    editor.putString("Kliknuo", ObjectSerializer.serialize(currentTasks));
-                } catch (IOException e) {
-                    e.printStackTrace();
+                SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_KEY);
+                if (mHistory.size() >= 4) {
+                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<String>(mHistory.subList(0, 4)));
+                } else {
+                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
                 }
-                editor.apply();
-
-
             }
         });
         mRecyclerView.setAdapter(mAdapter);

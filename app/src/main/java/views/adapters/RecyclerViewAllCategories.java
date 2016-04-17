@@ -24,9 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
-import rs.dodatnaoprema.dodatnaoprema.customview.DeleteHistoryDialog;
+import rs.dodatnaoprema.dodatnaoprema.fragments.DeleteHistoryDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -90,9 +91,9 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         this.categories = categories;
         this.context = context;
         this.listener = listener;
-        SharedPreferences prefs = context.getSharedPreferences("Kliknuo", Context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(AppConfig.HISTORY_KEY, Context.MODE_PRIVATE);
         try {
-            this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString("Kliknuo", ObjectSerializer.serialize(new ArrayList<String>())));
+            this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(AppConfig.HISTORY_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -136,18 +137,18 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
                 sglp.setFullSpan(position - existHistory == 0);
 
-                holder.itemView.setLayoutParams(sglp);}
+                holder.itemView.setLayoutParams(sglp);
+            }
 
-                categoryName.setText(categories.get(position - existHistory).getKatsrblat());
-                ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
-                productImg.setImageUrl(categories.get(position - existHistory).getKategorijaArtikalaSlika(), mImageLoader);
+            categoryName.setText(categories.get(position - existHistory).getKatsrblat());
+            ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
+            productImg.setImageUrl(categories.get(position - existHistory).getKategorijaArtikalaSlika(), mImageLoader);
 
         } else if (holder instanceof ViewHolderHeader) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             StaggeredGridLayoutManager.LayoutParams sglp = (StaggeredGridLayoutManager.LayoutParams) lp;
 
-            sglp.setFullSpan(position==0);
-            Log.logInfo("Niz", String.valueOf(mHistory.size()));
+            sglp.setFullSpan(position == 0);
 
             holder.itemView.setLayoutParams(sglp);
             if (existHistory == 1) {
@@ -160,6 +161,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     DeleteHistoryDialog dialog = new DeleteHistoryDialog();
                     dialog.setCancelable(false);
                     dialog.show(((Activity) context).getFragmentManager(), "Dialog");
@@ -202,7 +204,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         Button btn = new Button(historyList.getContext());
         btn.setLayoutParams(param);
         btn.setBackgroundResource(R.drawable.history_btn);
-        btn.setPadding(5, 0, 5, 0);
+        btn.setPadding(5, 5, 5, 5);
         btn.setClickable(true);
 
         btn.setText(subcategory);
