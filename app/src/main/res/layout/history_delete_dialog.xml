@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_holder_background"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standard_padding"
+            android:text="Da li ste sigurni da zelite da izbriste istoriju pregleda?" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obrisi istoriju"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="?android:attr/selectableItemBackground"
+                />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obustavi"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:layout_gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/deleteBtn"
+                android:layout_toStartOf="@+id/deleteBtn"
+                android:background="?android:attr/selectableItemBackground"
+                />
+
+        </RelativeLayout>
+
+</LinearLayout>
+

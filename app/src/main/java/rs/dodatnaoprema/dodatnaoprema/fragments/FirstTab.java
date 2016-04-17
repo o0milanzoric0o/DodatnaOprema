@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;

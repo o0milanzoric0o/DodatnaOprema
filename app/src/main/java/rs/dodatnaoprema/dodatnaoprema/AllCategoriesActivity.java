@@ -9,10 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +20,7 @@ import views.adapters.RecyclerViewAllCategories;
 public class AllCategoriesActivity extends AppCompatActivity {
 
     private AppBarLayout mAppBar;
+    List<Category> allCategories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class AllCategoriesActivity extends AppCompatActivity {
 
         setContentView(R.layout.all_categories_activity);
         Intent intent = getIntent();
-        List<Category> allCategories = new ArrayList<>();
+
         allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,6 +38,30 @@ public class AllCategoriesActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        populateRecyclerView();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        populateRecyclerView();
+
+    }
+
+    public void populateRecyclerView() {
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_categories);
 
@@ -66,19 +89,7 @@ public class AllCategoriesActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
-
 
 }

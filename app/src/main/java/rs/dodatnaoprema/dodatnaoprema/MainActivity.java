@@ -23,9 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -48,9 +46,6 @@ public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private List<Category> mAllCategories = new ArrayList<>();
-    private List<Article> mBestSelling = new ArrayList<>();
-    private List<Article> mProductsOnSale = new ArrayList<>();
-    private List<Article> mNewProducts = new ArrayList<>();
     private ViewPager mViewPager;
 
     RelativeLayout mFourthButton;
@@ -235,23 +230,26 @@ public class MainActivity extends FragmentActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
         mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         return mAllCategories;
     }
-
+    @SuppressWarnings("unchecked")
     public List<Article> getProductsOnSale() {
+        List<Article> mProductsOnSale;
         mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
         return mProductsOnSale;
     }
-
+    @SuppressWarnings("unchecked")
     public List<Article> getNewProducts() {
+        List<Article> mNewProducts;
         mNewProducts = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
         return mNewProducts;
     }
-
+    @SuppressWarnings("unchecked")
     public List<Article> getBestSellingProducts() {
+        List<Article> mBestSelling;
         mBestSelling = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[2]);
         return mBestSelling;
     }

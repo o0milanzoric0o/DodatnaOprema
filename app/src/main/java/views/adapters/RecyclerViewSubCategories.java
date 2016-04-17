@@ -29,20 +29,23 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View view) {
+
             super(view);
             subcategoryName = (TextView) view.findViewById(R.id.subcategoryText);
             subcategoryImg = (NetworkImageView) view.findViewById(R.id.subcategoryImage);
+
         }
+
         public void bind(final Child item, final OnItemClickListener listener) {
-            //   ...
             itemView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
+
+
                     listener.onItemClick(item, itemView);
                     itemView.setSelected(true);
-                    new Handler().postDelayed(new Runnable()
-                    {
-                        public void run()
-                        {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
                             itemView.setSelected(false);
                         }
                     }, 1000);
@@ -55,9 +58,11 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
 
 
     public RecyclerViewSubCategories(Context context, List<Child> subcategories, OnItemClickListener listener) {
+
         this.subcategories = subcategories;
         this.context = context;
-        this.listener=listener;
+        this.listener = listener;
+
     }
 
     @Override
@@ -70,14 +75,12 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerViewSubCategories.MyViewHolder holder, int position) {
-        holder.bind(subcategories.get(position), listener);
 
+        holder.bind(subcategories.get(position), listener);
         holder.setIsRecyclable(false);
 
         subcategoryName.setText(subcategories.get(position).getKatIme());
-
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
-
         subcategoryImg.setImageUrl(subcategories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
     }
 

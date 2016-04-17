@@ -16,9 +16,6 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
-/**
- * Created by Win 7 on 4.4.2016.
- */
 public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerViewSelectedProducts.MyViewHolder> {
     private List<Article> products;
     private NetworkImageView productImg;
