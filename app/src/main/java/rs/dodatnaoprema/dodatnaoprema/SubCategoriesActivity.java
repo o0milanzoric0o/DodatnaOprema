@@ -75,6 +75,11 @@ public class SubCategoriesActivity extends BaseActivity {
                 } else {
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
                 }
+
+                Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
+                intent.putExtra("Artikli", item.getKatIme());
+                intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);

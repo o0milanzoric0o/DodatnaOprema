@@ -85,7 +85,6 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-
     public RecyclerViewAllCategories(Context context, List<Category> categories, OnItemClickListener listener) {
 
         this.categories = categories;
@@ -154,7 +153,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             if (existHistory == 1) {
                 for (String subcategory : mHistory
                         ) {
-                    Log.logInfo("Niz", subcategory);
+
                     addNewButton(subcategory);
                 }
             }
@@ -165,7 +164,6 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                     DeleteHistoryDialog dialog = new DeleteHistoryDialog();
                     dialog.setCancelable(false);
                     dialog.show(((Activity) context).getFragmentManager(), "Dialog");
-
                 }
             });
         }
@@ -189,7 +187,6 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
-
 
     public interface OnItemClickListener {
         void onItemClick(Category item);

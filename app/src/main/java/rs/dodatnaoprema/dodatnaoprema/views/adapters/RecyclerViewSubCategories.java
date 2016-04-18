@@ -41,7 +41,6 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
                 @Override
                 public void onClick(View v) {
 
-
                     listener.onItemClick(item, itemView);
                     itemView.setSelected(true);
                     new Handler().postDelayed(new Runnable() {
