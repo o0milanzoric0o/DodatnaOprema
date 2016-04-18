@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.Status;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.gcm.QuickstartPreferences;
 
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
@@ -127,6 +128,13 @@ public class SignInActivity extends AppCompatActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+//            Intent resultIntent = new Intent();
+//            resultIntent.putExtra(QuickstartPreferences.GCM_SINGIN_NAME, acct.getDisplayName());
+//            resultIntent.putExtra(QuickstartPreferences.GCM_SINGIN_EMAIL, acct.getEmail());
+//            resultIntent.putExtra(QuickstartPreferences.GCM_SINGIN_PHOTO, acct.getPhotoUrl());
+//            // Pass result and finish activity
+//            setResult(RESULT_OK, resultIntent);
+//            finish();
             updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
@@ -218,5 +226,11 @@ public class SignInActivity extends AppCompatActivity implements
                 revokeAccess();
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

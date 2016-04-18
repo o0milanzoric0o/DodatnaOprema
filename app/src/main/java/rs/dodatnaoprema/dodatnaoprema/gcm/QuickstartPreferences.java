@@ -17,7 +17,10 @@
 package rs.dodatnaoprema.dodatnaoprema.gcm;
 
 public class QuickstartPreferences {
-
+    public static final int GCM_SIGNIN_REQUEST = 8999;
+    public static final String GCM_SINGIN_EMAIL = "userEmail";
+    public static final String GCM_SINGIN_NAME = "userName";
+    public static final String GCM_SINGIN_PHOTO = "userPhoto";
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 

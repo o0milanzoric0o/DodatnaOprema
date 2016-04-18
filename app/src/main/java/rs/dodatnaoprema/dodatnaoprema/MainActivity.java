@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
@@ -23,12 +24,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +62,7 @@ public class MainActivity extends FragmentActivity
 
     // The following fields are added to support GCM
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
     private static final String TAG = "MainActivity";
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -68,7 +73,8 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+        // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+
         ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +86,7 @@ public class MainActivity extends FragmentActivity
 
         mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 
-      //  icMore.setVisibility(View.GONE);
+        //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,7 +128,6 @@ public class MainActivity extends FragmentActivity
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-            Log.i(TAG,"YADAYADAYADA");
         }
 
         // FOR DEBUGGING
@@ -208,6 +213,8 @@ public class MainActivity extends FragmentActivity
 
         if (id == R.id.nav_account) {
             // Handle the login action
+            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivityForResult(intent, QuickstartPreferences.GCM_SIGNIN_REQUEST);
         } else if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_chart) {
@@ -230,23 +237,41 @@ public class MainActivity extends FragmentActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == QuickstartPreferences.GCM_SIGNIN_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                ((TextView)findViewById(R.id.id_user_name)).setText(data.getStringExtra(QuickstartPreferences.GCM_SINGIN_NAME));
+                ((TextView)findViewById(R.id.id_user_email)).setText(data.getStringExtra(QuickstartPreferences.GCM_SINGIN_EMAIL));
+                ((ImageView)findViewById(R.id.id_user_photo)).setImageURI((Uri)data.getExtras().get(QuickstartPreferences.GCM_SINGIN_PHOTO));
+            }
+        }
+
+    }
+
     @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
         mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         return mAllCategories;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getProductsOnSale() {
         List<Article> mProductsOnSale;
         mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
         return mProductsOnSale;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getNewProducts() {
         List<Article> mNewProducts;
         mNewProducts = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
         return mNewProducts;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getBestSellingProducts() {
         List<Article> mBestSelling;

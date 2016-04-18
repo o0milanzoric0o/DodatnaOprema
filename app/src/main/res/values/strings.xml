@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- Navigation drawer menu -->
-    <string name="login">Prijavite se</string>
+    <string name="account">Moj nalog</string>
     <string name="home">Home</string>
     <string name="cart">Korpa</string>
 
@@ -86,5 +86,6 @@
     <string name="play_services_error_fmt">Google Play Services Error: %i</string>
     <!-- Content Description for images -->
     <string name="desc_google_icon">Google Logo</string>
+    <string name="login">Prijavi se</string>
 
 </resources>
