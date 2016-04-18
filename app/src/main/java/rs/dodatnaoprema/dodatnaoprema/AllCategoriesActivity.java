@@ -14,7 +14,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
-import views.adapters.RecyclerViewAllCategories;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAllCategories;
 
 public class AllCategoriesActivity extends BaseActivity {
 
@@ -64,7 +64,8 @@ public class AllCategoriesActivity extends BaseActivity {
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_categories);
 
-        //  mRecyclerView.setNestedScrollingEnabled(false);
+
+        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
         StaggeredGridLayoutManager mLayoutManager;

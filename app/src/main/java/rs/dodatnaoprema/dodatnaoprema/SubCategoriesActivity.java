@@ -18,7 +18,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
-import views.adapters.RecyclerViewSubCategories;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubCategories;
 
 public class SubCategoriesActivity extends BaseActivity {
 

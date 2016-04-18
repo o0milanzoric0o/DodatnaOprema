@@ -39,7 +39,7 @@ import rs.dodatnaoprema.dodatnaoprema.gcm.RegistrationIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
-import views.adapters.ViewPagerAdapter;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
 public class MainActivity extends FragmentActivity

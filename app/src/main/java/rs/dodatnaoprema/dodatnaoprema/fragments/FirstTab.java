@@ -18,7 +18,7 @@ import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout;
 
-import views.adapters.RecyclerViewAdapterFirstTab;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAdapterFirstTab;
 
 public class FirstTab extends Fragment implements OnLoadMoreListener {
 

@@ -1,9 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -28,7 +25,6 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.models.ImageItem;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
@@ -37,7 +33,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
-import views.adapters.GridViewAdapter;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.GridViewAdapter;
 
 public class SecondTab extends Fragment {
     VolleySingleton mVolleySingleton;

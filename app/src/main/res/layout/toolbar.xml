@@ -19,19 +19,9 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/toolbar_text_size" />
 
-
-    <ImageButton
-        android:id="@+id/toolbar_btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="#00ffffff"
-        android:padding="@dimen/toolbar_items_padding"
-        android:src="@drawable/ic_search_white_24dp" />
-
     <ImageButton
         android:id="@+id/toolbar_btn_cart"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -39,5 +29,16 @@
         android:background="#00ffffff"
         android:padding="@dimen/toolbar_items_padding"
         android:src="@drawable/ic_shopping_cart_white_24dp" />
+
+    <ImageButton
+        android:id="@+id/toolbar_btn_search"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="#00ffffff"
+        android:padding="@dimen/toolbar_items_padding"
+        android:src="@drawable/ic_search_white_24dp" />
 
 </android.support.v7.widget.Toolbar>

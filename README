@@ -30,7 +30,7 @@ rs.dodatnaoprema.dodatnaoprema
 ├─ managers
 ├─ utils
 ├─ fragments
-└─ views
+└─ rs.dodatnaoprema.dodatnaoprema.views
    ├─ adapters
    ├─ actionbar
    ├─ widgets

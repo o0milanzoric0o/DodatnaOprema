@@ -61,7 +61,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.dot_indicator_view_pager_tripple_version, this, true);
 
-        // Get views
+        // Get rs.dodatnaoprema.dodatnaoprema.views
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
         //mImageView = (ImageView) findViewById(R.id.img_pager_item);
