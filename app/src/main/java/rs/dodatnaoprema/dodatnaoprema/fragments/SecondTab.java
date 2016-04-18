@@ -80,8 +80,7 @@ public class SecondTab extends Fragment {
         gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, mArticles);
         gridView.setAdapter(gridAdapter);
 
-        mVolleySingleton = VolleySingleton.getsInstance(getContext());
-        mArticles = new ArrayList<>();
+
 
         final MainActivity mainActivity = (MainActivity) getActivity();
 

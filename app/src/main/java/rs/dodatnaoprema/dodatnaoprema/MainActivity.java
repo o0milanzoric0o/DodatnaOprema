@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+
         ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +79,6 @@ public class MainActivity extends FragmentActivity
         });
 
         mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
-
-      //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,7 +120,7 @@ public class MainActivity extends FragmentActivity
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-            Log.i(TAG,"YADAYADAYADA");
+            Log.i(TAG, "YADAYADAYADA");
         }
 
         // FOR DEBUGGING
@@ -230,23 +228,27 @@ public class MainActivity extends FragmentActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
         mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         return mAllCategories;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getProductsOnSale() {
         List<Article> mProductsOnSale;
         mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
         return mProductsOnSale;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getNewProducts() {
         List<Article> mNewProducts;
         mNewProducts = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
         return mNewProducts;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getBestSellingProducts() {
         List<Article> mBestSelling;
