@@ -43,22 +43,16 @@
             android:layout_centerVertical="true"
             android:alpha="0.3"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_reorder_black_24dp"
-            android:contentDescription="@string/image_description"/>
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/ic_reorder_black_24dp" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_articles"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </FrameLayout>
-
+   <FrameLayout
+       android:background="@color/button_holder_background"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/articles_content"/>
 
 
 </LinearLayout>

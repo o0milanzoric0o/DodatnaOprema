@@ -87,7 +87,7 @@
         <activity
             android:name="rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity"
             android:label="@string/name_sign_in_activity"
-            android:theme="@style/ThemeOverlay.MyNoTitleActivity"></activity>
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity"/>
     </application>
 
 </manifest>
