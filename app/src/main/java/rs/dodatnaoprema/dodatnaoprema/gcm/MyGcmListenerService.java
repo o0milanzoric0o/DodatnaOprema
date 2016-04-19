@@ -20,19 +20,32 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.NetworkImageView;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
+import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+    private String mNotificationTitle;
+    private String mNotificationText;
+    private Bitmap mBigBitmap;
+    private Bitmap mLargeIcon;
+    private NetworkImageView mNetworkImageView;
 
     /**
      * Called when message is received.
@@ -44,9 +57,36 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
+        mNotificationText = data.getString("message");
+        mLargeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_drill);
+
+        String url = "";
+        mBigBitmap = null;
+        if (data.containsKey("image"))
+            url = data.getString("image");
+
+        mNotificationTitle = "";
+        if (data.containsKey("title"))
+            mNotificationTitle = data.getString("title");
+
+        ImageRequest request = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+                        mBigBitmap = bitmap;
+                        sendNotification(mNotificationText);
+                    }
+                }, 0, 0, null,
+                new Response.ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        // mImageView.setImageResource(R.drawable.image_load_error);
+                    }
+                });
+        // Access the RequestQueue through your singleton class.
+        VolleySingleton.getsInstance(this).addToRequestQueue(request);
+
         Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "Message: " + mNotificationText);
 
         if (from.startsWith("/topics/")) {
             // message received from some topic.
@@ -66,7 +106,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -83,16 +123,25 @@ public class MyGcmListenerService extends GcmListenerService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         /**TODO FIX THIS!!!!!*/
-        pendingIntent=null;
+        pendingIntent = null;
+
+
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(android.R.drawable.sym_def_app_icon)
-                .setContentTitle("GCM Message")
-                .setContentText(message)
+                .setSmallIcon(R.mipmap.ic_drill)
+                .setLargeIcon(mLargeIcon)
+                .setContentTitle(mNotificationTitle)
+                .setContentText(mNotificationText)
+                .setCategory(NotificationCompat.CATEGORY_PROMO)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
+
+        if (mBigBitmap != null)
+            notificationBuilder.setStyle(new NotificationCompat.BigPictureStyle()
+                    .bigPicture(mBigBitmap));
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
