@@ -4,10 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -27,19 +25,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.io.Serializable;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.gcm.QuickstartPreferences;
-import rs.dodatnaoprema.dodatnaoprema.gcm.RegistrationIntentService;
+import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
@@ -104,35 +103,52 @@ public class MainActivity extends FragmentActivity
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                SharedPreferences sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(context);
-                boolean sentToken = sharedPreferences
-                        .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-                if (sentToken) {
-                    /**TODO token sent successfully*/
-                    Log.i(TAG, getString(R.string.gcm_send_message));
-                } else {
-                    /**TODO token send failed*/
-                    Log.i(TAG, getString(R.string.token_error_message));
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    String token = intent.getStringExtra("token");
+
+                    Toast.makeText(getApplicationContext(), "GCM registration token: " + token, Toast.LENGTH_LONG).show();
+
+                } else if (intent.getAction().equals(Config.SENT_TOKEN_TO_SERVER)) {
+                    // gcm registration id is stored in our server's MySQL
+
+                    Toast.makeText(getApplicationContext(), "GCM registration token is stored in server!", Toast.LENGTH_LONG).show();
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    Toast.makeText(getApplicationContext(), "Push notification is received!", Toast.LENGTH_LONG).show();
                 }
             }
         };
 
-
-        // Registering BroadcastReceiver
-        registerReceiver();
-
         if (checkPlayServices()) {
-            // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
-            startService(intent);
+            registerGCM();
         }
-
-        // FOR DEBUGGING
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
 
     public void initializeTabs() {
         intent = getIntent();
@@ -307,19 +323,14 @@ public class MainActivity extends FragmentActivity
         startActivity(intent);
     }
 
-    private void registerReceiver() {
-        if (!isReceiverRegistered) {
-            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                    new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
-            isReceiverRegistered = true;
-        }
+
+    // starting the service to register with GCM
+    private void registerGCM() {
+        Intent intent = new Intent(this, GcmIntentService.class);
+        intent.putExtra("key", "register");
+        startService(intent);
     }
 
-    /**
-     * Check the device to make sure it has the Google Play Services APK. If
-     * it doesn't, display a dialog that allows users to download the APK from
-     * the Google Play Store or enable it in the device's system settings.
-     */
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
@@ -328,12 +339,12 @@ public class MainActivity extends FragmentActivity
                 apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
                         .show();
             } else {
-                Log.i(TAG, "This device is not supported.");
+                Log.i(TAG, "This device is not supported. Google Play Services not installed!");
+                Toast.makeText(getApplicationContext(), "This device is not supported. Google Play Services not installed!", Toast.LENGTH_LONG).show();
                 finish();
             }
             return false;
         }
         return true;
     }
-
 }
