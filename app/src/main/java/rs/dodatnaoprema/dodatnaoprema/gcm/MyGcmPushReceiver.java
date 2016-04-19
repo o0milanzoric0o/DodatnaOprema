@@ -26,6 +26,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
+import rs.dodatnaoprema.dodatnaoprema.SplashActivity;
 
 public class MyGcmPushReceiver extends GcmListenerService {
 
@@ -65,7 +66,7 @@ public class MyGcmPushReceiver extends GcmListenerService {
             notificationUtils.playNotificationSound();
         } else {
 
-            Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent resultIntent = new Intent(getApplicationContext(), SplashActivity.class);
             resultIntent.putExtra("message", message);
 
             if (TextUtils.isEmpty(image)) {
