@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
+        <rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView
             android:id="@+id/recycler_view_subcategories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

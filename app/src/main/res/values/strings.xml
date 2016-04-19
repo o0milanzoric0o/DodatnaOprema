@@ -32,7 +32,7 @@
     <string name="fourth_button_text">Sve kategorije</string>
 
     <!-- Progress dialog message -->
-    <string name="progress_dialog_message">Učitavanje podataka ...</string>
+    <string name="progress_dialog_message">Učitavanje podataka …</string>
 
     <!-- Tabs labels -->
     <string name="first_tab">TOP proizvodi</string>
@@ -48,9 +48,12 @@
     <string name="delete_txt">Obriši istoriju</string>
     <string name="cancel_txt">Odustani</string>
 
+    <!-- Sort options -->
+    <string name="no_sort">Nesortirano</string>
+
     <string name="Title">Mašine i alati</string>
 
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
 
     <string name="recyclerview_footer_text">Prevuci za prelazak na  karticu "PONUDA"</string>
     <string name="recyclerview_footer_image_description">arrow_up</string>
@@ -58,7 +61,7 @@
     <!-- GCM strings -->
     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
         send downstream messages to this app.</string>
-    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="registering_message">Generating InstanceID token…</string>
     <string name="token_error_message">An error occurred while either fetching the InstanceID token,
         sending the fetched token to the server or subscribing to the PubSub topic. Please try
         running the sample again.</string>

@@ -8,6 +8,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private GridLayoutManager mLayoutManager;
     private RecyclerViewSelectedProducts mAdapter;
+
+    private boolean nextImgStateGrid = true;
 
     private void searchArticlesByCategory(int id, int from, int to, int sort) {
         PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(this, ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
@@ -70,28 +74,20 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_articles);
+        final ImageButton listGridChangeBtn = (ImageButton) findViewById(R.id.list_grid_change_btn);
+        listGridChangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nextImgStateGrid) {
+                    listGridChangeBtn.setImageResource(R.drawable.ic_view_module_black_24dp);
+                    nextImgStateGrid = false;
+                } else {
+                    listGridChangeBtn.setImageResource(R.drawable.ic_reorder_black_24dp);
+                    nextImgStateGrid = true;
+                }
+            }
+        });
 
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(true);
-
-        mVolleySingleton = VolleySingleton.getsInstance(this);
-        mArticles = new ArrayList<>();
-        searchArticlesByCategory(mArticleId, 1, 100, 2);
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // use a linear layout manager
-            mLayoutManager = new GridLayoutManager(this, 6, GridLayoutManager.VERTICAL, false);
-        } else {
-            mLayoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
-        }
-        mLayoutManager.setAutoMeasureEnabled(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-
-        mAdapter = new RecyclerViewSelectedProducts(this, mArticles);
-        mRecyclerView.hasFixedSize();
-        mRecyclerView.setNestedScrollingEnabled(false);
 
     }
 
