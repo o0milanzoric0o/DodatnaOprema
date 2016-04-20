@@ -47,12 +47,11 @@
             android:src="@drawable/ic_reorder_black_24dp" />
     </RelativeLayout>
 
-
-   <FrameLayout
-       android:background="@color/button_holder_background"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/articles_content"/>
+    <FrameLayout
+        android:id="@+id/articles_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/button_holder_background" />
 
 
 </LinearLayout>

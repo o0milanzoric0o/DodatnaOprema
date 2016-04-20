@@ -18,6 +18,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
@@ -40,45 +41,46 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private boolean nextImgStateGrid = true;
     private Handler mHandler;
 
-    private void searchArticlesByCategory(int id, int from, int to, int sort) {
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(this, ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
-        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
-            @Override
-            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
-                if (success) {
-                    mArticles = articlesFilteredByCategory.getArtikli();
-                    // gridAdapter.updateContent(mArticles);
-                    mRecyclerView.setAdapter(mAdapter);
+    private int mArticleId;
 
-                }
-            }
 
-            @Override
-            public void webRequestError(String error) {
+    public List<Article> getArticlesList() {
+        return mArticles;
+    }
 
-            }
-        });
-        content.pullList();
-
+    public int getmArticleId() {
+        return mArticleId;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_category_articles_activity);
 
+
         Intent intent = getIntent();
         String mSubCategoryName = intent.getStringExtra("Artikli");
-        int mArticleId = intent.getIntExtra("ArtikalId", 0);
+        mArticleId = intent.getIntExtra("ArtikalId", 0);
+
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         mTextView.setText(mSubCategoryName);
+        Log.logInfo("NJNJ", String.valueOf(mArticles.size()));
 
         FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.articles_content, new ArticlesList())
+                // Add this transaction to the back stack, allowing users to press Back
+                // to get to the front of the card.
+                .addToBackStack(null)
+                // Commit the transaction.
+                .commit();
 
         final ImageButton listGridChangeBtn = (ImageButton) findViewById(R.id.list_grid_change_btn);
 
