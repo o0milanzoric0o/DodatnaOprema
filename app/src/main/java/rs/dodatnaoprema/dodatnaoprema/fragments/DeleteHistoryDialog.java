@@ -20,8 +20,6 @@ public class DeleteHistoryDialog extends DialogFragment {
     private boolean clickedNo = false;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

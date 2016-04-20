@@ -3,6 +3,7 @@ package rs.dodatnaoprema.dodatnaoprema.signin;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +20,10 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.gcm.QuickstartPreferences;
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
@@ -37,6 +39,7 @@ public class SignInActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +138,18 @@ public class SignInActivity extends AppCompatActivity implements
 //            // Pass result and finish activity
 //            setResult(RESULT_OK, resultIntent);
 //            finish();
+
+            User user = new User(acct.getId(), acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl());
+            MyApplication.getInstance().getPrefManager().storeUser(user);
+            Intent changeUserInfo = new Intent(Config.SET_USER_INFO);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(changeUserInfo);
+
             updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
+            Intent changeUserInfo = new Intent(Config.CLEAR_USER_INFO);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(changeUserInfo);
+
             updateUI(false);
         }
     }
@@ -157,6 +169,9 @@ public class SignInActivity extends AppCompatActivity implements
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
+                        // Signed out, show unauthenticated UI.
+                        Intent changeUserInfo = new Intent(Config.CLEAR_USER_INFO);
+                        LocalBroadcastManager.getInstance(SignInActivity.this).sendBroadcast(changeUserInfo);
                         updateUI(false);
                         // [END_EXCLUDE]
                     }
@@ -233,4 +248,6 @@ public class SignInActivity extends AppCompatActivity implements
         super.onPause();
 
     }
+
+
 }

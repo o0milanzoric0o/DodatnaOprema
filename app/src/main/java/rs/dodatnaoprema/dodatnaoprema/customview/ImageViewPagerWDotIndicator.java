@@ -27,7 +27,7 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
 
     public static final int TYPE_DOUBLE = 0;
     public static final int TYPE_TRIPPLE = 1;
-
+    private final Handler mhandler = new Handler();
     private ImageView mImageView = null;
     private LinearLayout mDotsLayout = null;
     private ViewPager mViewPager = null;
@@ -36,7 +36,6 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
     private Context mcontext;
     private int mdotsCount;
     private ImageView[] mdots;
-    private final Handler mhandler = new Handler();
     private int slideInterval;
     private int type;
     private Runnable mRunnable;

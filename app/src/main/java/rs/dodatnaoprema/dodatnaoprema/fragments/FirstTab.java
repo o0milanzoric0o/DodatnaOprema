@@ -13,22 +13,17 @@ import java.util.ArrayList;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BitmapDecoder;
-
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout;
-
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAdapterFirstTab;
 
 public class FirstTab extends Fragment implements OnLoadMoreListener {
 
 
-    private SwipeableLayout mSwipeableLayout;
-
-    private MainActivity mainActivity;
-
     ArrayList<Bitmap> bitmaps;
-
+    private SwipeableLayout mSwipeableLayout;
+    private MainActivity mainActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

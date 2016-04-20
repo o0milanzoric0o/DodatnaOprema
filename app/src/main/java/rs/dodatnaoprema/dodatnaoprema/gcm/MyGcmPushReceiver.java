@@ -25,7 +25,6 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.SplashActivity;
 
 public class MyGcmPushReceiver extends GcmListenerService {

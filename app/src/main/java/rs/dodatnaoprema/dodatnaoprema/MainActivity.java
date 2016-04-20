@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -35,10 +34,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.gcm.QuickstartPreferences;
 import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
@@ -48,21 +48,17 @@ import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
 public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private List<Category> mAllCategories = new ArrayList<>();
-    private ViewPager mViewPager;
-
+    // The following fields are added to support GCM
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "MainActivity";
     RelativeLayout mFourthButton;
 
     AppBarLayout mAppBar;
 
     TabLayout mTabLayout;
-
+    private List<Category> mAllCategories = new ArrayList<>();
+    private ViewPager mViewPager;
     private Intent intent;
-
-    // The following fields are added to support GCM
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String TAG = "MainActivity";
-
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private boolean isReceiverRegistered;
 
@@ -71,7 +67,7 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
+        // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
         ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +79,7 @@ public class MainActivity extends FragmentActivity
 
         mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 
-      //  icMore.setVisibility(View.GONE);
+        //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -121,6 +117,18 @@ public class MainActivity extends FragmentActivity
                     // new push notification is received
 
                     Toast.makeText(getApplicationContext(), "Push notification is received!", Toast.LENGTH_LONG).show();
+                } else if (intent.getAction().equals(Config.SET_USER_INFO)) {
+                    // Update user email, name and photo
+                    User user = MyApplication.getInstance().getPrefManager().getUser();
+                    ((TextView) findViewById(R.id.id_user_email)).setText(user.getEmail());
+                    ((TextView) findViewById(R.id.id_user_name)).setText(user.getName());
+                    ((ImageView) findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+                } else if (intent.getAction().equals(Config.CLEAR_USER_INFO)) {
+                    // Update user email, name and photo
+                    ((TextView) findViewById(R.id.id_user_email)).setText("");
+                    ((TextView) findViewById(R.id.id_user_name)).setText("Prijavi se | Registruj se besplatno");
+                    /**TODO figure out what to display when user is logged off*/
+                    //((ImageView)findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
                 }
             }
         };
@@ -142,12 +150,23 @@ public class MainActivity extends FragmentActivity
         // by doing this, the activity will be notified each time a new message arrives
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.SET_USER_INFO));
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.CLEAR_USER_INFO));
     }
 
     @Override
     protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onDestroy();
     }
 
     public void initializeTabs() {
@@ -227,8 +246,7 @@ public class MainActivity extends FragmentActivity
 
         if (id == R.id.nav_account) {
             // Handle the login action
-            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-            startActivityForResult(intent, QuickstartPreferences.GCM_SIGNIN_REQUEST);
+
         } else if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_chart) {
@@ -252,37 +270,26 @@ public class MainActivity extends FragmentActivity
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (requestCode == QuickstartPreferences.GCM_SIGNIN_REQUEST) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                ((TextView)findViewById(R.id.id_user_name)).setText(data.getStringExtra(QuickstartPreferences.GCM_SINGIN_NAME));
-                ((TextView)findViewById(R.id.id_user_email)).setText(data.getStringExtra(QuickstartPreferences.GCM_SINGIN_EMAIL));
-                ((ImageView)findViewById(R.id.id_user_photo)).setImageURI((Uri)data.getExtras().get(QuickstartPreferences.GCM_SINGIN_PHOTO));
-            }
-        }
-
-    }
-
     @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
         mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         return mAllCategories;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getProductsOnSale() {
         List<Article> mProductsOnSale;
         mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
         return mProductsOnSale;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getNewProducts() {
         List<Article> mNewProducts;
         mNewProducts = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
         return mNewProducts;
     }
+
     @SuppressWarnings("unchecked")
     public List<Article> getBestSellingProducts() {
         List<Article> mBestSelling;
