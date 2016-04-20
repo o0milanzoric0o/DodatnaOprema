@@ -120,6 +120,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
 
         if (holder instanceof MyViewHolder) {
 

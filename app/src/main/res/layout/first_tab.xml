@@ -1,53 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:refresh_enabled="false"
-    app:load_more_enabled="true"
+<rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeToLoadLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
-    <!-- Here you put the rest of your current view-->
+    app:load_more_enabled="true"
+    app:refresh_enabled="false">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <!-- Here you put the rest of your current view-->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:orientation="vertical">
 
 
-        <!--<FrameLayout-->
+            <!--<FrameLayout-->
             <!--android:id="@+id/dotIndicator"-->
             <!--android:layout_width="match_parent"-->
 
             <!--android:layout_height="wrap_content">-->
 
             <!--&lt;!&ndash;<rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/view_pager_dot_ind"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:layout_height="200dip"&ndash;&gt;-->
-                <!--&lt;!&ndash;custom:slideInterval="5000" />&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/view_pager_dot_ind"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="200dip"&ndash;&gt;-->
+            <!--&lt;!&ndash;custom:slideInterval="5000" />&ndash;&gt;-->
 
-        <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
+            <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
 
 
-        <FrameLayout
-            android:id="@+id/productsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight=".65">
+            <FrameLayout
+                android:id="@+id/productsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight=".65">
 
-            <include layout="@layout/recycler_view" />
+                <include
+                    layout="@layout/recycler_view" />
 
-            <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
-        </FrameLayout>
-    </LinearLayout>
-</ScrollView>
-<include layout="@layout/first_tab_footer"/>
+                <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/first_tab_footer" />
 </rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout>

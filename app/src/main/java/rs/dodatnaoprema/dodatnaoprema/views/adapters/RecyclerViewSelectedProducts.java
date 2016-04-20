@@ -48,7 +48,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public void onBindViewHolder(RecyclerViewSelectedProducts.MyViewHolder holder, int position) {
-
+        holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);

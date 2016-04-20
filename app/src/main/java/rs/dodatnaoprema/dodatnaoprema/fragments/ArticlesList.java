@@ -29,10 +29,11 @@ public class ArticlesList extends Fragment {
 
         SubCategoryArticlesActivity activity = (SubCategoryArticlesActivity) getActivity();
 
-        mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view_articles_list);
+        mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
 
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
+
 
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
