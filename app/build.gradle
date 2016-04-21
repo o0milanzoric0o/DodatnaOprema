@@ -6,7 +6,7 @@ android {
         debug_signing {
             keyAlias 'debugkeyshared'
             keyPassword 'android'
-            storeFile file('D:/Android projekti/DodatnaOprema/keys/debugKeystore.jks')
+            storeFile file('C:/Users/1/StudioProjects/DodatnaOprema/keys/debugKeystore.jks')
             storePassword 'android'
         }
     }

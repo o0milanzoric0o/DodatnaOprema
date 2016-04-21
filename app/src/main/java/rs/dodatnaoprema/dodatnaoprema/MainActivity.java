@@ -126,9 +126,8 @@ public class MainActivity extends FragmentActivity
                 } else if (intent.getAction().equals(Config.CLEAR_USER_INFO)) {
                     // Update user email, name and photo
                     ((TextView) findViewById(R.id.id_user_email)).setText("");
-                    ((TextView) findViewById(R.id.id_user_name)).setText("Prijavi se | Registruj se besplatno");
-                    /**TODO figure out what to display when user is logged off*/
-                    //((ImageView)findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+                    ((TextView) findViewById(R.id.id_user_name)).setText(getString(R.string.user_name_unavailable));
+                    ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.googleg_color));
                 }
             }
         };
