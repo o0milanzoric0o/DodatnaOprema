@@ -34,7 +34,6 @@ public class ArticlesList extends Fragment {
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
-
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setAutoMeasureEnabled(true);
@@ -42,17 +41,17 @@ public class ArticlesList extends Fragment {
         mVolleySingleton = VolleySingleton.getsInstance(getActivity());
         searchArticlesByCategory(activity.getmArticleId(), 1, 100, 2);
 
-
         return view;
     }
 
     private void searchArticlesByCategory(int id, int from, int to, int sort) {
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
+
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
-                    RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(getActivity(), articlesFilteredByCategory.getArtikli());
+                    RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(getActivity(), articlesFilteredByCategory.getArtikli(), true);
                     mRecyclerView.setAdapter(mAdapter);
                 }
             }
