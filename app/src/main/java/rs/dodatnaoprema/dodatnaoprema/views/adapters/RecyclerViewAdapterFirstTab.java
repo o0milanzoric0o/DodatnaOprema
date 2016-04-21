@@ -125,7 +125,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         if (holder instanceof MyViewHolder) {
 
             categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position - 1]);
-            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]));
+            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]), false);
             mRecyclerView.hasFixedSize();
             mRecyclerView.setNestedScrollingEnabled(false);
             mRecyclerView.setAdapter(mAdapter);
