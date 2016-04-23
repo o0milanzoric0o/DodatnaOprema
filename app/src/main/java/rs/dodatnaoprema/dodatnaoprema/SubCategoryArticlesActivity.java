@@ -16,17 +16,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
-import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
-import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSelectedProducts;
 
 public class SubCategoryArticlesActivity extends BaseActivity {
@@ -67,7 +63,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         mTextView.setText(mSubCategoryName);
         Log.logInfo("NJNJ", String.valueOf(mArticles.size()));
 
-        FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content);
+        FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
@@ -75,7 +71,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.articles_content, new ArticlesList())
+                .add(R.id.articles_content_list, new ArticlesList())
+                // Add this transaction to the back stack, allowing users to press Back
+                // to get to the front of the card.
+                .addToBackStack(null)
+                // Commit the transaction.
+                .commit();
+        getFragmentManager()
+                .beginTransaction()
+                .add(R.id.articles_content_grid, new ArticlesGrid())
                 // Add this transaction to the back stack, allowing users to press Back
                 // to get to the front of the card.
                 .addToBackStack(null)
@@ -90,58 +94,17 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 public void onClick(View v) {
 
 
-                    if (nextImgStateGrid) {
-                        listGridChangeBtn.setImageResource(R.drawable.ic_view_module_black_24dp);
-                        nextImgStateGrid = false;
-                        getFragmentManager()
-                                .beginTransaction()
-
-                                // Replace the default fragment animations with animator resources representing
-                                // rotations when switching to the back of the card, as well as animator
-                                // resources representing rotations when flipping back to the front (e.g. when
-                                // the system Back button is pressed).
-                                .setCustomAnimations(
-                                        R.animator.card_flip_right_in, R.animator.card_flip_right_out,
-                                        R.animator.card_flip_left_in, R.animator.card_flip_left_out)
-
-                                // Replace any fragments currently in the container view with a fragment
-                                // representing the next page (indicated by the just-incremented currentPage
-                                // variable).
-                                .replace(R.id.articles_content, new ArticlesGrid())
-
-                                // Add this transaction to the back stack, allowing users to press Back
-                                // to get to the front of the card.
-                                .addToBackStack(null)
-
-                                // Commit the transaction.
-                                .commit();
-                    } else {
+                  if (nextImgStateGrid) {
                         listGridChangeBtn.setImageResource(R.drawable.ic_reorder_black_24dp);
+                        nextImgStateGrid = false;
+
+                    } else {
+                        listGridChangeBtn.setImageResource(R.drawable.ic_view_module_black_24dp);
                         nextImgStateGrid = true;
-                        getFragmentManager()
-                                .beginTransaction()
 
-                                // Replace the default fragment animations with animator resources representing
-                                // rotations when switching to the back of the card, as well as animator
-                                // resources representing rotations when flipping back to the front (e.g. when
-                                // the system Back button is pressed).
-                                .setCustomAnimations(
-                                        R.animator.card_flip_right_in, R.animator.card_flip_right_out,
-                                        R.animator.card_flip_left_in, R.animator.card_flip_left_out)
-
-                                // Replace any fragments currently in the container view with a fragment
-                                // representing the next page (indicated by the just-incremented currentPage
-                                // variable).
-                                .replace(R.id.articles_content, new ArticlesList())
-
-                                // Add this transaction to the back stack, allowing users to press Back
-                                // to get to the front of the card.
-                                .addToBackStack(null)
-
-                                // Commit the transaction.
-                                .commit();
 
                     }
+                    flipCard();
 
                 }
             });
@@ -149,7 +112,25 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
 
     }
+    public void onCardClick(View view)
+    {
+        flipCard();
+    }
 
+    private void flipCard()
+    {
+        View rootLayout = (View) findViewById(R.id.main_activity_root);
+        View cardFace = (View) findViewById(R.id.main_activity_card_face);
+        View cardBack = (View) findViewById(R.id.main_activity_card_back);
+
+        FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
+
+        if (cardFace.getVisibility() == View.GONE)
+        {
+            flipAnimation.reverse();
+        }
+        rootLayout.startAnimation(flipAnimation);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

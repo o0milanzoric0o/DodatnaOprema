@@ -25,7 +25,7 @@ public class ArticlesList extends Fragment {
     private CustomRecyclerView mRecyclerView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_articles_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_articles, container, false);
 
         SubCategoryArticlesActivity activity = (SubCategoryArticlesActivity) getActivity();
 
