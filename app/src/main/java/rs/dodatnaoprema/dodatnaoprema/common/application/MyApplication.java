@@ -21,6 +21,7 @@ public class MyApplication extends Application {
     private RequestQueue mRequestQueue;
 
     private MyPreferenceManager pref;
+    private SessionManager sessionManager;
 
     public static synchronized MyApplication getInstance() {
         return mInstance;
@@ -38,6 +39,13 @@ public class MyApplication extends Application {
         }
 
         return pref;
+    }
+
+    public SessionManager getSessionManager(){
+        if (sessionManager == null){
+            sessionManager = new SessionManager(this);
+        }
+        return sessionManager;
     }
 
     public RequestQueue getRequestQueue() {

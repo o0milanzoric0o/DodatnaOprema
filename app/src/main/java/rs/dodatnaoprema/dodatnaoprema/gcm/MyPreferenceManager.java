@@ -2,6 +2,7 @@ package rs.dodatnaoprema.dodatnaoprema.gcm;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -11,28 +12,39 @@ import rs.dodatnaoprema.dodatnaoprema.models.User;
  */
 public class MyPreferenceManager {
 
-    private String TAG = MyPreferenceManager.class.getSimpleName();
-
-    // Shared Preferences
-    SharedPreferences pref;
-
-    // Editor for Shared preferences
-    SharedPreferences.Editor editor;
-
-    // Context
-    Context _context;
-
-    // Shared pref mode
-    int PRIVATE_MODE = 0;
-
     // Sharedpref file name
     private static final String PREF_NAME = "androidhive_gcm";
-
     // All Shared Preferences Keys
     private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_USER_NAME = "user_name";
-    private static final String KEY_USER_EMAIL = "user_email";
+    private static final String KEY_USER_PHOTO = "user_photo";
+
     private static final String KEY_NOTIFICATIONS = "notifications";
+    private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
+
+    private static final String KEY_GENERAL_NAME = "KomitentNaziv";
+    private static final String KEY_NAME = "KomitentIme";
+    private static final String KEY_LAST_NAME = "KomitentPrezime";
+    private static final String KEY_ADDRESS = "KomitentAdresa";
+    private static final String KEY_ZIP_CODE = "KomitentPosBroj";
+    private static final String KEY_CITY = "KomitentMesto";
+    private static final String KEY_PHONE = "KomitentTelefon";
+    private static final String KEY_MOBILE = "KomitentMobTel";
+    private static final String KEY_USER_EMAIL = "KomitentEmail";
+    private static final String KEY_USER_NAME = "KomitentUserName";
+    private static final String KEY_USER_TYPE = "KomitentTipUsera";
+    private static final String KEY_FIRM_NAME = "KomitentFirma";
+    private static final String KEY_FIRM_ID = "KomitentMatBr";
+    private static final String KEY_FIRM_PIB = "KomitentPIB";
+    private static final String KEY_FIRM_ADDRESS = "KomitentFirmaAdresa";
+    // Shared Preferences
+    SharedPreferences pref;
+    // Editor for Shared preferences
+    SharedPreferences.Editor editor;
+    // Context
+    Context _context;
+    // Shared pref mode
+    int PRIVATE_MODE = 0;
+    private String TAG = MyPreferenceManager.class.getSimpleName();
 
     // Constructor
     public MyPreferenceManager(Context context) {
@@ -43,9 +55,40 @@ public class MyPreferenceManager {
 
 
     public void storeUser(User user) {
-        editor.putString(KEY_USER_ID, user.getId());
-        editor.putString(KEY_USER_NAME, user.getName());
-        editor.putString(KEY_USER_EMAIL, user.getEmail());
+        if (user.getId() != null)
+            editor.putString(KEY_USER_ID, user.getId());
+        if (user.getName() != null)
+            editor.putString(KEY_NAME, user.getName());
+        if (user.getEmail() != null)
+            editor.putString(KEY_USER_EMAIL, user.getEmail());
+        if (user.getPhoto() != null)
+            editor.putString(KEY_USER_PHOTO, user.getPhoto().toString());
+        if (user.getId() != null)
+            editor.putString(KEY_GENERAL_NAME, user.getGeneral_name());
+        if (user.getName() != null)
+            editor.putString(KEY_LAST_NAME, user.getLast_name());
+        if (user.getEmail() != null)
+            editor.putString(KEY_ADDRESS, user.getAddress());
+        if (user.getPhoto() != null)
+            editor.putString(KEY_ZIP_CODE, user.getZip_code());
+        if (user.getId() != null)
+            editor.putString(KEY_CITY, user.getCity());
+        if (user.getName() != null)
+            editor.putString(KEY_PHONE, user.getPhone());
+        if (user.getEmail() != null)
+            editor.putString(KEY_MOBILE, user.getMobile());
+        if (user.getPhoto() != null)
+            editor.putString(KEY_USER_NAME, user.getUserName());
+        if (user.getPhoto() != null)
+            editor.putString(KEY_USER_TYPE, user.getUserType());
+        if (user.getId() != null)
+            editor.putString(KEY_FIRM_NAME, user.getUserFirmName());
+        if (user.getName() != null)
+            editor.putString(KEY_FIRM_ID, user.getFirmID());
+        if (user.getEmail() != null)
+            editor.putString(KEY_FIRM_PIB, user.getFirmPIB());
+        if (user.getPhoto() != null)
+            editor.putString(KEY_FIRM_ADDRESS, user.getFirmAddress());
         editor.commit();
 
         Log.e(TAG, "User is stored in shared preferences. " + user.getName() + ", " + user.getEmail());
@@ -59,6 +102,22 @@ public class MyPreferenceManager {
             email = pref.getString(KEY_USER_EMAIL, null);
 
             User user = new User(id, name, email);
+
+            user.setPhoto(Uri.parse(pref.getString(KEY_USER_PHOTO, null)));
+            user.setGeneral_name(pref.getString(KEY_GENERAL_NAME, null));
+            user.setLast_name(pref.getString(KEY_LAST_NAME, null));
+            user.setAddress(pref.getString(KEY_ADDRESS, null));
+            user.setZip_code(pref.getString(KEY_ZIP_CODE, null));
+            user.setCity(pref.getString(KEY_CITY, null));
+            user.setPhone(pref.getString(KEY_PHONE, null));
+            user.setMobile(pref.getString(KEY_MOBILE, null));
+            user.setUserName(pref.getString(KEY_USER_NAME, null));
+            user.setUserType(pref.getString(KEY_USER_TYPE, null));
+            user.setUserFirmName(pref.getString(KEY_FIRM_NAME, null));
+            user.setFirmID(pref.getString(KEY_FIRM_ID, null));
+            user.setFirmPIB(pref.getString(KEY_FIRM_PIB, null));
+            user.setFirmAddress(pref.getString(KEY_FIRM_ADDRESS, null));
+
             return user;
         }
         return null;
@@ -87,4 +146,17 @@ public class MyPreferenceManager {
         editor.clear();
         editor.commit();
     }
+
+
+    public void setLogin(boolean isLoggedIn) {
+
+        editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
+        // commit changes
+        editor.commit();
+    }
+
+    public boolean isLoggedIn() {
+        return pref.getBoolean(KEY_IS_LOGGEDIN, false);
+    }
+
 }

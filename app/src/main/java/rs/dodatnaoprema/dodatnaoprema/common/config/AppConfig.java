@@ -55,6 +55,12 @@ public class AppConfig {
     public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
 
     /**
+     * Login and register
+     */
+
+    public static final String URL_LOGIN_GET = "http://masinealati.rs/parametri.php?action=povuciPodatkeAndroidKorisnik&tag=%1$s&email=%2$s&p=%3$s";
+
+    /**
      * Number of tabs
      */
     public static final int TAB_NUMBER = 2;
