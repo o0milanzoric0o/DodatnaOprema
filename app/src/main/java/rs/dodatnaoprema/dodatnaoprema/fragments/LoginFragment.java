@@ -65,6 +65,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         //setting onclick listeners
         registerHere.setOnClickListener(this);
         signIn.setOnClickListener(this);
+
+        // Progress dialog
+        progressDialog = new ProgressDialogCustom(getActivity());
+        progressDialog.setCancelable(false);
+
+
         prefs = MyApplication.getInstance().getPrefManager();
         session = MyApplication.getInstance().getSessionManager();
         return view;
@@ -99,7 +105,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // login user
                     // Make a call to server to login user
 
-                    //checkLogin(email, password);
+                    checkLogin(email, password);
                 } else {
                     // show snackbar to enter credentials
                     Snackbar.make(v, "Unesite podatke!", Snackbar.LENGTH_LONG)

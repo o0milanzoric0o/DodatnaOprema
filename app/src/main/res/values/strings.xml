@@ -108,6 +108,7 @@
     <string name="text_web_site">direktnoizbaste.rs</string>
     <string name="btn_text_sign_in">Poveži se</string>
     <string name="btn_text_register_here">Registruj me</string>
+    <string name="OK">OK</string>
 
 
 </resources>
