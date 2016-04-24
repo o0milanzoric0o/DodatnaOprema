@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -20,8 +21,9 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private List<Article> products;
     private NetworkImageView productImg;
 
-    TextView productName;
+    private TextView productName;
     private Context context;
+    private boolean list;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,22 +35,29 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     }
 
 
-    public RecyclerViewSelectedProducts(Context context, List<Article> products) {
+    public RecyclerViewSelectedProducts(Context context, List<Article> products, boolean list) {
         this.products = products;
         this.context = context;
+        this.list = list;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product, parent, false);
+        View itemView;
+        if (list) {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.product_list, parent, false);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.product_grid, parent, false);
+        }
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewSelectedProducts.MyViewHolder holder, int position) {
-
+        holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);

@@ -25,7 +25,6 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
 import rs.dodatnaoprema.dodatnaoprema.fragments.DeleteHistoryDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
@@ -134,7 +133,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                 ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
                 StaggeredGridLayoutManager.LayoutParams sglp = (StaggeredGridLayoutManager.LayoutParams) lp;
 
-                sglp.setFullSpan(position - existHistory == 0);
+                sglp.setFullSpan((position - existHistory + 1) % 3 == 0);
 
                 holder.itemView.setLayoutParams(sglp);
             }

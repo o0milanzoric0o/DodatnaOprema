@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- layout for one product on main page-->
+<!-- layout for one product_grid on main page-->
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -10,6 +10,7 @@
     card_view:cardCornerRadius="@dimen/card_no_rounding">
 
     <LinearLayout
+        android:id="@+id/productHolder"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical">
@@ -22,8 +23,8 @@
 
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/productImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/image_description"/>
         </FrameLayout>
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/price"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textSize="12sp"/>
 
         </FrameLayout>
     </LinearLayout>
