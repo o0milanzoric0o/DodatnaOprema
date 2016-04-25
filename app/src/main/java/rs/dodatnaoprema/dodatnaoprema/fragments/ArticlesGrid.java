@@ -32,7 +32,7 @@ public class ArticlesGrid extends Fragment {
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
 
-        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
