@@ -111,6 +111,12 @@
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
 
+    <string name="sort_question">Izaberite način sortiranja</string>
+    <string-array name="sort_options">
+        <item>Nesortirano</item>
+        <item>Cena (uzlazno)</item>
+        <item>Cena (silazno)</item>
+    </string-array>
 
 
 </resources>

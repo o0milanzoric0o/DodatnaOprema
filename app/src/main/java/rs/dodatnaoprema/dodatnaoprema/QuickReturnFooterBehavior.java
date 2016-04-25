@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
 
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-
 @SuppressWarnings("unused")
 public class QuickReturnFooterBehavior extends CoordinatorLayout.Behavior {
 
@@ -27,7 +25,6 @@ public class QuickReturnFooterBehavior extends CoordinatorLayout.Behavior {
 
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
-        Log.logInfo("LAonStartNestedScroll", "onStartNestedScroll");
         return (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 

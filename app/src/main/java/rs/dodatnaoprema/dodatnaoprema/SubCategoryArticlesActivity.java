@@ -116,8 +116,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private void flipCard()
     {
         View rootLayout = (View) findViewById(R.id.main_activity_root);
-        View cardFace = (View) findViewById(R.id.main_activity_card_face);
-        View cardBack = (View) findViewById(R.id.main_activity_card_back);
+        View cardFace = (View) findViewById(R.id.articles_content_list);
+        View cardBack = (View) findViewById(R.id.articles_content_grid);
 
         FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
 

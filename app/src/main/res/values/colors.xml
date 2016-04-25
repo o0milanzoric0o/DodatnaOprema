@@ -42,6 +42,11 @@
     <color name="circle_stroke">#BDBDBD</color>
     <color name="button_holder_background">#EDEDED</color>
 
+    <!-- grey palette-->
+    <color name="light_gray">#D7D7D7</color>
+    <color name="dark_stroke">#BDBDBD</color>
+    <color name="base_gray">#EDEDED</color>
+
     <!-- SignIn activity colors-->
     <color name="blue_grey_500">#607D8B</color>
     <color name="blue_grey_600">#546E7A</color>

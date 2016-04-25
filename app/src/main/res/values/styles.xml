@@ -13,6 +13,7 @@
     </style>
 
 
+
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@android:color/white</item>
     </style>
@@ -46,9 +47,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.NoActionBar" />
-
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
 
@@ -67,6 +66,16 @@
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/blue_grey_500</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CustomSpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="colorPrimary">@color/base_gray</item>
+        <item name="colorPrimaryDark">@color/base_gray</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="colorControlNormal">@color/secondary_text</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
     </style>
 
 </resources>
