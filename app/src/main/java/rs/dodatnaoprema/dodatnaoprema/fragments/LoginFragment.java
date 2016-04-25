@@ -172,9 +172,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         user.setFirmAddress(jObj_user_data.getString("KomitentFirmaAdresa"));
                         prefs.storeUser(user);
                         // Launching  user account fragment
-                        /**TODO
-                         * Launch fragment to display user data
-                         */
+                        Fragment accountDetailsFragment = new AccountDetailsFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                        // Replace whatever is in the fragment_container view with this fragment,
+                        // and add the transaction to the back stack
+                        transaction.replace(R.id.fragment_container, accountDetailsFragment);
+                        transaction.addToBackStack(null);
+
+                        // Commit the transaction
+                        transaction.commit();
 
                     } else {
                         // login error

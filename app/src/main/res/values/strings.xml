@@ -104,11 +104,13 @@
         <u>kliknite ovde.</u>
     </string>
     <string name="text_logged_in">Povezani ste</string>
+    <string name="text_logged_out">Niste povezani</string>
     <string name="btn_text_logout">Odveži se</string>
-    <string name="text_web_site">direktnoizbaste.rs</string>
+    <string name="text_web_site">masinealati.rs</string>
     <string name="btn_text_sign_in">Poveži se</string>
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
+
 
 
 </resources>
