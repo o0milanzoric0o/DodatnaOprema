@@ -41,6 +41,7 @@ import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
 
@@ -245,6 +246,8 @@ public class MainActivity extends FragmentActivity
 
         if (id == R.id.nav_account) {
             // Handle the login action
+            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_home) {
 

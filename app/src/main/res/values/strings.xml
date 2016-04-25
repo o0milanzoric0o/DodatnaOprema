@@ -95,4 +95,21 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_name_unavailable">Prijavi se | Registruj se besplatno</string>
 
+    <!-- Login and Register strings-->
+    <string name="full_name_hint">Ime</string>
+    <string name="last_name_hint">Prezime</string>
+    <string name="email_hint">Email</string>
+    <string name="pass_hint">Šifra</string>
+    <string name="btn_text_register">Registruj</string>
+    <string name="text_already_have_account">Ako već imate nalog:
+        <u>kliknite ovde.</u>
+    </string>
+    <string name="text_logged_in">Povezani ste</string>
+    <string name="btn_text_logout">Odveži se</string>
+    <string name="text_web_site">direktnoizbaste.rs</string>
+    <string name="btn_text_sign_in">Poveži se</string>
+    <string name="btn_text_register_here">Registruj me</string>
+    <string name="OK">OK</string>
+
+
 </resources>

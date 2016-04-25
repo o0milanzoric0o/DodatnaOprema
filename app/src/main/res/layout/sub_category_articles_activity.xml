@@ -44,14 +44,48 @@
             android:alpha="0.3"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="@string/image_description"
-            android:src="@drawable/ic_reorder_black_24dp" />
+            android:src="@drawable/ic_view_module_black_24dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/main_activity_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent" >
+
+        <RelativeLayout
+            android:id="@+id/main_activity_card_face"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onCardClick"
+            android:padding="5dp" >
+            <FrameLayout
+                android:id="@+id/articles_content_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/button_holder_background" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/main_activity_card_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onCardClick"
+            android:visibility="gone" >
+            <FrameLayout
+                android:id="@+id/articles_content_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/button_holder_background" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/articles_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/button_holder_background" />
+
 
 
 </LinearLayout>
