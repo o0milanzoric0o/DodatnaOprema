@@ -52,11 +52,9 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_category_articles_activity);
 
-
         Intent intent = getIntent();
         String mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
-
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
@@ -102,14 +100,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         listGridChangeBtn.setImageResource(R.drawable.ic_view_module_black_24dp);
                         nextImgStateGrid = true;
 
-
                     }
                     flipCard();
 
                 }
             });
         }
-
 
     }
     public void onCardClick(View view)
@@ -120,8 +116,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private void flipCard()
     {
         View rootLayout = (View) findViewById(R.id.main_activity_root);
-        View cardFace = (View) findViewById(R.id.main_activity_card_face);
-        View cardBack = (View) findViewById(R.id.main_activity_card_back);
+        View cardFace = (View) findViewById(R.id.articles_content_list);
+        View cardBack = (View) findViewById(R.id.articles_content_grid);
 
         FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
 
@@ -142,6 +138,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
 
 

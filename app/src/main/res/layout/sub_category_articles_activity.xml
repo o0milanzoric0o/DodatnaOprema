@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,76 +17,106 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/sort_options_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:drawableEnd="@drawable/ic_arrow_drop_down_black_18dp"
-            android:drawableRight="@drawable/ic_arrow_drop_down_black_18dp"
-            android:singleLine="true"
-            android:text="@string/no_sort"
-            android:textAllCaps="true" />
-
-        <ImageButton
-            android:id="@+id/list_grid_change_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:alpha="0.3"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/image_description"
-            android:src="@drawable/ic_view_module_black_24dp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/main_activity_root"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent" >
-
-        <RelativeLayout
-            android:id="@+id/main_activity_card_face"
+        <FrameLayout
+            android:id="@+id/main_activity_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:onClick="onCardClick"
-            android:padding="5dp" >
+            android:background="@android:color/transparent">
+
             <FrameLayout
-                android:id="@+id/articles_content_list"
+                android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/button_holder_background" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/main_activity_card_back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:onClick="onCardClick"
-            android:visibility="gone" >
-            <FrameLayout
-                android:id="@+id/articles_content_grid"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent" />
+
+     <!--       <RelativeLayout
+                android:id="@+id/main_activity_card_face"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/button_holder_background" />
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="5dp">-->
 
-    </RelativeLayout>
+                <FrameLayout
+                    android:id="@+id/articles_content_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/button_holder_background" />
+            <!--   </RelativeLayout>-->
+
+            <!--       <RelativeLayout            <RelativeLayout
+                            android:id="@+id/main_activity_card_back"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:visibility="gone">-->
+
+                            <FrameLayout
+                                android:id="@+id/articles_content_grid"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/button_holder_background"
+                                android:visibility="gone"/>
+           <!--             </RelativeLayout>-->
+
+                    </FrameLayout>
+
+                    <android.support.design.widget.AppBarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/base_gray"
+                        android:theme="@style/AppTheme.AppBarOverlay"
+                        android:windowActionBarOverlay="true">
+
+                        <android.support.v7.widget.Toolbar
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:theme="@style/AppTheme.AppBarOverlay"
+                            app:layout_scrollFlags="scroll|enterAlways"
+                            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <Spinner
+                                    android:id="@+id/spinner_sort"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content"
+                                    android:entries="@array/sort_options"
+                                    android:popupBackground="@color/base_gray"
+                                    android:prompt="@string/sort_question"
+                                    android:theme="@style/CustomSpinnerItemStyle" />
+
+                                <ImageButton
+                                    android:id="@+id/list_grid_change_btn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:alpha="0.3"
+                                    android:background="?android:attr/selectableItemBackground"
+                                    android:contentDescription="@string/image_description"
+                                    android:paddingEnd="10dp"
+                                    android:paddingRight="10dp"
+                                    android:paddingStart="10dp"
+                                    android:paddingLeft="10dp"
+                                    android:src="@drawable/ic_view_module_black_24dp" />
+                            </RelativeLayout>
+                        </android.support.v7.widget.Toolbar>
+                    </android.support.design.widget.AppBarLayout>
 
 
-
-
-</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:alpha="0.7"
+                        android:background="@color/base_gray"
+                        app:layout_behavior=".QuickReturnFooterBehavior" />
+                </android.support.design.widget.CoordinatorLayout>
+            </LinearLayout>

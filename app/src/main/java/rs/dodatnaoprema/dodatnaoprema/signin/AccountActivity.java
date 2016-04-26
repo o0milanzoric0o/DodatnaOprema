@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
+import rs.dodatnaoprema.dodatnaoprema.fragments.AccountDetailsFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.LoginFragment;
 
 public class AccountActivity extends FragmentActivity {
@@ -31,6 +32,16 @@ public class AccountActivity extends FragmentActivity {
             //If the session is logged in move to MainActivity
             if (session.isLoggedIn()) {
                 // Show user details fragment
+                // Create a new Fragment to be placed in the activity layout
+                AccountDetailsFragment accountDetailsFragment = new AccountDetailsFragment();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                accountDetailsFragment.setArguments(getIntent().getExtras());
+
+                // Add the fragment to the 'fragment_container' FrameLayout
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, accountDetailsFragment).commit();
             } else {// Show login fragment
 
                 // Create a new Fragment to be placed in the activity layout
