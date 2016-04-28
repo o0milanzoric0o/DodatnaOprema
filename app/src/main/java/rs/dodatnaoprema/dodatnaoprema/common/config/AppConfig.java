@@ -36,6 +36,7 @@ public class AppConfig {
 
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
+    public static final String URL_VALUE_CATEGORY_SPECIFICATION = "specPoKategorijiSamo";
     public static final String URL_VALUE_CURRENCY_RSD = "rsd";
     public static final String URL_VALUE_LANGUAGE_SRB_LAT = "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
@@ -51,8 +52,6 @@ public class AppConfig {
      * History Shared Preferences
      */
     public static final String HISTORY_KEY = "History";
-
-    public static final String URL_ALL_CATEGORIES = "http://masinealati.rs/parametri.php?action=sveKategorije";
 
     /**
      * Login and register
