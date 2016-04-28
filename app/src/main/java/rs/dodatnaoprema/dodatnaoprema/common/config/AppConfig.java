@@ -43,11 +43,14 @@ public class AppConfig {
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
+    public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
+
     public static final int URL_VALUE_ID_ARTICLES_ON_SALE = 6;
     public static final int URL_VALUE_ID_NEW_PRODUCTS = 7;
     public static final int URL_VALUE_ID_BEST_SEllING = 8;
 
     public static final String[] FIRST_TAB_ITEMS = {"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
+    public static final String THE_PRODUCTS_OF_THE_WEEK = "Proizvodi nedelje";
     /**
      * History Shared Preferences
      */

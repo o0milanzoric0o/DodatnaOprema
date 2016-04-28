@@ -14,6 +14,8 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.ProductsOfTheWeek;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -25,7 +27,8 @@ public class SplashActivity extends AppCompatActivity {
 
     Intent intent;
     private List<Category> mAllCategories = new ArrayList<>();
-    private List<Article> mProducts = new ArrayList<>();
+    private List<Article> mArticles = new ArrayList<>();
+    private List<Product> mProducts = new ArrayList<>();
     private int requestCounter = 0;
     private VolleySingleton mVolleySingleton;
 
@@ -45,7 +48,9 @@ public class SplashActivity extends AppCompatActivity {
         getBestSellingProducts();
         getProductsOnSale();
         getNewProducts();
+       // getProductsOfTheWeek();
         getAllCategories();
+
 
 
     }
@@ -86,8 +91,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
-                    mProducts = articles.getKategorije();
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mProducts);
+                    mArticles = articles.getKategorije();
+                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
                     response();
                 }
             }
@@ -107,8 +112,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
-                    mProducts = articles.getKategorije();
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mProducts);
+                    mArticles = articles.getKategorije();
+                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
                     response();
                 }
             }
@@ -129,8 +134,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
-                    mProducts = articles.getKategorije();
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mProducts);
+                    mArticles = articles.getKategorije();
+                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mArticles);
                     response();
                 }
             }
@@ -141,6 +146,31 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
         content.pullList();
+    }
+
+    private void getProductsOfTheWeek(){
+        PullWebContent<ProductsOfTheWeek> content =
+                new PullWebContent<ProductsOfTheWeek>(this, ProductsOfTheWeek.class,AppConfig.URL_PRODUCTS_OF_THE_WEEK, mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<ProductsOfTheWeek>() {
+            @Override
+            public void webRequestSuccess(boolean success, ProductsOfTheWeek articles) {
+                if (success) {
+                    mProducts = articles.getArtikli();
+                    intent.putExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK, (Serializable) mProducts);
+                    response();
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
+    }
+
+    private void getAllBrands(){
+
     }
 
 }
