@@ -5,17 +5,14 @@ public class AppConfig {
      * The default socket timeout in milliseconds
      */
     public static final int DEFAULT_TIMEOUT_MS = 3000;
-
     /**
      * The default number of retries
      */
     public static final int DEFAULT_MAX_RETRIES = 4;
-
     /**
      * The default backoff multiplier
      */
     public static final float DEFAULT_BACKOFF_MULT = 1f;
-
     /**
      * Urls for json docs
      */
@@ -33,7 +30,6 @@ public class AppConfig {
     public static final String URL_PARAM_LANGUAGE = "jezik";
     public static final String URL_PARAM_BRAND = "brend";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
-
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
     public static final String URL_VALUE_CATEGORY_SPECIFICATION = "specPoKategorijiSamo";
@@ -77,6 +73,5 @@ public class AppConfig {
      */
     public static final int NUMBER_OF_ITEMS = 4;
     public static final int START_POSITION = 0;
-
 
 }

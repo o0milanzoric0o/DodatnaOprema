@@ -112,12 +112,12 @@
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
 
+    <string name="cena_txt">Cena:</string>
+    <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
     <string-array name="sort_options">
-        <item>Nesortirano</item>
-        <item>Cena (uzlazno)</item>
-        <item>Cena (silazno)</item>
+        <item>Cena (rastuće)</item>
+        <item>Cena (opadajuće)</item>
     </string-array>
-
 
 </resources>

@@ -21,38 +21,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/main_activity_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@android:color/transparent">
 
             <FrameLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent" />
-
-     <!--       <RelativeLayout
-                android:id="@+id/main_activity_card_face"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:padding="5dp">-->
 
                 <FrameLayout
                     android:id="@+id/articles_content_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/button_holder_background" />
-            <!--   </RelativeLayout>-->
 
-            <!--       <RelativeLayout            <RelativeLayout
-                            android:id="@+id/main_activity_card_back"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:visibility="gone">-->
 
                             <FrameLayout
                                 android:id="@+id/articles_content_grid"
@@ -60,9 +47,8 @@
                                 android:layout_height="match_parent"
                                 android:background="@color/button_holder_background"
                                 android:visibility="gone"/>
-           <!--             </RelativeLayout>-->
 
-                    </FrameLayout>
+                    </LinearLayout>
 
                     <android.support.design.widget.AppBarLayout
                         android:layout_width="match_parent"
@@ -86,9 +72,7 @@
                                     android:id="@+id/spinner_sort"
                                     android:layout_width="150dp"
                                     android:layout_height="wrap_content"
-                                    android:entries="@array/sort_options"
                                     android:popupBackground="@color/base_gray"
-                                    android:prompt="@string/sort_question"
                                     android:theme="@style/CustomSpinnerItemStyle" />
 
                                 <ImageButton
@@ -111,12 +95,32 @@
                     </android.support.design.widget.AppBarLayout>
 
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_gravity="bottom"
                         android:alpha="0.7"
+                        android:clickable="true"
                         android:background="@color/base_gray"
-                        app:layout_behavior=".QuickReturnFooterBehavior" />
+                        app:layout_behavior=".QuickReturnFooterBehavior">
+                        <TextView
+                            android:id="@+id/btn_filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textSize="14sp"
+                            android:textAllCaps="true"
+                            android:text="@string/btn_filter" />
+                        <ImageView
+                            android:id="@+id/img_filter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.5"
+                            android:layout_alignStart="@id/btn_filter"
+                            android:layout_alignLeft="@+id/btn_filter"
+                            android:layout_centerVertical="true"
+                            android:contentDescription="@string/image_description"
+                            android:src="@drawable/ic_filter_list_black_24dp" />
+                    </RelativeLayout>
                 </android.support.design.widget.CoordinatorLayout>
             </LinearLayout>

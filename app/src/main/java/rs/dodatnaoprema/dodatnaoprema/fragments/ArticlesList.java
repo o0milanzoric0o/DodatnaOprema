@@ -3,9 +3,13 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
@@ -23,6 +27,10 @@ public class ArticlesList extends Fragment {
 
     private VolleySingleton mVolleySingleton;
     private CustomRecyclerView mRecyclerView;
+    private static int firstVisibleInRecyclerView;
+    private LinearLayoutManager mLayoutManager;
+    private FrameLayout mHeader;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
@@ -30,16 +38,35 @@ public class ArticlesList extends Fragment {
         SubCategoryArticlesActivity activity = (SubCategoryArticlesActivity) getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
+        mHeader = (FrameLayout) view.findViewById(R.id.header);
 
         mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        firstVisibleInRecyclerView = mLayoutManager.findFirstVisibleItemPosition();
+
+       /* mRecyclerView.addOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int currentFirstVisible = mLayoutManager.findFirstVisibleItemPosition();
+
+                if (currentFirstVisible > firstVisibleInRecyclerView)
+                    mHeader.setVisibility(View.VISIBLE);
+                else
+                    mHeader.setVisibility(View.GONE);
+
+                firstVisibleInRecyclerView = currentFirstVisible;
+            }
+        });*/
         mVolleySingleton = VolleySingleton.getsInstance(getActivity());
         searchArticlesByCategory(activity.getmArticleId(), 1, 100, 2);
+
 
         return view;
     }

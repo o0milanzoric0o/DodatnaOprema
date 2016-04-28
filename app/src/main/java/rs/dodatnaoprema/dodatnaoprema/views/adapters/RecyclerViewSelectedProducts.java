@@ -22,6 +22,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private NetworkImageView productImg;
 
     private TextView productName;
+    private TextView price;
     private Context context;
     private boolean list;
 
@@ -30,6 +31,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         public MyViewHolder(View view) {
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
+            price = (TextView) view.findViewById(R.id.productPrice);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
         }
     }
@@ -59,6 +61,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(RecyclerViewSelectedProducts.MyViewHolder holder, int position) {
         holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv());
+        price.append(" "+products.get(position).getCenaSamoBrojFormat()+" "+products.get(position).getCenaPrikazExt());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
     }
@@ -67,5 +70,12 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     @Override
     public int getItemCount() {
         return products.size();
+    }
+
+    public void updateContent(List<Article> products) {
+        // clear and add to keep the old object reference
+        this.products.clear();
+        this.products.addAll(products);
+        notifyDataSetChanged();
     }
 }
