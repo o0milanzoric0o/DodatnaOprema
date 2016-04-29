@@ -40,6 +40,7 @@ import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
@@ -127,9 +128,8 @@ public class MainActivity extends FragmentActivity
                 } else if (intent.getAction().equals(Config.CLEAR_USER_INFO)) {
                     // Update user email, name and photo
                     ((TextView) findViewById(R.id.id_user_email)).setText("");
-                    ((TextView) findViewById(R.id.id_user_name)).setText("Prijavi se | Registruj se besplatno");
-                    /**TODO figure out what to display when user is logged off*/
-                    //((ImageView)findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+                    ((TextView) findViewById(R.id.id_user_name)).setText(getString(R.string.user_name_unavailable));
+                    ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.googleg_color));
                 }
             }
         };
@@ -298,6 +298,12 @@ public class MainActivity extends FragmentActivity
         List<Article> mBestSelling;
         mBestSelling = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[2]);
         return mBestSelling;
+    }
+
+    public List<Product> getProductsOfTheWeek(){
+        List<Product> products;
+        products = (List<Product>) intent.getSerializableExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK);
+        return products;
     }
 
     private void getIntentExtras() {

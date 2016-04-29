@@ -3,13 +3,12 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_white"
     android:layout_margin="0dp"
+    android:background="@color/background_white"
     card_view:cardCornerRadius="@dimen/card_no_rounding"
     card_view:cardElevation="0dp"
     card_view:cardPreventCornerOverlap="false"
-    card_view:cardUseCompatPadding="true"
-    >
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,13 +38,7 @@
             android:layout_weight=".6"
             android:padding="@dimen/standard_padding">
 
-            <TextView
-                android:id="@+id/subcategoryName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/price"
-                android:textSize="12sp" />
+            <include layout="@layout/short_product_info" />
 
         </FrameLayout>
     </LinearLayout>

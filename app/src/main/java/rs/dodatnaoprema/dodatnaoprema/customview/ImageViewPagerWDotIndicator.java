@@ -15,9 +15,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
 
 /**
@@ -90,6 +96,10 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
         });
 
         mViewPager.setPageTransformer(true, new ExperimentalPageTransformer());
+
+    }
+
+    public void setProductsOfTheWeek(List<Product> productsOfTheWeek){
 
     }
 
@@ -175,17 +185,22 @@ public class ImageViewPagerWDotIndicator extends RelativeLayout {
                 itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_tripple_version, container, false);
             else
                 itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_double_version, container, false);
-            ImageView imageView_left = (ImageView) itemView.findViewById(R.id.img_pager_item_1);
-            ImageView imageView_middle = (ImageView) itemView.findViewById(R.id.img_pager_item_2);
-            ImageView imageView_right = null;
+            NetworkImageView imageView_left = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_1);
+            NetworkImageView imageView_middle = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_2);
+            NetworkImageView imageView_right = null;
             if (type == TYPE_TRIPPLE)
-                imageView_right = (ImageView) itemView.findViewById(R.id.img_pager_item_3);
+                imageView_right = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_3);
 
             //imageView.setImageResource(mbitmapArray.get(position).getRowBytes());
-            imageView_left.setImageBitmap(mbitmapArray.get(position >= 1 ? position - 1 : mbitmapArray.size() - 1));
+            /*imageView_left.setImageBitmap(mbitmapArray.get(position >= 1 ? position - 1 : mbitmapArray.size() - 1));
             imageView_middle.setImageBitmap(mbitmapArray.get(position));
             if (type == TYPE_TRIPPLE && imageView_right != null)
-                imageView_right.setImageBitmap(mbitmapArray.get(position < mbitmapArray.size() - 1 ? position + 1 : 0));
+                imageView_right.setImageBitmap(mbitmapArray.get(position < mbitmapArray.size() - 1 ? position + 1 : 0));*/
+            ImageLoader mImageLoader = VolleySingleton.getsInstance(mContext).getImageLoader();
+            imageView_left.setImageUrl("http://masinealati.rs/p/61/616/angle-grinder-gws-15-125-cip-101701-616.png", mImageLoader);
+            imageView_middle.setImageUrl("http://masinealati.rs/p/61/616/angle-grinder-gws-15-125-cip-101701-616.png", mImageLoader);
+            if (type == TYPE_TRIPPLE && imageView_right != null)
+                imageView_right.setImageUrl("http://masinealati.rs/p/61/616/angle-grinder-gws-15-125-cip-101701-616.png", mImageLoader);
             container.addView(itemView);
 
             return itemView;

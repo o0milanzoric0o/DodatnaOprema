@@ -2,7 +2,6 @@ package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +19,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 
 
 public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -35,7 +34,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_three_imgs;
     private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_two_imgs;
 
-    ArrayList<Bitmap> bitmaps;
+    List<Product> products_of_the_week;
 
     private Context context;
     private RecyclerView mRecyclerView;
@@ -82,6 +81,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
         }
     }
+
     class ViewHolderFooter extends RecyclerView.ViewHolder {
 
         public ViewHolderFooter(View itemView) {
@@ -90,10 +90,10 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     }
 
 
-    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, ArrayList<Bitmap> bitmaps) {
+    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, List<Product> products_of_the_week) {
         this.items = items;
         this.context = context;
-        this.bitmaps=bitmaps;
+        this.products_of_the_week = products_of_the_week;
     }
 
     @Override
@@ -107,8 +107,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.first_tab_header, parent, false);
             return new ViewHolderHeader(itemView);
-        }
-        else if (viewType == TYPE_FOOTER){
+        } else if (viewType == TYPE_FOOTER) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recyclerview_footer, parent, false);
             return new ViewHolderFooter(itemView);
@@ -131,18 +130,16 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView.setAdapter(mAdapter);
 
         } else if (holder instanceof ViewHolderHeader) {
-            imageViewPagerWDotIndicator_three_imgs.setBitmapList(bitmaps);
-            imageViewPagerWDotIndicator_two_imgs.setBitmapList(bitmaps);
+            imageViewPagerWDotIndicator_three_imgs.setProductsOfTheWeek(products_of_the_week);
+            imageViewPagerWDotIndicator_two_imgs.setProductsOfTheWeek(products_of_the_week);
 
             mFourthButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mFourthButton.setSelected(true);
-                    ((MainActivity)context).viewAllCategories();
-                   new Handler().postDelayed(new Runnable()
-                    {
-                        public void run()
-                        {
+                    ((MainActivity) context).viewAllCategories();
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
                             mFourthButton.setSelected(false);
                         }
                     }, 1000);

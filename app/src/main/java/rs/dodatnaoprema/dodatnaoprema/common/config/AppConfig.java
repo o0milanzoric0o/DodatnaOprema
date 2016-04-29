@@ -5,17 +5,14 @@ public class AppConfig {
      * The default socket timeout in milliseconds
      */
     public static final int DEFAULT_TIMEOUT_MS = 3000;
-
     /**
      * The default number of retries
      */
     public static final int DEFAULT_MAX_RETRIES = 4;
-
     /**
      * The default backoff multiplier
      */
     public static final float DEFAULT_BACKOFF_MULT = 1f;
-
     /**
      * Urls for json docs
      */
@@ -34,7 +31,6 @@ public class AppConfig {
     public static final String URL_PARAM_BRAND = "brend";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
-
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
     public static final String URL_VALUE_CATEGORY_SPECIFICATION = "specPoKategorijiSamo";
     public static final String URL_VALUE_CURRENCY_RSD = "rsd";
@@ -43,11 +39,14 @@ public class AppConfig {
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
 
+    public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
+
     public static final int URL_VALUE_ID_ARTICLES_ON_SALE = 6;
     public static final int URL_VALUE_ID_NEW_PRODUCTS = 7;
     public static final int URL_VALUE_ID_BEST_SEllING = 8;
 
     public static final String[] FIRST_TAB_ITEMS = {"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
+    public static final String THE_PRODUCTS_OF_THE_WEEK = "Proizvodi nedelje";
     /**
      * History Shared Preferences
      */
@@ -74,6 +73,5 @@ public class AppConfig {
      */
     public static final int NUMBER_OF_ITEMS = 4;
     public static final int START_POSITION = 0;
-
 
 }

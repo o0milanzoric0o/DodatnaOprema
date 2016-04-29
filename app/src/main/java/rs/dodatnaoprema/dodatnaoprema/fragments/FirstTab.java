@@ -64,7 +64,7 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity(), bitmaps);
+        RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity(), mainActivity.getProductsOfTheWeek());
         mRecyclerView.setAdapter(mAdapter);
         return mView;
     }
