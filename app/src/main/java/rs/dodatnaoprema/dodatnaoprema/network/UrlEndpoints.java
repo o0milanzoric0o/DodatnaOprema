@@ -19,6 +19,7 @@ import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_A
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORIES_BY_ID;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ARTICLES_ON_SALE;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORY_SPECIFICATION;
+import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ARTICLE;
 
 
 public class UrlEndpoints {
@@ -92,6 +93,17 @@ public class UrlEndpoints {
         return URL_MACHINES_AND_TOOLS
                 + URL_CHAR_QUESTION
                 + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_CATEGORY_SPECIFICATION
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_ID + URL_CHAR_EQUAL + id;
+    }
+
+    public static String getRequestUrlArticleById(int id) {
+
+        // http://masinealati.rs/parametri.php?action=artikal&id=641
+
+        return URL_MACHINES_AND_TOOLS
+                + URL_CHAR_QUESTION
+                + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_ARTICLE
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_ID + URL_CHAR_EQUAL + id;
     }

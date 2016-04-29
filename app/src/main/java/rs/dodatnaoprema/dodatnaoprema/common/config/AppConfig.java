@@ -38,6 +38,7 @@ public class AppConfig {
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
+    public static final String URL_VALUE_ARTICLE= "artikal";
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
 
