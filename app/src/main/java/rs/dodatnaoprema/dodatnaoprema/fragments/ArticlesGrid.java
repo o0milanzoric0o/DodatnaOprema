@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -52,7 +54,15 @@ public class ArticlesGrid extends Fragment {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
-                    RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(getActivity(), articlesFilteredByCategory.getArtikli(), false);
+                    RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(getActivity(), articlesFilteredByCategory.getArtikli(), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Article item, View view) {
+
+                            //Start Intent for Single Item Activity
+
+                            Log.logInfo("LALALA", "GRID");
+                        }
+                    });
                     mRecyclerView.setAdapter(mAdapter);
                 }
             }
