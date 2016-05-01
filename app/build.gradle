@@ -10,7 +10,7 @@ android {
             storePassword 'android'
         }
     }
-    compileSdkVersion 'android-N'
+    compileSdkVersion 23
     buildToolsVersion '23.0.2'
     defaultConfig {
         applicationId "rs.dodatnaoprema.dodatnaoprema"
