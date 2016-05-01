@@ -6,18 +6,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
+    <rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands
         android:id="@+id/view_pager_dot_ind_0"
         android:layout_width="match_parent"
-        android:layout_height="100dip"
-        app:sildeType="three_images"
+        android:layout_height="120dp"
         app:slideInterval="5000" />
 
-    <rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator
+    <rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products
         android:id="@+id/view_pager_dot_ind_1"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        app:sildeType="two_images"
+        android:layout_height="180dp"
         app:slideInterval="5000" />
 
     <FrameLayout
