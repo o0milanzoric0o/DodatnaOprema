@@ -1,11 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,30 +9,39 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
-import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSelectedProducts;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<Article> mArticles = new ArrayList<>();
+    private RelativeLayout mFooter;
+    private VolleySingleton mVolleySingleton;
 
     private Spinner mSpinner;
 
     private boolean nextImgStateGrid = true;
 
     private int mArticleId;
+    private int sortOption = 0;
+    private boolean addedFragments = false;
 
 
     public List<Article> getArticlesList() {
@@ -49,11 +54,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sub_category_articles_activity);
+        setContentView(R.layout.subcategory_articles_activity);
 
         Intent intent = getIntent();
         String mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
+        Log.logInfo("IDArticle", "" + mArticleId);
 
         mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -65,12 +71,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0) {
-
-                    Log.logInfo("LALA", "0");
-                } else if (position == 1) {
-
-                    Log.logInfo("LALA", "1");
+                if (position == 0 && sortOption != 0) {
+                    sortOption = 0;
+                    searchArticlesByCategory(getmArticleId(), 0, 100, 2);
+                } else if (position == 1 && sortOption != 1) {
+                    sortOption = 1;
+                    searchArticlesByCategory(getmArticleId(), 0, 100, 3);
                 }
 
             }
@@ -81,6 +87,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             }
         });
 
+        mVolleySingleton = VolleySingleton.getsInstance(this);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
@@ -93,22 +100,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.articles_content_list, new ArticlesList())
-                // Add this transaction to the back stack, allowing users to press Back
-                // to get to the front of the card.
-                .addToBackStack(null)
-                // Commit the transaction.
-                .commit();
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.articles_content_grid, new ArticlesGrid())
-                // Add this transaction to the back stack, allowing users to press Back
-                // to get to the front of the card.
-                .addToBackStack(null)
-                // Commit the transaction.
-                .commit();
 
         final ImageButton listGridChangeBtn = (ImageButton) findViewById(R.id.list_grid_change_btn);
 
@@ -131,6 +122,20 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 }
             });
         }
+
+        mFooter = (RelativeLayout) findViewById(R.id.filter_layout);
+        mFooter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.logInfo("LALALA", "FILTER");
+                Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
+                intent.putExtra("NumberOfArticles", mArticles.size());
+                // intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+                startActivity(intent);
+            }
+        });
+
+        searchArticlesByCategory(getmArticleId(), 0, 100, 2);
 
     }
 
@@ -157,6 +162,56 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void searchArticlesByCategory(int id, int from, final int to, int sort) {
+
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(this, ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
+            @Override
+            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
+                if (success) {
+
+                    mArticles = articlesFilteredByCategory.getArtikli();
+                    Log.logInfo("UKUPNO", "" + mArticles.size());
+
+                    if (!addedFragments) {
+
+                        addedFragments = true;
+
+                        Log.logInfo("UKUPNO", "" + mArticles.size());
+                        getFragmentManager()
+                                .beginTransaction()
+                                .add(R.id.articles_content_list, new ArticlesList())
+                                // Add this transaction to the back stack, allowing users to press Back
+                                // to get to the front of the card.
+                                .addToBackStack(null)
+                                // Commit the transaction.
+                                .commit();
+                        getFragmentManager()
+                                .beginTransaction()
+                                .add(R.id.articles_content_grid, new ArticlesGrid())
+                                // Add this transaction to the back stack, allowing users to press Back
+                                // to get to the front of the card.
+                                .addToBackStack(null)
+                                // Commit the transaction.
+                                .commit();
+                    } else {
+
+                        ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(mArticles);
+                        ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(mArticles);
+                    }
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                Log.logInfo("UKUPNO", error);
+
+            }
+        });
+        content.pullList();
+
     }
 
 }

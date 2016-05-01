@@ -8,24 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
-import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
-import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
-import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
-import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSelectedProducts;
 
 
 public class ArticlesGrid extends Fragment {
 
-    private VolleySingleton mVolleySingleton;
     private CustomRecyclerView mRecyclerView;
+    private RecyclerViewSelectedProducts mAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
@@ -41,39 +37,23 @@ public class ArticlesGrid extends Fragment {
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mVolleySingleton = VolleySingleton.getsInstance(getActivity());
-        searchArticlesByCategory(activity.getmArticleId(), 1, 100, 2);
+
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+            @Override
+            public void onItemClick(Article item, View view) {
+
+                //Start Intent for Single Item Activity
+
+                Log.logInfo("LALALA", "GRID");
+            }
+        });
+        mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
+    public void updateFragment (List<Article> products){
 
-    private void searchArticlesByCategory(int id, int from, int to, int sort) {
-
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
-        content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
-            @Override
-            public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
-                if (success) {
-                    RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(getActivity(), articlesFilteredByCategory.getArtikli(), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(Article item, View view) {
-
-                            //Start Intent for Single Item Activity
-
-                            Log.logInfo("LALALA", "GRID");
-                        }
-                    });
-                    mRecyclerView.setAdapter(mAdapter);
-                }
-            }
-
-            @Override
-            public void webRequestError(String error) {
-
-            }
-        });
-        content.pullList();
-
+        mAdapter.updateContent(products);
     }
 
 }

@@ -26,7 +26,7 @@ public class Article implements Serializable {
     private String urlArtiklaLink;
     @SerializedName("cenaPrikaz")
     @Expose
-    private String cenaPrikaz;
+    private Object cenaPrikaz;
     @SerializedName("cenaPrikazBroj")
     @Expose
     private String cenaPrikazBroj;
@@ -65,7 +65,7 @@ public class Article implements Serializable {
     private String codeVendor;
     @SerializedName("mozedasekupi")
     @Expose
-    private Integer mozedasekupi;
+    private String mozedasekupi;
     @SerializedName("ocenaut")
     @Expose
     private Integer ocenaut;
@@ -158,7 +158,7 @@ public class Article implements Serializable {
     /**
      * @return The cenaPrikaz
      */
-    public String getCenaPrikaz() {
+    public Object getCenaPrikaz() {
         return cenaPrikaz;
     }
 
@@ -340,14 +340,14 @@ public class Article implements Serializable {
     /**
      * @return The mozedasekupi
      */
-    public Integer getMozedasekupi() {
+    public String getMozedasekupi() {
         return mozedasekupi;
     }
 
     /**
      * @param mozedasekupi The mozedasekupi
      */
-    public void setMozedasekupi(Integer mozedasekupi) {
+    public void setMozedasekupi(String mozedasekupi) {
         this.mozedasekupi = mozedasekupi;
     }
 
