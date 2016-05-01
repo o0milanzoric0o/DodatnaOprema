@@ -161,7 +161,6 @@ public class ImageSlider2Products extends RelativeLayout {
         @Override
         public float getPageWidth(int position) {
             return super.getPageWidth(position);
-            //return 0.8f;
         }
 
         @Override
