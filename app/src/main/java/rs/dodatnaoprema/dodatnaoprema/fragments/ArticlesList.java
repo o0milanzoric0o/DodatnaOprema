@@ -1,7 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +12,7 @@ import android.widget.FrameLayout;
 import java.io.Serializable;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -91,15 +91,12 @@ public class ArticlesList extends Fragment {
                     public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                         if (success) {
                             Log.logInfo("LALALA", "SUCCESS");
-                            Intent intent = new Intent(getActivity(), OneArticleFragment.class);
+                            Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
 
-                            OneArticleFragment articleDetailsFragment = new OneArticleFragment();
-                            articleDetailsFragment.setArguments(intent.getExtras());
-                            FragmentManager fragmentManager = getFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.articles_content_list, articleDetailsFragment)
-                                    .commit();
+                            //OneArticleActivity articleDetails = new OneArticleActivity();
+                            startActivity(intent);
+
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 

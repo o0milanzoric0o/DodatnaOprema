@@ -1,6 +1,8 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +21,17 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
+import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 
 public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -42,6 +51,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private GridLayoutManager mLayoutManager;
 
     private RelativeLayout mFourthButton;
+    private VolleySingleton mVolleySingleton;
 
     public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, ArrayList<Product> products_of_the_week, ArrayList<Brand> allBrands) {
         this.items = items;
@@ -67,6 +77,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             return new ViewHolderFooter(itemView);
         }
 
+
         throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
 
     }
@@ -85,6 +96,44 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                     //Start Intent for Single Item Activity
 
                     int itemID = item.getArtikalId();
+
+                /*    PullWebContent<OneArticle> content =
+                            new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+
+
+                    Log.logInfo("LALALA", String.valueOf(itemID));
+                    content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
+                        @Override
+                        public void webRequestSuccess(boolean success, OneArticle oneArticle) {
+                            if (success) {
+                                Log.logInfo("LALALA", "SUCCESS");
+                                Intent intent = new Intent(getActivity(), OneArticleFragment.class);
+                                intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+
+                                OneArticleFragment articleDetailsFragment = new OneArticleFragment();
+                                articleDetailsFragment.setArguments(intent.getExtras());
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.articles_content_list, articleDetailsFragment)
+                                        .commit();
+
+                                Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
+
+                            }
+                            else
+                            {
+                                Log.logInfo("LALALA", "FAILED");
+                            }
+                        }
+
+                        @Override
+                        public void webRequestError(String error) {
+
+                        }
+                    });*/
+
+                    Log.logInfo("LALALA", "LIST");
+                 //   content.pullList();
 
                 }
             });

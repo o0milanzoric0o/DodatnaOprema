@@ -119,5 +119,6 @@
         <item>Cena (rastuće)</item>
         <item>Cena (opadajuće)</item>
     </string-array>
+    <string name="title_activity_one_article">OneArticleActivity</string>
 
 </resources>

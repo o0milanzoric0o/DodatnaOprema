@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rs.dodatnaoprema.dodatnaoprema">
+<manifest package="rs.dodatnaoprema.dodatnaoprema"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <permission
         android:name="rs.dodatnaoprema.dodatnaoprema.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
 
-    <uses-permission android:name="rs.dodatnaoprema.dodatnaoprema.permission.C2D_MESSAGE" />
+    <uses-permission android:name="rs.dodatnaoprema.dodatnaoprema.permission.C2D_MESSAGE"/>
 
     <application
         android:name=".common.application.MyApplication"
@@ -22,7 +22,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".AllCategoriesActivity"
             android:label="@string/app_name"
@@ -31,7 +31,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rs.dodatnaoprema.dodatnaoprema.MainActivity" />
+                android:value="rs.dodatnaoprema.dodatnaoprema.MainActivity"/>
         </activity>
         <activity
             android:name=".SubCategoriesActivity"
@@ -41,7 +41,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rs.dodatnaoprema.dodatnaoprema.AllCategoriesActivity" />
+                android:value="rs.dodatnaoprema.dodatnaoprema.AllCategoriesActivity"/>
         </activity>
         <activity
             android:name=".SubCategoryArticlesActivity"
@@ -51,7 +51,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoriesActivity" />
+                android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoriesActivity"/>
         </activity>
         <activity
             android:name=".SubCategorySpecificationActivity"
@@ -61,16 +61,16 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity" />
+                android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity"/>
         </activity>
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <!-- Support for GCM -->
@@ -79,9 +79,9 @@
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
 
-                <category android:name="com.example.gcm" />
+                <category android:name="com.example.gcm"/>
             </intent-filter>
         </receiver>
 
@@ -89,29 +89,35 @@
             android:name=".gcm.MyGcmPushReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
             </intent-filter>
         </service>
         <service
             android:name=".gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
         <service
             android:name=".gcm.GcmIntentService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
             </intent-filter>
         </service>
 
         <activity
             android:name=".signin.SignInActivity"
             android:label="@string/name_sign_in_activity"
-            android:theme="@style/ThemeOverlay.MyNoTitleActivity" />
-        <activity android:name=".signin.AccountActivity"></activity>
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity"/>
+        <activity android:name=".signin.AccountActivity"/>
+        <activity
+            android:name=".OneArticleActivity"
+            android:label="@string/title_activity_one_article"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

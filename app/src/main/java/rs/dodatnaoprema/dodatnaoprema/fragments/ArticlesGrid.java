@@ -1,10 +1,8 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
-
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +56,7 @@ public class ArticlesGrid extends Fragment {
                 //Start Intent for Single Item Activity
                 int itemID = item.getArtikalId();
 
-                PullWebContent<OneArticle> content =
+              /*       PullWebContent<OneArticle> content =
                         new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
@@ -67,16 +65,19 @@ public class ArticlesGrid extends Fragment {
                     @Override
                     public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                         if (success) {
-                            Log.logInfo("LALALA", "SUCCESS");
-                            Intent intent = new Intent(getActivity(), OneArticleFragment.class);
+                       Log.logInfo("LALALA", "SUCCESS");
+                            Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+
+                            OneArticleActivity articleDetails = new OneArticleActivity();
+                            startActivity(intent);
 
                             OneArticleFragment articleDetailsFragment = new OneArticleFragment();
                             articleDetailsFragment.setArguments(intent.getExtras());
                             FragmentManager fragmentManager = getFragmentManager();
                             fragmentManager.beginTransaction()
                                     .replace(R.id.articles_content_grid, articleDetailsFragment)
-                                    .commit();
+                                    .commit()
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
@@ -93,7 +94,7 @@ public class ArticlesGrid extends Fragment {
                     }
                 });
 
-                content.pullList();
+                content.pullList();*/
 
                 Log.logInfo("LALALA", "GRID");
             }
