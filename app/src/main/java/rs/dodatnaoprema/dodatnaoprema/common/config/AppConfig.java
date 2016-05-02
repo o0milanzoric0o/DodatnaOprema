@@ -75,4 +75,8 @@ public class AppConfig {
     public static final int NUMBER_OF_ITEMS = 4;
     public static final int START_POSITION = 0;
 
+
+
+    public static final String ABOUT_PRODUCT = "O proizvodu";
+
 }

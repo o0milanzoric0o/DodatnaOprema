@@ -130,6 +130,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
                     //Start Intent for Single Item Activity
 
+                    int itemID = item.getArtikalId();
+
                 }
             });
             mRecyclerView.hasFixedSize();
