@@ -1,12 +1,10 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
-
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -14,7 +12,6 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
