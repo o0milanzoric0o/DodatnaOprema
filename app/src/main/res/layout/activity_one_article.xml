@@ -1,85 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/background_white">
+              android:background="@color/light_gray"
+              android:orientation="vertical"
+    >
     <!-- pic-->
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/img_one_product"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/one_product_padding">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/img_one_product"
+                android:layout_width="200dp"
+                android:layout_height="200dp"/>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/background_white">
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- naziv proizvodjac cena-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/one_product_padding"
+        android:paddingTop="@dimen/one_product_padding">
+
+        <TextView
+            android:id="@+id/textView_brend_name"
+            style="@style/OneArticleTextView"
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:textColor="#af2b2b"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView_naziv"
+            style="@style/OneArticleTextView"
+            android:layout_width="match_parent"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textView_cena"
+            style="@style/OneArticleTextView"
+            android:layout_width="match_parent"
+            android:textColor="#af2b2b"/>
+
+        <TextView
+            android:id="@+id/textView_about_price"
+            style="@style/OneArticleTextView"
+            android:layout_width="match_parent"/>
+    </LinearLayout>
+
+
+    <!-- zvezdice stanje min kolicina-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/one_product_padding"
+        android:paddingTop="@dimen/one_product_padding"
+        android:weightSum="8">
+
+        <TextView
+            android:id="@+id/textView_stars"
+            style="@style/OneArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:textColor="#af2b2b"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/textView_yes_no"
+            style="@style/OneArticleTextView"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="2"            />
+        <TextView
+            android:id="@+id/textView_min"
+            style="@style/OneArticleTextView"
+            android:layout_width="0dp"
+            android:layout_weight="3"/>
+    </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/one_product_padding"
+        android:paddingTop="@dimen/one_product_padding"
+        android:weightSum="3"
+        >
 
-        <!-- naziv proizvodjac cena-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView_kom"
+            style="@style/OneArticleTextView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="place holder kol"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView_proizvodjac"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView_naziv"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView_cena"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView6"/>
-        </LinearLayout>
-
-
-        <!-- zvezdice stanje min kolicina-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView_korpa"
+            style="@style/OneArticleTextView"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:text="place holder korpa"/>
     </LinearLayout>
 
     <!-- opis-->
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingBottom="@dimen/one_product_padding"
+        android:paddingTop="@dimen/one_product_padding"
         android:text="Medium Text"
-        android:id="@+id/textView2"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <!-- tabovi-->
     <TabHost
+        android:id="@+id/tabHost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tabHost">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,5 +182,12 @@
             </FrameLayout>
         </LinearLayout>
     </TabHost>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
+    </RelativeLayout>
+
 
 </LinearLayout>
