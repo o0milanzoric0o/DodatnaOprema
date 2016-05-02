@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.io.Serializable;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -54,9 +55,9 @@ public class ArticlesGrid extends Fragment {
             public void onItemClick(Article item, View view) {
 
                 //Start Intent for Single Item Activity
-                int itemID = item.getArtikalId();
 
-              /*       PullWebContent<OneArticle> content =
+                int itemID = item.getArtikalId();
+                PullWebContent<OneArticle> content =
                         new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
@@ -65,19 +66,13 @@ public class ArticlesGrid extends Fragment {
                     @Override
                     public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                         if (success) {
-                       Log.logInfo("LALALA", "SUCCESS");
+                            Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
 
-                            OneArticleActivity articleDetails = new OneArticleActivity();
+                            //OneArticleActivity articleDetails = new OneArticleActivity();
                             startActivity(intent);
 
-                            OneArticleFragment articleDetailsFragment = new OneArticleFragment();
-                            articleDetailsFragment.setArguments(intent.getExtras());
-                            FragmentManager fragmentManager = getFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.articles_content_grid, articleDetailsFragment)
-                                    .commit()
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
@@ -93,8 +88,7 @@ public class ArticlesGrid extends Fragment {
 
                     }
                 });
-
-                content.pullList();*/
+                content.pullList();
 
                 Log.logInfo("LALALA", "GRID");
             }

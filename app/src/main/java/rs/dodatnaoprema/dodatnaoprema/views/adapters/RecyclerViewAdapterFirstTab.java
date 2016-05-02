@@ -1,5 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
+import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
@@ -97,43 +100,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
                     int itemID = item.getArtikalId();
 
-                /*    PullWebContent<OneArticle> content =
-                            new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
-
-                    Log.logInfo("LALALA", String.valueOf(itemID));
-                    content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
-                        @Override
-                        public void webRequestSuccess(boolean success, OneArticle oneArticle) {
-                            if (success) {
-                                Log.logInfo("LALALA", "SUCCESS");
-                                Intent intent = new Intent(getActivity(), OneArticleFragment.class);
-                                intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
-
-                                OneArticleFragment articleDetailsFragment = new OneArticleFragment();
-                                articleDetailsFragment.setArguments(intent.getExtras());
-                                FragmentManager fragmentManager = getFragmentManager();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.articles_content_list, articleDetailsFragment)
-                                        .commit();
-
-                                Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
-
-                            }
-                            else
-                            {
-                                Log.logInfo("LALALA", "FAILED");
-                            }
-                        }
-
-                        @Override
-                        public void webRequestError(String error) {
-
-                        }
-                    });*/
-
-                    Log.logInfo("LALALA", "LIST");
-                 //   content.pullList();
+                    Log.logInfo("LALALA", "RecyclerViewAdapterFirstTab");
 
                 }
             });
