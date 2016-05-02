@@ -11,31 +11,31 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.customview.ImageViewPagerWDotIndicator;
+import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products;
+import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 
 
 public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    HashMap<String, List<Article>> items = new HashMap<>();
-    private TextView categoryName;
-
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_FOOTER = 2;
-
-    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_three_imgs;
-    private ImageViewPagerWDotIndicator imageViewPagerWDotIndicator_two_imgs;
-
-    List<Product> products_of_the_week;
-
+    HashMap<String, List<Article>> items = new HashMap<>();
+    ArrayList<Product> products_of_the_week;
+    ArrayList<Brand> allBrands;
+    private TextView categoryName;
+    private ImageSlider3Brands imageViewPagerWDotIndicator_three_imgs;
+    private ImageSlider2Products imageViewPagerWDotIndicator_two_imgs;
     private Context context;
     private RecyclerView mRecyclerView;
 
@@ -43,57 +43,11 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private RelativeLayout mFourthButton;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public MyViewHolder(View view) {
-
-            super(view);
-
-            categoryName = (TextView) view.findViewById(R.id.categoryName);
-            mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
-
-            int spacing = context.getResources().getDimensionPixelSize(R.dimen.recycler_view_space);
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(4, spacing, 0));
-                mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
-                mLayoutManager.setAutoMeasureEnabled(true);
-
-            } else {
-                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacing, 0));
-                mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
-                mLayoutManager.setAutoMeasureEnabled(true);
-
-            }
-
-            mRecyclerView.setLayoutManager(mLayoutManager);
-
-        }
-    }
-
-    class ViewHolderHeader extends RecyclerView.ViewHolder {
-
-        public ViewHolderHeader(View itemView) {
-            super(itemView);
-            imageViewPagerWDotIndicator_three_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_0);
-            imageViewPagerWDotIndicator_two_imgs = (ImageViewPagerWDotIndicator) itemView.findViewById(R.id.view_pager_dot_ind_1);
-
-            mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
-
-        }
-    }
-
-    class ViewHolderFooter extends RecyclerView.ViewHolder {
-
-        public ViewHolderFooter(View itemView) {
-            super(itemView);
-        }
-    }
-
-
-    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, List<Product> products_of_the_week) {
+    public RecyclerViewAdapterFirstTab(HashMap<String, List<Article>> items, Context context, ArrayList<Product> products_of_the_week, ArrayList<Brand> allBrands) {
         this.items = items;
         this.context = context;
         this.products_of_the_week = products_of_the_week;
+        this.allBrands = allBrands;
     }
 
     @Override
@@ -139,7 +93,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView.setAdapter(mAdapter);
 
         } else if (holder instanceof ViewHolderHeader) {
-            imageViewPagerWDotIndicator_three_imgs.setProductsOfTheWeek(products_of_the_week);
+            imageViewPagerWDotIndicator_three_imgs.setAllBrands(allBrands);
             imageViewPagerWDotIndicator_two_imgs.setProductsOfTheWeek(products_of_the_week);
 
             mFourthButton.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +112,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         }
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -181,6 +134,52 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private boolean isPositionFooter(int position) {
         return position == (getItemCount() - 1);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        public MyViewHolder(View view) {
+
+            super(view);
+
+            categoryName = (TextView) view.findViewById(R.id.categoryName);
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
+
+            int spacing = context.getResources().getDimensionPixelSize(R.dimen.recycler_view_space);
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(4, spacing, 0));
+                mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
+                mLayoutManager.setAutoMeasureEnabled(true);
+
+            } else {
+                mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacing, 0));
+                mLayoutManager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+                mLayoutManager.setAutoMeasureEnabled(true);
+
+            }
+
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
+        }
+    }
+
+    class ViewHolderHeader extends RecyclerView.ViewHolder {
+
+        public ViewHolderHeader(View itemView) {
+            super(itemView);
+            imageViewPagerWDotIndicator_three_imgs = (ImageSlider3Brands) itemView.findViewById(R.id.view_pager_dot_ind_0);
+            imageViewPagerWDotIndicator_two_imgs = (ImageSlider2Products) itemView.findViewById(R.id.view_pager_dot_ind_1);
+
+            mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
+
+        }
+    }
+
+    class ViewHolderFooter extends RecyclerView.ViewHolder {
+
+        public ViewHolderFooter(View itemView) {
+            super(itemView);
+        }
     }
 
 }

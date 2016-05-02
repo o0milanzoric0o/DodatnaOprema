@@ -6,4 +6,5 @@
     <size android:height="6dip" android:width="6dip"/>
 
     <solid android:color="@color/icons"/>
+    <stroke android:color="@color/accent" android:width="0.5dp"/>
 </shape>

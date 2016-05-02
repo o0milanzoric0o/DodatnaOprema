@@ -14,6 +14,8 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.AllBrands;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.ProductsOfTheWeek;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
@@ -29,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     private List<Category> mAllCategories = new ArrayList<>();
     private List<Article> mArticles = new ArrayList<>();
     private List<Product> mProducts = new ArrayList<>();
+    private List<Brand> mBrands = new ArrayList<>();
     private int requestCounter = 0;
     private VolleySingleton mVolleySingleton;
 
@@ -48,16 +51,14 @@ public class SplashActivity extends AppCompatActivity {
         getBestSellingProducts();
         getProductsOnSale();
         getNewProducts();
-       // getProductsOfTheWeek();
+        getProductsOfTheWeek();
+        getAllBrands();
         getAllCategories();
-
-
-
     }
 
     private void response() {
         requestCounter++;
-        final int numberOfRequests = 4;
+        final int numberOfRequests = 6;
         if (requestCounter == numberOfRequests) {
             startActivity(intent);
             finish();
@@ -148,9 +149,9 @@ public class SplashActivity extends AppCompatActivity {
         content.pullList();
     }
 
-    private void getProductsOfTheWeek(){
+    private void getProductsOfTheWeek() {
         PullWebContent<ProductsOfTheWeek> content =
-                new PullWebContent<ProductsOfTheWeek>(this, ProductsOfTheWeek.class,AppConfig.URL_PRODUCTS_OF_THE_WEEK, mVolleySingleton);
+                new PullWebContent<ProductsOfTheWeek>(this, ProductsOfTheWeek.class, AppConfig.URL_PRODUCTS_OF_THE_WEEK, mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ProductsOfTheWeek>() {
             @Override
             public void webRequestSuccess(boolean success, ProductsOfTheWeek articles) {
@@ -169,8 +170,25 @@ public class SplashActivity extends AppCompatActivity {
         content.pullList();
     }
 
-    private void getAllBrands(){
+    private void getAllBrands() {
+        PullWebContent<AllBrands> content =
+                new PullWebContent<AllBrands>(this, AllBrands.class, AppConfig.URL_ALL_BRENDS, mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<AllBrands>() {
+            @Override
+            public void webRequestSuccess(boolean success, AllBrands allBrands) {
+                if (success) {
+                    mBrands = allBrands.getBrand();
+                    intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
+                    response();
+                }
+            }
 
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
     }
 
 }
