@@ -2,12 +2,22 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.util.Base64;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -24,6 +34,7 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewMin;
 
     private TextView mTextViewAbout;
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,7 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
         mTextViewAbout = (TextView) findViewById(R.id.textView_about);
+        mWebView = (WebView) findViewById(R.id.webView);
 
         OneArticle oneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
@@ -60,9 +72,17 @@ public class OneArticleActivity extends AppCompatActivity {
 
         mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(oneArticle.getArtikal().getMozedaseKupi()));
 
-     /*   oneArticle.
-        byte[] data = Base64.decode(base64, Base64.DEFAULT);
-        String text = new String(data, "UTF-8");*/
+
+
+        Object  opisObject = oneArticle.getArtikal().getOpisArtikliTekstovi();
+        byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
+        String opisText = new String(data);
+        mTextViewAbout.setText("Opis artikla");
+
+        mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
+
+
+
     }
 
 

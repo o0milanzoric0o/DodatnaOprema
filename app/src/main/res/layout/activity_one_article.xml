@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/light_gray"
               android:orientation="vertical"
     >
+
     <!-- pic-->
 
     <LinearLayout
@@ -31,43 +36,42 @@
             android:layout_height="match_parent"
             android:background="@color/background_white">
 
+        <!-- naziv proizvodjac cena-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/textView_brend_name"
+                style="@style/OneArticleTextView"
+                android:layout_width="match_parent"
+                android:textColor="#af2b2b"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView_naziv"
+                style="@style/OneArticleTextView"
+                android:layout_width="match_parent"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textView_cena"
+                style="@style/OneArticleTextView"
+                android:layout_width="match_parent"
+                android:textColor="#af2b2b"/>
+
+            <TextView
+                android:id="@+id/textView_about_price"
+                style="@style/OneArticleTextView"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 
-    <!-- naziv proizvodjac cena-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_gray"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/one_product_padding"
-        android:paddingTop="@dimen/one_product_padding">
 
-        <TextView
-            android:id="@+id/textView_brend_name"
-            style="@style/OneArticleTextView"
-            android:layout_width="match_parent"
-            android:gravity="left|center_vertical"
-            android:textColor="#af2b2b"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/textView_naziv"
-            style="@style/OneArticleTextView"
-            android:layout_width="match_parent"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/textView_cena"
-            style="@style/OneArticleTextView"
-            android:layout_width="match_parent"
-            android:textColor="#af2b2b"/>
-
-        <TextView
-            android:id="@+id/textView_about_price"
-            style="@style/OneArticleTextView"
-            android:layout_width="match_parent"/>
-    </LinearLayout>
 
 
     <!-- zvezdice stanje min kolicina-->
@@ -134,8 +138,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/one_product_padding"
-        android:layout_marginBottom="@dimen/one_product_padding"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="left"
+        android:textStyle="bold"/>
+
+      <WebView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/webView"
+      />
 
     <!-- tabovi-->
     <TabHost
@@ -190,4 +201,6 @@
     </RelativeLayout>
 
 
+
 </LinearLayout>
+</ScrollView>
