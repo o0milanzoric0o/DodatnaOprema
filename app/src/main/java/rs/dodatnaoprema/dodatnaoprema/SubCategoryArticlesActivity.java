@@ -2,6 +2,7 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +60,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         Intent intent = getIntent();
         String mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
-        Log.logInfo("IDArticle", "" + mArticleId);
 
         mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -73,10 +73,10 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
                 if (position == 0 && sortOption != 0) {
                     sortOption = 0;
-                    searchArticlesByCategory(getmArticleId(), 0, 100, 2);
+                    searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
                 } else if (position == 1 && sortOption != 1) {
                     sortOption = 1;
-                    searchArticlesByCategory(getmArticleId(), 0, 100, 3);
+                    searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
                 }
 
             }
@@ -127,15 +127,21 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         mFooter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mFooter.setSelected(true);
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        mFooter.setSelected(false);
+                    }
+                }, 1000);
                 Log.logInfo("LALALA", "FILTER");
                 Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
                 intent.putExtra("NumberOfArticles", mArticles.size());
-                // intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+                intent.putExtra("KategorijaID", mArticleId);
                 startActivity(intent);
             }
         });
 
-        searchArticlesByCategory(getmArticleId(), 0, 100, 2);
+        searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
 
     }
 
@@ -173,13 +179,11 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 if (success) {
 
                     mArticles = articlesFilteredByCategory.getArtikli();
-                    Log.logInfo("UKUPNO", "" + mArticles.size());
 
                     if (!addedFragments) {
 
                         addedFragments = true;
 
-                        Log.logInfo("UKUPNO", "" + mArticles.size());
                         getFragmentManager()
                                 .beginTransaction()
                                 .add(R.id.articles_content_list, new ArticlesList())
@@ -206,7 +210,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
             @Override
             public void webRequestError(String error) {
-                Log.logInfo("UKUPNO", error);
 
             }
         });

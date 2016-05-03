@@ -7,6 +7,7 @@
     <dimen name="activity_vertical_margin">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="standard_padding">20dp</dimen>
+    <dimen name="no_elevation">0dp</dimen>
     <dimen name="card_no_rounding">0dp</dimen>
     <dimen name="card_rounding">4dp</dimen>
     <dimen name="four_products_margine_left_right">5dp</dimen>
@@ -20,6 +21,7 @@
     <dimen name="subheader_text_size">12sp</dimen>
 
     <dimen name="load_more_footer_height_classic">10dp</dimen>
+
     <!-- SignIn activity -->
     <dimen name="g_top_margin">100dp</dimen>
     <dimen name="one_product_padding">5dp</dimen>

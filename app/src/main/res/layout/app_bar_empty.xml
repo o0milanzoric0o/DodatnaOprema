@@ -10,10 +10,10 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="@dimen/no_elevation">
+        app:elevation="0dp">
 
         <include
-            layout="@layout/toolbar"
+            layout="@layout/empty_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>

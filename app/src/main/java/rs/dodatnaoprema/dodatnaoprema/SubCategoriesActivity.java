@@ -79,6 +79,7 @@ public class SubCategoriesActivity extends BaseActivity {
                 Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
                 intent.putExtra("Artikli", item.getKatIme());
                 intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+                
                 startActivity(intent);
             }
         });
