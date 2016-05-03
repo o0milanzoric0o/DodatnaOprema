@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity
                     // now subscribe to `global` topic to receive app wide notifications
                     String token = intent.getStringExtra("token");
 
-                    Toast.makeText(getApplicationContext(), "GCM registration token: " + token, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "GCM registration token: " + token, Toast.LENGTH_LONG).show();
 
                 } else if (intent.getAction().equals(Config.SENT_TOKEN_TO_SERVER)) {
                     // gcm registration id is stored in our server's MySQL

@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack
                 transaction.replace(R.id.fragment_container, registerFragment);
-                transaction.addToBackStack(null);
+                //transaction.addToBackStack(null);
 
                 // Commit the transaction
                 transaction.commit();
@@ -178,7 +178,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         // Replace whatever is in the fragment_container view with this fragment,
                         // and add the transaction to the back stack
                         transaction.replace(R.id.fragment_container, accountDetailsFragment);
-                        transaction.addToBackStack(null);
+                        //transaction.addToBackStack(null);
 
                         // Commit the transaction
                         transaction.commit();
@@ -207,7 +207,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() {
                 // Post params to login url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
 
                 params.put("action", "povuciPodatkeAndroidKorisnik");
                 params.put("tag", "login");

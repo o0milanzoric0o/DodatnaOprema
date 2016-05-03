@@ -36,6 +36,7 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_details, container, false);
         signOut = (Button) view.findViewById(R.id.sign_out_button);
+        signOut.setOnClickListener(this);
         imageView = (ImageView) view.findViewById(R.id.user_photo);
         title = (TextView) view.findViewById(R.id.title_text);
         status = (TextView) view.findViewById(R.id.status);
@@ -77,13 +78,13 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
                 //Log out
                 MyApplication.getInstance().getSessionManager().setLogin(false);
                 // Switch to Login Fragment
-                Fragment loginFragment = new RegisterFragment();
+                Fragment loginFragment = new LoginFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack
                 transaction.replace(R.id.fragment_container, loginFragment);
-                transaction.addToBackStack(null);
+                //transaction.addToBackStack(null);
 
                 // Commit the transaction
                 transaction.commit();
