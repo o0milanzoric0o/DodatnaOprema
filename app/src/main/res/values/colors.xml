@@ -43,6 +43,7 @@
     <color name="button_holder_background">#EDEDED</color>
 
     <!-- grey palette-->
+    <color name="lighter_gray">#EFE7E7</color>
     <color name="light_gray">#D7D7D7</color>
     <color name="dark_stroke">#BDBDBD</color>
     <color name="base_gray">#EDEDED</color>
