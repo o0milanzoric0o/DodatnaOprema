@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -197,11 +198,18 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        Button btn = new Button(historyList.getContext());
+        final Button btn = new Button(historyList.getContext());
         btn.setLayoutParams(param);
         btn.setBackgroundResource(R.drawable.history_btn);
         btn.setPadding(5, 5, 5, 5);
         btn.setClickable(true);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, btn.getText().toString(),Toast.LENGTH_LONG).show();
+            }
+        });
 
         btn.setText(subcategory);
         btn.setAllCaps(false);
