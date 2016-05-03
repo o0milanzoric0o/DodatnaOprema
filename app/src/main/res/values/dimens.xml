@@ -27,4 +27,5 @@
     <dimen name="one_product_padding">5dp</dimen>
     <dimen name="one_product_text_padding_top_bottom">1dp</dimen>
     <dimen name="one_product_text_padding_left_right">3dp</dimen>
+    <dimen name="line_margine">8dp</dimen>
 </resources>

@@ -103,7 +103,8 @@ public class MyPreferenceManager {
 
             User user = new User(id, name, email);
 
-            user.setPhoto(Uri.parse(pref.getString(KEY_USER_PHOTO, null)));
+            if (pref.getString(KEY_USER_PHOTO, null)!=null)
+                user.setPhoto(Uri.parse(pref.getString(KEY_USER_PHOTO, null)));
             user.setGeneral_name(pref.getString(KEY_GENERAL_NAME, null));
             user.setLast_name(pref.getString(KEY_LAST_NAME, null));
             user.setAddress(pref.getString(KEY_ADDRESS, null));

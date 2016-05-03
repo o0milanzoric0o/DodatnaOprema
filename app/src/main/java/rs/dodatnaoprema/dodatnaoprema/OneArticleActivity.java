@@ -33,7 +33,7 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
 
-    private TextView mTextViewAbout;
+  //  private TextView mTextViewAbout;
     private WebView mWebView;
 
     @Override
@@ -51,7 +51,7 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
-        mTextViewAbout = (TextView) findViewById(R.id.textView_about);
+      //  mTextViewAbout = (TextView) findViewById(R.id.textView_about);
         mWebView = (WebView) findViewById(R.id.webView);
 
         OneArticle oneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
@@ -77,7 +77,7 @@ public class OneArticleActivity extends AppCompatActivity {
         Object  opisObject = oneArticle.getArtikal().getOpisArtikliTekstovi();
         byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
         String opisText = new String(data);
-        mTextViewAbout.setText("Opis artikla");
+      //  mTextViewAbout.setText("Opis artikla");
 
         mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 

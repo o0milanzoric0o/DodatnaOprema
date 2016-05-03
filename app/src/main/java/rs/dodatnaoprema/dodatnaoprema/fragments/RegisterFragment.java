@@ -95,13 +95,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_signin:
                 // Show login fragment
                 // Create new fragment and transaction
-                Fragment loginFragment = new RegisterFragment();
+                Fragment loginFragment = new LoginFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack
                 transaction.replace(R.id.fragment_container, loginFragment);
-                transaction.addToBackStack(null);
+                //transaction.addToBackStack(null);
 
                 // Commit the transaction
                 transaction.commit();
@@ -176,13 +176,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                                         // Launch login activity
                                         // Show login fragment
                                         // Create new fragment and transaction
-                                        Fragment loginFragment = new RegisterFragment();
+                                        Fragment loginFragment = new LoginFragment();
                                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                                         // Replace whatever is in the fragment_container view with this fragment,
                                         // and add the transaction to the back stack
                                         transaction.replace(R.id.fragment_container, loginFragment);
-                                        transaction.addToBackStack(null);
+                                        //transaction.addToBackStack(null);
 
                                         // Commit the transaction
                                         transaction.commit();
@@ -219,7 +219,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "registrujAndroid");
                 params.put("tag", "register");
                 params.put("komitentime", name);
