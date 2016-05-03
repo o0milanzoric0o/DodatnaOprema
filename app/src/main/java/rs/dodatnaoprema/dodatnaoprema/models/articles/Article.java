@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Article implements Serializable {
 
+
+
     @SerializedName("ArtikalId")
     @Expose
     private Integer ArtikalId;
@@ -18,15 +20,21 @@ public class Article implements Serializable {
     @SerializedName("ArtikalKratakOpis")
     @Expose
     private Object ArtikalKratakOpis;
+    @SerializedName("OpisArtikliTekstovi")
+    @Expose
+    private String OpisArtikliTekstovi;
     @SerializedName("ArtikalNaAkciji")
     @Expose
     private Integer ArtikalNaAkciji;
     @SerializedName("urlArtiklaLink")
     @Expose
     private String urlArtiklaLink;
+    @SerializedName("link")
+    @Expose
+    private String link;
     @SerializedName("cenaPrikaz")
     @Expose
-    private Object cenaPrikaz;
+    private String cenaPrikaz;
     @SerializedName("cenaPrikazBroj")
     @Expose
     private String cenaPrikazBroj;
@@ -53,19 +61,19 @@ public class Article implements Serializable {
     private String TipUnitCelo;
     @SerializedName("MinimalnaKolArt")
     @Expose
-    private Integer MinimalnaKolArt;
+    private Object MinimalnaKolArt;
     @SerializedName("slikaMain")
     @Expose
-    private String slikaMain;
+    private Object slikaMain;
     @SerializedName("stanje")
     @Expose
     private Integer stanje;
     @SerializedName("codeVendor")
     @Expose
     private String codeVendor;
-    @SerializedName("mozedasekupi")
+    @SerializedName("mozedaseKupi")
     @Expose
-    private String mozedasekupi;
+    private Integer mozedaseKupi;
     @SerializedName("ocenaut")
     @Expose
     private Integer ocenaut;
@@ -128,6 +136,24 @@ public class Article implements Serializable {
     }
 
     /**
+     *
+     * @return
+     * The OpisArtikliTekstovi
+     */
+    public String getOpisArtikliTekstovi() {
+        return OpisArtikliTekstovi;
+    }
+
+    /**
+     *
+     * @param OpisArtikliTekstovi
+     * The OpisArtikliTekstovi
+     */
+    public void setOpisArtikliTekstovi(String OpisArtikliTekstovi) {
+        this.OpisArtikliTekstovi = OpisArtikliTekstovi;
+    }
+
+    /**
      * @return The ArtikalNaAkciji
      */
     public Integer getArtikalNaAkciji() {
@@ -156,14 +182,36 @@ public class Article implements Serializable {
     }
 
     /**
-     * @return The cenaPrikaz
+     *
+     * @return
+     * The link
      */
-    public Object getCenaPrikaz() {
+    public String getLink() {
+        return link;
+    }
+
+    /**
+     *
+     * @param link
+     * The link
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    /**
+     *
+     * @return
+     * The cenaPrikaz
+     */
+    public String getCenaPrikaz() {
         return cenaPrikaz;
     }
 
     /**
-     * @param cenaPrikaz The cenaPrikaz
+     *
+     * @param cenaPrikaz
+     * The cenaPrikaz
      */
     public void setCenaPrikaz(String cenaPrikaz) {
         this.cenaPrikaz = cenaPrikaz;
@@ -282,30 +330,38 @@ public class Article implements Serializable {
     }
 
     /**
-     * @return The MinimalnaKolArt
+     *
+     * @return
+     * The MinimalnaKolArt
      */
-    public Integer getMinimalnaKolArt() {
+    public Object getMinimalnaKolArt() {
         return MinimalnaKolArt;
     }
 
     /**
-     * @param MinimalnaKolArt The MinimalnaKolArt
+     *
+     * @param MinimalnaKolArt
+     * The MinimalnaKolArt
      */
-    public void setMinimalnaKolArt(Integer MinimalnaKolArt) {
+    public void setMinimalnaKolArt(Object MinimalnaKolArt) {
         this.MinimalnaKolArt = MinimalnaKolArt;
     }
 
     /**
-     * @return The slikaMain
+     *
+     * @return
+     * The slikaMain
      */
-    public String getSlikaMain() {
+    public Object getSlikaMain() {
         return slikaMain;
     }
 
     /**
-     * @param slikaMain The slikaMain
+     *
+     * @param slikaMain
+     * The slikaMain
      */
-    public void setSlikaMain(String slikaMain) {
+    public void setSlikaMain(Object slikaMain) {
         this.slikaMain = slikaMain;
     }
 
@@ -338,17 +394,21 @@ public class Article implements Serializable {
     }
 
     /**
-     * @return The mozedasekupi
+     *
+     * @return
+     * The mozedaseKupi
      */
-    public String getMozedasekupi() {
-        return mozedasekupi;
+    public Integer getMozedaseKupi() {
+        return mozedaseKupi;
     }
 
     /**
-     * @param mozedasekupi The mozedasekupi
+     *
+     * @param mozedaseKupi
+     * The mozedaseKupi
      */
-    public void setMozedasekupi(String mozedasekupi) {
-        this.mozedasekupi = mozedasekupi;
+    public void setMozedaseKupi(Integer mozedaseKupi) {
+        this.mozedaseKupi = mozedaseKupi;
     }
 
     /**

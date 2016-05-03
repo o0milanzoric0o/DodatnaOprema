@@ -23,6 +23,8 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
 
+    private TextView mTextViewAbout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,7 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
+        mTextViewAbout = (TextView) findViewById(R.id.textView_about);
 
         OneArticle oneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
@@ -55,8 +58,11 @@ public class OneArticleActivity extends AppCompatActivity {
         else
             mTextViewYesNo.setText("nema na stanju");
 
-        mTextViewMin.setText("Minimalna količina za narudžbinu: " + oneArticle.getArtikal().getMozedasekupi());
+        mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(oneArticle.getArtikal().getMozedaseKupi()));
 
+     /*   oneArticle.
+        byte[] data = Base64.decode(base64, Base64.DEFAULT);
+        String text = new String(data, "UTF-8");*/
     }
 
 
