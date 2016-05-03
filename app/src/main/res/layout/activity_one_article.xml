@@ -32,7 +32,7 @@
 
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/background_white">
 
@@ -98,7 +98,9 @@
             style="@style/OneArticleTextView"
             android:layout_width="0dp"
             android:layout_gravity="center"
-            android:layout_weight="2"            />
+            android:layout_weight="2"
+            android:layout_marginLeft="@dimen/one_product_padding"
+            android:layout_marginRight="@dimen/one_product_padding"/>
         <TextView
             android:id="@+id/textView_min"
             style="@style/OneArticleTextView"
@@ -132,6 +134,7 @@
     </LinearLayout>
 
     <!-- opis-->
+        <!--
     <TextView
         android:id="@+id/textView_about"
         style="@style/OneArticleTextView"
@@ -141,11 +144,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:gravity="left"
         android:textStyle="bold"/>
+        -->
 
       <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/webView"
+            android:layout_marginTop="@dimen/one_product_padding"
       />
 
     <!-- tabovi-->
