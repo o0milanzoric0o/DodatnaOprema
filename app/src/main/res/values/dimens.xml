@@ -20,6 +20,7 @@
     <dimen name="subheader_text_size">12sp</dimen>
 
     <dimen name="load_more_footer_height_classic">10dp</dimen>
+
     <!-- SignIn activity -->
     <dimen name="g_top_margin">100dp</dimen>
     <dimen name="one_product_padding">5dp</dimen>

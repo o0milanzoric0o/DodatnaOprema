@@ -11,7 +11,7 @@
         android:lines="1"
         android:ellipsize="end"
         android:id="@+id/title"
-        android:layout_width="190dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
         android:gravity="start"
         android:padding="@dimen/toolbar_items_padding"

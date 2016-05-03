@@ -43,6 +43,6 @@
                 <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
         </LinearLayout>
     </ScrollView>
-
+    <!-- swipeable footer that enables transition from the first to the second tab  -->
     <include layout="@layout/first_tab_footer" />
 </rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout>

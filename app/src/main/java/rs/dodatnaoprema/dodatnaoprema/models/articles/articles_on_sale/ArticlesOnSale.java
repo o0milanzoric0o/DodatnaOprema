@@ -23,7 +23,7 @@ public class ArticlesOnSale implements Serializable {
     @SerializedName("error_msg")
     @Expose
     private String errorMsg;
-    @SerializedName("kategorije")
+    @SerializedName("artikli")
     @Expose
     private List<Article> kategorije = new ArrayList<Article>();
 

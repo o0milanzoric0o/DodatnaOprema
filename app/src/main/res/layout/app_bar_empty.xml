@@ -13,9 +13,8 @@
         app:elevation="0dp">
 
         <include
-            layout="@layout/toolbar"
+            layout="@layout/empty_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>
