@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -20,7 +19,6 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
@@ -35,8 +33,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private List<Article> mArticles = new ArrayList<>();
     private RelativeLayout mFooter;
     private VolleySingleton mVolleySingleton;
-
-    private Spinner mSpinner;
 
     private boolean nextImgStateGrid = true;
 
@@ -61,7 +57,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         String mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
 
-        mSpinner = (Spinner) findViewById(R.id.spinner_sort);
+        Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.sort_options));
 
@@ -92,9 +88,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         mTextView.setText(mSubCategoryName);
-        Log.logInfo("NJNJ", String.valueOf(mArticles.size()));
 
-        FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
+      //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
@@ -133,7 +128,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         mFooter.setSelected(false);
                     }
                 }, 1000);
-                Log.logInfo("LALALA", "FILTER");
+
                 Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
                 intent.putExtra("NumberOfArticles", mArticles.size());
                 intent.putExtra("KategorijaID", mArticleId);

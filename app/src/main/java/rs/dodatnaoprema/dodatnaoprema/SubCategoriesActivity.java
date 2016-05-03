@@ -28,7 +28,7 @@ public class SubCategoriesActivity extends BaseActivity {
         setContentView(R.layout.subcategories_activity);
 
         Intent intent = getIntent();
-        List<Child> subCategories = new ArrayList<>();
+        List<Child> subCategories;
         Category item = (Category) intent.getSerializableExtra("Potkategorije");
         subCategories = item.getChild();
 
@@ -60,27 +60,39 @@ public class SubCategoriesActivity extends BaseActivity {
             public void onItemClick(Child item, final View view) {
 
                 ArrayList<String> mHistory;
+                ArrayList<String> mHistoryID;
+
                 mHistory = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_KEY);
+                mHistoryID = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_ID_KEY);
 
                 if (mHistory.contains(item.getKatIme())) {
                     mHistory.remove(item.getKatIme());
+                    mHistoryID.remove(item.getKategorijaArtikalaId());
+
                     mHistory.add(0, item.getKatIme());
+                    mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
                 } else {
                     mHistory.add(0, item.getKatIme());
+                    mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
                 }
 
                 SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_KEY);
+                SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_ID_KEY);
                 if (mHistory.size() >= 4) {
-                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<String>(mHistory.subList(0, 4)));
+                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<>(mHistory.subList(0, 4)));
+                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, new ArrayList<>(mHistoryID.subList(0, 4)));
+
                 } else {
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
+                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, mHistoryID);
                 }
 
                 Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
                 intent.putExtra("Artikli", item.getKatIme());
                 intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
-                
                 startActivity(intent);
+
+
             }
         });
         mRecyclerView.setAdapter(mAdapter);

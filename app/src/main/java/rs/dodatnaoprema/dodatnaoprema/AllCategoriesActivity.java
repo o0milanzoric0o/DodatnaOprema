@@ -91,5 +91,11 @@ public class AllCategoriesActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);
 
     }
+    public void shortcutArticles(String subcategory, String id){
+        Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
+        intent.putExtra("Artikli", subcategory);
+        intent.putExtra("ArtikalId", Integer.parseInt(id));
+        startActivity(intent);
+    }
 
 }

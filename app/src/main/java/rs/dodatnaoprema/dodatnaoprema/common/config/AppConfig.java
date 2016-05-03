@@ -54,6 +54,7 @@ public class AppConfig {
      * History Shared Preferences
      */
     public static final String HISTORY_KEY = "History";
+    public static final String HISTORY_ID_KEY = "HistoryID";
 
     /**
      * Login and register

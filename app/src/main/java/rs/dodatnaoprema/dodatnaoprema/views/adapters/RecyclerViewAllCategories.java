@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.AllCategoriesActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
@@ -40,6 +40,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
     private final OnItemClickListener listener;
 
     private ArrayList<String> mHistory;
+    private ArrayList<String> mHistoryID;
     private ViewGroup historyList;
 
     private int existHistory;
@@ -91,8 +92,11 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         this.context = context;
         this.listener = listener;
         SharedPreferences prefs = context.getSharedPreferences(AppConfig.HISTORY_KEY, Context.MODE_PRIVATE);
+        SharedPreferences prefsID = context.getSharedPreferences(AppConfig.HISTORY_ID_KEY, Context.MODE_PRIVATE);
         try {
             this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(AppConfig.HISTORY_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
+            this.mHistoryID = (ArrayList<String>) ObjectSerializer.deserialize(prefsID.getString(AppConfig.HISTORY_ID_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -154,7 +158,8 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                 for (String subcategory : mHistory
                         ) {
 
-                    addNewButton(subcategory);
+                    addNewButton(subcategory, mHistoryID.get(mHistory.indexOf(subcategory)));
+
                 }
             }
             deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +197,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         void onItemClick(Category item);
     }
 
-    private Button addNewButton(String subcategory) {
+    private Button addNewButton(final String subcategory, final String id) {
 
         ViewGroup.LayoutParams param = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -207,7 +212,8 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, btn.getText().toString(),Toast.LENGTH_LONG).show();
+
+                ((AllCategoriesActivity)context).shortcutArticles(subcategory, id);
             }
         });
 
