@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_grey_700"
+    android:background="@color/primary_dark"
     android:orientation="vertical"
     android:weightSum="4">
 
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="@string/title_text"
             android:textColor="@android:color/white"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/status"
@@ -59,7 +59,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/blue_grey_900">
+        android:background="@color/primary_light">
 
         <LinearLayout
             android:id="@+id/sign_out_and_disconnect"
@@ -69,7 +69,6 @@
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:visibility="gone"
             tools:visibility="visible">
 
             <Button
