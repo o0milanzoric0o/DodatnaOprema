@@ -129,12 +129,12 @@
 
     <!-- opis-->
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_about"
+        style="@style/OneArticleTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/one_product_padding"
-        android:paddingTop="@dimen/one_product_padding"
-        android:text="Medium Text"
+        android:layout_marginTop="@dimen/one_product_padding"
+        android:layout_marginBottom="@dimen/one_product_padding"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <!-- tabovi-->
