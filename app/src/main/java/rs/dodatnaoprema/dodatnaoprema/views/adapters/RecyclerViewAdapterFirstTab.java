@@ -61,6 +61,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         this.context = context;
         this.products_of_the_week = products_of_the_week;
         this.allBrands = allBrands;
+
+        mVolleySingleton = VolleySingleton.getsInstance(this.context);
     }
 
     @Override
@@ -99,7 +101,38 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                     //Start Intent for Single Item Activity
 
                     int itemID = item.getArtikalId();
+                    PullWebContent<OneArticle> content =
+                            new PullWebContent<OneArticle>((MainActivity)context, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
+
+                    Log.logInfo("LALALA", String.valueOf(itemID));
+                    content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
+                        @Override
+                        public void webRequestSuccess(boolean success, OneArticle oneArticle) {
+                            if (success) {
+                                Log.logInfo("LALALA", "SUCCESS");
+                                Intent intent = new Intent((MainActivity)context, OneArticleActivity.class);
+                                intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+
+                                ( (MainActivity)context).startActivityOneArticle(intent);
+
+
+                                Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
+
+                            }
+                            else
+                            {
+                                Log.logInfo("LALALA", "FAILED");
+                            }
+                        }
+
+                        @Override
+                        public void webRequestError(String error) {
+
+                        }
+                    });
+
+                    content.pullList();
 
                     Log.logInfo("LALALA", "RecyclerViewAdapterFirstTab");
 

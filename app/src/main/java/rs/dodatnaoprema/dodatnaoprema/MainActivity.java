@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -369,5 +370,11 @@ public class MainActivity extends FragmentActivity
             return false;
         }
         return true;
+    }
+
+
+    public void startActivityOneArticle(Intent intent)
+    {
+        startActivity(intent);
     }
 }
