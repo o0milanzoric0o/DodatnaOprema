@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -21,16 +22,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
+import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -84,7 +89,43 @@ public class SecondTab extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),"ON ITEM CLICK", Toast.LENGTH_SHORT).show();
+
+                int itemID = ((Article)gridView.getItemAtPosition(position)).getArtikalId();
+           //     mArticles.get(position).getArtikalId()
+                Log.logInfo("LALALA", "SUCCESS" +itemID);
+                PullWebContent<OneArticle> content =
+                        new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+
+
+                Log.logInfo("LALALA", String.valueOf(itemID));
+                content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
+                    @Override
+                    public void webRequestSuccess(boolean success, OneArticle oneArticle) {
+                        if (success) {
+                            Log.logInfo("LALALA", "SUCCESS");
+                            Intent intent = new Intent(getActivity(), OneArticleActivity.class);
+                            intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+
+                            startActivity(intent);
+
+
+                            Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
+
+                        }
+                        else
+                        {
+                            Log.logInfo("LALALA", "FAILED");
+                        }
+                    }
+
+                    @Override
+                    public void webRequestError(String error) {
+
+                    }
+                });
+
+                Log.logInfo("LALALA", "LIST");
+                content.pullList();
             }
         });
         mVolleySingleton = VolleySingleton.getsInstance(getContext());
