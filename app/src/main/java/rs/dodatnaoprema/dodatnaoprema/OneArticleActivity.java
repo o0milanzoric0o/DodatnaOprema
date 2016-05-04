@@ -2,6 +2,7 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Base64;
 import android.webkit.WebView;
@@ -51,11 +52,17 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTextView = (TextView) findViewById(R.id.title);
+
       //  mTextViewAbout = (TextView) findViewById(R.id.textView_about);
         mWebView = (WebView) findViewById(R.id.webView);
 
         OneArticle oneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
+
+
+        mTextView.setText(oneArticle.getArtikal().getArtikalNaziv());
 
         mImageView.setImageUrl(oneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
         mTextViewBrendName.setText(oneArticle.getArtikal().getBrendIme());
