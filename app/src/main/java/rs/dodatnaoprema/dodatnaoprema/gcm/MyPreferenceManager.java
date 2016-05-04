@@ -63,31 +63,31 @@ public class MyPreferenceManager {
             editor.putString(KEY_USER_EMAIL, user.getEmail());
         if (user.getPhoto() != null)
             editor.putString(KEY_USER_PHOTO, user.getPhoto().toString());
-        if (user.getId() != null)
+        if (user.getGeneral_name() != null)
             editor.putString(KEY_GENERAL_NAME, user.getGeneral_name());
-        if (user.getName() != null)
+        if (user.getLast_name() != null)
             editor.putString(KEY_LAST_NAME, user.getLast_name());
-        if (user.getEmail() != null)
+        if (user.getAddress() != null)
             editor.putString(KEY_ADDRESS, user.getAddress());
-        if (user.getPhoto() != null)
+        if (user.getZip_code() != null)
             editor.putString(KEY_ZIP_CODE, user.getZip_code());
-        if (user.getId() != null)
+        if (user.getCity() != null)
             editor.putString(KEY_CITY, user.getCity());
-        if (user.getName() != null)
+        if (user.getPhone() != null)
             editor.putString(KEY_PHONE, user.getPhone());
-        if (user.getEmail() != null)
+        if (user.getMobile() != null)
             editor.putString(KEY_MOBILE, user.getMobile());
-        if (user.getPhoto() != null)
+        if (user.getUserName() != null)
             editor.putString(KEY_USER_NAME, user.getUserName());
-        if (user.getPhoto() != null)
+        if (user.getUserType() != null)
             editor.putString(KEY_USER_TYPE, user.getUserType());
-        if (user.getId() != null)
+        if (user.getUserFirmName() != null)
             editor.putString(KEY_FIRM_NAME, user.getUserFirmName());
-        if (user.getName() != null)
+        if (user.getFirmID() != null)
             editor.putString(KEY_FIRM_ID, user.getFirmID());
-        if (user.getEmail() != null)
+        if (user.getFirmPIB() != null)
             editor.putString(KEY_FIRM_PIB, user.getFirmPIB());
-        if (user.getPhoto() != null)
+        if (user.getFirmAddress() != null)
             editor.putString(KEY_FIRM_ADDRESS, user.getFirmAddress());
         editor.commit();
 
@@ -98,7 +98,7 @@ public class MyPreferenceManager {
         if (pref.getString(KEY_USER_ID, null) != null) {
             String id, name, email;
             id = pref.getString(KEY_USER_ID, null);
-            name = pref.getString(KEY_USER_NAME, null);
+            name = pref.getString(KEY_NAME, null);
             email = pref.getString(KEY_USER_EMAIL, null);
 
             User user = new User(id, name, email);

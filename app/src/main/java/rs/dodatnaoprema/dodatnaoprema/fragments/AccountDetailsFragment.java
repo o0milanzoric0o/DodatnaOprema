@@ -1,9 +1,11 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 /**
@@ -81,6 +84,9 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
                 Fragment loginFragment = new LoginFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+                // Update Navigation Drawer from main activity
+                Intent signOut = new Intent(Config.CLEAR_USER_INFO);
+                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(signOut);
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack
                 transaction.replace(R.id.fragment_container, loginFragment);

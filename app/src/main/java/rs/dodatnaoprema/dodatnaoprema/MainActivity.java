@@ -1,6 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
@@ -64,7 +64,7 @@ public class MainActivity extends FragmentActivity
     private ViewPager mViewPager;
     private Intent intent;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-    private boolean isReceiverRegistered;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +87,20 @@ public class MainActivity extends FragmentActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                session = MyApplication.getInstance().getSessionManager();
+                if (session.isLoggedIn()) {
+                    setUserDrawerInfo();
+                } else {
+                    clearUserDrawerInfo();
+                }
+            }
+        };
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -97,7 +109,6 @@ public class MainActivity extends FragmentActivity
         initializeTabs();
 
         mAppBar = (AppBarLayout) findViewById(R.id.appBar);
-
 
         // GCM support
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
@@ -122,16 +133,9 @@ public class MainActivity extends FragmentActivity
 
                     Toast.makeText(getApplicationContext(), "Push notification is received!", Toast.LENGTH_LONG).show();
                 } else if (intent.getAction().equals(Config.SET_USER_INFO)) {
-                    // Update user email, name and photo
-                    User user = MyApplication.getInstance().getPrefManager().getUser();
-                    ((TextView) findViewById(R.id.id_user_email)).setText(user.getEmail());
-                    ((TextView) findViewById(R.id.id_user_name)).setText(user.getName());
-                    ((ImageView) findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+                    setUserDrawerInfo();
                 } else if (intent.getAction().equals(Config.CLEAR_USER_INFO)) {
-                    // Update user email, name and photo
-                    ((TextView) findViewById(R.id.id_user_email)).setText("");
-                    ((TextView) findViewById(R.id.id_user_name)).setText(getString(R.string.user_name_unavailable));
-                    ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.googleg_color));
+                    clearUserDrawerInfo();
                 }
             }
         };
@@ -139,6 +143,7 @@ public class MainActivity extends FragmentActivity
         if (checkPlayServices()) {
             registerGCM();
         }
+
 
     }
 
@@ -170,6 +175,33 @@ public class MainActivity extends FragmentActivity
     protected void onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onDestroy();
+    }
+
+    private void setUserDrawerInfo() {
+        // Update user email, name and photo
+        User user = MyApplication.getInstance().getPrefManager().getUser();
+        ((TextView) findViewById(R.id.id_user_email)).setText(user.getEmail());
+        TextView tv_user_name = (TextView) findViewById(R.id.id_user_name);
+        tv_user_name.setText(user.getName());
+        tv_user_name.setOnClickListener(null);
+        ((ImageView) findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+    }
+
+    private void clearUserDrawerInfo() {
+        // Update user email, name and photo
+        ((TextView) findViewById(R.id.id_user_email)).setText("");
+        TextView tv_user_name_unavailable = (TextView) findViewById(R.id.id_user_name);
+        tv_user_name_unavailable.setText(getString(R.string.user_name_unavailable));
+        tv_user_name_unavailable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the login action
+                Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.googleg_color));
     }
 
     public void initializeTabs() {
@@ -302,13 +334,13 @@ public class MainActivity extends FragmentActivity
         return mBestSelling;
     }
 
-    public ArrayList<Product> getProductsOfTheWeek(){
+    public ArrayList<Product> getProductsOfTheWeek() {
         ArrayList<Product> products;
         products = (ArrayList<Product>) intent.getSerializableExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK);
         return products;
     }
 
-    public ArrayList<Brand> getAllBrands(){
+    public ArrayList<Brand> getAllBrands() {
         ArrayList<Brand> brands;
         brands = (ArrayList<Brand>) intent.getSerializableExtra(AppConfig.ALL_BRANDS);
         return brands;
@@ -373,8 +405,7 @@ public class MainActivity extends FragmentActivity
     }
 
 
-    public void startActivityOneArticle(Intent intent)
-    {
+    public void startActivityOneArticle(Intent intent) {
         startActivity(intent);
     }
 }

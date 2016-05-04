@@ -1,10 +1,12 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
@@ -171,6 +174,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         user.setFirmPIB(jObj_user_data.getString("KomitentPIB"));
                         user.setFirmAddress(jObj_user_data.getString("KomitentFirmaAdresa"));
                         prefs.storeUser(user);
+
+                        // Update Navigation Drawer from main activity
+                        Intent loginSuccess = new Intent(Config.SET_USER_INFO);
+                        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(loginSuccess);
+
                         // Launching  user account fragment
                         Fragment accountDetailsFragment = new AccountDetailsFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
