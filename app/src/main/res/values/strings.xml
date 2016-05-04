@@ -115,10 +115,24 @@
     <string name="cena_txt">Cena:</string>
     <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
+
     <string-array name="sort_options">
         <item>Cena (rastuće)</item>
         <item>Cena (opadajuće)</item>
     </string-array>
+
+    <string-array name="price_options">
+        <item>bilo koja cena</item>
+        <item>manje od 500</item>
+        <item>od 500 do 1000</item>
+        <item>od 1000 do 2000</item>
+        <item>od 2000 do 5000</item>
+        <item>od 5000 do 10000</item>
+        <item>od 10000 do 20000</item>
+        <item>od 20000 do 50000</item>
+        <item>više od 50000</item>
+    </string-array>
+
     <string name="title_activity_one_article">OneArticleActivity</string>
 
 </resources>

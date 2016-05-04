@@ -78,6 +78,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public void onBindViewHolder(RecyclerViewSelectedProducts.MyViewHolder holder, int position) {
+
         holder.bind(products.get(position), listener);
         holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv());

@@ -3,18 +3,21 @@
     android:id="@+id/specificationLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/specificationGroup"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight=".5"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textAllCaps="true"/>
 
     <rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner
         android:id="@+id/multiSelectionSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight=".5"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
 </LinearLayout>
