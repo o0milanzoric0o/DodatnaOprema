@@ -115,6 +115,8 @@
     <string name="cena_txt">Cena:</string>
     <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
+    <string name="txt_brands">Brendovi</string>
+    <string name="txt_search_results">Ukupan broj rezultata pretrage:</string>
 
     <string-array name="sort_options">
         <item>Cena (rastuće)</item>

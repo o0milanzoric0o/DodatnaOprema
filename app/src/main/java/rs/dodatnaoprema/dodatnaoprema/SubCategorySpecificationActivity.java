@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.CategorySpecification;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -26,15 +26,12 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubcategorySpecification;
 
-public class SubCategorySpecificationActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
-
-    private int numberOfResults;
-    private int subCategoryId;
+public class SubCategorySpecificationActivity extends BaseActivity implements AdapterView.OnItemSelectedListener, MultiSelectionSpinner.OnMultipleItemsSelectedListener {
 
     private RecyclerView mRecyclerView;
-    private List<Spec> specifications = new ArrayList<>();
 
-    private Spinner priceOptions;
+    private List<Spec> specifications = new ArrayList<>();
+    private List<String> brandNames = new ArrayList<>();
 
     private VolleySingleton mVolleySingleton;
 
@@ -43,24 +40,45 @@ public class SubCategorySpecificationActivity extends BaseActivity implements Ad
         setContentView(R.layout.subcategory_specification_activity);
 
         Intent intent = getIntent();
-        numberOfResults = intent.getIntExtra("NumberOfArticles", 0);
-        subCategoryId = intent.getIntExtra("KategorijaID", 0);
+        int numberOfResults = intent.getIntExtra("NumberOfArticles", 0);
+        int subCategoryId = intent.getIntExtra("KategorijaID", 0);
+        List<Brendovus> mBrands = (List<Brendovus>) intent.getSerializableExtra("Brendovi");
+
+        for (Brendovus brands : mBrands) {
+
+            brandNames.add(brands.getBrendIme());
+        }
+
+        Log.logInfo("BRENDOVI", "" + mBrands.size());
+
+        MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.multiSelectionSpinnerBrands);
+        if (multiSelectionSpinner != null) {
+            multiSelectionSpinner.setItems(brandNames);
+            multiSelectionSpinner.setListener(this);
+        }
 
         mVolleySingleton = VolleySingleton.getsInstance(this);
 
-
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
-        mTextView.setText("" + subCategoryId);
+        mTextView.setText("Filter");
 
-        priceOptions = (Spinner) findViewById(R.id.pricesFilter);
+       // Log.logInfo("BROJ",""+numberOfResults);
+        TextView mTextViewResults = (TextView) findViewById(R.id.searchResultsNumber);
+        if (mTextViewResults != null) {
+            Log.logInfo("BROJ",""+numberOfResults);
+            mTextViewResults.setText(getResources().getString(R.string.txt_search_results)+" "+String.valueOf(numberOfResults));
+        }
+
+
+        Spinner priceOptions = (Spinner) findViewById(R.id.pricesFilter);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataAdapter.addAll(getResources().getStringArray(R.array.price_options));
-        priceOptions.setAdapter(dataAdapter);
-       // priceOptions.setSelection(0);
-        priceOptions.setOnItemSelectedListener(this);
+        if (priceOptions != null) {
+            priceOptions.setAdapter(dataAdapter);
+            priceOptions.setOnItemSelectedListener(this);
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_specifications);
         // use a linear layout manager
@@ -99,7 +117,6 @@ public class SubCategorySpecificationActivity extends BaseActivity implements Ad
 
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -107,6 +124,16 @@ public class SubCategorySpecificationActivity extends BaseActivity implements Ad
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void selectedIndices(List<Integer> indices) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings) {
 
     }
 }

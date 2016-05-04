@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -31,6 +33,8 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<Article> mArticles = new ArrayList<>();
+    private List<Brendovus> mBrands = new ArrayList<>();
+
     private RelativeLayout mFooter;
     private VolleySingleton mVolleySingleton;
 
@@ -87,9 +91,9 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
-        mTextView.setText(mSubCategoryName);
+        if (mTextView!=null) mTextView.setText(mSubCategoryName);
 
-      //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
+        //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
@@ -118,6 +122,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             });
         }
 
+        //Button for transition to the searh filter form
         mFooter = (RelativeLayout) findViewById(R.id.filter_layout);
         mFooter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +137,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
                 intent.putExtra("NumberOfArticles", mArticles.size());
                 intent.putExtra("KategorijaID", mArticleId);
+                intent.putExtra("Brendovi", (Serializable) mBrands);
                 startActivity(intent);
             }
         });
@@ -150,7 +156,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         if (cardFace.getVisibility() == View.GONE) {
             flipAnimation.reverse();
         }
-        rootLayout.startAnimation(flipAnimation);
+       if (rootLayout!=null) rootLayout.startAnimation(flipAnimation);
     }
 
     @Override
@@ -174,6 +180,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 if (success) {
 
                     mArticles = articlesFilteredByCategory.getArtikli();
+                    mBrands = articlesFilteredByCategory.getBrendovi();
 
                     if (!addedFragments) {
 

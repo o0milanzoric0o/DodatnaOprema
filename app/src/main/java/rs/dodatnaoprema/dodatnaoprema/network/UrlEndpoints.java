@@ -106,6 +106,7 @@ public class UrlEndpoints {
                 + URL_PARAM_ID + URL_CHAR_EQUAL + id;
     }
 
+
     public static String getRequestUrlArticleById(int id) {
 
         // http://masinealati.rs/parametri.php?action=artikal&id=641

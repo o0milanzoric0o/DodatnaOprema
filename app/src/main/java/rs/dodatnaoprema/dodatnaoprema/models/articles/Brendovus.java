@@ -1,9 +1,11 @@
-package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category;
+package rs.dodatnaoprema.dodatnaoprema.models.articles;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Brendovus {
+import java.io.Serializable;
+
+public class Brendovus implements Serializable{
 
     @SerializedName("ArtikalBrendId")
     @Expose

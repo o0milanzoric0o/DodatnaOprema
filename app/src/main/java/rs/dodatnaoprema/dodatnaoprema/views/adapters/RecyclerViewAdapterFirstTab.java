@@ -1,8 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
-import android.app.Activity;
-import android.app.Application;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -12,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,10 +40,14 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_FOOTER = 2;
+
     HashMap<String, List<Article>> items = new HashMap<>();
     ArrayList<Product> products_of_the_week;
     ArrayList<Brand> allBrands;
+
     private TextView categoryName;
+    private Button viewMore;
+
     private ImageSlider3Brands imageViewPagerWDotIndicator_three_imgs;
     private ImageSlider2Products imageViewPagerWDotIndicator_two_imgs;
     private Context context;
@@ -193,6 +195,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             super(view);
 
             categoryName = (TextView) view.findViewById(R.id.categoryName);
+            viewMore = (Button) view.findViewById(R.id.buttonViewMore);
             mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
 
             int spacing = context.getResources().getDimensionPixelSize(R.dimen.recycler_view_space);
@@ -209,6 +212,15 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             }
 
             mRecyclerView.setLayoutManager(mLayoutManager);
+
+            viewMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+                }
+            });
 
         }
     }

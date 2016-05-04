@@ -1,4 +1,5 @@
-package rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category;
+package rs.dodatnaoprema.dodatnaoprema.models.articles.brands_subcategoty;
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,13 +7,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 
-/**
- * Created by Win 7 on 17.3.2016.
- */
-public class ArticlesFilteredByCategory {
+public class BrandsSubcategory {
 
     @SerializedName("tag")
     @Expose
@@ -29,9 +26,6 @@ public class ArticlesFilteredByCategory {
     @SerializedName("brendovi")
     @Expose
     private List<Brendovus> brendovi = new ArrayList<Brendovus>();
-    @SerializedName("artikli")
-    @Expose
-    private List<Article> artikli = new ArrayList<Article>();
 
     /**
      *
@@ -123,21 +117,4 @@ public class ArticlesFilteredByCategory {
         this.brendovi = brendovi;
     }
 
-    /**
-     *
-     * @return
-     * The artikli
-     */
-    public List<Article> getArtikli() {
-        return artikli;
-    }
-
-    /**
-     *
-     * @param artikli
-     * The artikli
-     */
-    public void setArtikli(List<Article> artikli) {
-        this.artikli = artikli;
-    }
 }
