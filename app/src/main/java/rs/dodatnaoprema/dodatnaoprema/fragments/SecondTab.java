@@ -12,12 +12,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +81,12 @@ public class SecondTab extends Fragment {
         gridView = (GridView) mView.findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, mArticles);
         gridView.setAdapter(gridAdapter);
-
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(),"ON ITEM CLICK", Toast.LENGTH_SHORT).show();
+            }
+        });
         mVolleySingleton = VolleySingleton.getsInstance(getContext());
         mArticles = new ArrayList<>();
 
