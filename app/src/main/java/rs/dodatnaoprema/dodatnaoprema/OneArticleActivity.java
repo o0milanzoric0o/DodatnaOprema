@@ -1,9 +1,11 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -12,16 +14,12 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
-
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabOne;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
 
 public class OneArticleActivity extends AppCompatActivity {
 
@@ -37,6 +35,10 @@ public class OneArticleActivity extends AppCompatActivity {
 
   //  private TextView mTextViewAbout;
     private WebView mWebView;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
+    private OneArticle mOneArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,39 +64,78 @@ public class OneArticleActivity extends AppCompatActivity {
       //  mTextViewAbout = (TextView) findViewById(R.id.textView_about);
         mWebView = (WebView) findViewById(R.id.webView);
 
-        OneArticle oneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
+        mOneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
 
 
-        mTextView.setText(oneArticle.getArtikal().getArtikalNaziv());
+        mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
 
-        mImageView.setImageUrl(oneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
-        mTextViewBrendName.setText(oneArticle.getArtikal().getBrendIme());
-        mTextViewProductName.setText(oneArticle.getArtikal().getArtikalNaziv());
-        mTextViewPrice.setText(oneArticle.getArtikal().getCenaSamoBrojFormat()+" "+oneArticle.getArtikal().getCenaPrikazExt());
-        mTextViewAboutPrice.setText("cena po: "+ oneArticle.getArtikal().getTipUnitCelo());
+        mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
+        mTextViewBrendName.setText(mOneArticle.getArtikal().getBrendIme());
+        mTextViewProductName.setText(mOneArticle.getArtikal().getArtikalNaziv());
+        mTextViewPrice.setText(mOneArticle.getArtikal().getCenaSamoBrojFormat()+" "+mOneArticle.getArtikal().getCenaPrikazExt());
+        mTextViewAboutPrice.setText("cena po: "+ mOneArticle.getArtikal().getTipUnitCelo());
 
-        mTextViewStars.setText("ocena: "+ oneArticle.getArtikal().getOcenaut());
+        mTextViewStars.setText("ocena: "+ mOneArticle.getArtikal().getOcenaut());
 
-        if (oneArticle.getArtikal().getStanje() == 1)
+        if (mOneArticle.getArtikal().getStanje() == 1)
             mTextViewYesNo.setText("ima na stanju");
         else
             mTextViewYesNo.setText("nema na stanju");
 
-        mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(oneArticle.getArtikal().getMozedaseKupi()));
+        mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()));
 
 
 
-        Object  opisObject = oneArticle.getArtikal().getOpisArtikliTekstovi();
+        Object  opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
         byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
         String opisText = new String(data);
       //  mTextViewAbout.setText("Opis artikla");
 
         mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 
+        Log.logInfo("LALALA.....", ".............");
 
+
+
+        mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
+        mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
+
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
+        final ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle
+                (getSupportFragmentManager(), mTabLayout.getTabCount());
+        mViewPager.setAdapter(adapter);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
+
+
+    public String opis()
+    {
+        Object  opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
+        byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
+        String opisText = new String(data);
+
+        return opisText;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
