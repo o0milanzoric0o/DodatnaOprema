@@ -101,7 +101,7 @@ public class OneArticleActivity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
-
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
         final ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle
                 (getSupportFragmentManager(), mTabLayout.getTabCount());
