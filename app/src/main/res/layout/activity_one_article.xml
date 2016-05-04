@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,12 +18,12 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.AppBarLayout>
 
-<ScrollView
+    <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:background="@color/light_gray"
@@ -74,7 +74,7 @@
                             android:id="@+id/textView_brend_name"
                             style="@style/OneArticleTextView"
                             android:layout_width="match_parent"
-                            android:textColor="#af2b2b"
+                            android:textColor="@android:color/holo_red_dark"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -87,7 +87,7 @@
                             android:id="@+id/textView_cena"
                             style="@style/OneArticleTextView"
                             android:layout_width="match_parent"
-                            android:textColor="#af2b2b"/>
+                            android:textColor="@android:color/holo_red_dark"/>
 
                         <TextView
                             android:id="@+id/textView_about_price"
@@ -117,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:textColor="#af2b2b"
+                    android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold"
                     />
                 <View
