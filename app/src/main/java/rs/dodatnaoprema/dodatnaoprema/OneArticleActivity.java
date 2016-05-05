@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
