@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class OneArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_one_article);
 
         mImageView = (NetworkImageView)  findViewById(R.id.img_one_product);
+        mImageView.requestFocus();
         mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
         mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
         mTextViewPrice= (TextView) findViewById(R.id.textView_cena);

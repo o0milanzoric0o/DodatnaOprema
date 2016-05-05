@@ -125,7 +125,8 @@
         <activity
             android:name=".OneArticleActivity"
             android:label="@string/title_activity_one_article"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
     </application>
