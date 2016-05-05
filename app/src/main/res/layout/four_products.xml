@@ -39,8 +39,8 @@
         <Button
             android:id="@+id/buttonViewMore"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/view_more_colour"
+            android:layout_height="50dp"
+            android:background="@drawable/selected_item"
             android:text="@string/view_more" />
 
     </LinearLayout>
