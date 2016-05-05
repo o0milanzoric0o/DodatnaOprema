@@ -94,6 +94,16 @@ public class UrlEndpoints {
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_TO + URL_CHAR_EQUAL + to;
     }
+    public static String getRequestUrlSearchOnSaleAll(int id) {
+
+        // http://masinealati.rs/parametri.php?action=artNaAkciji&id=6
+
+        return URL_MACHINES_AND_TOOLS
+                + URL_CHAR_QUESTION
+                + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_ARTICLES_ON_SALE
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_ID + URL_CHAR_EQUAL + id;
+    }
 
     public static String getRequestUrlCategorySpecification(int id) {
 

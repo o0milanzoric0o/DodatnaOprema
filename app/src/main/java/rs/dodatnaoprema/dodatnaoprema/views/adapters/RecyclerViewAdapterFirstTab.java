@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
+import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -90,13 +91,14 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         holder.setIsRecyclable(false);
+
 
         if (holder instanceof MyViewHolder) {
 
             categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position - 1]);
-            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]).subList(AppConfig.START_POSITION,AppConfig.NUMBER_OF_ITEMS), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
                 @Override
                 public void onItemClick(Article item, View view) {
 
@@ -104,7 +106,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
                     int itemID = item.getArtikalId();
                     PullWebContent<OneArticle> content =
-                            new PullWebContent<OneArticle>((MainActivity)context, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                            new PullWebContent<OneArticle>((MainActivity) context, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
                     Log.logInfo("LALALA", String.valueOf(itemID));
@@ -113,17 +115,14 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                         public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                             if (success) {
                                 Log.logInfo("LALALA", "SUCCESS");
-                                Intent intent = new Intent((MainActivity)context, OneArticleActivity.class);
+                                Intent intent = new Intent((MainActivity) context, OneArticleActivity.class);
                                 intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
-
-                                ( (MainActivity)context).startActivityOneArticle(intent);
+                                ((MainActivity) context).startActivityOneArticle(intent);
 
 
                                 Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
-                            }
-                            else
-                            {
+                            } else {
                                 Log.logInfo("LALALA", "FAILED");
                             }
                         }
@@ -143,6 +142,25 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView.hasFixedSize();
             mRecyclerView.setNestedScrollingEnabled(false);
             mRecyclerView.setAdapter(mAdapter);
+
+            viewMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    viewMore.setSelected(true);
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            viewMore.setSelected(false);
+                        }
+                    }, 1000);
+
+                    Intent intent = new Intent((MainActivity) context, OffersActivity.class);
+                    intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[holder.getAdapterPosition() - 1]);
+                    intent.putExtra("AllCategories", (Serializable) items.get(AppConfig.FIRST_TAB_ITEMS[holder.getAdapterPosition() - 1]));
+                    ((MainActivity) context).startActivityOneArticle(intent);
+
+                }
+            });
 
         } else if (holder instanceof ViewHolderHeader) {
             imageViewPagerWDotIndicator_three_imgs.setAllBrands(allBrands);
@@ -213,14 +231,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
             mRecyclerView.setLayoutManager(mLayoutManager);
 
-            viewMore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-
-                }
-            });
 
         }
     }

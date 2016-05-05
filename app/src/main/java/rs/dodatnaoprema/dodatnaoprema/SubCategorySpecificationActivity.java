@@ -49,12 +49,14 @@ public class SubCategorySpecificationActivity extends BaseActivity implements Ad
             brandNames.add(brands.getBrendIme());
         }
 
-        Log.logInfo("BRENDOVI", "" + mBrands.size());
-
         MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) findViewById(R.id.multiSelectionSpinnerBrands);
         if (multiSelectionSpinner != null) {
-            multiSelectionSpinner.setItems(brandNames);
-            multiSelectionSpinner.setListener(this);
+            if (brandNames.size() > 0) {
+                multiSelectionSpinner.setItems(brandNames);
+                multiSelectionSpinner.setListener(this);
+            }
+            multiSelectionSpinner.setVisibility(View.GONE);
+
         }
 
         mVolleySingleton = VolleySingleton.getsInstance(this);
@@ -62,11 +64,11 @@ public class SubCategorySpecificationActivity extends BaseActivity implements Ad
         TextView mTextView = (TextView) findViewById(R.id.title);
         mTextView.setText("Filter");
 
-       // Log.logInfo("BROJ",""+numberOfResults);
+        // Log.logInfo("BROJ",""+numberOfResults);
         TextView mTextViewResults = (TextView) findViewById(R.id.searchResultsNumber);
         if (mTextViewResults != null) {
-            Log.logInfo("BROJ",""+numberOfResults);
-            mTextViewResults.setText(getResources().getString(R.string.txt_search_results)+" "+String.valueOf(numberOfResults));
+            Log.logInfo("BROJ", "" + numberOfResults);
+            mTextViewResults.setText(getResources().getString(R.string.txt_search_results) + " " + String.valueOf(numberOfResults));
         }
 
 
