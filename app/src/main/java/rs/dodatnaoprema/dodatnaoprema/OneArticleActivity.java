@@ -18,6 +18,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabOne;
+import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabTwo;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
@@ -35,7 +36,7 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewMin;
 
   //  private TextView mTextViewAbout;
-    private WebView mWebView;
+ //   private WebView mWebView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private NumberPicker mNumberPicker;
@@ -64,7 +65,7 @@ public class OneArticleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
       //  mTextViewAbout = (TextView) findViewById(R.id.textView_about);
-        mWebView = (WebView) findViewById(R.id.webView);
+      //  mWebView = (WebView) findViewById(R.id.webView);
 
         mOneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
@@ -94,7 +95,7 @@ public class OneArticleActivity extends AppCompatActivity {
         String opisText = new String(data);
       //  mTextViewAbout.setText("Opis artikla");
 
-        mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
+      //  mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 
         Log.logInfo("LALALA.....", ".............");
 
@@ -127,10 +128,22 @@ public class OneArticleActivity extends AppCompatActivity {
 
             }
         });
+/*
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
+        setupViewPager(mViewPager);
 
+        mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
+        mTabLayout.setupWithViewPager(mViewPager);*/
+    }
+/*
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle(getSupportFragmentManager());
+        adapter.addFragment(new OneArticleTabOne(), "Opis");
+        adapter.addFragment(new OneArticleTabTwo(), "Kako kupiti");
+        viewPager.setAdapter(adapter);
     }
 
-
+*/
     public String opis()
     {
         Object  opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
