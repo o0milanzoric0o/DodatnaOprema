@@ -46,7 +46,7 @@ public class ArticlesList extends Fragment {
         activity = (SubCategoryArticlesActivity) getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
-        mHeader = (FrameLayout) view.findViewById(R.id.header);
+       // mHeader = (FrameLayout) view.findViewById(R.id.header);
 
         mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setHasFixedSize(true);

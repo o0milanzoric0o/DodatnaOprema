@@ -290,6 +290,7 @@ public class MainActivity extends FragmentActivity
 
         } else if (id == R.id.nav_best) {
 
+
         } else if (id == R.id.nav_new) {
 
         } else if (id == R.id.nav_sale) {
