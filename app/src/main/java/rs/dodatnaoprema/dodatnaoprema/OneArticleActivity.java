@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -37,6 +38,7 @@ public class OneArticleActivity extends AppCompatActivity {
     private WebView mWebView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private NumberPicker mNumberPicker;
 
     private OneArticle mOneArticle;
 
@@ -96,7 +98,9 @@ public class OneArticleActivity extends AppCompatActivity {
 
         Log.logInfo("LALALA.....", ".............");
 
-
+        mNumberPicker = (NumberPicker)findViewById(R.id.numberPicker);
+        mNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
+        mNumberPicker.setMaxValue(9999);
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
