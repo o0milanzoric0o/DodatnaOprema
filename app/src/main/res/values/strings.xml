@@ -135,6 +135,10 @@
         <item>više od 50000</item>
     </string-array>
 
+    <!-- SubCategorySpecificationLayout-->
+    <string name="reset">Poništi</string>
+    <string name="apply">Primeni</string>
+
     <string name="title_activity_one_article">OneArticleActivity</string>
 
 </resources>

@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Brendovus implements Serializable{
+public class Brendovus implements Serializable {
+
 
     @SerializedName("ArtikalBrendId")
     @Expose
@@ -75,6 +76,5 @@ public class Brendovus implements Serializable{
     public void setBrendSlika(String BrendSlika) {
         this.BrendSlika = BrendSlika;
     }
-
 
 }

@@ -13,7 +13,6 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
  * Created by Win 7 on 17.3.2016.
  */
 public class ArticlesFilteredByCategory {
-
     @SerializedName("tag")
     @Expose
     private String tag;
@@ -29,6 +28,9 @@ public class ArticlesFilteredByCategory {
     @SerializedName("brendovi")
     @Expose
     private List<Brendovus> brendovi = new ArrayList<Brendovus>();
+    @SerializedName("specKateg")
+    @Expose
+    private String specKateg;
     @SerializedName("artikli")
     @Expose
     private List<Article> artikli = new ArrayList<Article>();
@@ -126,6 +128,24 @@ public class ArticlesFilteredByCategory {
     /**
      *
      * @return
+     * The specKateg
+     */
+    public String getSpecKateg() {
+        return specKateg;
+    }
+
+    /**
+     *
+     * @param specKateg
+     * The specKateg
+     */
+    public void setSpecKateg(String specKateg) {
+        this.specKateg = specKateg;
+    }
+
+    /**
+     *
+     * @return
      * The artikli
      */
     public List<Article> getArtikli() {
@@ -140,4 +160,5 @@ public class ArticlesFilteredByCategory {
     public void setArtikli(List<Article> artikli) {
         this.artikli = artikli;
     }
+
 }

@@ -71,8 +71,6 @@ public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<R
         specificationGroup.setText(specification.get(position).getGrupe());
         multiSelectionSpinner.setItems(myCollection);
       //  multiSelectionSpinner.setSelection(new int[]{0});
-
-
     }
 
     @Override
