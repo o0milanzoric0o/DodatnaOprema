@@ -83,8 +83,9 @@
         <item name="android:paddingLeft">@dimen/one_product_text_padding_left_right</item>
         <item name="android:paddingRight">@dimen/one_product_text_padding_left_right</item>
         <item name="android:paddingTop">@dimen/one_product_text_padding_top_bottom</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:text">Medium Text</item>
         <item name="android:background">@color/background_white</item>
         <item name="android:textColor">@color/primary_text</item>

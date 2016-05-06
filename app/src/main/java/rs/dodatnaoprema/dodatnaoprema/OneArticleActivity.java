@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.NumberPicker;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -32,7 +33,7 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewPrice;
     private TextView mTextViewAboutPrice;
 
-    private TextView mTextViewStars;
+    private RatingBar mRatingBar;
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
 
@@ -55,7 +56,7 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewPrice= (TextView) findViewById(R.id.textView_cena);
         mTextViewAboutPrice = (TextView) findViewById(R.id.textView_about_price);
 
-        mTextViewStars = (TextView) findViewById(R.id.textView_stars);
+        mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
@@ -80,7 +81,9 @@ public class OneArticleActivity extends AppCompatActivity {
         mTextViewPrice.setText(mOneArticle.getArtikal().getCenaSamoBrojFormat()+" "+mOneArticle.getArtikal().getCenaPrikazExt());
         mTextViewAboutPrice.setText("cena po: "+ mOneArticle.getArtikal().getTipUnitCelo());
 
-        mTextViewStars.setText("ocena: "+ mOneArticle.getArtikal().getOcenaut());
+
+        Integer i = mOneArticle.getArtikal().getOcenaut();
+        mRatingBar.setRating(i);
 
         if (mOneArticle.getArtikal().getStanje() == 1)
             mTextViewYesNo.setText("ima na stanju");
