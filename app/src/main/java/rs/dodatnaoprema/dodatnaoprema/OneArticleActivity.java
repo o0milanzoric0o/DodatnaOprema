@@ -2,6 +2,7 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.webkit.WebView;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -41,7 +43,7 @@ public class OneArticleActivity extends AppCompatActivity {
  //   private WebView mWebView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private NumberPicker mNumberPicker;
+  //  private NumberPicker mNumberPicker;
 
     private OneArticle mOneArticle;
 
@@ -102,11 +104,11 @@ public class OneArticleActivity extends AppCompatActivity {
       //  mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 
         Log.logInfo("LALALA.....", ".............");
-
+/*
         mNumberPicker = (NumberPicker)findViewById(R.id.numberPicker);
         mNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
         mNumberPicker.setMaxValue(9999);
-
+*/
         mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
         mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
@@ -157,6 +159,24 @@ public class OneArticleActivity extends AppCompatActivity {
         return opisText;
     }
 
+    public void morePics(View v)
+    {
+        //selected|_item.xml
+        Toast.makeText(this.getApplicationContext(),"wqeqeqeqe",Toast.LENGTH_LONG).show();
+        mImageView.setSelected(true);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                mImageView.setSelected(false);
+            }
+        }, 1000);
+    }
+
+    public void addToChart (View v){
+        //selected|_item.xml
+        Toast.makeText(this.getApplicationContext(),"wqeqeqeqe",Toast.LENGTH_LONG).show();
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
