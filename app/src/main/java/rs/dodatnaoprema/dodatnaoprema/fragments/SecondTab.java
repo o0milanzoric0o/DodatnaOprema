@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -90,9 +89,9 @@ public class SecondTab extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int itemID = ((Article)gridView.getItemAtPosition(position)).getArtikalId();
-           //     mArticles.get(position).getArtikalId()
-                Log.logInfo("LALALA", "SUCCESS" +itemID);
+                int itemID = ((Article) gridView.getItemAtPosition(position)).getArtikalId();
+                //     mArticles.get(position).getArtikalId()
+                Log.logInfo("LALALA", "SUCCESS" + itemID);
                 PullWebContent<OneArticle> content =
                         new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
@@ -111,9 +110,7 @@ public class SecondTab extends Fragment {
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
-                        }
-                        else
-                        {
+                        } else {
                             Log.logInfo("LALALA", "FAILED");
                         }
                     }
@@ -140,7 +137,9 @@ public class SecondTab extends Fragment {
         dropdown_text = (TextView) mView.findViewById(R.id.txt_drop);
 
         flow_layout_scroll.setVisibility(ViewGroup.GONE);
-        List<Category> categories = mainActivity.getCategoriesList();
+
+        //List<Category> categories = mainActivity.getCategoriesList();
+        List<YMALCategory> categories = mainActivity.getYMALCategories();
 
         param = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -155,12 +154,16 @@ public class SecondTab extends Fragment {
 
         // creating buttons
 
-        for (Category category : categories
-                ) {
-            for (Child child : category.getChild()
-                    ) {
-                addNewButton(child);
-            }
+//        for (YMALCategory category : categories
+//                ) {
+//            for (Child child : category.getChild()
+//                    ) {
+//                addNewButton(child);
+//            }
+//        }
+
+        for (YMALCategory category : categories) {
+            addNewButton(category);
         }
 
         rotateUp = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -197,13 +200,13 @@ public class SecondTab extends Fragment {
         return mView;
     }
 
-    private Button addNewButton(Child child) {
+    private Button addNewButton(YMALCategory child) {
         Button btn = new Button(drop_down.getContext());
         btn.setLayoutParams(param);
         btn.setBackgroundResource(R.drawable.rounded_btn_normal);
         btn.setPadding(10, 0, 10, 0);
 
-        btn.setText(child.getKatIme());
+        btn.setText(child.getNazivKategorije());
         btn.setAllCaps(false);
         btn.setTextColor(ContextCompat.getColor(drop_down.getContext(), R.color.btnTextColor));
         btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);

@@ -44,6 +44,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
@@ -345,6 +346,12 @@ public class MainActivity extends FragmentActivity
         ArrayList<Brand> brands;
         brands = (ArrayList<Brand>) intent.getSerializableExtra(AppConfig.ALL_BRANDS);
         return brands;
+    }
+
+    public ArrayList<YMALCategory> getYMALCategories() {
+        ArrayList<YMALCategory> ymalCategories;
+        ymalCategories = (ArrayList<YMALCategory>) intent.getSerializableExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES);
+        return ymalCategories;
     }
 
     private void getIntentExtras() {

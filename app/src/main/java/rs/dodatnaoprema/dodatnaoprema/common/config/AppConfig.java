@@ -42,6 +42,7 @@ public class AppConfig {
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
     public static final String URL_ALL_BRENDS = "http://masinealati.rs/parametri.php?action=listaBrendova";
+    public static final String URL_YOU_MAY_ALSO_LIKE_CATEGORIES = "http://masinealati.rs/parametri.php?action=kategYouMayAlso&limit=10";
 
     public static final int URL_VALUE_ID_ARTICLES_ON_SALE = 6;
     public static final int URL_VALUE_ID_NEW_PRODUCTS = 7;
@@ -50,6 +51,7 @@ public class AppConfig {
     public static final String[] FIRST_TAB_ITEMS = {"Proizvodi na akciji", "Novi proizvodi", "Najprodavanije"};
     public static final String THE_PRODUCTS_OF_THE_WEEK = "Proizvodi nedelje";
     public static final String ALL_BRANDS = "Svi brendovi";
+    public static final String YOU_MAY_ALSO_LIKE_CATEGORIES = "Preporucene kategorije";
     /**
      * History Shared Preferences
      */

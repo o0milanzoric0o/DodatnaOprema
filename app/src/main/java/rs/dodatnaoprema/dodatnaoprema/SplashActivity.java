@@ -20,6 +20,8 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Produ
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.ProductsOfTheWeek;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCategories;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategories;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -32,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
     private List<Article> mArticles = new ArrayList<>();
     private List<Product> mProducts = new ArrayList<>();
     private List<Brand> mBrands = new ArrayList<>();
+    private List<YMALCategory> mYMALCategories = new ArrayList<>();
     private int requestCounter = 0;
     private VolleySingleton mVolleySingleton;
 
@@ -53,12 +56,13 @@ public class SplashActivity extends AppCompatActivity {
         getNewProducts();
         getProductsOfTheWeek();
         getAllBrands();
+        getYMALCategories();
         getAllCategories();
     }
 
     private void response() {
         requestCounter++;
-        final int numberOfRequests = 6;
+        final int numberOfRequests = 7;
         if (requestCounter == numberOfRequests) {
             startActivity(intent);
             finish();
@@ -179,6 +183,27 @@ public class SplashActivity extends AppCompatActivity {
                 if (success) {
                     mBrands = allBrands.getBrand();
                     intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
+                    response();
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
+    }
+
+    private void getYMALCategories() { // get YOU MAY ALSO LIKE CATEGORIES
+        PullWebContent<YMALCategories> content =
+                new PullWebContent<YMALCategories>(this, YMALCategories.class, AppConfig.URL_YOU_MAY_ALSO_LIKE_CATEGORIES, mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<YMALCategories>() {
+            @Override
+            public void webRequestSuccess(boolean success, YMALCategories ymalCategories) {
+                if (success) {
+                    mYMALCategories = ymalCategories.getKategorije();
+                    intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
                     response();
                 }
             }
