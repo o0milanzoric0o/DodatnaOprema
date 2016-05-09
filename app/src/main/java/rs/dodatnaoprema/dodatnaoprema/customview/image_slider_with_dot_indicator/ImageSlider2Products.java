@@ -19,6 +19,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
+import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -29,10 +30,9 @@ import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransform
  */
 public class ImageSlider2Products extends RelativeLayout {
 
-    public static final int TYPE_DOUBLE = 0;
-    public static final int TYPE_TRIPPLE = 1;
     private final Handler mhandler = new Handler();
     private LinearLayout mDotsLayout = null;
+    private SpringIndicator mSpringIndicator = null;
     private ViewPager mViewPager = null;
     private ViewPagerAdapter mAdapter = null;
     private ArrayList<Product> mProductsOfTheWeek = null;
@@ -40,7 +40,6 @@ public class ImageSlider2Products extends RelativeLayout {
     private int mdotsCount;
     private ImageView[] mdots;
     private int slideInterval;
-    private int type;
     private Runnable mRunnable;
 
     public ImageSlider2Products(Context context, AttributeSet attrs) {
@@ -55,14 +54,13 @@ public class ImageSlider2Products extends RelativeLayout {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.dot_indicator_view_pager_tripple_version, this, true);
+        inflater.inflate(R.layout.dot_indicator_view_pager_double_version, this, true);
 
         // Get rs.dodatnaoprema.dodatnaoprema.views
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
         //mImageView = (ImageView) findViewById(R.id.img_pager_item);
         mDotsLayout = (LinearLayout) findViewById(R.id.viewPagerCountDots);
-
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

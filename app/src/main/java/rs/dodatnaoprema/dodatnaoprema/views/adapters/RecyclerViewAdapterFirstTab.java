@@ -51,6 +51,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private ImageSlider3Brands imageViewPagerWDotIndicator_three_imgs;
     private ImageSlider2Products imageViewPagerWDotIndicator_two_imgs;
+
     private Context context;
     private RecyclerView mRecyclerView;
 
@@ -98,7 +99,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         if (holder instanceof MyViewHolder) {
 
             categoryName.setText(AppConfig.FIRST_TAB_ITEMS[position - 1]);
-            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]).subList(AppConfig.START_POSITION,AppConfig.NUMBER_OF_ITEMS), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+            RecyclerViewSelectedProducts mAdapter = new RecyclerViewSelectedProducts(context, items.get(AppConfig.FIRST_TAB_ITEMS[position - 1]).subList(AppConfig.START_POSITION, AppConfig.NUMBER_OF_ITEMS), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
                 @Override
                 public void onItemClick(Article item, View view) {
 
