@@ -6,7 +6,7 @@ android {
         debug_signing {
             keyAlias 'debugkeyshared'
             keyPassword 'android'
-            storeFile file('C:/Users/mirna/AndroidStudioProjects/DodatnaOprema/keys/debugKeystore.jks')
+            storeFile file('C:/Users/milan/AndroidStudioProjects/DodatnaOprema/keys/debugKeystore.jks')
             storePassword 'android'
         }
     }
@@ -49,5 +49,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.android.support:gridlayout-v7:23.3.0'
     compile 'com.github.lawloretienne:quickreturn:0.0.3'
+    // Dependency for dot indicator
+    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
 }
 apply plugin: 'com.google.gms.google-services'

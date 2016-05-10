@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
             android:layout_centerHorizontal="true"
 
             android:fitsSystemWindows="true"
-            tools:listitem="@layout/view_pager_item_tripple_version" />
+            tools:listitem="@layout/view_pager_item_double_version" />
 
         <!--<RelativeLayout
             android:id="@+id/viewPagerIndicator"
@@ -34,8 +35,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="horizontal" />
-
-
     </RelativeLayout>
 
 </merge>
