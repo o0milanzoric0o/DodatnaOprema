@@ -143,7 +143,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                 holder.itemView.setLayoutParams(sglp);
             }
 
-            categoryName.setText(categories.get(position - existHistory).getKatsrblat());
+            categoryName.setText(categories.get(position - existHistory).getKatsrblat().trim());
             ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
             productImg.setImageUrl(categories.get(position - existHistory).getKategorijaArtikalaSlika(), mImageLoader);
 

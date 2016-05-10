@@ -78,7 +78,7 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
         holder.bind(subcategories.get(position), listener);
         holder.setIsRecyclable(false);
 
-        subcategoryName.setText(subcategories.get(position).getKatIme());
+        subcategoryName.setText(subcategories.get(position).getKatIme().trim());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         subcategoryImg.setImageUrl(subcategories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
     }

@@ -81,7 +81,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
         holder.bind(products.get(position), listener);
         holder.setIsRecyclable(false);
-        productName.setText(products.get(position).getArtikalNaziv());
+        productName.setText(products.get(position).getArtikalNaziv().trim());
         price.append(" "+products.get(position).getCenaSamoBrojFormat()+" "+products.get(position).getCenaPrikazExt());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);

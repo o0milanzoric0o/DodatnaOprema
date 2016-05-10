@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
+import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
@@ -45,6 +47,10 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private int mArticleId;
     private int sortOption = 0;
     private boolean addedFragments = false;
+
+    private int numberOfResults = 0;
+
+    public int selectedSubcategoryId = 0;
 
 
     public List<Article> getArticlesList() {
@@ -93,7 +99,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
-        if (mTextView!=null) mTextView.setText(mSubCategoryName);
+        if (mTextView != null) mTextView.setText(mSubCategoryName);
 
         //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
 
@@ -136,11 +142,17 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                     }
                 }, 1000);
 
-                Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
+                setClickedSubcategoryId(mArticleId);
+                setNumberOfResults(mArticles.size());
+                setBrands(mBrands);
+               /* Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
                 intent.putExtra("NumberOfArticles", mArticles.size());
                 intent.putExtra("KategorijaID", mArticleId);
                 intent.putExtra("Brendovi", (Serializable) mBrands);
-                startActivity(intent);
+                startActivity(intent);*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FilterFragmentDialog frag = new FilterFragmentDialog();
+                frag.show(ft, "txn_tag");
             }
         });
 
@@ -158,7 +170,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         if (cardFace.getVisibility() == View.GONE) {
             flipAnimation.reverse();
         }
-       if (rootLayout!=null) rootLayout.startAnimation(flipAnimation);
+        if (rootLayout != null) rootLayout.startAnimation(flipAnimation);
     }
 
     @Override
@@ -219,6 +231,31 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         });
         content.pullList();
 
+    }
+
+    private void setClickedSubcategoryId(int id) {
+
+        selectedSubcategoryId = id;
+    }
+
+    public int getClickedSubcategoryId() {
+        return selectedSubcategoryId;
+    }
+    private void setNumberOfResults(int number) {
+        numberOfResults = number;
+    }
+    public int getNumberOfResults() {
+        return numberOfResults;
+    }
+    private void setBrands(List<Brendovus> brands) {
+        mBrands = brands;
+    }
+    public List<Brendovus> getBrands() {
+        return mBrands;
+    }
+    public void closeFilter () {
+
+        getFragmentManager().popBackStack();
     }
 
 }
