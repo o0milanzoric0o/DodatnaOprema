@@ -22,6 +22,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
@@ -46,6 +47,9 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     private Button btnApply;
     private Button btnReset;
+
+    private double down = 0.0;
+    private double up = Double.MAX_VALUE;
 
     private VolleySingleton mVolleySingleton;
 
@@ -122,6 +126,8 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
             @Override
             public void onClick(View v) {
 
+                ((SubCategoryArticlesActivity) getActivity()).filterPrices(down, up, ((SubCategoryArticlesActivity) getActivity()).getArticlesList());
+                dismiss();
             }
         });
 
@@ -142,7 +148,6 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
             @Override
             public void onClick(View v) {
 
-                Log.logInfo("EXIT", "EXIT");
                 dismiss();
 
             }
@@ -183,6 +188,14 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        if (position == 0 ) {
+            down = 0.0;
+            up = Double.MAX_VALUE;
+        } else if (position == 1) {
+            down= 0.0;
+            up = 500.0;
+        }
 
     }
 

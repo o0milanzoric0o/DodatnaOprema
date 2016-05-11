@@ -14,6 +14,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -83,6 +84,11 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv().trim());
         price.append(" "+products.get(position).getCenaSamoBrojFormat()+" "+products.get(position).getCenaPrikazExt());
+
+     /*   if (Conversions.priceStringToFloat(products.get(position).getCenaSamoBrojFormat())>30000.00){
+
+        Log.logInfo("FORMATIRANO", String.valueOf(Conversions.priceStringToFloat(products.get(position).getCenaSamoBrojFormat())));
+        }*/
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
     }

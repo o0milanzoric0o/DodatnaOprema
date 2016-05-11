@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
@@ -37,12 +36,14 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<Article> mArticles = new ArrayList<>();
+    private List<Article> filteredArticles = new ArrayList<>();
     private List<Brendovus> mBrands = new ArrayList<>();
 
     private RelativeLayout mFooter;
     private VolleySingleton mVolleySingleton;
 
     private boolean nextImgStateGrid = true;
+    private boolean filtered = false;
 
     private int mArticleId;
     private int sortOption = 0;
@@ -74,27 +75,28 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 R.layout.spinner_item, getResources().getStringArray(R.array.sort_options));
 
         adapter.setDropDownViewResource(R.layout.drop_down_spinner_view);
-        mSpinner.setAdapter(adapter);
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (mSpinner != null) {
+            mSpinner.setAdapter(adapter);
+            mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position == 0 && sortOption != 0) {
-                    sortOption = 0;
-                    searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
-                } else if (position == 1 && sortOption != 1) {
-                    sortOption = 1;
-                    searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                    if (position == 0 && sortOption != 0) {
+                        sortOption = 0;
+                        searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
+                    } else if (position == 1 && sortOption != 1) {
+                        sortOption = 1;
+                        searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                    }
+
                 }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+                }
+            });
+        }
         mVolleySingleton = VolleySingleton.getsInstance(this);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -104,8 +106,10 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
 
         final ImageButton listGridChangeBtn = (ImageButton) findViewById(R.id.list_grid_change_btn);
@@ -166,11 +170,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         View cardBack = findViewById(R.id.articles_content_grid);
 
         FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
-
-        if (cardFace.getVisibility() == View.GONE) {
-            flipAnimation.reverse();
+        if (cardFace != null) {
+            if (cardFace.getVisibility() == View.GONE) {
+                flipAnimation.reverse();
+            }
+            if (rootLayout != null) rootLayout.startAnimation(flipAnimation);
         }
-        if (rootLayout != null) rootLayout.startAnimation(flipAnimation);
     }
 
     @Override
@@ -241,21 +246,45 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     public int getClickedSubcategoryId() {
         return selectedSubcategoryId;
     }
+
+    public void updateList(List<Article> articles) {
+        ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
+        ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
+    }
+
     private void setNumberOfResults(int number) {
         numberOfResults = number;
     }
+
     public int getNumberOfResults() {
         return numberOfResults;
     }
+
     private void setBrands(List<Brendovus> brands) {
         mBrands = brands;
     }
+
     public List<Brendovus> getBrands() {
         return mBrands;
     }
-    public void closeFilter () {
 
-        getFragmentManager().popBackStack();
+    public void filterPrices(double down, double up, List<Article> articles) {
+
+        filteredArticles = new ArrayList<>();
+        filtered = true;
+
+        for (Article article : articles) {
+            if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
+
+                filteredArticles.add(article);
+        }
+        Log.logInfo("onResume", String.valueOf(filteredArticles.size()));
+        updateList(filteredArticles);
+
+    }
+
+    public List<Article> getArticles() {
+        return mArticles;
     }
 
 }
