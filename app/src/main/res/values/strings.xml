@@ -116,7 +116,7 @@
     <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
     <string name="txt_brands">Brendovi</string>
-    <string name="txt_search_results">Ukupan broj rezultata pretrage:</string>
+    <string name="txt_search_results">Ukupan broj rezultata pretrage: %1$d</string>
 
     <string-array name="sort_options">
         <item>Cena (rastuće)</item>
@@ -138,6 +138,7 @@
     <!-- SubCategorySpecificationLayout-->
     <string name="reset">Poništi</string>
     <string name="apply">Primeni</string>
+    <string name="filter_txt">Filter</string>
 
     <string name="title_activity_one_article">OneArticleActivity</string>
 

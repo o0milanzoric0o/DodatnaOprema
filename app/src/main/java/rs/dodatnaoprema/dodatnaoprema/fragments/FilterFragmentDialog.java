@@ -5,7 +5,6 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,9 +21,8 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.CategorySpecification;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
@@ -42,11 +39,9 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
     private List<Spec> specifications = new ArrayList<>();
     private List<String> brandNames = new ArrayList<>();
 
-    private List<String> selectedBrands = new ArrayList<>();
-    private ImageButton exitFragmentBtn;
+    private Spinner priceOptions;
 
-    private Button btnApply;
-    private Button btnReset;
+    private int priceOptionSelected = 0;
 
     private double down = 0.0;
     private double up = Double.MAX_VALUE;
@@ -71,13 +66,11 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.subcategory_specification_activity, container, false);
 
-        Toolbar mToolbar = (Toolbar) root.findViewById(R.id.toolbar);
-
         TextView mTextView = (TextView) root.findViewById(R.id.title);
-        mTextView.setText("Filter");
+        mTextView.setText(getResources().getString(R.string.filter_txt));
 
         List<Brendovus> mBrands = ((SubCategoryArticlesActivity) getActivity()).getBrands();
 
@@ -94,25 +87,30 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
             } else {
                 multiSelectionSpinner.setVisibility(View.GONE);
             }
+
+            multiSelectionSpinner.setSelection(SharedPreferencesUtils.getArrayList(getActivity(), AppConfig.SELECTED_BRANDS_KEY));
         }
 
         mVolleySingleton = VolleySingleton.getsInstance(getActivity());
 
         TextView mTextViewResults = (TextView) root.findViewById(R.id.searchResultsNumber);
         if (mTextViewResults != null) {
-            Log.logInfo("BROJ", "" + ((SubCategoryArticlesActivity) getActivity()).getNumberOfResults());
-            mTextViewResults.setText(getResources().getString(R.string.txt_search_results) + " " + String.valueOf(((SubCategoryArticlesActivity) getActivity()).getNumberOfResults()));
+            mTextViewResults.setText(getString(R.string.txt_search_results, ((SubCategoryArticlesActivity) getActivity()).getNumberOfResults()));
         }
 
 
-        final Spinner priceOptions = (Spinner) root.findViewById(R.id.pricesFilter);
+        priceOptions = (Spinner) root.findViewById(R.id.pricesFilter);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataAdapter.addAll(getResources().getStringArray(R.array.price_options));
+
         if (priceOptions != null) {
+
             priceOptions.setAdapter(dataAdapter);
             priceOptions.setOnItemSelectedListener(this);
+            priceOptions.setSelection(SharedPreferencesUtils.getInt(getActivity(), AppConfig.SELECTED_PRICES_KEY));
+
         }
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.recycler_view_specifications);
@@ -121,23 +119,27 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        btnApply = (Button) root.findViewById(R.id.applyBtn);
+        Button btnApply = (Button) root.findViewById(R.id.applyBtn);
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ((SubCategoryArticlesActivity) getActivity()).filterPrices(down, up, ((SubCategoryArticlesActivity) getActivity()).getArticlesList());
+                ((SubCategoryArticlesActivity) getActivity()).filterPrices(down, up);
+                SharedPreferencesUtils.putInt(getActivity(), AppConfig.SELECTED_PRICES_KEY, priceOptionSelected);
                 dismiss();
             }
         });
 
-        btnReset = (Button) root.findViewById(R.id.resetBtn);
+        Button btnReset = (Button) root.findViewById(R.id.resetBtn);
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (priceOptions != null) priceOptions.setSelection(0);
-                //  if (multiSelectionSpinner != null) multiSelectionSpinner.resetSpinner();
+                SharedPreferencesUtils.clearSharedPreferences(getActivity(),AppConfig.SELECTED_PRICES_KEY);
+                SharedPreferencesUtils.clearSharedPreferences(getActivity(),AppConfig.SELECTED_BRANDS_KEY);
+
+                if (multiSelectionSpinner != null) multiSelectionSpinner.resetSpinner();
                 RecyclerViewSubcategorySpecification mAdapter = new RecyclerViewSubcategorySpecification(getActivity(), specifications);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -157,6 +159,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
         return root;
     }
+
 
     private void subCategoriesSpecifications(int id) {
 
@@ -185,16 +188,45 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        if (position == 0 ) {
+        if (position == 0) {
+            priceOptionSelected = 0;
             down = 0.0;
             up = Double.MAX_VALUE;
         } else if (position == 1) {
-            down= 0.0;
+            priceOptionSelected = 1;
+            down = 0.0;
             up = 500.0;
+        } else if (position == 2) {
+            priceOptionSelected = 2;
+            down = 500.0;
+            up = 1000.0;
+        } else if (position == 3) {
+            priceOptionSelected = 3;
+            down = 1000.0;
+            up = 2000.0;
+        } else if (position == 4) {
+            priceOptionSelected = 4;
+            down = 2000.0;
+            up = 5000.0;
+        } else if (position == 5) {
+            priceOptionSelected = 5;
+            down = 5000.0;
+            up = 10000.0;
+        } else if (position == 6) {
+            priceOptionSelected = 6;
+            down = 10000.0;
+            up = 20000.0;
+        } else if (position == 7) {
+            priceOptionSelected = 7;
+            down = 20000.0;
+            up = 50000.0;
+        } else if (position == 8) {
+            priceOptionSelected = 8;
+            down = 50000.0;
+            up = Double.MAX_VALUE;
         }
 
     }
@@ -211,6 +243,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void selectedStrings(List<String> strings) {
+        SharedPreferencesUtils.putArrayList(getActivity(), AppConfig.SELECTED_BRANDS_KEY, new ArrayList<>(strings));
 
     }
 }
