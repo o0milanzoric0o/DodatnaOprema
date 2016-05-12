@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -21,11 +22,13 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabOne;
-import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabTwo;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
+
+import android.widget.RelativeLayout;
+import android.support.v7.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class OneArticleActivity extends AppCompatActivity {
 
@@ -39,18 +42,19 @@ public class OneArticleActivity extends AppCompatActivity {
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
 
-  //  private TextView mTextViewAbout;
- //   private WebView mWebView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-  //  private NumberPicker mNumberPicker;
 
     private OneArticle mOneArticle;
+
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_article);
+
+        mContext = OneArticleActivity.this;
 
         mImageView = (NetworkImageView)  findViewById(R.id.img_one_product);
         mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
@@ -173,8 +177,45 @@ public class OneArticleActivity extends AppCompatActivity {
 
     public void addToChart (View v){
         //selected|_item.xml
-        Toast.makeText(this.getApplicationContext(),"wqeqeqeqe",Toast.LENGTH_LONG).show();
+        show();
+    }
 
+    private void show()
+    {
+        RelativeLayout linearLayout = new RelativeLayout(mContext);
+        final NumberPicker aNumberPicker = new NumberPicker(mContext,null,R.style.number_picker);
+        aNumberPicker.setMaxValue(9999);
+        aNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams numPicerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        numPicerParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+        linearLayout.setLayoutParams(params);
+        linearLayout.addView(aNumberPicker,numPicerParams);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+        alertDialogBuilder.setTitle("Odaberite količinu");
+        alertDialogBuilder.setView(linearLayout);
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Izaberi",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                Log.logDebug("","New Quantity Value : "+ aNumberPicker.getValue());
+
+                            }
+                        })
+                .setNegativeButton("Otkaži",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
 
     }
 
