@@ -48,4 +48,19 @@ public class SharedPreferencesUtils {
         editor.apply();
     }
 
+    public static void putInt(Context context, String key, int value) {
+
+        SharedPreferences.Editor editor = getEditor(context, key);
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public static int getInt(Context context, String key) {
+
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+
+        return prefs.getInt(key, 0);
+
+    }
+
 }

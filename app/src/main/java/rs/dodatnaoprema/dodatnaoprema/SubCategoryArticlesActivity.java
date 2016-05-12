@@ -103,8 +103,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         TextView mTextView = (TextView) findViewById(R.id.title);
         if (mTextView != null) mTextView.setText(mSubCategoryName);
 
-        //  FrameLayout mFragmentHolder = (FrameLayout) findViewById(R.id.articles_content_list);
-
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -161,6 +159,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         });
 
         searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
+
+        Log.logInfo("onResume", "onCreate "+String.valueOf(mArticles.size()));
 
     }
 
@@ -268,17 +268,17 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return mBrands;
     }
 
-    public void filterPrices(double down, double up, List<Article> articles) {
+    public void filterPrices(double down, double up) {
 
         filteredArticles = new ArrayList<>();
         filtered = true;
 
-        for (Article article : articles) {
+        for (Article article : mArticles) {
             if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
 
                 filteredArticles.add(article);
         }
-        Log.logInfo("onResume", String.valueOf(filteredArticles.size()));
+        Log.logInfo("onResume", String.valueOf(mArticles.size()));
         updateList(filteredArticles);
 
     }

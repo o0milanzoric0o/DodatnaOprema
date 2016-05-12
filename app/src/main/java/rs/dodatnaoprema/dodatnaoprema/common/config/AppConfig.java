@@ -88,4 +88,10 @@ public class AppConfig {
 
     public static final String ABOUT_PRODUCT = "O proizvodu";
 
+    /**
+     * Shared preferences keys for FilterFragmentDialog
+     */
+    public static final String SELECTED_PRICES_KEY = "SELECTED_PRICE_RANGE";
+    public static final String SELECTED_BRANDS_KEY = "SELECTED_BRANDS";
+
 }

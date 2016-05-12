@@ -50,7 +50,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
                         }
                     }, 1000);
 
-                    Log.logInfo("LALALA", "CLICKED");
                 }
             });
         }
@@ -84,11 +83,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         holder.setIsRecyclable(false);
         productName.setText(products.get(position).getArtikalNaziv().trim());
         price.append(" "+products.get(position).getCenaSamoBrojFormat()+" "+products.get(position).getCenaPrikazExt());
-
-     /*   if (Conversions.priceStringToFloat(products.get(position).getCenaSamoBrojFormat())>30000.00){
-
-        Log.logInfo("FORMATIRANO", String.valueOf(Conversions.priceStringToFloat(products.get(position).getCenaSamoBrojFormat())));
-        }*/
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
     }
