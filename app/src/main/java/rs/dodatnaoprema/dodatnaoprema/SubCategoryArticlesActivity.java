@@ -22,6 +22,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
@@ -36,6 +37,8 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<Article> mArticles = new ArrayList<>();
+    private List<Article> allSubcategoryArticles = new ArrayList<>();
+
     private List<Article> filteredArticles = new ArrayList<>();
     private List<Brendovus> mBrands = new ArrayList<>();
 
@@ -160,8 +163,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
 
-        Log.logInfo("onResume", "onCreate "+String.valueOf(mArticles.size()));
-
     }
 
     private void flipCard() {
@@ -199,6 +200,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 if (success) {
 
                     mArticles = articlesFilteredByCategory.getArtikli();
+                    allSubcategoryArticles = articlesFilteredByCategory.getArtikli();
+
                     mBrands = articlesFilteredByCategory.getBrendovi();
 
                     if (!addedFragments) {
@@ -223,8 +226,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                                 .commit();
                     } else {
 
-                        ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(mArticles);
-                        ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(mArticles);
+                        updateList(mArticles);
                     }
                 }
             }
@@ -273,20 +275,22 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         filteredArticles = new ArrayList<>();
         filtered = true;
 
-        for (Article article : mArticles) {
+        Log.logInfo("onResume", String.valueOf(allSubcategoryArticles.size()));
+
+        for (Article article : allSubcategoryArticles) {
             if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
 
                 filteredArticles.add(article);
         }
-        Log.logInfo("onResume", String.valueOf(mArticles.size()));
         updateList(filteredArticles);
-
     }
 
-    public List<Article> getArticles() {
-        return mArticles;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
+        SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
     }
-
 }
 
 
