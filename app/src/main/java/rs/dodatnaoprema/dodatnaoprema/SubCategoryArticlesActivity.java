@@ -2,14 +2,17 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,8 +45,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private List<Article> filteredArticles = new ArrayList<>();
     private List<Brendovus> mBrands = new ArrayList<>();
 
+    private List<String> selectedBrands = new ArrayList<>();
+
+
     private RelativeLayout mFooter;
     private VolleySingleton mVolleySingleton;
+
+    private ImageView filterImg;
 
     private boolean nextImgStateGrid = true;
     private boolean filtered = false;
@@ -161,6 +169,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             }
         });
 
+        filterImg = (ImageView) findViewById(R.id.img_filter);
+
         searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
 
     }
@@ -270,17 +280,34 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return mBrands;
     }
 
+    public boolean isFiltered() {
+        return filtered;
+    }
+
+    public void setFiltered(boolean filtered) {
+        this.filtered = filtered;
+        changeFilterButtonColor();
+    }
+
     public void filterPrices(double down, double up) {
 
         filteredArticles = new ArrayList<>();
         filtered = true;
+
+        selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
 
         Log.logInfo("onResume", String.valueOf(allSubcategoryArticles.size()));
 
         for (Article article : allSubcategoryArticles) {
             if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
 
-                filteredArticles.add(article);
+                if (selectedBrands.size() > 0) {
+                    if (selectedBrands.contains(article.getBrendIme())) {
+                        filteredArticles.add(article);
+                    }
+                } else {
+                    filteredArticles.add(article);
+                }
         }
         updateList(filteredArticles);
     }
@@ -290,6 +317,17 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         super.onDestroy();
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
+    }
+
+    private void changeFilterButtonColor() {
+
+        if (isFiltered()) {
+            filterImg.setColorFilter(ContextCompat.getColor(this, R.color.primary_dark));
+
+        }
+        else {
+            filterImg.setColorFilter(Color.BLACK);
+        }
     }
 }
 

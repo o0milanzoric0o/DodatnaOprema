@@ -39,6 +39,8 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
     private List<Spec> specifications = new ArrayList<>();
     private List<String> brandNames = new ArrayList<>();
 
+    private int numberOfSelectedBrands = 0;
+
     private Spinner priceOptions;
 
     private int priceOptionSelected = 0;
@@ -126,6 +128,14 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
                 ((SubCategoryArticlesActivity) getActivity()).filterPrices(down, up);
                 SharedPreferencesUtils.putInt(getActivity(), AppConfig.SELECTED_PRICES_KEY, priceOptionSelected);
+
+                if (priceOptionSelected != 0) {
+                    ((SubCategoryArticlesActivity) getActivity()).setFiltered(true);
+                }
+
+                if (numberOfSelectedBrands > 0) {
+                    ((SubCategoryArticlesActivity) getActivity()).setFiltered(true);
+                }
                 dismiss();
             }
         });
@@ -134,14 +144,22 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //reset spinner with prices
                 if (priceOptions != null) priceOptions.setSelection(0);
-                SharedPreferencesUtils.clearSharedPreferences(getActivity(),AppConfig.SELECTED_PRICES_KEY);
-                SharedPreferencesUtils.clearSharedPreferences(getActivity(),AppConfig.SELECTED_BRANDS_KEY);
 
+                //delete saved filter's options
+                SharedPreferencesUtils.clearSharedPreferences(getActivity(), AppConfig.SELECTED_PRICES_KEY);
+                SharedPreferencesUtils.clearSharedPreferences(getActivity(), AppConfig.SELECTED_BRANDS_KEY);
+
+                //reset spinner with brands
                 if (multiSelectionSpinner != null) multiSelectionSpinner.resetSpinner();
+
+                //reset spinner with specifications
                 RecyclerViewSubcategorySpecification mAdapter = new RecyclerViewSubcategorySpecification(getActivity(), specifications);
                 mRecyclerView.setAdapter(mAdapter);
+
+                //set activity filter indicator to false
+                ((SubCategoryArticlesActivity) getActivity()).setFiltered(false);
             }
         });
 
@@ -149,13 +167,13 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
         exitFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //close dialog
                 dismiss();
 
             }
         });
-        subCategoriesSpecifications(((SubCategoryArticlesActivity) getActivity()).getClickedSubcategoryId());
 
+        subCategoriesSpecifications(((SubCategoryArticlesActivity) getActivity()).getClickedSubcategoryId());
 
         return root;
     }
@@ -243,7 +261,9 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void selectedStrings(List<String> strings) {
+
         SharedPreferencesUtils.putArrayList(getActivity(), AppConfig.SELECTED_BRANDS_KEY, new ArrayList<>(strings));
+        numberOfSelectedBrands = strings.size();
 
     }
 }
