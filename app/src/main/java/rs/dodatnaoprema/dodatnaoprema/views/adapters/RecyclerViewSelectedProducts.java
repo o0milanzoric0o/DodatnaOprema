@@ -14,8 +14,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -94,11 +92,8 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     }
 
     public void updateContent(List<Article> articles) {
-        // clear and add to keep the old object reference
-        Log.logInfo("SORTBefore", ""+articles.size());
-        this.products.clear();
-        this.products.addAll(articles);
-        Log.logInfo("SORTAfter", ""+this.products.size());
+
+        this.products = articles;
         notifyDataSetChanged();
     }
     public interface OnItemClickListener {
