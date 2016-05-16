@@ -93,10 +93,12 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         return products.size();
     }
 
-    public void updateContent(List<Article> products) {
+    public void updateContent(List<Article> articles) {
         // clear and add to keep the old object reference
+        Log.logInfo("SORTBefore", ""+articles.size());
         this.products.clear();
-        this.products.addAll(products);
+        this.products.addAll(articles);
+        Log.logInfo("SORTAfter", ""+this.products.size());
         notifyDataSetChanged();
     }
     public interface OnItemClickListener {

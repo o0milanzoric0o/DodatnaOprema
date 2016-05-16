@@ -7,6 +7,11 @@ import android.content.SharedPreferences;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
+import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
+
 public class SharedPreferencesUtils {
     public static SharedPreferences.Editor getEditor(Context context, String key) {
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
@@ -63,4 +68,17 @@ public class SharedPreferencesUtils {
 
     }
 
+    public static String getUserId() {
+        MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
+        SessionManager session = MyApplication.getInstance().getSessionManager();
+        //String userID = "";
+        if (session.isLoggedIn()) {
+            User user = prefs.getUser();
+            if (user != null) {
+                return user.getId();
+            }
+        }
+        return "";
+
+    }
 }

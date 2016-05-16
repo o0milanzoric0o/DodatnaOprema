@@ -8,10 +8,9 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 
-/**
- * Created by Win 7 on 17.3.2016.
- */
+
 public class ArticlesFilteredByCategory {
     @SerializedName("tag")
     @Expose
@@ -30,7 +29,7 @@ public class ArticlesFilteredByCategory {
     private List<Brendovus> brendovi = new ArrayList<Brendovus>();
     @SerializedName("specKateg")
     @Expose
-    private String specKateg;
+    private List<Spec> specKateg = new ArrayList<Spec>();
     @SerializedName("artikli")
     @Expose
     private List<Article> artikli = new ArrayList<Article>();
@@ -130,7 +129,7 @@ public class ArticlesFilteredByCategory {
      * @return
      * The specKateg
      */
-    public String getSpecKateg() {
+    public List<Spec> getSpecKateg() {
         return specKateg;
     }
 
@@ -139,7 +138,7 @@ public class ArticlesFilteredByCategory {
      * @param specKateg
      * The specKateg
      */
-    public void setSpecKateg(String specKateg) {
+    public void setSpecKateg(List<Spec> specKateg) {
         this.specKateg = specKateg;
     }
 

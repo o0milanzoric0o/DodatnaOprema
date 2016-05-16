@@ -18,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -26,6 +28,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SortUtils;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
@@ -94,10 +97,18 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
                     if (position == 0 && sortOption != 0) {
                         sortOption = 0;
-                        searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
+                       // mArticles = SortUtils.sortArticlesByPriceAscending(mArticles);
+                        //Log.logInfo("SORT", ""+mArticles.size());
+                        updateList(SortUtils.sortArticlesByPriceAscending(mArticles));
+
+                        //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
                     } else if (position == 1 && sortOption != 1) {
                         sortOption = 1;
-                        searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                        //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                       // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
+                        Log.logInfo("SORT", ""+mArticles.size());
+                        updateList(SortUtils.sortArticlesByPriceDescending(mArticles));
+
                     }
 
                 }
@@ -209,7 +220,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
 
-                    mArticles = articlesFilteredByCategory.getArtikli();
+                   // mArticles = articlesFilteredByCategory.getArtikli();
+                    mArticles = SortUtils.sortArticlesByPriceAscending(articlesFilteredByCategory.getArtikli());
                     allSubcategoryArticles = articlesFilteredByCategory.getArtikli();
 
                     mBrands = articlesFilteredByCategory.getBrendovi();
@@ -260,6 +272,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     }
 
     public void updateList(List<Article> articles) {
+
+        Log.logInfo("SORT", ""+articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
     }

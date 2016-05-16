@@ -123,6 +123,7 @@ public class ArticlesList extends Fragment {
         return view;
     }
     public void updateFragment (List<Article> products){
+        Log.logInfo("SORTArticlesList", ""+products.size());
 
          mAdapter.updateContent(products);
     }
