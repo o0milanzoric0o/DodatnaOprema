@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="left"
         android:lines="2"
         android:ellipsize="end"
         android:text="@string/price"
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:gravity="left"
         android:text="@string/cena_txt"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="12sp" />

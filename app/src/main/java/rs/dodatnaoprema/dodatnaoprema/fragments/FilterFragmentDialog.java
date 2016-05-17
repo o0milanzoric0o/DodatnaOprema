@@ -126,7 +126,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
             @Override
             public void onClick(View v) {
 
-                ((SubCategoryArticlesActivity) getActivity()).filterPrices(down, up);
+                ((SubCategoryArticlesActivity) getActivity()).filterArticles(down, up);
                 SharedPreferencesUtils.putInt(getActivity(), AppConfig.SELECTED_PRICES_KEY, priceOptionSelected);
 
                 if (priceOptionSelected != 0) {

@@ -294,27 +294,30 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return mBrands;
     }
 
+    //check if some of filter's options is selected
     public boolean isFiltered() {
         return filtered;
     }
 
+    //set filter's state and indicator color
     public void setFiltered(boolean filtered) {
         this.filtered = filtered;
         changeFilterButtonColor();
     }
 
-    public void filterPrices(double down, double up) {
+    //filter articles by selected options
+    public void filterArticles(double down, double up) {
 
         filteredArticles = new ArrayList<>();
         filtered = true;
 
         selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
 
-        Log.logInfo("onResume", String.valueOf(allSubcategoryArticles.size()));
-
+        //price filter
         for (Article article : allSubcategoryArticles) {
             if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
 
+                //brands filter
                 if (selectedBrands.size() > 0) {
                     if (selectedBrands.contains(article.getBrendIme())) {
                         filteredArticles.add(article);
@@ -329,10 +332,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
+        setFiltered(false);
     }
 
+    //set filter indicator color
     private void changeFilterButtonColor() {
 
         if (isFiltered()) {
