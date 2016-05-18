@@ -55,6 +55,7 @@
 
     <string name="loading">Loading…</string>
 
+    <!-- First tab footer strings-->
     <string name="recyclerview_footer_text">Prevuci za prelazak na  karticu "PONUDA"</string>
     <string name="recyclerview_footer_image_description">arrow_up</string>
 
@@ -113,6 +114,13 @@
     <string name="OK">OK</string>
 
     <string name="cena_txt">Cena:</string>
+    <string name="brend_txt">Brend:</string>
+    <string name="description_txt">Opis artikla:</string>
+
+    <string name="stock_state_available">ima na stanju</string>
+    <string name="stock_state_sold">rasprodato</string>
+
+
     <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
     <string name="txt_brands">Brendovi</string>

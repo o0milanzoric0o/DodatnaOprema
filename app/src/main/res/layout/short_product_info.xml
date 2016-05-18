@@ -2,27 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="start">
+    <TextView
+        android:id="@+id/brandName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        android:text="@string/brend_txt"
+        android:textSize="@dimen/medium_text_size" />
 
     <TextView
         android:id="@+id/subcategoryName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="left"
-        android:lines="2"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        android:maxLines="2"
+        android:textStyle="bold"
         android:ellipsize="end"
         android:text="@string/price"
-        android:textSize="12sp" />
-
+        android:textSize="@dimen/medium_text_size" />
     <TextView
         android:id="@+id/productPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:gravity="left"
+        android:gravity="start"
         android:text="@string/cena_txt"
         android:textColor="@android:color/holo_red_dark"
-        android:textSize="12sp" />
+        android:textSize="@dimen/medium_text_size" />
+    <TextView
+        android:id="@+id/stockState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="start"
+        android:text=""
+        android:textSize="@dimen/medium_text_size" />
+
 
 </LinearLayout>

@@ -23,6 +23,10 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     private TextView productName;
     private TextView price;
+    private TextView brandName;
+    private TextView stockState;
+    private TextView shortDescription;
+
     private Context context;
     private boolean list;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
@@ -32,9 +36,16 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         public MyViewHolder(View view) {
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
+            brandName = (TextView) view.findViewById(R.id.brandName);
             price = (TextView) view.findViewById(R.id.productPrice);
+            stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
+
+            if (list) {
+                shortDescription = (TextView) view.findViewById(R.id.short_description_txt);
+            }
         }
+
         public void bind(final Article item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,10 +90,22 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
         holder.bind(products.get(position), listener);
         holder.setIsRecyclable(false);
+
         productName.setText(products.get(position).getArtikalNaziv().trim());
-        price.append(" "+products.get(position).getCenaSamoBrojFormat()+" "+products.get(position).getCenaPrikazExt());
+        brandName.setText(products.get(position).getBrendIme().trim());
+        price.append(" " + products.get(position).getCenaSamoBrojFormat() + " " + products.get(position).getCenaPrikazExt());
+        if (products.get(position).getStanje() > 0) {
+            stockState.setText(context.getString(R.string.stock_state_available));
+        } else {
+            stockState.setText(context.getString(R.string.stock_state_sold));
+        }
+
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
+
+        if (list && products.get(position).getArtikalKratakOpis().toString().length() > 0) {
+            shortDescription.append(" " + products.get(position).getArtikalKratakOpis().toString());
+        }
     }
 
 
@@ -96,6 +119,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         this.products = articles;
         notifyDataSetChanged();
     }
+
     public interface OnItemClickListener {
         void onItemClick(Article item, View view);
     }
