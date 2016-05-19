@@ -2,10 +2,12 @@ package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -26,6 +28,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private TextView brandName;
     private TextView stockState;
     private TextView shortDescription;
+    private ImageView saleIndicator;
 
     private Context context;
     private boolean list;
@@ -40,6 +43,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
+            saleIndicator = (ImageView) view.findViewById(R.id.saleIndicator);
 
             if (list) {
                 shortDescription = (TextView) view.findViewById(R.id.short_description_txt);
@@ -105,6 +109,28 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
         if (list && products.get(position).getArtikalKratakOpis().toString().length() > 0) {
             shortDescription.append(" " + products.get(position).getArtikalKratakOpis().toString());
+        }
+        if (products.get(position).getArtikalNaAkciji() == 6) {
+
+        }
+        switch (products.get(position).getArtikalNaAkciji()) {
+            case 6:
+                saleIndicator.setColorFilter(R.color.primary_dark);
+                saleIndicator.setVisibility(View.VISIBLE);
+                saleIndicator.setImageResource(R.drawable.ic_nav_sale);
+                break;
+            case 7:
+                saleIndicator.setVisibility(View.VISIBLE);
+                saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_new, null));
+                saleIndicator.setColorFilter(R.color.primary_dark);
+                break;
+            case 8:
+                saleIndicator.setVisibility(View.VISIBLE);
+                saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_best, null));
+                saleIndicator.setColorFilter(R.color.primary_dark);
+                break;
+            default:
+                break;
         }
     }
 

@@ -25,13 +25,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
                 android:padding="@dimen/standard_padding">
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/productImage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_vertical"
+                    android:background="@drawable/image_placeholder"
                     android:contentDescription="@string/image_description" />
+                    <ImageView
+                        android:id="@+id/saleIndicator"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentBottom="true"
+                        android:tint="@color/primary_dark"
+                        android:visibility="gone"/>
+                </RelativeLayout>
             </FrameLayout>
 
             <!-- layout for text (prices). it contains one TextView, but can contain more than one TextView (in future) -->
