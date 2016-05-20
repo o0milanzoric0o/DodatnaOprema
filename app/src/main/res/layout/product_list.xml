@@ -20,14 +20,12 @@
             android:orientation="horizontal"
             android:weightSum="1">
             <!-- layout for image -->
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".4"
                 android:padding="@dimen/standard_padding">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/productImage"
                     android:layout_width="100dp"
@@ -35,15 +33,15 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/image_placeholder"
                     android:contentDescription="@string/image_description" />
-                    <ImageView
-                        android:id="@+id/saleIndicator"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentBottom="true"
-                        android:tint="@color/primary_dark"
-                        android:visibility="gone"/>
-                </RelativeLayout>
-            </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/saleIndicator"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/productImage"
+                    android:contentDescription="@string/image_description"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <!-- layout for text (prices). it contains one TextView, but can contain more than one TextView (in future) -->
             <FrameLayout
@@ -57,16 +55,17 @@
             </FrameLayout>
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/short_description_txt"
-            android:layout_alignBottom="@+id/first_part"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/first_part"
             android:layout_gravity="center_vertical"
             android:gravity="start"
-            android:visibility="gone"
             android:text="@string/description_txt"
-            android:textSize="@dimen/medium_text_size" />
+            android:textSize="@dimen/medium_text_size"
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"

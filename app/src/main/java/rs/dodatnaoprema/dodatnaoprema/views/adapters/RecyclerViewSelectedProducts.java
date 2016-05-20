@@ -1,7 +1,9 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,10 +42,14 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
             brandName = (TextView) view.findViewById(R.id.brandName);
+
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
+
             saleIndicator = (ImageView) view.findViewById(R.id.saleIndicator);
+            saleIndicator.setColorFilter(ContextCompat.getColor(context, android.R.color.holo_red_dark), PorterDuff.Mode.SRC_ATOP);
+
 
             if (list) {
                 shortDescription = (TextView) view.findViewById(R.id.short_description_txt);
@@ -115,19 +121,16 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         }
         switch (products.get(position).getArtikalNaAkciji()) {
             case 6:
-                saleIndicator.setColorFilter(R.color.primary_dark);
                 saleIndicator.setVisibility(View.VISIBLE);
                 saleIndicator.setImageResource(R.drawable.ic_nav_sale);
                 break;
             case 7:
                 saleIndicator.setVisibility(View.VISIBLE);
                 saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_new, null));
-                saleIndicator.setColorFilter(R.color.primary_dark);
                 break;
             case 8:
                 saleIndicator.setVisibility(View.VISIBLE);
                 saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_best, null));
-                saleIndicator.setColorFilter(R.color.primary_dark);
                 break;
             default:
                 break;

@@ -4,13 +4,19 @@ package rs.dodatnaoprema.dodatnaoprema.common.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
 public class SharedPreferencesUtils {
     public static SharedPreferences.Editor getEditor(Context context, String key) {
@@ -51,6 +57,26 @@ public class SharedPreferencesUtils {
             e.printStackTrace();
         }
         editor.apply();
+    }
+    public static void putArrayListArticle(Context context, String key, List<Article> mList) {
+
+        SharedPreferences.Editor editor = getEditor(context, key);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(mList);
+        editor.putString(key, json);
+        editor.commit();
+    }
+    public static List<Article> getArrayListArticle(Context context, String key) {
+
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = prefs.getString(key, "");
+        Type type = new TypeToken<List<Article>>(){}.getType();
+        List<Article> students= gson.fromJson(json, type);
+
+        return students;
     }
 
     public static void putInt(Context context, String key, int value) {

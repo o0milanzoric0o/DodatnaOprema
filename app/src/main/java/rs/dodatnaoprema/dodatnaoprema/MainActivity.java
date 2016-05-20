@@ -290,11 +290,24 @@ public class MainActivity extends FragmentActivity
         } else if (id == R.id.nav_chart) {
 
         } else if (id == R.id.nav_best) {
-
+            Intent intent = new Intent(this, OffersActivity.class);
+            intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[2]);
+            intent.putExtra("AllCategories", (Serializable) getBestSellingProducts());
+            startActivityOneArticle(intent);
 
         } else if (id == R.id.nav_new) {
 
+            Intent intent = new Intent(this, OffersActivity.class);
+            intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[1]);
+            intent.putExtra("AllCategories", (Serializable) getNewProducts());
+            startActivityOneArticle(intent);
+
+
         } else if (id == R.id.nav_sale) {
+            Intent intent = new Intent(this, OffersActivity.class);
+            intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
+            intent.putExtra("AllCategories", (Serializable) getProductsOnSale());
+            startActivityOneArticle(intent);
 
         } else if (id == R.id.nav_how_to_buy) {
 

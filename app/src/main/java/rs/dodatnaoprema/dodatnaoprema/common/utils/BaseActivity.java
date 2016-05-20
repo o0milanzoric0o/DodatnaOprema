@@ -1,11 +1,16 @@
 package rs.dodatnaoprema.dodatnaoprema.common.utils;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
+import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -30,7 +35,10 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item_sale:
-                Toast.makeText(this, "Clicked: Menu No. 2 - SubMenu No .2", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, OffersActivity.class);
+                intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
+                intent.putExtra("AllCategories",(Serializable) SharedPreferencesUtils.getArrayListArticle(this,"SALE"));
+                startActivity(intent);
                 return true;
 
             default:

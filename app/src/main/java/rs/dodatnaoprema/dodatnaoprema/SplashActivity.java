@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.AllBrands;
@@ -44,10 +45,11 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.splash_layout);
         ImageView image = (ImageView) findViewById(R.id.img_logo);
-        image.setBackgroundResource(R.drawable.chainsaw_splah_screen_logo);
-        AnimationDrawable rocketAnimation = (AnimationDrawable) image.getBackground();
-        rocketAnimation.start();
-
+        if (image != null) {
+            image.setBackgroundResource(R.drawable.chainsaw_splah_screen_logo);
+            AnimationDrawable rocketAnimation = (AnimationDrawable) image.getBackground();
+            rocketAnimation.start();
+        }
         mVolleySingleton = VolleySingleton.getsInstance(this);
         intent = new Intent(getApplicationContext(), MainActivity.class);
 
@@ -97,6 +99,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "SALE", mArticles);
                     intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
                     response();
                 }
@@ -118,6 +121,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "NEW", mArticles);
                     intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
                     response();
                 }
@@ -140,6 +144,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "BEST", mArticles);
                     intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mArticles);
                     response();
                 }

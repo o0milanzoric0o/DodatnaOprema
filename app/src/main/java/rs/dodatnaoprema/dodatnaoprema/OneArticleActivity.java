@@ -21,6 +21,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -30,7 +31,7 @@ import android.widget.RelativeLayout;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 
-public class OneArticleActivity extends AppCompatActivity {
+public class OneArticleActivity extends BaseActivity {
 
     private NetworkImageView mImageView;
     private TextView mTextViewBrendName;
