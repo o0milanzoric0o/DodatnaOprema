@@ -26,6 +26,7 @@
 
     <color name="blue">#00abea</color>
     <color name="white">#ffffff</color>-->
+    <color name="white_transparent">#99FFFFFF</color>-->
 
     <color name="primary">#2196f3</color>
     <color name="primary_dark">#1976D2</color>

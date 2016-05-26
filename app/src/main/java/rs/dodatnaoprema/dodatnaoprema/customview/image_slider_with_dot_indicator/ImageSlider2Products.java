@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -74,7 +75,6 @@ public class ImageSlider2Products extends RelativeLayout {
                 for (int i = 0; i < dotsCount; i++) {
                     mdots[i].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.nonselecteditem_dot));
                 }
-
                 mdots[position].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
             }
 
@@ -153,7 +153,7 @@ public class ImageSlider2Products extends RelativeLayout {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((LinearLayout) object);
+            return view == ((RelativeLayout) object);
         }
 
         @Override
@@ -168,10 +168,23 @@ public class ImageSlider2Products extends RelativeLayout {
             itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_double_version, container, false);
             NetworkImageView imageView_left = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_1);
             NetworkImageView imageView_middle = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_2);
+            TextView tv_item_1 = (TextView) itemView.findViewById(R.id.tv_price_title_item_1);
+            TextView tv_item_2 = (TextView) itemView.findViewById(R.id.tv_price_title_item_2);
 
             ImageLoader mImageLoader = VolleySingleton.getsInstance(mContext).getImageLoader();
             imageView_left.setImageUrl(mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getSrednjaSlika(), mImageLoader);
             imageView_middle.setImageUrl(mProductArray.get(position).getSrednjaSlika(), mImageLoader);
+
+            String item1_str = mProductArray.get(position-1>=0 ? position-1: mProductArray.size()-1).getArtikalNaziv();
+            item1_str = item1_str + "\n" + mProductArray.get(position-1>=0 ? position-1: mProductArray.size()-1).getCenaBroj();
+            item1_str = item1_str + " DIN";
+            tv_item_1.setText(item1_str);
+
+            String item2_str = mProductArray.get(position).getArtikalNaziv();
+            item2_str = item2_str + "\n" + mProductArray.get(position).getCenaBroj();
+            item2_str = item2_str + " DIN";
+            tv_item_2.setText(item2_str);
+
             container.addView(itemView);
 
             return itemView;
@@ -179,7 +192,7 @@ public class ImageSlider2Products extends RelativeLayout {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((LinearLayout) object);
+            container.removeView((RelativeLayout) object);
 
         }
     }
