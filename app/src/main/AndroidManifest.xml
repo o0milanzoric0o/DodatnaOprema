@@ -54,16 +54,6 @@
                 android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoriesActivity"/>
         </activity>
         <activity
-            android:name=".SubCategorySpecificationActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity"/>
-        </activity>
-        <activity
             android:name=".OffersActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

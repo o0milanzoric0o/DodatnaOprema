@@ -142,10 +142,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                     if (nextImgStateGrid) {
                         listGridChangeBtn.setImageResource(R.drawable.ic_reorder_black_24dp);
                         nextImgStateGrid = false;
+                        ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).scrollToTop();
+
 
                     } else {
                         listGridChangeBtn.setImageResource(R.drawable.ic_view_module_black_24dp);
                         nextImgStateGrid = true;
+                        ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).scrollToTop();
 
                     }
                     flipCard();
@@ -169,11 +172,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 setClickedSubcategoryId(mArticleId);
                 setNumberOfResults(mArticles.size());
                 setBrands(mBrands);
-               /* Intent intent = new Intent(getApplicationContext(), SubCategorySpecificationActivity.class);
-                intent.putExtra("NumberOfArticles", mArticles.size());
-                intent.putExtra("KategorijaID", mArticleId);
-                intent.putExtra("Brendovi", (Serializable) mBrands);
-                startActivity(intent);*/
+
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 FilterFragmentDialog frag = new FilterFragmentDialog();
                 frag.show(ft, "txn_tag");
@@ -276,6 +275,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         Log.logInfo("SORT", ""+articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
+        setNumberOfResults(articles.size());
     }
 
     private void setNumberOfResults(int number) {
@@ -326,6 +326,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                     filteredArticles.add(article);
                 }
         }
+
         updateList(filteredArticles);
     }
 

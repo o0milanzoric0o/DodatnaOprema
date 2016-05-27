@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,6 +33,7 @@ public class ArticlesGrid extends Fragment {
     private RecyclerViewSelectedProducts mAdapter;
 
     private VolleySingleton mVolleySingleton;
+    private ScrollView mScrollView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
@@ -40,8 +42,11 @@ public class ArticlesGrid extends Fragment {
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
 
-        mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.hasFixedSize();
+        mRecyclerView.setNestedScrollingEnabled(false);
+
+        mScrollView = (ScrollView) view.findViewById(R.id.scrollView);
 
         // use a linear layout manager
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
@@ -100,6 +105,10 @@ public class ArticlesGrid extends Fragment {
     public void updateFragment (List<Article> products){
 
         mAdapter.updateContent(products);
+    }
+
+    public void scrollToTop(){
+        mScrollView.fullScroll(ScrollView.FOCUS_UP);
     }
 
 }

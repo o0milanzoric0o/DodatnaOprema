@@ -116,9 +116,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         if (list && products.get(position).getArtikalKratakOpis().toString().length() > 0) {
             shortDescription.append(" " + products.get(position).getArtikalKratakOpis().toString());
         }
-        if (products.get(position).getArtikalNaAkciji() == 6) {
 
-        }
         switch (products.get(position).getArtikalNaAkciji()) {
             case 6:
                 saleIndicator.setVisibility(View.VISIBLE);
@@ -140,6 +138,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public int getItemCount() {
+
         return products.size();
     }
 

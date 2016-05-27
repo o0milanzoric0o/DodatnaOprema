@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -37,6 +38,8 @@ public class ArticlesList extends Fragment {
     private FrameLayout mHeader;
     private RecyclerViewSelectedProducts mAdapter;
 
+    private ScrollView mScrollView;
+
     private VolleySingleton mVolleySingleton;
 
 
@@ -46,10 +49,15 @@ public class ArticlesList extends Fragment {
         activity = (SubCategoryArticlesActivity) getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
-       // mHeader = (FrameLayout) view.findViewById(R.id.header);
+        // mHeader = (FrameLayout) view.findViewById(R.id.header);
 
-        mRecyclerView.setNestedScrollingEnabled(true);
+        // mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setHasFixedSize(true);
+
+        mRecyclerView.hasFixedSize();
+        mRecyclerView.setNestedScrollingEnabled(false);
+
+        mScrollView = (ScrollView) view.findViewById(R.id.scrollView);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -100,9 +108,7 @@ public class ArticlesList extends Fragment {
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
-                        }
-                        else
-                        {
+                        } else {
                             Log.logInfo("LALALA", "FAILED");
                         }
                     }
@@ -122,10 +128,13 @@ public class ArticlesList extends Fragment {
 
         return view;
     }
-    public void updateFragment (List<Article> products){
-        Log.logInfo("SORTArticlesList", ""+products.size());
 
-         mAdapter.updateContent(products);
+    public void updateFragment(List<Article> products) {
+
+        mAdapter.updateContent(products);
     }
+
+    public void scrollToTop() {
+        mScrollView.fullScroll(ScrollView.FOCUS_UP);    }
 
 }

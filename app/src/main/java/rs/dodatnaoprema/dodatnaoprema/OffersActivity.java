@@ -104,7 +104,6 @@ public class OffersActivity extends BaseActivity {
         });
 
         content.pullList();
-
     }
 
     @Override

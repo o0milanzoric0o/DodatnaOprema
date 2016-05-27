@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/button_holder_background"
-    android:orientation="vertical">
+    android:fillViewport="true">
+    <!-- Here you put the rest of your current view-->
 
-    <include layout="@layout/recycler_view" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_holder_background"
+        android:descendantFocusability="blocksDescendants"
+        android:fillViewport="true"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <include layout="@layout/recycler_view" />
+
+    </LinearLayout>
+</ScrollView>

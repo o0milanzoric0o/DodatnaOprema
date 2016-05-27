@@ -21,6 +21,7 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
@@ -97,6 +98,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
         TextView mTextViewResults = (TextView) root.findViewById(R.id.searchResultsNumber);
         if (mTextViewResults != null) {
+            Log.logInfo("SEARCH", "Broj rezultata dialog: "+((SubCategoryArticlesActivity) getActivity()).getNumberOfResults());
             mTextViewResults.setText(getString(R.string.txt_search_results, ((SubCategoryArticlesActivity) getActivity()).getNumberOfResults()));
         }
 
