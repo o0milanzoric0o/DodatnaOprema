@@ -150,4 +150,8 @@
 
     <string name="title_activity_one_article">OneArticleActivity</string>
 
+    <!-- cart strings-->
+    <string name="empty_cart_text">Trenutno nema proizvoda u korpi.</string>
+    <string name="empty_cart_btn_text">Pogledaj proizvode</string>
+
 </resources>
