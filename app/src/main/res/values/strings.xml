@@ -154,4 +154,6 @@
     <string name="empty_cart_text">Trenutno nema proizvoda u korpi.</string>
     <string name="empty_cart_btn_text">Pogledaj proizvode</string>
 
+
+    <string name="add_to_chart">Dodaj u korpu </string>
 </resources>

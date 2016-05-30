@@ -1,7 +1,9 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -11,7 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -43,12 +47,16 @@ public class OneArticleActivity extends BaseActivity {
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
 
+    private TextView mTextViewKorpa;
+
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
     private OneArticle mOneArticle;
 
     private Context mContext;
+
+    public int quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +75,16 @@ public class OneArticleActivity extends BaseActivity {
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
 
+        mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-      //  mTextViewAbout = (TextView) findViewById(R.id.textView_about);
-      //  mWebView = (WebView) findViewById(R.id.webView);
+        quantity = 0;
+
 
         mOneArticle= (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
@@ -146,15 +156,7 @@ public class OneArticleActivity extends BaseActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         mTabLayout.setupWithViewPager(mViewPager);*/
     }
-/*
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle(getSupportFragmentManager());
-        adapter.addFragment(new OneArticleTabOne(), "Opis");
-        adapter.addFragment(new OneArticleTabTwo(), "Kako kupiti");
-        viewPager.setAdapter(adapter);
-    }
 
-*/
     public String opis()
     {
         Object  opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
@@ -166,7 +168,7 @@ public class OneArticleActivity extends BaseActivity {
 
     public void morePics(View v)
     {
-        //selected|_item.xml
+        //selected_item.xml
         Toast.makeText(this.getApplicationContext(),"wqeqeqeqe",Toast.LENGTH_LONG).show();
         mImageView.setSelected(true);
         new Handler().postDelayed(new Runnable() {
@@ -177,34 +179,25 @@ public class OneArticleActivity extends BaseActivity {
     }
 
     public void addToChart (View v){
-        //selected|_item.xml
-        show();
-    }
 
-    private void show()
-    {
-        RelativeLayout linearLayout = new RelativeLayout(mContext);
         final NumberPicker aNumberPicker = new NumberPicker(mContext,null,R.style.number_picker);
         aNumberPicker.setMaxValue(9999);
         aNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
-
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams numPicerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        numPicerParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-        linearLayout.setLayoutParams(params);
-        linearLayout.addView(aNumberPicker,numPicerParams);
-
+        aNumberPicker.setLayoutParams( new NumberPicker.LayoutParams(NumberPicker.LayoutParams.WRAP_CONTENT, NumberPicker.LayoutParams.WRAP_CONTENT));
+        aNumberPicker.setOrientation(LinearLayout.VERTICAL);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
         alertDialogBuilder.setTitle("Odaberite količinu");
-        alertDialogBuilder.setView(linearLayout);
+
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton("Izaberi",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
-                                Log.logDebug("","New Quantity Value : "+ aNumberPicker.getValue());
+
+                                quantity = aNumberPicker.getValue();
+
+                                mTextViewKorpa.setText("Količina: "+ quantity);
 
                             }
                         })
@@ -212,12 +205,21 @@ public class OneArticleActivity extends BaseActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
+                                quantity = 0;
+                                mTextViewKorpa.setText(R.string.add_to_chart);
                                 dialog.cancel();
                             }
                         });
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
 
+        Dialog d = alertDialogBuilder.setView(aNumberPicker).create();
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(d.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        d.show();
+        d.getWindow().setAttributes(lp);
     }
 
     @Override
