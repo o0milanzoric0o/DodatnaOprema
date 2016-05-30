@@ -38,8 +38,6 @@ public class ArticlesList extends Fragment {
     private FrameLayout mHeader;
     private RecyclerViewSelectedProducts mAdapter;
 
-    private ScrollView mScrollView;
-
     private VolleySingleton mVolleySingleton;
 
 
@@ -49,15 +47,12 @@ public class ArticlesList extends Fragment {
         activity = (SubCategoryArticlesActivity) getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setFlingFactor(1);
         // mHeader = (FrameLayout) view.findViewById(R.id.header);
 
         // mRecyclerView.setNestedScrollingEnabled(true);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(true);
 
-        mRecyclerView.hasFixedSize();
-        mRecyclerView.setNestedScrollingEnabled(false);
-
-        mScrollView = (ScrollView) view.findViewById(R.id.scrollView);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -135,6 +130,7 @@ public class ArticlesList extends Fragment {
     }
 
     public void scrollToTop() {
-        mScrollView.fullScroll(ScrollView.FOCUS_UP);    }
+        mRecyclerView.scrollToPosition(0);
+    }
 
 }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +15,7 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubCategories;
@@ -34,16 +34,21 @@ public class SubCategoriesActivity extends BaseActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
-        mTextView.setText(item.getKatsrblat());
+        if (mTextView != null) mTextView.setText(item.getKatsrblat());
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_subcategories);
+        CustomRecyclerView mRecyclerView = (CustomRecyclerView) findViewById(R.id.recycler_view_subcategories);
 
-        mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(true);
+        if (mRecyclerView != null) {
+            mRecyclerView.setFlingFactor(1);
+            mRecyclerView.setNestedScrollingEnabled(false);
+            mRecyclerView.setHasFixedSize(true);
+        }
 
         GridLayoutManager mLayoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -53,7 +58,7 @@ public class SubCategoriesActivity extends BaseActivity {
             mLayoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         }
         mLayoutManager.setAutoMeasureEnabled(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        if (mRecyclerView != null) mRecyclerView.setLayoutManager(mLayoutManager);
 
         RecyclerViewSubCategories mAdapter = new RecyclerViewSubCategories(this, subCategories, new RecyclerViewSubCategories.OnItemClickListener() {
             @Override
@@ -67,7 +72,7 @@ public class SubCategoriesActivity extends BaseActivity {
 
                 if (mHistory.contains(item.getKatIme())) {
                     mHistory.remove(item.getKatIme());
-                    mHistoryID.remove(item.getKategorijaArtikalaId());
+                    mHistoryID.remove((int) item.getKategorijaArtikalaId());
 
                     mHistory.add(0, item.getKatIme());
                     mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
@@ -95,7 +100,7 @@ public class SubCategoriesActivity extends BaseActivity {
 
             }
         });
-        mRecyclerView.setAdapter(mAdapter);
+        if (mRecyclerView != null) mRecyclerView.setAdapter(mAdapter);
 
     }
 
