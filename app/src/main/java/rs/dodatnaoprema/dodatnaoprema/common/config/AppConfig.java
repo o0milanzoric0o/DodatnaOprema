@@ -65,6 +65,13 @@ public class AppConfig {
     public static final String URL_REGISTER_GET = "http://masinealati.rs/parametri.php?action=registrujAndroid&tag=%1$s&email=%2$s&sifra=%3$s&komitentime=%4$s&komitentprezime=%5$s";
 
     /**
+     * Cart
+     */
+    public static final String URL_GET_CART = "http://masinealati.rs/parametri.php?action=korpaLista&userId=%1$s";
+    public static final String URL_ADD_CART_ITEM = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
+    public static final String URL_DELETE_CART_ITEM = "http://masinealati.rs/parametri.php?action=obrisiArtikalKorpa&id=%1$s&userId=%2$s";
+
+    /**
      * Number of tabs
      */
     public static final int TAB_NUMBER = 2;

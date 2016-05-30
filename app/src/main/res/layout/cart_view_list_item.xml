@@ -13,7 +13,7 @@
         android:text="" />
 
     <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/icon"
+        android:id="@+id/productImage"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
@@ -30,8 +30,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_toRightOf="@id/productImage"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="@string/app_name"
@@ -47,8 +47,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_toRightOf="@id/productImage"
         android:gravity="center_vertical"
         android:text="@string/app_name"
         android:textColor="@color/primary_text"
