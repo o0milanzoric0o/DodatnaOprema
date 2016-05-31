@@ -18,6 +18,7 @@
             android:text="@string/empty_cart_text" />
 
         <Button
+            android:id="@+id/btn_continue_shopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty_cart_btn_text" />

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -49,6 +50,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private List<Brendovus> mBrands = new ArrayList<>();
 
     private List<String> selectedBrands = new ArrayList<>();
+
+    private HashMap<String, ArrayList<String>> selectedSpecifications = null;
 
 
     private RelativeLayout mFooter;
@@ -97,7 +100,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
                     if (position == 0 && sortOption != 0) {
                         sortOption = 0;
-                       // mArticles = SortUtils.sortArticlesByPriceAscending(mArticles);
+                        // mArticles = SortUtils.sortArticlesByPriceAscending(mArticles);
                         //Log.logInfo("SORT", ""+mArticles.size());
                         updateList(SortUtils.sortArticlesByPriceAscending(mArticles));
 
@@ -105,8 +108,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                     } else if (position == 1 && sortOption != 1) {
                         sortOption = 1;
                         //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
-                       // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
-                        Log.logInfo("SORT", ""+mArticles.size());
+                        // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
+                        Log.logInfo("SORT", "" + mArticles.size());
                         updateList(SortUtils.sortArticlesByPriceDescending(mArticles));
 
                     }
@@ -170,7 +173,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 }, 1000);
 
                 setClickedSubcategoryId(mArticleId);
-                setNumberOfResults(mArticles.size());
+                setNumberOfResults(filteredArticles.size());
                 setBrands(mBrands);
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -219,8 +222,9 @@ public class SubCategoryArticlesActivity extends BaseActivity {
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
 
-                   // mArticles = articlesFilteredByCategory.getArtikli();
+                    // mArticles = articlesFilteredByCategory.getArtikli();
                     mArticles = SortUtils.sortArticlesByPriceAscending(articlesFilteredByCategory.getArtikli());
+                    filteredArticles = mArticles;
                     allSubcategoryArticles = articlesFilteredByCategory.getArtikli();
 
                     mBrands = articlesFilteredByCategory.getBrendovi();
@@ -272,10 +276,10 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     public void updateList(List<Article> articles) {
 
-        Log.logInfo("SORT", ""+articles.size());
+        Log.logInfo("SORT", "" + articles.size());
+        setNumberOfResults(articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
-        setNumberOfResults(articles.size());
     }
 
     private void setNumberOfResults(int number) {
@@ -332,8 +336,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
 
+        super.onDestroy();
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
         setFiltered(false);
@@ -345,10 +349,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         if (isFiltered()) {
             filterImg.setColorFilter(ContextCompat.getColor(this, R.color.primary_dark));
 
-        }
-        else {
+        } else {
             filterImg.setColorFilter(Color.BLACK);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
 

@@ -77,7 +77,7 @@ public class MainActivity extends FragmentActivity
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
             }
         });

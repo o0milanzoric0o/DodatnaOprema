@@ -12,8 +12,8 @@
         android:layout_centerVertical="true"
         android:text="" />
 
-    <ImageView
-        android:id="@+id/icon"
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/productImage"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
@@ -21,7 +21,7 @@
         android:layout_marginEnd="6dip"
         android:layout_marginRight="6dip"
         android:layout_toRightOf="@id/cb_item"
-        android:src="@drawable/chainsaw_128" />
+        android:background="@drawable/chainsaw_128" />
 
     <TextView
         android:id="@+id/secondLine"
@@ -30,8 +30,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_toRightOf="@id/productImage"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="@string/app_name"
@@ -47,8 +47,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_toEndOf="@id/icon"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toEndOf="@id/productImage"
+        android:layout_toRightOf="@id/productImage"
         android:gravity="center_vertical"
         android:text="@string/app_name"
         android:textColor="@color/primary_text"

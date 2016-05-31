@@ -26,9 +26,9 @@ public class AppConfig {
     public static final String URL_PARAM_ID = "id";
     public static final String URL_PARAM_FROM = "od";
     public static final String URL_PARAM_TO = "do";
-    public static final String URL_PARAM_CURRENCY = "valutasession";
-    public static final String URL_PARAM_LANGUAGE = "jezik";
-    public static final String URL_PARAM_BRAND = "brend";
+    //public static final String URL_PARAM_CURRENCY = "valutasession";
+    //public static final String URL_PARAM_LANGUAGE = "jezik";
+    //public static final String URL_PARAM_BRAND = "brend";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
@@ -38,7 +38,7 @@ public class AppConfig {
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
-    public static final String URL_VALUE_ARTICLE= "artikal";
+    public static final String URL_VALUE_ARTICLE = "artikal";
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
     public static final String URL_ALL_BRENDS = "http://masinealati.rs/parametri.php?action=listaBrendova";
@@ -65,6 +65,13 @@ public class AppConfig {
     public static final String URL_REGISTER_GET = "http://masinealati.rs/parametri.php?action=registrujAndroid&tag=%1$s&email=%2$s&sifra=%3$s&komitentime=%4$s&komitentprezime=%5$s";
 
     /**
+     * Cart
+     */
+    public static final String URL_GET_CART = "http://masinealati.rs/parametri.php?action=korpaLista&userId=%1$s";
+    public static final String URL_ADD_CART_ITEM = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
+    public static final String URL_DELETE_CART_ITEM = "http://masinealati.rs/parametri.php?action=obrisiArtikalKorpa&id=%1$s&userId=%2$s";
+
+    /**
      * Number of tabs
      */
     public static final int TAB_NUMBER = 2;
@@ -84,7 +91,7 @@ public class AppConfig {
      * Sort options
      */
     public static final int SORT_ASCENDING = 2;
-    public static final int SORT_DESCENDING = 3;
+    // public static final int SORT_DESCENDING = 3;
 
     public static final String ABOUT_PRODUCT = "O proizvodu";
 
