@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +45,6 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Produ
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
-import rs.dodatnaoprema.dodatnaoprema.signin.SignInActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
 
 // mirko svemirko komentar
@@ -56,7 +54,7 @@ public class MainActivity extends FragmentActivity
     // The following fields are added to support GCM
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
-    RelativeLayout mFourthButton;
+
 
     AppBarLayout mAppBar;
 
@@ -82,7 +80,6 @@ public class MainActivity extends FragmentActivity
             }
         });
 
-        mFourthButton = (RelativeLayout) findViewById(R.id.fourth_round_button);
 
         //  icMore.setVisibility(View.GONE);
 
@@ -304,10 +301,7 @@ public class MainActivity extends FragmentActivity
 
 
         } else if (id == R.id.nav_sale) {
-            Intent intent = new Intent(this, OffersActivity.class);
-            intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
-            intent.putExtra("AllCategories", (Serializable) getProductsOnSale());
-            startActivityOneArticle(intent);
+            articlesOnSale();
 
         } else if (id == R.id.nav_how_to_buy) {
 
@@ -396,8 +390,15 @@ public class MainActivity extends FragmentActivity
 
         intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
         intent.putExtra("SveKategorije", (Serializable) mAllCategories);
-
         startActivity(intent);
+    }
+
+    public void articlesOnSale() {
+
+        Intent intent = new Intent(this, OffersActivity.class);
+        intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
+        intent.putExtra("AllCategories", (Serializable) getProductsOnSale());
+        startActivityOneArticle(intent);
     }
 
 

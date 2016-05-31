@@ -146,6 +146,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((SubCategoryArticlesActivity) getActivity()).filterArticles(0.0, Double.MAX_VALUE);
                 //reset spinner with prices
                 if (priceOptions != null) priceOptions.setSelection(0);
 

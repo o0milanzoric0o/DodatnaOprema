@@ -29,6 +29,9 @@
     <string name="group_name">Naziv categories</string>
 
     <!-- Round buttons labels (first tab) -->
+    <string name="first_button_text">Kontakt</string>
+    <string name="second_button_text">Kako kupiti?</string>
+    <string name="third_button_text">Na akciji</string>
     <string name="fourth_button_text">Sve kategorije</string>
 
     <!-- Progress dialog message -->

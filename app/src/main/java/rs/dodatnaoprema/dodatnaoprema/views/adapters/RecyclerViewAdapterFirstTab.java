@@ -57,6 +57,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private GridLayoutManager mLayoutManager;
 
+    private RelativeLayout mThirdButton;
     private RelativeLayout mFourthButton;
     private VolleySingleton mVolleySingleton;
 
@@ -167,6 +168,18 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             imageViewPagerWDotIndicator_three_imgs.setAllBrands(allBrands);
             imageViewPagerWDotIndicator_two_imgs.setProductsOfTheWeek(products_of_the_week);
 
+            mThirdButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mThirdButton.setSelected(true);
+                    ((MainActivity) context).articlesOnSale();
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            mThirdButton.setSelected(false);
+                        }
+                    }, 1000);
+                }
+            });
             mFourthButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -243,6 +256,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             imageViewPagerWDotIndicator_three_imgs = (ImageSlider3Brands) itemView.findViewById(R.id.view_pager_dot_ind_0);
             imageViewPagerWDotIndicator_two_imgs = (ImageSlider2Products) itemView.findViewById(R.id.view_pager_dot_ind_1);
 
+            mThirdButton = (RelativeLayout) itemView.findViewById(R.id.third_round_button);
             mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
 
         }

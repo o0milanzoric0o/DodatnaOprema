@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:grid="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="fill_horizontal"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginStart="@dimen/activity_horizontal_margin"
     android:background="@color/button_holder_background"
     android:baselineAligned="false"
-    grid:columnCount="4"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    grid:columnCount="4">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -22,26 +21,34 @@
         grid:layout_columnWeight="1"
         grid:layout_rowSpan="1">
 
-        <ImageView
-            android:id="@+id/first_round_button"
+        <FrameLayout
+            android:id="@+id/img_first_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/header_button_circle"
-            android:foregroundGravity="center" />
+            android:foregroundGravity="center">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/description_txt"
+                android:src="@drawable/ic_nav_contact" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/first_button_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/first_round_button"
+            android:layout_below="@+id/img_first_round_button"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
-            android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Button #1"
-            android:lines="2"/>
+            android:gravity="center"
+            android:lines="2"
+            android:paddingBottom="10dp"
+            android:text="@string/first_button_text" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -54,13 +61,22 @@
         grid:layout_columnWeight="1"
         grid:layout_rowSpan="1">
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/second_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/header_button_circle"
-            android:foregroundGravity="center" />
+            android:foregroundGravity="center">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/description_txt"
+                android:src="@drawable/ic_nav_info" />
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/second_button_label"
@@ -69,14 +85,15 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/second_round_button"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:lines="2"
-            android:layout_marginTop="10dp"
-            android:text="Button #2" />
+            android:paddingBottom="10dp"
+            android:text="@string/second_button_text" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/third_round_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -86,26 +103,34 @@
         grid:layout_columnWeight="1"
         grid:layout_rowSpan="1">
 
-        <ImageView
-            android:id="@+id/third_round_button"
+        <FrameLayout
+            android:id="@+id/img_third_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/header_button_circle"
-            android:foregroundGravity="center" />
+            android:foregroundGravity="center">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/description_txt"
+                android:src="@drawable/ic_nav_sale" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/third_button_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/third_round_button"
+            android:layout_below="@+id/img_third_round_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:paddingBottom="10dp"
             android:gravity="center"
             android:lines="2"
-            android:text="Button #3" />
+            android:paddingBottom="10dp"
+            android:text="@string/third_button_text" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -119,13 +144,21 @@
         grid:layout_columnWeight="1"
         grid:layout_rowSpan="1">
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/img_fourth_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/header_button_circle"
-            android:src="@drawable/ic_list_black_36dp" />
+            android:foregroundGravity="center">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/description_txt"
+                android:src="@drawable/ic_list_black_36dp" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/fourth_button_label"
@@ -135,9 +168,9 @@
             android:layout_below="@+id/img_fourth_round_button"
             android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:lines="2"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:lines="2"
             android:text="@string/fourth_button_text" />
     </RelativeLayout>
 
