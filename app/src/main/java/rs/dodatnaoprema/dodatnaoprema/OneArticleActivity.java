@@ -166,6 +166,11 @@ public class OneArticleActivity extends BaseActivity {
         return opisText;
     }
 
+    public int getArtikalId() {
+
+        return mOneArticle.getArtikal().getArtikalId();
+    }
+
     public void morePics(View v)
     {
         //selected_item.xml
