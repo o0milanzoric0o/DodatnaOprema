@@ -1,18 +1,14 @@
 {
   "project_info": {
-    "project_id": "alati-2b56d",
     "project_number": "125491094864",
-    "name": "Alati"
+    "project_id": "alati-2b56d"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:125491094864:android:6d34b824d80e405e",
-        "client_id": "android:rs.dodatnaoprema.dodatnaoprema",
-        "client_type": 1,
         "android_client_info": {
-          "package_name": "rs.dodatnaoprema.dodatnaoprema",
-          "certificate_hash": []
+          "package_name": "rs.dodatnaoprema.dodatnaoprema"
         }
       },
       "oauth_client": [
@@ -29,21 +25,18 @@
           "client_type": 3
         }
       ],
-      "api_key": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeoSN7YXsM8iPk0ftv8R0oQxZfmB2dFPM"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1
         },
-        "cloud_messaging_service": {
-          "status": 2,
-          "apns_config": []
-        },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
-        },
-        "google_signin_service": {
-          "status": 2
         },
         "ads_service": {
           "status": 1
@@ -51,6 +44,5 @@
       }
     }
   ],
-  "client_info": [],
-  "ARTIFACT_VERSION": "1"
+  "configuration_version": "1"
 }

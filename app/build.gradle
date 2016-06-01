@@ -6,7 +6,7 @@ android {
         debug_signing {
             keyAlias 'debugkeyshared'
             keyPassword 'android'
-            storeFile file('C:/Users/mirna/AndroidStudioProjects/DodatnaOprema/keys/debugKeystore.jks')
+            storeFile file('C:/Users/milan/AndroidStudioProjects/DodatnaOprema/keys/debugKeystore.jks')
             storePassword 'android'
         }
     }
@@ -31,6 +31,9 @@ android {
     }
     productFlavors {
     }
+    dexOptions {
+        incremental true
+    }
 }
 
 dependencies {
@@ -40,8 +43,8 @@ dependencies {
     // Dependency for Google Cloud Messaging
     // Dependency for dot indicator
     compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.google.android.gms:play-services-auth:8.4.0'
-    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services:9.0.1'
+    compile 'com.google.android.gms:play-services-auth:9.0.1'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'

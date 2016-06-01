@@ -1,7 +1,6 @@
 Server API Key
 AIzaSyAiTGJHKl54516aSXlFkmaYSoxUp59_Oic
-Sender ID:
-125491094864
+Sender ID:125491094864
 
 Google Sign-In
 Registered SHA-1s:
