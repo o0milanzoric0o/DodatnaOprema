@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
+
 
 public class Category implements Serializable{
 
@@ -90,7 +93,26 @@ public class Category implements Serializable{
      * @return The child
      */
     public List<Child> getChild() {
-        return child;
+
+        List<Child> visibleSubcategories = new ArrayList<>();
+
+        if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+            // jeste logovan
+            User user = MyApplication.getInstance().getPrefManager().getUser();
+
+            if (user != null) {
+                if (Integer.parseInt(user.getUserType()) > 2) {
+                    return child;
+                }
+            }
+        }
+        for (Child subcategory : child
+                ) {
+            if (subcategory.getKategorijeVidljivZaMP() == 1) visibleSubcategories.add(subcategory);
+
+        }
+        return visibleSubcategories;
+
     }
 
 

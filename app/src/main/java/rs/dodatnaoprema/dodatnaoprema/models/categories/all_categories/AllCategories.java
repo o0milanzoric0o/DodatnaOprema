@@ -7,8 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
 
-public class AllCategories implements Serializable{
+
+public class AllCategories implements Serializable {
 
     @SerializedName("tag")
     @Expose
@@ -58,7 +61,25 @@ public class AllCategories implements Serializable{
      * @return The kategorije
      */
     public List<Category> getKategorije() {
-        return kategorije;
+
+        List<Category> visibleCategories = new ArrayList<>();
+
+        if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+            // jeste logovan
+            User user = MyApplication.getInstance().getPrefManager().getUser();
+
+            if (user != null) {
+                if (Integer.parseInt(user.getUserType()) > 2) {
+                    return kategorije;
+                }
+            }
+        }
+        for (Category category : kategorije
+                ) {
+            if (category.getKategorijeVidljivZaMP() == 1) visibleCategories.add(category);
+
+        }
+        return visibleCategories;
     }
 
 

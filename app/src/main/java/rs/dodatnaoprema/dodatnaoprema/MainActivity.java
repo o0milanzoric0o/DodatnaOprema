@@ -36,6 +36,7 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.gcm.GcmIntentService;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -322,24 +323,21 @@ public class MainActivity extends FragmentActivity
         return mAllCategories;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Article> getProductsOnSale() {
         List<Article> mProductsOnSale;
-        mProductsOnSale = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[0]);
+        mProductsOnSale = SharedPreferencesUtils.getArrayListArticle(this, AppConfig.SALE);
         return mProductsOnSale;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Article> getNewProducts() {
         List<Article> mNewProducts;
-        mNewProducts = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[1]);
+        mNewProducts = SharedPreferencesUtils.getArrayListArticle(this, AppConfig.NEW);
         return mNewProducts;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Article> getBestSellingProducts() {
         List<Article> mBestSelling;
-        mBestSelling = (List<Article>) intent.getSerializableExtra(AppConfig.FIRST_TAB_ITEMS[2]);
+        mBestSelling = SharedPreferencesUtils.getArrayListArticle(this, AppConfig.BEST);
         return mBestSelling;
     }
 
@@ -355,17 +353,14 @@ public class MainActivity extends FragmentActivity
         return brands;
     }
 
-    public ArrayList<YMALCategory> getYMALCategories() {
-        ArrayList<YMALCategory> ymalCategories;
-        ymalCategories = (ArrayList<YMALCategory>) intent.getSerializableExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES);
+    public List<YMALCategory> getYMALCategories() {
+        List<YMALCategory> ymalCategories;
+        ymalCategories =  SharedPreferencesUtils.getArrayListYAML(this, AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES);
         return ymalCategories;
     }
 
     private void getIntentExtras() {
 
-        getProductsOnSale();
-        getNewProducts();
-        getBestSellingProducts();
         getCategoriesList();
 
     }

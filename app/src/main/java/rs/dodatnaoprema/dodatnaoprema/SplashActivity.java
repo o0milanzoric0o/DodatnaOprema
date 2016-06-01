@@ -99,8 +99,8 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
-                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "SALE", mArticles);
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.SALE, mArticles);
+                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
                     response();
                 }
             }
@@ -121,8 +121,8 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
-                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "NEW", mArticles);
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.NEW, mArticles);
+                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
                     response();
                 }
             }
@@ -144,8 +144,8 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
                 if (success) {
                     mArticles = articles.getKategorije();
-                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), "BEST", mArticles);
-                    intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mArticles);
+                    SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.BEST, mArticles);
+                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mArticles);
                     response();
                 }
             }
@@ -209,6 +209,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (success) {
                     mYMALCategories = ymalCategories.getKategorije();
                     intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
+                    SharedPreferencesUtils.putArrayListYAML(getApplicationContext(), AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, mYMALCategories);
                     response();
                 }
             }

@@ -52,6 +52,13 @@ public class AppConfig {
     public static final String THE_PRODUCTS_OF_THE_WEEK = "Proizvodi nedelje";
     public static final String ALL_BRANDS = "Svi brendovi";
     public static final String YOU_MAY_ALSO_LIKE_CATEGORIES = "Preporucene kategorije";
+
+
+    //Shared Preferences keys
+    public static final String SALE = "SALE";
+    public static final String NEW = "NEW";
+    public static final String BEST = "BEST";
+    public static final String ALL_CATEGORIES = "ALL_CATEGORIES";
     /**
      * History Shared Preferences
      */

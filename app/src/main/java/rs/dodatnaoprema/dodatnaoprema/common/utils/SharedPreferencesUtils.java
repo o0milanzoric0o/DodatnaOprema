@@ -17,6 +17,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 
 public class SharedPreferencesUtils {
     public static SharedPreferences.Editor getEditor(Context context, String key) {
@@ -58,6 +59,7 @@ public class SharedPreferencesUtils {
         }
         editor.apply();
     }
+
     public static void putArrayListArticle(Context context, String key, List<Article> mList) {
 
         SharedPreferences.Editor editor = getEditor(context, key);
@@ -67,16 +69,35 @@ public class SharedPreferencesUtils {
         editor.putString(key, json);
         editor.commit();
     }
+
     public static List<Article> getArrayListArticle(Context context, String key) {
 
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
         String json = prefs.getString(key, "");
-        Type type = new TypeToken<List<Article>>(){}.getType();
-        List<Article> students= gson.fromJson(json, type);
+        Type type = new TypeToken<List<Article>>() {
+        }.getType();
+        return gson.fromJson(json, type);
+    }
 
-        return students;
+    public static void putArrayListYAML(Context context, String key, List<YMALCategory> mList) {
+
+        SharedPreferences.Editor editor = getEditor(context, key);
+        Gson gson = new Gson();
+        String json = gson.toJson(mList);
+        editor.putString(key, json);
+        editor.commit();
+    }
+
+    public static List<YMALCategory> getArrayListYAML(Context context, String key) {
+
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, "");
+        Type type = new TypeToken<List<YMALCategory>>() {
+        }.getType();
+        return gson.fromJson(json, type);
     }
 
     public static void putInt(Context context, String key, int value) {
@@ -89,7 +110,6 @@ public class SharedPreferencesUtils {
     public static int getInt(Context context, String key) {
 
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
-
         return prefs.getInt(key, 0);
 
     }

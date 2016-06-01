@@ -70,20 +70,25 @@ public class SubCategoriesActivity extends BaseActivity {
                 mHistory = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_KEY);
                 mHistoryID = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_ID_KEY);
 
-                if (mHistory.contains(item.getKatIme())) {
+                if (mHistory.contains(item.getKatIme())) { //check if subcategory shortcut exists
+                    // move existing shortcut to the beginning of the array
                     mHistory.remove(item.getKatIme());
-                    mHistoryID.remove((int) item.getKategorijaArtikalaId());
+                    mHistoryID.remove(String.valueOf(item.getKategorijaArtikalaId()));
 
                     mHistory.add(0, item.getKatIme());
                     mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
                 } else {
+                    // create new subcategory shortcut at the beginning of the array
                     mHistory.add(0, item.getKatIme());
                     mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
                 }
 
+                //clear existing history
                 SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_KEY);
                 SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_ID_KEY);
-                if (mHistory.size() >= 4) {
+
+                //
+                if (mHistory.size() >= 4) { // limit size of history array to 4 items
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<>(mHistory.subList(0, 4)));
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, new ArrayList<>(mHistoryID.subList(0, 4)));
 
