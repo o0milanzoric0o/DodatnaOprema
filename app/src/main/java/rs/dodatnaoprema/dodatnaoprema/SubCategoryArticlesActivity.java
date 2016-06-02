@@ -298,7 +298,18 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return mBrands;
     }
 
+    public void setSelectedSpecifications(String key, List<String> values) {
+        if (selectedSpecifications.containsKey(key)) {
+
+            selectedSpecifications.remove(key);
+        }
+
+        selectedSpecifications.put(key, (ArrayList<String>) values);
+    }
+    //public HashMap<String, String>
+
     //check if some of filter's options is selected
+
     public boolean isFiltered() {
         return filtered;
     }

@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Detail;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 
 public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<RecyclerViewSubcategorySpecification.MyViewHolder> {
@@ -42,6 +45,22 @@ public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<R
         @Override
         public void selectedStrings(List<String> strings) {
 
+            boolean found = false;
+
+            Log.logInfo("MULTISPINNER", strings.toString());
+            for (Spec spec : specification) {
+                for (Detail detail : specification.get(specification.indexOf(spec)).getDetalj()) {
+                    if (strings.contains(detail.getIdSpecVrednostiImeVre())) {
+                        Log.logInfo("MULTISPINNER", spec.getGrupe());
+                        ((SubCategoryArticlesActivity)context).setSelectedSpecifications(spec.getGrupe(), strings);
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            //((SubCategoryArticlesActivity)context).setSelectedSpecifications();
+
         }
     }
 
@@ -65,12 +84,12 @@ public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<R
     public void onBindViewHolder(RecyclerViewSubcategorySpecification.MyViewHolder holder, int position) {
 
         List<String> myCollection = new ArrayList<>();
-        for ( int i=0;i<specification.get(position).getDetalj().size();i++){
+        for (int i = 0; i < specification.get(position).getDetalj().size(); i++) {
             myCollection.add(specification.get(position).getDetalj().get(i).getIdSpecVrednostiImeVre());
         }
         specificationGroup.setText(specification.get(position).getGrupe());
         multiSelectionSpinner.setItems(myCollection);
-      //  multiSelectionSpinner.setSelection(new int[]{0});
+        //  multiSelectionSpinner.setSelection(new int[]{0});
     }
 
     @Override

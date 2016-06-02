@@ -145,7 +145,6 @@ public class SplashActivity extends AppCompatActivity {
                 if (success) {
                     mArticles = articles.getKategorije();
                     SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.BEST, mArticles);
-                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[2], (Serializable) mArticles);
                     response();
                 }
             }
