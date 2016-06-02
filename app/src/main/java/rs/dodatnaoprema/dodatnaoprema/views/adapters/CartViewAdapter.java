@@ -39,9 +39,9 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Artikli artikal = artikliList.get(position);
-        holder.networkImageView.setImageUrl(artikal.getSlikaMain(), VolleySingleton.getsInstance(mContext).getImageLoader());
+        holder.networkImageView.setImageUrl(artikal.getSlike().get(0).getMalaSlika(), VolleySingleton.getsInstance(mContext).getImageLoader());
         holder.firstLine.setText(artikal.getArtikalNaziv());
-        holder.secondLine.setText(artikal.getCenaPrikaz());
+        holder.secondLine.setText(artikal.getCenaSamoBrojFormat());
     }
 
     @Override
