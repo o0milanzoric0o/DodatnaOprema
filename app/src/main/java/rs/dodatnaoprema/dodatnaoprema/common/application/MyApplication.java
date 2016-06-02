@@ -1,6 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.common.application;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -12,7 +12,7 @@ import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
 /**
  * Created by 1 on 3/8/2016.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     public static final String TAG = MyApplication.class
             .getSimpleName();
 

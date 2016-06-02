@@ -6,15 +6,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
-import rs.dodatnaoprema.dodatnaoprema.models.cart.Artikli;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -23,8 +19,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class CartActivity extends AppCompatActivity {
     private FrameLayout mContainer;
     private VolleySingleton mVolleySingleton;
-    private List<Artikli> mArtikli = new ArrayList<>();
-    ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

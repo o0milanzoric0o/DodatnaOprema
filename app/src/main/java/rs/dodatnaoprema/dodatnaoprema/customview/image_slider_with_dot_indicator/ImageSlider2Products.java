@@ -20,7 +20,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
-import github.chenupt.springindicator.SpringIndicator;
+//import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -33,7 +33,7 @@ public class ImageSlider2Products extends RelativeLayout {
 
     private final Handler mhandler = new Handler();
     private LinearLayout mDotsLayout = null;
-    private SpringIndicator mSpringIndicator = null;
+   // private SpringIndicator mSpringIndicator = null;
     private ViewPager mViewPager = null;
     private ViewPagerAdapter mAdapter = null;
     private ArrayList<Product> mProductsOfTheWeek = null;
