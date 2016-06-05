@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment">
+    tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment"
+    tools:showIn="@layout/activity_cart">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_cart"
