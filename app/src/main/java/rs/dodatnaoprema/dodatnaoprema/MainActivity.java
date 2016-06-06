@@ -319,7 +319,8 @@ public class MainActivity extends FragmentActivity
 
     @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
-        mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
+       // mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
+        mAllCategories = SharedPreferencesUtils.getArrayListCategories(this, AppConfig.ALL_CATEGORIES);
         return mAllCategories;
     }
 
@@ -342,15 +343,16 @@ public class MainActivity extends FragmentActivity
     }
 
     public ArrayList<Product> getProductsOfTheWeek() {
-        ArrayList<Product> products;
-        products = (ArrayList<Product>) intent.getSerializableExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK);
-        return products;
+        List<Product> products;
+        products = SharedPreferencesUtils.getArrayListProducts(this, AppConfig.THE_PRODUCTS_OF_THE_WEEK);
+        return new ArrayList<>(products);
     }
 
     public ArrayList<Brand> getAllBrands() {
-        ArrayList<Brand> brands;
-        brands = (ArrayList<Brand>) intent.getSerializableExtra(AppConfig.ALL_BRANDS);
-        return brands;
+        List<Brand> brands;
+        brands = SharedPreferencesUtils.getArrayListBrands(this, AppConfig.ALL_BRANDS);
+
+        return new ArrayList<>(brands);
     }
 
     public List<YMALCategory> getYMALCategories() {

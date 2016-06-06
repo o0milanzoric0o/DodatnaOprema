@@ -78,7 +78,9 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
                     mAllCategories = allCategories.getKategorije();
-                    intent.putExtra("AllCategories", (Serializable) mAllCategories);
+                   // intent.putExtra("AllCategories", (Serializable) mAllCategories);
+                    SharedPreferencesUtils.putArrayListCategories(getApplicationContext(), AppConfig.ALL_CATEGORIES, mAllCategories);
+
                     response();
                 }
             }
@@ -165,7 +167,9 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, ProductsOfTheWeek articles) {
                 if (success) {
                     mProducts = articles.getArtikli();
-                    intent.putExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK, (Serializable) mProducts);
+                    //intent.putExtra(AppConfig.THE_PRODUCTS_OF_THE_WEEK, (Serializable) mProducts);
+                    SharedPreferencesUtils.putArrayListProducts(getApplicationContext(), AppConfig.THE_PRODUCTS_OF_THE_WEEK, mProducts);
+
                     response();
                 }
             }
@@ -186,7 +190,8 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, AllBrands allBrands) {
                 if (success) {
                     mBrands = allBrands.getBrand();
-                    intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
+                   // intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
+                    SharedPreferencesUtils.putArrayListBrands(getApplicationContext(), AppConfig.ALL_BRANDS, mBrands);
                     response();
                 }
             }
@@ -207,7 +212,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, YMALCategories ymalCategories) {
                 if (success) {
                     mYMALCategories = ymalCategories.getKategorije();
-                    intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
+                   // intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
                     SharedPreferencesUtils.putArrayListYAML(getApplicationContext(), AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, mYMALCategories);
                     response();
                 }

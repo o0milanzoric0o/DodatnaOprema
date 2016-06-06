@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.io.Serializable;
 
+import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -23,11 +24,15 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
 
         switch (item.getItemId()) {
 
             case R.id.item_home:
-                Toast.makeText(this, "Clicked: Menu No. 1", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 return true;
 
             case R.id.item_signing:
@@ -35,9 +40,9 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item_sale:
-                Intent intent = new Intent(this, OffersActivity.class);
+                intent = new Intent(this, OffersActivity.class);
                 intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
-                intent.putExtra("AllCategories",(Serializable) SharedPreferencesUtils.getArrayListArticle(this,"SALE"));
+                intent.putExtra("AllCategories", (Serializable) SharedPreferencesUtils.getArrayListArticle(this, "SALE"));
                 startActivity(intent);
                 return true;
 

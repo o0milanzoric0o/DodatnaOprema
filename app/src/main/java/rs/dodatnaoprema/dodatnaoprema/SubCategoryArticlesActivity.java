@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
@@ -36,6 +38,7 @@ import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -51,7 +54,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<String> selectedBrands = new ArrayList<>();
 
-    private HashMap<String, ArrayList<String>> selectedSpecifications = null;
+    private HashMap<String, ArrayList<String>> selectedSpecifications = new HashMap<>();
 
 
     private RelativeLayout mFooter;
@@ -299,14 +302,20 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     }
 
     public void setSelectedSpecifications(String key, List<String> values) {
+
         if (selectedSpecifications.containsKey(key)) {
 
             selectedSpecifications.remove(key);
         }
 
-        selectedSpecifications.put(key, (ArrayList<String>) values);
+        selectedSpecifications.put(key, new ArrayList<>(values));
     }
-    //public HashMap<String, String>
+
+    public HashMap<String, ArrayList<String>> getSelectedSpecification() {
+
+
+        return selectedSpecifications;
+    }
 
     //check if some of filter's options is selected
 
@@ -327,11 +336,11 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         filtered = true;
 
         selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
-
         //price filter
         for (Article article : allSubcategoryArticles) {
-            if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
 
+            hasSpecifications(article);
+            if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
                 //brands filter
                 if (selectedBrands.size() > 0) {
                     if (selectedBrands.contains(article.getBrendIme())) {
@@ -369,6 +378,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+    public boolean hasSpecifications (Article article){
+
+        for(Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()){
+           Log.logInfo("SPECIFICATION",""+article.getSpec().indexOf(entry.getKey()));
+        }
+        return false;
     }
 }
 

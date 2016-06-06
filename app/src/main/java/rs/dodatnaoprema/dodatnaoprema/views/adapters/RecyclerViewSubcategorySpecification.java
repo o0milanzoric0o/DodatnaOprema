@@ -30,9 +30,7 @@ public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<R
         public MyViewHolder(View view) {
 
             super(view);
-
             specificationGroup = (TextView) view.findViewById(R.id.specificationGroup);
-
             multiSelectionSpinner = (MultiSelectionSpinner) view.findViewById(R.id.multiSelectionSpinner);
             multiSelectionSpinner.setListener(this);
         }
