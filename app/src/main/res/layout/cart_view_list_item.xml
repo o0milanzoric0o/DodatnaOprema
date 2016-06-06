@@ -2,11 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip"
     android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:descendantFocusability="blocksDescendants"
+    android:padding="6dip">
 
     <CheckBox
         android:id="@+id/cb_item"
@@ -23,8 +21,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="6dip"
         android:layout_marginRight="6dip"
-        android:layout_toRightOf="@id/cb_item"
-        android:layout_toEndOf="@id/cb_item"/>
+        android:layout_toEndOf="@id/cb_item"
+        android:layout_toRightOf="@id/cb_item" />
 
     <TextView
         android:id="@+id/secondLine"
@@ -56,5 +54,16 @@
         android:text="@string/app_name"
         android:textColor="@color/primary_text"
         android:textSize="12sp" />
+
+    <ImageButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="#00ffffff"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        />
 
 </RelativeLayout>

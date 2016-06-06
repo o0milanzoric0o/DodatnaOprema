@@ -159,4 +159,8 @@
 
 
     <string name="add_to_chart">Dodaj u korpu </string>
+    <string name="delete_confirmation_title">Brisanje iz korpe</string>
+    <string name="delete_confirmation_question">Da li želite da izbacite artikal iz korpe?</string>
+    <string name="yes">Da</string>
+    <string name="cancel">Odustani</string>
 </resources>
