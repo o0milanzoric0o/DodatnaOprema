@@ -317,7 +317,6 @@ public class MainActivity extends FragmentActivity
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     public List<Category> getCategoriesList() {
        // mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         mAllCategories = SharedPreferencesUtils.getArrayListCategories(this, AppConfig.ALL_CATEGORIES);

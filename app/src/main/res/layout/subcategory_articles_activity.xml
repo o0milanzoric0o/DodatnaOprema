@@ -33,6 +33,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent" />
+            <TextView
+                android:id="@+id/no_results_message"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:textSize="@dimen/medium_text_size"
+                android:visibility="gone"/>
 
             <FrameLayout
                 android:id="@+id/articles_content_list"
@@ -65,6 +71,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <RelativeLayout
+                    android:id="@+id/sort_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -123,7 +130,6 @@
                 android:layout_centerVertical="true"
                 android:textAllCaps="true"
                 android:textSize="14sp" />
-
 
             <View
                 android:layout_width="match_parent"

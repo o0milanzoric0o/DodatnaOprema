@@ -122,6 +122,7 @@
 
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>
+    <string name="msg_no_articles">Nema artikala za kategoriju %s </string>
 
 
     <string name="btn_filter">Filter</string>

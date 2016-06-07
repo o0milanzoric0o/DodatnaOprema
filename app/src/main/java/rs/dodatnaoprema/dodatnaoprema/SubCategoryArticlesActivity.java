@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -56,11 +57,14 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     private HashMap<String, ArrayList<String>> selectedSpecifications = new HashMap<>();
 
-
-    private RelativeLayout mFooter;
-    private VolleySingleton mVolleySingleton;
-
     private ImageView filterImg;
+    private TextView msgNoResults;
+    private FrameLayout cardFace;
+    private FrameLayout cardBack;
+    private RelativeLayout mHeader;
+    private RelativeLayout mFooter;
+
+    private VolleySingleton mVolleySingleton;
 
     private boolean nextImgStateGrid = true;
     private boolean filtered = false;
@@ -68,6 +72,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private int mArticleId;
     private int sortOption = 0;
     private boolean addedFragments = false;
+
+    private String mSubCategoryName;
 
     private int numberOfResults = 0;
 
@@ -86,8 +92,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subcategory_articles_activity);
 
+        msgNoResults = (TextView) findViewById(R.id.no_results_message);
+        cardFace = (FrameLayout) findViewById(R.id.articles_content_list);
+        cardBack = (FrameLayout) findViewById(R.id.articles_content_grid);
+        mHeader = (RelativeLayout) findViewById(R.id.sort_header);
+
         Intent intent = getIntent();
-        String mSubCategoryName = intent.getStringExtra("Artikli");
+        mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
 
         Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
@@ -193,8 +204,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     private void flipCard() {
         View rootLayout = findViewById(R.id.main_activity_root);
-        View cardFace = findViewById(R.id.articles_content_list);
-        View cardBack = findViewById(R.id.articles_content_grid);
 
         FlipAnimation flipAnimation = new FlipAnimation(cardFace, cardBack);
         if (cardFace != null) {
@@ -232,35 +241,42 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
                     mBrands = articlesFilteredByCategory.getBrendovi();
 
-                    if (!addedFragments) {
+                    Log.logInfo("ARTIKLI", "" + mArticles.size());
+                    if (mArticles.size() > 0) {
 
-                        addedFragments = true;
+                        if (!addedFragments) {
 
-                        getFragmentManager()
-                                .beginTransaction()
-                                .add(R.id.articles_content_list, new ArticlesList())
-                                // Add this transaction to the back stack, allowing users to press Back
-                                // to get to the front of the card.
-                                .addToBackStack(null)
-                                // Commit the transaction.
-                                .commit();
-                        getFragmentManager()
-                                .beginTransaction()
-                                .add(R.id.articles_content_grid, new ArticlesGrid())
-                                // Add this transaction to the back stack, allowing users to press Back
-                                // to get to the front of the card.
-                                .addToBackStack(null)
-                                // Commit the transaction.
-                                .commit();
+                            addedFragments = true;
+
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .add(R.id.articles_content_list, new ArticlesList())
+                                    // Add this transaction to the back stack, allowing users to press Back
+                                    // to get to the front of the card.
+                                    .addToBackStack(null)
+                                    // Commit the transaction.
+                                    .commit();
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .add(R.id.articles_content_grid, new ArticlesGrid())
+                                    // Add this transaction to the back stack, allowing users to press Back
+                                    // to get to the front of the card.
+                                    .addToBackStack(null)
+                                    // Commit the transaction.
+                                    .commit();
+                        } else {
+
+                            updateList(mArticles);
+                        }
                     } else {
-
-                        updateList(mArticles);
+                        noResults();
                     }
                 }
             }
 
             @Override
             public void webRequestError(String error) {
+                noResults();
 
             }
         });
@@ -379,12 +395,23 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         super.onBackPressed();
         finish();
     }
-    public boolean hasSpecifications (Article article){
 
-        for(Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()){
-           Log.logInfo("SPECIFICATION",""+article.getSpec().indexOf(entry.getKey()));
+    public boolean hasSpecifications(Article article) {
+
+        for (Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()) {
+            Log.logInfo("SPECIFICATION", "" + article.getSpec().indexOf(entry.getKey()));
         }
         return false;
+    }
+
+    private void noResults() {
+        mHeader.setVisibility(View.GONE);
+        mFooter.setVisibility(View.GONE);
+        cardBack.setVisibility(View.GONE);
+        cardFace.setVisibility(View.GONE);
+
+        msgNoResults.setVisibility(View.VISIBLE);
+        msgNoResults.setText(getString(R.string.msg_no_articles,mSubCategoryName));
     }
 }
 
