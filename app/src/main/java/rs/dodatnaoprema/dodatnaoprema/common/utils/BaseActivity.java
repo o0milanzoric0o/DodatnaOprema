@@ -1,13 +1,18 @@
 package rs.dodatnaoprema.dodatnaoprema.common.utils;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.Serializable;
 
+import rs.dodatnaoprema.dodatnaoprema.CartActivity;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
@@ -15,6 +20,18 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 
 
 public class BaseActivity extends AppCompatActivity {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
+        icCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

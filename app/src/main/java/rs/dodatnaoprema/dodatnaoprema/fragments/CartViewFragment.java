@@ -17,9 +17,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemDeleteConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
+import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemDeleteResponse;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.CartViewAdapter;
 
 /**
@@ -31,6 +37,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     private CartViewAdapter mAdapter;
     private ListView listView;
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
+    private VolleySingleton mVolleySingleton;
+    private int item_position;
 
     public CartViewFragment() {
         // Required empty public constructor
@@ -52,11 +60,52 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         if (getArguments() != null)
             mCart = (Cart) getArguments().getSerializable(AppConfig.GET_CART);
 
+        mVolleySingleton = VolleySingleton.getsInstance(getActivity());
+
         cartItemDeleteConfirmationDialog = new CartItemDeleteConfirmationDialog(getActivity());
         cartItemDeleteConfirmationDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Delete item from cart
+                // check if logged in
+                if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+                    // Load user data and get UserId
+                    User user = MyApplication.getInstance().getPrefManager().getUser();
+                    String user_id = user.getId();
 
+                    int item_id = mCart.getArtikli().get(item_position).getArtikalId();
+                    // get item id
+                    String url = String.format(AppConfig.URL_DELETE_CART_ITEM, item_id ,user_id);
+
+                    PullWebContent<ItemDeleteResponse> content =
+                            new PullWebContent<ItemDeleteResponse>(getActivity(), ItemDeleteResponse.class, url, mVolleySingleton);
+                    content.setCallbackListener(new WebRequestCallbackInterface<ItemDeleteResponse>() {
+                        @Override
+                        public void webRequestSuccess(boolean success, ItemDeleteResponse resp) {
+                            if (success) {
+                                if (resp.getSuccess()){
+                                    // item is successfully deleted
+                                    // remove from the list (this is offline removal)
+                                    mCart.getArtikli().remove(item_position);
+                                    mAdapter.notifyDataSetChanged();
+                                }else{
+                                    /**TODO  couldn't delete, God knows why**/
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void webRequestError(String error) {
+                            // Web request fail
+                            // Create snackbar or something
+                            /**TODO Inform the user there was a connection failure...**////
+                        }
+                    });
+                    content.pullList();
+
+                } else {
+
+                }
             }
         });
         cartItemDeleteConfirmationDialog.setNegativeButtonListener(new DialogInterface.OnClickListener() {
@@ -124,6 +173,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemBtnClickListener(int position) {
+        item_position = position;
         cartItemDeleteConfirmationDialog.create().show();
     }
 }

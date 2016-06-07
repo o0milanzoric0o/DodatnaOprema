@@ -1,13 +1,21 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
+import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -16,7 +24,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends BaseActivity {
     private FrameLayout mContainer;
     private VolleySingleton mVolleySingleton;
 
@@ -25,6 +33,13 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTextView = (TextView) findViewById(R.id.title);
+        mTextView.setText("Korpa");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mVolleySingleton = VolleySingleton.getsInstance(this);
         mContainer = (FrameLayout) findViewById(R.id.container);
@@ -82,5 +97,30 @@ public class CartActivity extends AppCompatActivity {
         CartViewFragment cartViewFragment = CartViewFragment.newInstance(cart);
         fragmentTransaction.add(R.id.container, cartViewFragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
+        icCart.setVisibility(View.GONE);
+        icCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+//                startActivity(intent);
+            }
+        });
     }
 }
