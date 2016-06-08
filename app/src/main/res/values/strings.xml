@@ -59,7 +59,7 @@
     <string name="loading">Loading…</string>
 
     <!-- First tab footer strings-->
-    <string name="recyclerview_footer_text">Prevuci za prelazak na  karticu "PONUDA"</string>
+    <string name="recyclerview_footer_text">Prevuci za prelazak na  karticu \"PONUDA\"</string>
     <string name="recyclerview_footer_image_description">arrow_up</string>
 
     <!-- GCM strings -->
@@ -122,7 +122,7 @@
 
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>
-    <string name="msg_no_articles">Nema artikala za kategoriju %s </string>
+    <string name="msg_no_articles">Nema artikala za kategoriju \"<i>%s</i>\" </string>
 
 
     <string name="btn_filter">Filter</string>

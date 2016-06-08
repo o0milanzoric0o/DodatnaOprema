@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
+
 
 public class Article implements Serializable {
 
@@ -90,7 +90,7 @@ public class Article implements Serializable {
     private String KategorijaArtikalaLink;
     @SerializedName("spec")
     @Expose
-    private List<Spec> spec = new ArrayList<Spec>();
+    private List<ArticleSpec> spec = new ArrayList<ArticleSpec>();
     @SerializedName("slike")
     @Expose
     private List<Pictures> slike = new ArrayList<Pictures>();
@@ -472,14 +472,14 @@ public class Article implements Serializable {
     /**
      * @return The spec
      */
-    public List<Spec> getSpec() {
+    public List<ArticleSpec> getSpec() {
         return spec;
     }
 
     /**
      * @param spec The spec
      */
-    public void setSpec(List<Spec> spec) {
+    public void setSpec(List<ArticleSpec> spec) {
         this.spec = spec;
     }
 

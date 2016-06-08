@@ -355,18 +355,18 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         //price filter
         for (Article article : allSubcategoryArticles) {
 
-            hasSpecifications(article);
-            if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
-                //brands filter
-                if (selectedBrands.size() > 0) {
-                    if (selectedBrands.contains(article.getBrendIme())) {
+            if (hasSpecifications(article)) {
+                if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
+                    //brands filter
+                    if (selectedBrands.size() > 0) {
+                        if (selectedBrands.contains(article.getBrendIme())) {
+                            filteredArticles.add(article);
+                        }
+                    } else {
                         filteredArticles.add(article);
                     }
-                } else {
-                    filteredArticles.add(article);
-                }
+            }
         }
-
         updateList(filteredArticles);
     }
 
@@ -398,8 +398,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     public boolean hasSpecifications(Article article) {
 
-        for (Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()) {
-            Log.logInfo("SPECIFICATION", "" + article.getSpec().indexOf(entry.getKey()));
+        if (article.getSpec().size() > 0) {
+
+            for (Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()) {
+                Log.logInfo("SPECIFICATION", "" + article.getSpec().size());
+            }
+            return true;
         }
         return false;
     }
@@ -411,7 +415,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         cardFace.setVisibility(View.GONE);
 
         msgNoResults.setVisibility(View.VISIBLE);
-        msgNoResults.setText(getString(R.string.msg_no_articles,mSubCategoryName));
+        msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
     }
 }
 
