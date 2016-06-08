@@ -203,7 +203,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableBottom="@drawable/ic_nav_cart"
                                     android:text="@string/add_to_chart"
-                                    android:onClick="addToChart"
+                                    android:onClick="addToCart"
                                     android:background="@color/background_white"/>
 
                       </FrameLayout>

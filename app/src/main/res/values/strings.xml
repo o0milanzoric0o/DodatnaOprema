@@ -157,11 +157,15 @@
     <!-- cart strings-->
     <string name="empty_cart_text">Trenutno nema proizvoda u korpi.</string>
     <string name="empty_cart_btn_text">Pogledaj proizvode</string>
-
-
     <string name="add_to_chart">Dodaj u korpu </string>
     <string name="delete_confirmation_title">Brisanje iz korpe</string>
     <string name="delete_confirmation_question">Da li želite da izbacite artikal iz korpe?</string>
     <string name="yes">Da</string>
     <string name="cancel">Odustani</string>
+    <string name="add_confirmation_title">Artikal u korpi</string>
+    <string name="add_confirmation_question">U korpi imate X artikala.</string>
+    <string name="go_to_cart">Korpa</string>
+    <string name="continue_shopping">Nastavi</string>
+
+
 </resources>
