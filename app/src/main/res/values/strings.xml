@@ -123,6 +123,7 @@
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>
     <string name="msg_no_articles">Nema artikala za kategoriju \"<i>%s</i>\" </string>
+    <string name="msg_no_search_results">Nema artikala koji odgovaraju zadatim kriterijumima. Klikom na \"FILTER\" možete promeniti specifikacije.</string>
 
 
     <string name="btn_filter">Filter</string>

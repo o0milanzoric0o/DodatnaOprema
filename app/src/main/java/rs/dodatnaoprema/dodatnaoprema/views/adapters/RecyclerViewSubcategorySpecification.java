@@ -14,6 +14,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Detail;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 
@@ -44,15 +45,20 @@ public class RecyclerViewSubcategorySpecification extends RecyclerView.Adapter<R
         public void selectedStrings(List<String> strings) {
 
             boolean found = false;
+            List<Integer> ids = new ArrayList<>();
 
             Log.logInfo("MULTISPINNER", strings.toString());
             for (Spec spec : specification) {
                 for (Detail detail : specification.get(specification.indexOf(spec)).getDetalj()) {
                     if (strings.contains(detail.getIdSpecVrednostiImeVre())) {
-                        Log.logInfo("MULTISPINNER", spec.getGrupe());
-                        ((SubCategoryArticlesActivity)context).setSelectedSpecifications(spec.getGrupe(), strings);
+
+                        Log.logInfo("MULTISPINNER", "" + detail.getIdSpecVrednostiVre());
+                        ids.add(detail.getIdSpecVrednostiVre());
                         found = true;
-                        break;
+                    }
+                    if (ids.size() > 0) {
+                        found = true;
+                        ((SubCategoryArticlesActivity) context).setSelectedSpecifications(spec.getIdSpecGrupe(), ids);
                     }
                 }
                 if (found) break;

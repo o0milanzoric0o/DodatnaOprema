@@ -19,10 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +34,9 @@ import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesGrid;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.Spec;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -55,7 +52,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     private List<String> selectedBrands = new ArrayList<>();
 
-    private HashMap<String, ArrayList<String>> selectedSpecifications = new HashMap<>();
+    private HashMap<Integer, ArrayList<Integer>> selectedSpecifications = new HashMap<>();
 
     private ImageView filterImg;
     private TextView msgNoResults;
@@ -299,6 +296,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         setNumberOfResults(articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
+
+        if (articles.size()==0) noSearchResults();
     }
 
     private void setNumberOfResults(int number) {
@@ -317,7 +316,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return mBrands;
     }
 
-    public void setSelectedSpecifications(String key, List<String> values) {
+    public void setSelectedSpecifications(Integer key, List<Integer> values) {
 
         if (selectedSpecifications.containsKey(key)) {
 
@@ -327,7 +326,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         selectedSpecifications.put(key, new ArrayList<>(values));
     }
 
-    public HashMap<String, ArrayList<String>> getSelectedSpecification() {
+    public HashMap<Integer, ArrayList<Integer>> getSelectedSpecification() {
 
 
         return selectedSpecifications;
@@ -398,12 +397,29 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     public boolean hasSpecifications(Article article) {
 
+        int filterItems = getSelectedSpecification().size();
+        int passFilter = 0;
+        boolean inc = false;
+
+        if (getSelectedSpecification().size() == 0) return true;
         if (article.getSpec().size() > 0) {
 
-            for (Map.Entry<String, ArrayList<String>> entry : getSelectedSpecification().entrySet()) {
-                Log.logInfo("SPECIFICATION", "" + article.getSpec().size());
+            for (Map.Entry<Integer, ArrayList<Integer>> entry : getSelectedSpecification().entrySet()) {
+                inc = false;
+
+                for (ArticleSpec spec : article.getSpec()) {
+
+                    if (spec.getIdSpecGrupe() == entry.getKey() && entry.getValue().contains(spec.getIdSpecVrednosti())) {
+                        passFilter++;
+                        inc = true;
+                    }
+
+                    if (inc) break;
+                }
+
+
             }
-            return true;
+            if (filterItems == passFilter) return true;
         }
         return false;
     }
@@ -416,6 +432,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         msgNoResults.setVisibility(View.VISIBLE);
         msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
+    }
+
+    private void noSearchResults() {
+        mHeader.setVisibility(View.GONE);
+        cardBack.setVisibility(View.GONE);
+        cardFace.setVisibility(View.GONE);
+
+        msgNoResults.setVisibility(View.VISIBLE);
+        msgNoResults.setText(getString(R.string.msg_no_search_results));
     }
 }
 
