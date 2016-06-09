@@ -1,3 +1,4 @@
+
 package rs.dodatnaoprema.dodatnaoprema.models.cart;
 
 import com.google.gson.annotations.Expose;
@@ -17,6 +18,9 @@ public class ItemDeleteResponse {
     @SerializedName("error_msg")
     @Expose
     private String errorMsg;
+    @SerializedName("ukupnaKolicina")
+    @Expose
+    private Integer ukupnaKolicina;
 
     /**
      * @return The tag
@@ -72,6 +76,20 @@ public class ItemDeleteResponse {
      */
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    /**
+     * @return The ukupnaKolicina
+     */
+    public Integer getUkupnaKolicina() {
+        return ukupnaKolicina;
+    }
+
+    /**
+     * @param ukupnaKolicina The ukupnaKolicina
+     */
+    public void setUkupnaKolicina(Integer ukupnaKolicina) {
+        this.ukupnaKolicina = ukupnaKolicina;
     }
 
 }

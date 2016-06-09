@@ -4,17 +4,15 @@ package rs.dodatnaoprema.dodatnaoprema.models.cart;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+public class Spec {
 
-public class Spec implements Serializable{
-
-    @SerializedName("imeSpecGrupe")
+    @SerializedName("ImeSpecGrupe")
     @Expose
     private String imeSpecGrupe;
     @SerializedName("IdSpecGrupe")
     @Expose
     private Integer idSpecGrupe;
-    @SerializedName("vredSpecGrupe")
+    @SerializedName("VredSpecGrupe")
     @Expose
     private String vredSpecGrupe;
     @SerializedName("IdSpecVrednosti")
@@ -29,7 +27,7 @@ public class Spec implements Serializable{
     }
 
     /**
-     * @param imeSpecGrupe The imeSpecGrupe
+     * @param imeSpecGrupe The ImeSpecGrupe
      */
     public void setImeSpecGrupe(String imeSpecGrupe) {
         this.imeSpecGrupe = imeSpecGrupe;
@@ -57,7 +55,7 @@ public class Spec implements Serializable{
     }
 
     /**
-     * @param vredSpecGrupe The vredSpecGrupe
+     * @param vredSpecGrupe The VredSpecGrupe
      */
     public void setVredSpecGrupe(String vredSpecGrupe) {
         this.vredSpecGrupe = vredSpecGrupe;

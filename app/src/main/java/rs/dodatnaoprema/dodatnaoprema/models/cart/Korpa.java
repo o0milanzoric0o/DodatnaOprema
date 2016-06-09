@@ -4,9 +4,7 @@ package rs.dodatnaoprema.dodatnaoprema.models.cart;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Korpa implements Serializable{
+public class Korpa {
 
     @SerializedName("KorpaKolTempArt")
     @Expose
