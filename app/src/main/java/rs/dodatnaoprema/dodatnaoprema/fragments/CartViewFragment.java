@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -88,6 +89,18 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                                     // remove from the list (this is offline removal)
                                     mCart.getArtikli().remove(item_position);
                                     mAdapter.notifyDataSetChanged();
+                                    if (mCart.getArtikli().size()==0){
+                                        // No more items in the cart
+                                        // Show EmptyCartFragment
+                                        // Launching  empty cart fragment
+                                        Toast.makeText(getActivity(), "Removed last item", Toast.LENGTH_SHORT).show();
+                                        Fragment emptyCartFragment = new EmptyCartFragment();
+                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                                        // Replace whatever is in the container view with this fragment
+                                        transaction.add(R.id.container, emptyCartFragment);
+                                        transaction.commit();
+                                    }
                                 }else{
                                     /**TODO  couldn't delete, God knows why**/
                                 }
