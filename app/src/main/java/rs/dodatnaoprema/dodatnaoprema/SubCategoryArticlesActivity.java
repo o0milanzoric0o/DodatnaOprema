@@ -113,15 +113,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         sortOption = 0;
                         // mArticles = SortUtils.sortArticlesByPriceAscending(mArticles);
                         //Log.logInfo("SORT", ""+mArticles.size());
-                        updateList(SortUtils.sortArticlesByPriceAscending(mArticles));
+                        updateList(SortUtils.sortArticlesByPriceAscending(filteredArticles));
 
                         //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
                     } else if (position == 1 && sortOption != 1) {
                         sortOption = 1;
                         //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
                         // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
-                        Log.logInfo("SORT", "" + mArticles.size());
-                        updateList(SortUtils.sortArticlesByPriceDescending(mArticles));
+                        Log.logInfo("SORT", "" + filteredArticles.size());
+                        updateList(SortUtils.sortArticlesByPriceDescending(filteredArticles));
 
                     }
 
@@ -442,6 +442,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         msgNoResults.setVisibility(View.VISIBLE);
         msgNoResults.setText(getString(R.string.msg_no_search_results));
     }
+
 }
 
 

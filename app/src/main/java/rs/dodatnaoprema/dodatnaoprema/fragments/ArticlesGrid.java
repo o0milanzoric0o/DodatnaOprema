@@ -50,7 +50,7 @@ public class ArticlesGrid extends Fragment {
 
         mVolleySingleton = VolleySingleton.getsInstance(this.getActivity());
 
-        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), false, true, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
 

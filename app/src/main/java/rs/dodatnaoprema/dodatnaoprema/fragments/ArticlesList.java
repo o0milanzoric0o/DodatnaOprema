@@ -78,7 +78,7 @@ public class ArticlesList extends Fragment {
             }
         });*/
 
-        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), true, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), true, true, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
                 ///Start Intent for Single Item Activity

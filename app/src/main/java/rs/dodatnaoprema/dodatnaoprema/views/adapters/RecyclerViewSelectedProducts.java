@@ -34,6 +34,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     private Context context;
     private boolean list;
+    private boolean header;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -74,10 +75,11 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    public RecyclerViewSelectedProducts(Context context, List<Article> products, boolean list, OnItemClickListener listener) {
+    public RecyclerViewSelectedProducts(Context context, List<Article> products, boolean list, boolean header, OnItemClickListener listener) {
         this.products = products;
         this.context = context;
         this.list = list;
+        this.header = header;
         this.listener = listener;
     }
 

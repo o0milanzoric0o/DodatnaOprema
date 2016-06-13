@@ -7,11 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Article implements Serializable {
-
-
 
     @SerializedName("ArtikalId")
     @Expose
@@ -103,24 +99,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param ArtikalId The ArtikalId
-     */
-    public void setArtikalId(Integer ArtikalId) {
-        this.ArtikalId = ArtikalId;
-    }
-
-    /**
      * @return The ArtikalNaziv
      */
     public String getArtikalNaziv() {
         return ArtikalNaziv;
-    }
-
-    /**
-     * @param ArtikalNaziv The ArtikalNaziv
-     */
-    public void setArtikalNaziv(String ArtikalNaziv) {
-        this.ArtikalNaziv = ArtikalNaziv;
     }
 
     /**
@@ -131,28 +113,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param ArtikalKratakOpis The ArtikalKratakOpis
-     */
-    public void setArtikalKratakOpis(Object ArtikalKratakOpis) {
-        this.ArtikalKratakOpis = ArtikalKratakOpis;
-    }
-
-    /**
-     *
-     * @return
-     * The OpisArtikliTekstovi
+     * @return The OpisArtikliTekstovi
      */
     public String getOpisArtikliTekstovi() {
         return OpisArtikliTekstovi;
-    }
-
-    /**
-     *
-     * @param OpisArtikliTekstovi
-     * The OpisArtikliTekstovi
-     */
-    public void setOpisArtikliTekstovi(String OpisArtikliTekstovi) {
-        this.OpisArtikliTekstovi = OpisArtikliTekstovi;
     }
 
     /**
@@ -163,13 +127,6 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param ArtikalNaAkciji The ArtikalNaAkciji
-     */
-    public void setArtikalNaAkciji(Integer ArtikalNaAkciji) {
-        this.ArtikalNaAkciji = ArtikalNaAkciji;
-    }
-
-    /**
      * @return The urlArtiklaLink
      */
     public String getUrlArtiklaLink() {
@@ -177,46 +134,17 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param urlArtiklaLink The urlArtiklaLink
-     */
-    public void setUrlArtiklaLink(String urlArtiklaLink) {
-        this.urlArtiklaLink = urlArtiklaLink;
-    }
-
-    /**
-     *
-     * @return
-     * The link
+     * @return The link
      */
     public String getLink() {
         return link;
     }
 
     /**
-     *
-     * @param link
-     * The link
-     */
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    /**
-     *
-     * @return
-     * The cenaPrikaz
+     * @return The cenaPrikaz
      */
     public String getCenaPrikaz() {
         return cenaPrikaz;
-    }
-
-    /**
-     *
-     * @param cenaPrikaz
-     * The cenaPrikaz
-     */
-    public void setCenaPrikaz(String cenaPrikaz) {
-        this.cenaPrikaz = cenaPrikaz;
     }
 
     /**
@@ -227,24 +155,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param cenaPrikazBroj The cenaPrikazBroj
-     */
-    public void setCenaPrikazBroj(String cenaPrikazBroj) {
-        this.cenaPrikazBroj = cenaPrikazBroj;
-    }
-
-    /**
      * @return The cenaSamoBrojFormat
      */
     public String getCenaSamoBrojFormat() {
         return cenaSamoBrojFormat;
-    }
-
-    /**
-     * @param cenaSamoBrojFormat The cenaSamoBrojFormat
-     */
-    public void setCenaSamoBrojFormat(String cenaSamoBrojFormat) {
-        this.cenaSamoBrojFormat = cenaSamoBrojFormat;
     }
 
     /**
@@ -255,24 +169,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param cenaPrikazExt The cenaPrikazExt
-     */
-    public void setCenaPrikazExt(String cenaPrikazExt) {
-        this.cenaPrikazExt = cenaPrikazExt;
-    }
-
-    /**
      * @return The pozovite
      */
     public Object getPozovite() {
         return pozovite;
-    }
-
-    /**
-     * @param pozovite The pozovite
-     */
-    public void setPozovite(Object pozovite) {
-        this.pozovite = pozovite;
     }
 
     /**
@@ -283,24 +183,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param BrendIme The BrendIme
-     */
-    public void setBrendIme(String BrendIme) {
-        this.BrendIme = BrendIme;
-    }
-
-    /**
      * @return The BrendId
      */
     public Integer getBrendId() {
         return BrendId;
-    }
-
-    /**
-     * @param BrendId The BrendId
-     */
-    public void setBrendId(Integer BrendId) {
-        this.BrendId = BrendId;
     }
 
     /**
@@ -311,13 +197,6 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param TipUnit The TipUnit
-     */
-    public void setTipUnit(String TipUnit) {
-        this.TipUnit = TipUnit;
-    }
-
-    /**
      * @return The TipUnitCelo
      */
     public String getTipUnitCelo() {
@@ -325,46 +204,17 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param TipUnitCelo The TipUnitCelo
-     */
-    public void setTipUnitCelo(String TipUnitCelo) {
-        this.TipUnitCelo = TipUnitCelo;
-    }
-
-    /**
-     *
-     * @return
-     * The MinimalnaKolArt
+     * @return The MinimalnaKolArt
      */
     public Object getMinimalnaKolArt() {
         return MinimalnaKolArt;
     }
 
     /**
-     *
-     * @param MinimalnaKolArt
-     * The MinimalnaKolArt
-     */
-    public void setMinimalnaKolArt(Object MinimalnaKolArt) {
-        this.MinimalnaKolArt = MinimalnaKolArt;
-    }
-
-    /**
-     *
-     * @return
-     * The slikaMain
+     * @return The slikaMain
      */
     public Object getSlikaMain() {
         return slikaMain;
-    }
-
-    /**
-     *
-     * @param slikaMain
-     * The slikaMain
-     */
-    public void setSlikaMain(Object slikaMain) {
-        this.slikaMain = slikaMain;
     }
 
     /**
@@ -375,13 +225,6 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param stanje The stanje
-     */
-    public void setStanje(Integer stanje) {
-        this.stanje = stanje;
-    }
-
-    /**
      * @return The codeVendor
      */
     public String getCodeVendor() {
@@ -389,28 +232,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param codeVendor The codeVendor
-     */
-    public void setCodeVendor(String codeVendor) {
-        this.codeVendor = codeVendor;
-    }
-
-    /**
-     *
-     * @return
-     * The mozedaseKupi
+     * @return The mozedaseKupi
      */
     public Integer getMozedaseKupi() {
         return mozedaseKupi;
-    }
-
-    /**
-     *
-     * @param mozedaseKupi
-     * The mozedaseKupi
-     */
-    public void setMozedaseKupi(Integer mozedaseKupi) {
-        this.mozedaseKupi = mozedaseKupi;
     }
 
     /**
@@ -421,24 +246,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param ocenaut The ocenaut
-     */
-    public void setOcenaut(Integer ocenaut) {
-        this.ocenaut = ocenaut;
-    }
-
-    /**
      * @return The KategorijaArtiklaNaziv
      */
     public String getKategorijaArtiklaNaziv() {
         return KategorijaArtiklaNaziv;
-    }
-
-    /**
-     * @param KategorijaArtiklaNaziv The KategorijaArtiklaNaziv
-     */
-    public void setKategorijaArtiklaNaziv(String KategorijaArtiklaNaziv) {
-        this.KategorijaArtiklaNaziv = KategorijaArtiklaNaziv;
     }
 
     /**
@@ -449,24 +260,10 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param KategorijaArtikalId The KategorijaArtikalId
-     */
-    public void setKategorijaArtikalId(Integer KategorijaArtikalId) {
-        this.KategorijaArtikalId = KategorijaArtikalId;
-    }
-
-    /**
      * @return The KategorijaArtikalaLink
      */
     public String getKategorijaArtikalaLink() {
         return KategorijaArtikalaLink;
-    }
-
-    /**
-     * @param KategorijaArtikalaLink The KategorijaArtikalaLink
-     */
-    public void setKategorijaArtikalaLink(String KategorijaArtikalaLink) {
-        this.KategorijaArtikalaLink = KategorijaArtikalaLink;
     }
 
     /**
@@ -477,25 +274,12 @@ public class Article implements Serializable {
     }
 
     /**
-     * @param spec The spec
-     */
-    public void setSpec(List<ArticleSpec> spec) {
-        this.spec = spec;
-    }
-
-    /**
      * @return The slike
      */
     public List<Pictures> getSlike() {
         return slike;
     }
 
-    /**
-     * @param slike The slike
-     */
-    public void setSlike(List<Pictures> slike) {
-        this.slike = slike;
-    }
 
 }
 
