@@ -63,7 +63,7 @@ public class OffersActivity extends BaseActivity {
 
         mVolleySingleton = VolleySingleton.getsInstance(this);
 
-        mAdapter = new RecyclerViewSelectedProducts(this, articles, true, false, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(this, articles, true, 0, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
                 ///Start Intent for Single Item Activity

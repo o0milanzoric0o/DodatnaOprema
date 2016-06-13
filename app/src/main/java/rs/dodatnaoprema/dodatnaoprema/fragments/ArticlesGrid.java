@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -50,7 +49,7 @@ public class ArticlesGrid extends Fragment {
 
         mVolleySingleton = VolleySingleton.getsInstance(this.getActivity());
 
-        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), false, true, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), false, 0, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
 

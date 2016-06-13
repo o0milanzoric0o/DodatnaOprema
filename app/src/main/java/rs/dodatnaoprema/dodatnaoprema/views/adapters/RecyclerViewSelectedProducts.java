@@ -21,7 +21,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
-public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerViewSelectedProducts.MyViewHolder> {
+public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Article> products;
     private NetworkImageView productImg;
 
@@ -34,8 +34,11 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     private Context context;
     private boolean list;
-    private boolean header;
+    private int existHeader;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
+
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -75,16 +78,33 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    public RecyclerViewSelectedProducts(Context context, List<Article> products, boolean list, boolean header, OnItemClickListener listener) {
+    class ViewHolderHeader extends RecyclerView.ViewHolder {
+
+        public ViewHolderHeader(View itemView) {
+
+            super(itemView);
+
+
+        }
+    }
+
+    public RecyclerViewSelectedProducts(Context context, List<Article> products, boolean list, int header, OnItemClickListener listener) {
         this.products = products;
         this.context = context;
         this.list = list;
-        this.header = header;
+        this.existHeader = header;
         this.listener = listener;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (existHeader == 1) {
+            if (viewType == TYPE_HEADER) {
+                View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.empty_header, parent, false);
+                return new ViewHolderHeader(itemView);
+            }
+        }
         View itemView;
         if (list) {
             itemView = LayoutInflater.from(parent.getContext())
@@ -95,45 +115,50 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         }
 
         return new MyViewHolder(itemView);
+
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewSelectedProducts.MyViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        holder.bind(products.get(position), listener);
-        holder.setIsRecyclable(false);
 
-        productName.setText(products.get(position).getArtikalNaziv().trim());
-        brandName.setText(products.get(position).getBrendIme().trim());
-        price.append(" " + products.get(position).getCenaSamoBrojFormat() + " " + products.get(position).getCenaPrikazExt());
-        if (products.get(position).getStanje() > 0) {
-            stockState.setText(context.getString(R.string.stock_state_available));
-        } else {
-            stockState.setText(context.getString(R.string.stock_state_sold));
-        }
+        if (holder instanceof MyViewHolder) {
 
-        ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
-        productImg.setImageUrl(products.get(position).getSlike().get(0).getSrednjaSlika(), mImageLoader);
+            ((MyViewHolder) holder).bind(products.get(position + existHeader), listener);
+            holder.setIsRecyclable(false);
 
-        if (list && products.get(position).getArtikalKratakOpis().toString().length() > 0) {
-            shortDescription.append(" " + products.get(position).getArtikalKratakOpis().toString());
-        }
+            productName.setText(products.get(position + existHeader).getArtikalNaziv().trim());
+            brandName.setText(products.get(position + existHeader).getBrendIme().trim());
+            price.append(" " + products.get(position + existHeader).getCenaSamoBrojFormat() + " " + products.get(position + existHeader).getCenaPrikazExt());
+            if (products.get(position + existHeader).getStanje() > 0) {
+                stockState.setText(context.getString(R.string.stock_state_available));
+            } else {
+                stockState.setText(context.getString(R.string.stock_state_sold));
+            }
 
-        switch (products.get(position).getArtikalNaAkciji()) {
-            case 6:
-                saleIndicator.setVisibility(View.VISIBLE);
-                saleIndicator.setImageResource(R.drawable.ic_nav_sale);
-                break;
-            case 7:
-                saleIndicator.setVisibility(View.VISIBLE);
-                saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_new, null));
-                break;
-            case 8:
-                saleIndicator.setVisibility(View.VISIBLE);
-                saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_best, null));
-                break;
-            default:
-                break;
+            ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
+            productImg.setImageUrl(products.get(position + existHeader).getSlike().get(0).getSrednjaSlika(), mImageLoader);
+
+            if (list && products.get(position + existHeader).getArtikalKratakOpis().toString().length() > 0) {
+                shortDescription.append(" " + products.get(position + existHeader).getArtikalKratakOpis().toString());
+            }
+
+            switch (products.get(position + existHeader).getArtikalNaAkciji()) {
+                case 6:
+                    saleIndicator.setVisibility(View.VISIBLE);
+                    saleIndicator.setImageResource(R.drawable.ic_nav_sale);
+                    break;
+                case 7:
+                    saleIndicator.setVisibility(View.VISIBLE);
+                    saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_new, null));
+                    break;
+                case 8:
+                    saleIndicator.setVisibility(View.VISIBLE);
+                    saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_best, null));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -141,7 +166,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     @Override
     public int getItemCount() {
 
-        return products.size();
+        return products.size() + existHeader;
     }
 
     public void updateContent(List<Article> articles) {
@@ -152,5 +177,17 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
     public interface OnItemClickListener {
         void onItemClick(Article item, View view);
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position))
+            return TYPE_HEADER;
+
+        return TYPE_ITEM;
     }
 }

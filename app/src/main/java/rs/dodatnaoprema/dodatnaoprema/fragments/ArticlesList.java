@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
 
 import java.io.Serializable;
 import java.util.List;
@@ -78,7 +77,7 @@ public class ArticlesList extends Fragment {
             }
         });*/
 
-        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), true, true, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), true, 1, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
                 ///Start Intent for Single Item Activity
