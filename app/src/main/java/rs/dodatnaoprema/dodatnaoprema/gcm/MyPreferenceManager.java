@@ -21,6 +21,8 @@ public class MyPreferenceManager {
     private static final String KEY_NOTIFICATIONS = "notifications";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
+    private static final String KEY_CART_ITEM_COUNT = "CartItemCount";
+
     private static final String KEY_GENERAL_NAME = "KomitentNaziv";
     private static final String KEY_NAME = "KomitentIme";
     private static final String KEY_LAST_NAME = "KomitentPrezime";
@@ -103,7 +105,7 @@ public class MyPreferenceManager {
 
             User user = new User(id, name, email);
 
-            if (pref.getString(KEY_USER_PHOTO, null)!=null)
+            if (pref.getString(KEY_USER_PHOTO, null) != null)
                 user.setPhoto(Uri.parse(pref.getString(KEY_USER_PHOTO, null)));
             user.setGeneral_name(pref.getString(KEY_GENERAL_NAME, null));
             user.setLast_name(pref.getString(KEY_LAST_NAME, null));
@@ -158,6 +160,15 @@ public class MyPreferenceManager {
 
     public boolean isLoggedIn() {
         return pref.getBoolean(KEY_IS_LOGGEDIN, false);
+    }
+
+    public int getCartItemCount() {
+        return pref.getInt(KEY_CART_ITEM_COUNT, 0);
+    }
+
+    public void setCartItemCount(int count) {
+        editor.putInt(KEY_CART_ITEM_COUNT, count);
+        editor.commit();
     }
 
 }

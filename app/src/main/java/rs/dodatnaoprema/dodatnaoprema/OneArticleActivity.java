@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemAddResponse;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
@@ -199,8 +201,14 @@ public class OneArticleActivity extends BaseActivity {
                             // item is successfully added to cart
                             // update one item display
                             mTextViewKorpa.setText("Količina: " + quantity);
+                            // update toolbar cart icon
+                            MyApplication.getInstance().getSessionManager().setCartItemCount(resp.getUkupnaKolicina());
+                            Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                            LocalBroadcastManager.getInstance(mContext).sendBroadcast(updateToolbar);
                             // Inform the user
                             cartItemAddConfirmationDialog = new CartItemAddConfirmationDialog(mContext);
+
+                            cartItemAddConfirmationDialog.setDialogMessage(String.format("U korpi imate ukupno %1s artikala.", String.valueOf(resp.getUkupnaKolicina())));
                             cartItemAddConfirmationDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

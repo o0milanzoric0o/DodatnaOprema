@@ -1,21 +1,21 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.content.Intent;
-import android.opengl.Visibility;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
+
+import junit.framework.Assert;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.CartDeleteAllConfirmationDialog;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -27,15 +27,19 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 public class CartActivity extends BaseActivity {
     private FrameLayout mContainer;
     private VolleySingleton mVolleySingleton;
+    private Context mContext;
+    private CartDeleteAllConfirmationDialog cartDeleteАllConfirmationDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        mContext = this;
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
+        Assert.assertNotNull(mTextView);
         mTextView.setText("Korpa");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
@@ -57,7 +61,7 @@ public class CartActivity extends BaseActivity {
                 String url = String.format(AppConfig.URL_GET_CART, user_id);
 
                 PullWebContent<Cart> content =
-                        new PullWebContent<Cart>(this, Cart.class, url, mVolleySingleton);
+                        new PullWebContent<>(this, Cart.class, url, mVolleySingleton);
                 content.setCallbackListener(new WebRequestCallbackInterface<Cart>() {
                     @Override
                     public void webRequestSuccess(boolean success, Cart cart) {
@@ -79,6 +83,20 @@ public class CartActivity extends BaseActivity {
                 showEmptyCartFragment();
             }
         }
+
+        cartDeleteАllConfirmationDialog = new CartDeleteAllConfirmationDialog(mContext);
+        cartDeleteАllConfirmationDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Create web request to delete all cart items.
+            }
+        });
+        cartDeleteАllConfirmationDialog.setNegativeButtonListener(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing
+            }
+        });
     }
 
     private void showEmptyCartFragment() {
@@ -113,14 +131,6 @@ public class CartActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
-        icCart.setVisibility(View.GONE);
-        icCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-//                startActivity(intent);
-            }
-        });
     }
+
 }

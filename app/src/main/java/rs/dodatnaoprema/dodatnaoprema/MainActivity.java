@@ -72,15 +72,8 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
-        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
-        icCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                startActivity(intent);
-            }
-        });
 
+        updateCartToolbarIcon();
 
         //  icMore.setVisibility(View.GONE);
 
@@ -135,6 +128,8 @@ public class MainActivity extends FragmentActivity
                     setUserDrawerInfo();
                 } else if (intent.getAction().equals(Config.CLEAR_USER_INFO)) {
                     clearUserDrawerInfo();
+                } else if (intent.getAction().equals(Config.UPDATE_CART_TOOLBAR_ICON)) {
+                    updateCartToolbarIcon();
                 }
             }
         };
@@ -143,7 +138,26 @@ public class MainActivity extends FragmentActivity
             registerGCM();
         }
 
+    }
 
+    private void updateCartToolbarIcon() {
+        // Display badge over cart icon if there are some items in the cart
+        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
+        TextView tvItemCount = (TextView) findViewById(R.id.badge_textView);
+        session = MyApplication.getInstance().getSessionManager();
+        int itemCount = session.getCartItemCount();
+        if (itemCount == 0) {
+            tvItemCount.setVisibility(View.GONE);
+        } else {
+            tvItemCount.setText(String.valueOf(itemCount));
+        }
+        icCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -163,6 +177,11 @@ public class MainActivity extends FragmentActivity
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.CLEAR_USER_INFO));
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.UPDATE_CART_TOOLBAR_ICON));
+
+
     }
 
     @Override
@@ -318,7 +337,7 @@ public class MainActivity extends FragmentActivity
     }
 
     public List<Category> getCategoriesList() {
-       // mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
+        // mAllCategories = (List<Category>) intent.getSerializableExtra("AllCategories");
         mAllCategories = SharedPreferencesUtils.getArrayListCategories(this, AppConfig.ALL_CATEGORIES);
         return mAllCategories;
     }
@@ -356,7 +375,7 @@ public class MainActivity extends FragmentActivity
 
     public List<YMALCategory> getYMALCategories() {
         List<YMALCategory> ymalCategories;
-        ymalCategories =  SharedPreferencesUtils.getArrayListYAML(this, AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES);
+        ymalCategories = SharedPreferencesUtils.getArrayListYAML(this, AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES);
         return ymalCategories;
     }
 

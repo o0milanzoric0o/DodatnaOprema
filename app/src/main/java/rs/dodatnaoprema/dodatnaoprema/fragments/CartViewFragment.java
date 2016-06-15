@@ -2,10 +2,12 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemDeleteConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemDeleteResponse;
@@ -76,7 +79,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
                     int item_id = mCart.getArtikli().get(item_position).getArtikalId();
                     // get item id
-                    String url = String.format(AppConfig.URL_DELETE_CART_ITEM, item_id ,user_id);
+                    String url = String.format(AppConfig.URL_DELETE_CART_ITEM, item_id, user_id);
 
                     PullWebContent<ItemDeleteResponse> content =
                             new PullWebContent<ItemDeleteResponse>(getActivity(), ItemDeleteResponse.class, url, mVolleySingleton);
@@ -84,12 +87,20 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                         @Override
                         public void webRequestSuccess(boolean success, ItemDeleteResponse resp) {
                             if (success) {
-                                if (resp.getSuccess()){
+                                if (resp.getSuccess()) {
                                     // item is successfully deleted
                                     // remove from the list (this is offline removal)
                                     mCart.getArtikli().remove(item_position);
+
+                                    // update toolbar cart icon
+                                    MyApplication.getInstance().getSessionManager().setCartItemCount(resp.getUkupnaKolicina());
+                                    //mUpdateToolbarIconCallback.UpdateCartToolbarIcon();
+                                    // Update Navigation Drawer from main activity
+                                    Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                                    LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
+
                                     mAdapter.notifyDataSetChanged();
-                                    if (mCart.getArtikli().size()==0){
+                                    if (mCart.getArtikli().size() == 0) {
                                         // No more items in the cart
                                         // Show EmptyCartFragment
                                         // Launching  empty cart fragment
@@ -101,7 +112,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                                         transaction.add(R.id.container, emptyCartFragment);
                                         transaction.commit();
                                     }
-                                }else{
+                                } else {
                                     /**TODO  couldn't delete, God knows why**/
                                 }
                             }
@@ -189,4 +200,5 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         item_position = position;
         cartItemDeleteConfirmationDialog.create().show();
     }
+
 }

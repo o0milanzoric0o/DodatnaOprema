@@ -22,4 +22,12 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return pref.isLoggedIn();
     }
+
+    public void setCartItemCount(int count){
+        pref.setCartItemCount(count);
+    }
+
+    public int getCartItemCount(){
+        return pref.getCartItemCount();
+    }
 }

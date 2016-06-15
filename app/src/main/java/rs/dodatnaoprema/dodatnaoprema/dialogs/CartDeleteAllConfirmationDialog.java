@@ -11,30 +11,23 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 /**
  * Created by 1 on 1/28/2016.
  */
-public class CartItemAddConfirmationDialog {
+public class CartDeleteAllConfirmationDialog {
     AlertDialog.Builder builder;
 
-    private String dialogMessage;
-
-    public CartItemAddConfirmationDialog(Context context) {
+    public CartDeleteAllConfirmationDialog(Context context) {
         builder = new AlertDialog.Builder(context);
 
         // Use the Builder class for convenient dialog construction
-        builder.setTitle(R.string.add_confirmation_title);
-        builder.setMessage(dialogMessage);
-    }
-
-    public void setDialogMessage(String msg){
-        dialogMessage = msg;
-        builder.setMessage(dialogMessage);
+        builder.setTitle(R.string.delete_confirmation_title);
+        builder.setMessage(R.string.delete_all_confirmation_question);
     }
 
     public void setPositiveButtonListener(DialogInterface.OnClickListener listener) {
-        builder.setPositiveButton(R.string.go_to_cart, listener);
+        builder.setPositiveButton(R.string.yes, listener);
     }
 
     public void setNegativeButtonListener(DialogInterface.OnClickListener listener) {
-        builder.setNegativeButton(R.string.continue_shopping, listener);
+        builder.setNegativeButton(R.string.cancel, listener);
     }
 
     public Dialog create() {

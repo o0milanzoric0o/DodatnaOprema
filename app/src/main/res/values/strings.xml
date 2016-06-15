@@ -163,10 +163,14 @@
     <string name="delete_confirmation_question">Da li želite da izbacite artikal iz korpe?</string>
     <string name="yes">Da</string>
     <string name="cancel">Odustani</string>
-    <string name="add_confirmation_title">Artikal u korpi</string>
+    <string name="add_confirmation_title">Artikal ubačen u korpu</string>
     <string name="add_confirmation_question">U korpi imate X artikala.</string>
     <string name="go_to_cart">Korpa</string>
     <string name="continue_shopping">Nastavi</string>
+    <string name="clear_cart">Isprazni korpu</string>
+    <string name="buy">Kupi</string>
+    <string name="total">Ukupno:</string>
+    <string name="delete_all_confirmation_question">Da li želite da ispraznite korpu?</string>
 
 
 </resources>
