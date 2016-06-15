@@ -71,14 +71,12 @@ public class CartViewAdapter extends ArrayAdapter<Artikli> {
 
     public class MyViewHolder {
         public TextView firstLine, secondLine;
-        public CheckBox checkBox;
         public NetworkImageView networkImageView;
         public ImageButton imgButton;
 
         public MyViewHolder(View view) {
             firstLine = (TextView) view.findViewById(R.id.firstLine);
             secondLine = (TextView) view.findViewById(R.id.secondLine);
-            checkBox = (CheckBox) view.findViewById(R.id.cb_item);
             imgButton = (ImageButton) view.findViewById(R.id.btn_delete);
             networkImageView = (NetworkImageView) view.findViewById(R.id.productImage);
         }

@@ -6,12 +6,6 @@
     android:descendantFocusability="blocksDescendants"
     android:padding="6dip">
 
-    <CheckBox
-        android:id="@+id/cb_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="" />
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/productImage"
@@ -21,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="6dip"
         android:layout_marginRight="6dip"
-        android:layout_toEndOf="@id/cb_item"
-        android:layout_toRightOf="@id/cb_item" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/secondLine"
