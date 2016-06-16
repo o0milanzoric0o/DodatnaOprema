@@ -124,26 +124,26 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
         if (holder instanceof MyViewHolder) {
 
-            ((MyViewHolder) holder).bind(products.get(position + existHeader), listener);
+            ((MyViewHolder) holder).bind(products.get(position - existHeader), listener);
             holder.setIsRecyclable(false);
 
-            productName.setText(products.get(position + existHeader).getArtikalNaziv().trim());
-            brandName.setText(products.get(position + existHeader).getBrendIme().trim());
-            price.append(" " + products.get(position + existHeader).getCenaSamoBrojFormat() + " " + products.get(position + existHeader).getCenaPrikazExt());
-            if (products.get(position + existHeader).getStanje() > 0) {
+            productName.setText(products.get(position - existHeader).getArtikalNaziv().trim());
+            brandName.setText(products.get(position - existHeader).getBrendIme().trim());
+            price.append(" " + products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt());
+            if (products.get(position - existHeader).getStanje() > 0) {
                 stockState.setText(context.getString(R.string.stock_state_available));
             } else {
                 stockState.setText(context.getString(R.string.stock_state_sold));
             }
 
             ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
-            productImg.setImageUrl(products.get(position + existHeader).getSlike().get(0).getSrednjaSlika(), mImageLoader);
+            productImg.setImageUrl(products.get(position - existHeader).getSlike().get(0).getSrednjaSlika(), mImageLoader);
 
-            if (list && products.get(position + existHeader).getArtikalKratakOpis().toString().length() > 0) {
-                shortDescription.append(" " + products.get(position + existHeader).getArtikalKratakOpis().toString());
+            if (list && products.get(position - existHeader).getArtikalKratakOpis().toString().length() > 0) {
+                shortDescription.append(" " + products.get(position - existHeader).getArtikalKratakOpis().toString());
             }
 
-            switch (products.get(position + existHeader).getArtikalNaAkciji()) {
+            switch (products.get(position - existHeader).getArtikalNaAkciji()) {
                 case 6:
                     saleIndicator.setVisibility(View.VISIBLE);
                     saleIndicator.setImageResource(R.drawable.ic_nav_sale);
