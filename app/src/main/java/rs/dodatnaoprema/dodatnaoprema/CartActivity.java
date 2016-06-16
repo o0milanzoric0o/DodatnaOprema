@@ -2,12 +2,16 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import junit.framework.Assert;
@@ -133,4 +137,26 @@ public class CartActivity extends BaseActivity {
         super.onResume();
     }
 
+    @Override
+    protected void updateCartToolbarIcon() {
+        // Display badge over cart icon if there are some items in the cart
+        ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
+        TextView tvItemCount = (TextView) findViewById(R.id.badge_textView);
+        int itemCount = MyApplication.getInstance().getSessionManager().getCartItemCount();
+        Assert.assertNotNull(tvItemCount);
+        Assert.assertNotNull(icCart);
+        icCart.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_delete_white_24dp));
+        if (itemCount == 0) {
+            tvItemCount.setVisibility(View.GONE);
+            icCart.setVisibility(View.GONE);
+        } else {
+            tvItemCount.setText(String.valueOf(itemCount));
+        }
+        icCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartDeleteАllConfirmationDialog.create().show();
+            }
+        });
+    }
 }

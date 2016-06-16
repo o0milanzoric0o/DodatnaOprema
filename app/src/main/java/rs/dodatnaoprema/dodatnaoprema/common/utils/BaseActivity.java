@@ -96,7 +96,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    private void updateCartToolbarIcon() {
+    protected void updateCartToolbarIcon() {
         // Display badge over cart icon if there are some items in the cart
         ImageButton icCart = (ImageButton) findViewById(R.id.toolbar_btn_cart);
         TextView tvItemCount = (TextView) findViewById(R.id.badge_textView);

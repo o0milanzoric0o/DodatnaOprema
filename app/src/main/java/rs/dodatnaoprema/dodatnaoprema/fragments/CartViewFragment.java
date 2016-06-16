@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     private Cart mCart;
     private CartViewAdapter mAdapter;
     private ListView listView;
+    private Button mBtnBuy;
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
     private VolleySingleton mVolleySingleton;
     private int item_position;
@@ -148,6 +150,19 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         View view = inflater.inflate(R.layout.fragment_cart_view, container, false);
 
         listView = (ListView) view.findViewById(R.id.list_view_cart);
+        mBtnBuy = (Button) view.findViewById(R.id.btn_buy);
+        mBtnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch fragment to fill user data
+                Fragment userDataFragment = new CartUserDataFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                // Replace whatever is in the container view with this fragment
+                transaction.add(R.id.container, userDataFragment);
+                transaction.commit();
+            }
+        });
 
         mAdapter = new CartViewAdapter(getContext(), mCart.getArtikli());
         mAdapter.setItemBtnClickListner(this);
