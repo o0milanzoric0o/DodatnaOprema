@@ -171,6 +171,13 @@
     <string name="buy">Kupi</string>
     <string name="total">Ukupno:</string>
     <string name="delete_all_confirmation_question">Da li želite da ispraznite korpu?</string>
+    <string name="address_hint">Adresa za slanje</string>
+    <string name="city_hint">Grad</string>
+    <string name="zip_hint">Poštanski broj</string>
+    <string name="mobile_hint">Mobilni telefon</string>
+    <string name="phone_hint">Fiksni telefon</string>
+    <string name="comment_hint">Napomena</string>
+    <string name="next">Nastavi</string>
 
 
 </resources>

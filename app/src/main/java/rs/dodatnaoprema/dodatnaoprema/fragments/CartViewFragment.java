@@ -111,7 +111,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                                         // Replace whatever is in the container view with this fragment
-                                        transaction.add(R.id.container, emptyCartFragment);
+                                        transaction.replace(R.id.container, emptyCartFragment);
                                         transaction.commit();
                                     }
                                 } else {
@@ -150,7 +150,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         View view = inflater.inflate(R.layout.fragment_cart_view, container, false);
 
         listView = (ListView) view.findViewById(R.id.list_view_cart);
-        mBtnBuy = (Button) view.findViewById(R.id.btn_buy);
+        mBtnBuy = (Button) view.findViewById(R.id.btn_cart_buy);
         mBtnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,7 +159,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                 // Replace whatever is in the container view with this fragment
-                transaction.add(R.id.container, userDataFragment);
+                transaction.replace(R.id.container, userDataFragment);
                 transaction.commit();
             }
         });
