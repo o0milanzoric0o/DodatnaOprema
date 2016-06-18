@@ -175,6 +175,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         user.setFirmAddress(jObj_user_data.getString("KomitentFirmaAdresa"));
                         prefs.storeUser(user);
 
+                        // collect user data
+                        JSONObject jObj_cart_count = jObj.getJSONObject("artUkorpi");
+                        int cart_count = jObj_cart_count.getInt("ukupnaKolicina");
+
+                        MyApplication.getInstance().getSessionManager().setCartItemCount(cart_count);
+                        // Inform the rest of the change
+                        Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
+
                         // Update Navigation Drawer from main activity
                         Intent loginSuccess = new Intent(Config.SET_USER_INFO);
                         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(loginSuccess);

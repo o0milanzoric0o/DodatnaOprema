@@ -70,7 +70,10 @@ public class AppConfig {
      */
     public static final String URL_LOGIN_GET = "http://masinealati.rs/parametri.php?action=povuciPodatkeAndroidKorisnik&tag=%1$s&email=%2$s&p=%3$s";
     public static final String URL_REGISTER_GET = "http://masinealati.rs/parametri.php?action=registrujAndroid&tag=%1$s&email=%2$s&sifra=%3$s&komitentime=%4$s&komitentprezime=%5$s";
-
+    public static final String URL_CHANGE_USER_DATA_GET = "http://direktnoizbaste.rs/parametri.php?action=izmeniPodatkeKomitent&id=%1$s&KomitentNaziv=%2$s&KomitentIme=%3$s" +
+            "&KomitentPrezime=%4$s&KomitentAdresa=%5$s&KomitentPosBroj=%6$s&KomitentMesto=%7$s&KomitentTelefon=%8$s" +
+            "&KomitentMobTel=%9$s&email=%10$s&KomitentUserName=%11$s&KomitentTipUsera=%12$s&KomitentFirma=%13$s" +
+            "&KomitentMatBr=%14$s&KomitentPIB=%15$s&KomitentFirmaAdresa=%16$s";
     /**
      * Cart
      */
@@ -78,6 +81,7 @@ public class AppConfig {
     public static final String URL_ADD_CART_ITEM = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
     public static final String URL_DELETE_CART_ITEM = "http://masinealati.rs/parametri.php?action=obrisiArtikalKorpa&id=%1$s&userId=%2$s";
     public static final String GET_CART = "Korpa";
+    public static final String URL_COMPLETE_TRANSACTION = "http://masinealati.rs/parametri.php?action=kupovinaKorpa&userId=%1$s";
 
 
 

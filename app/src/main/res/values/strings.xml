@@ -178,6 +178,8 @@
     <string name="phone_hint">Fiksni telefon</string>
     <string name="comment_hint">Napomena</string>
     <string name="next">Nastavi</string>
+    <string name="progress_update_user_data">Slanje podataka o korisniku</string>
+    <string name="progress_completing_transaction">Pravljenje narudžbine</string>
 
 
 </resources>

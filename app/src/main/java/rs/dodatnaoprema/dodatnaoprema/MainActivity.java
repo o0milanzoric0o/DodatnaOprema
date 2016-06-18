@@ -150,6 +150,7 @@ public class MainActivity extends FragmentActivity
             tvItemCount.setVisibility(View.GONE);
         } else {
             tvItemCount.setText(String.valueOf(itemCount));
+            tvItemCount.setVisibility(View.VISIBLE);
         }
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +217,9 @@ public class MainActivity extends FragmentActivity
                 // Handle the login action
                 Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
                 startActivity(intent);
+                // close drawer
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
             }
         });
 

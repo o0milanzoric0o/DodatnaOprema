@@ -84,6 +84,13 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
                 Fragment loginFragment = new LoginFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+                // clear the cart since we logged off
+                MyApplication.getInstance().getSessionManager().setCartItemCount(0);
+                // inform about cart update
+                Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
+
+
                 // Update Navigation Drawer from main activity
                 Intent signOut = new Intent(Config.CLEAR_USER_INFO);
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(signOut);
