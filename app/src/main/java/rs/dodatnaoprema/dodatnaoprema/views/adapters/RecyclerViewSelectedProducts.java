@@ -30,7 +30,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private TextView brandName;
     private TextView stockState;
     private TextView shortDescription;
-    private ImageView saleIndicator;
+    private TextView saleIndicator;
 
     private Context context;
     private boolean list;
@@ -50,9 +50,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
-
-            saleIndicator = (ImageView) view.findViewById(R.id.saleIndicator);
-            saleIndicator.setColorFilter(ContextCompat.getColor(context, android.R.color.holo_red_dark), PorterDuff.Mode.SRC_ATOP);
+            saleIndicator = (TextView) view.findViewById(R.id.saleIndicator);
 
 
             if (list) {
@@ -128,7 +126,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             holder.setIsRecyclable(false);
 
             productName.setText(products.get(position - existHeader).getArtikalNaziv().trim());
-            brandName.setText(products.get(position - existHeader).getBrendIme().trim());
+            brandName.append(" " +products.get(position - existHeader).getBrendIme().trim());
             price.append(" " + products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt());
             if (products.get(position - existHeader).getStanje() > 0) {
                 stockState.setText(context.getString(R.string.stock_state_available));
@@ -146,15 +144,18 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             switch (products.get(position - existHeader).getArtikalNaAkciji()) {
                 case 6:
                     saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setImageResource(R.drawable.ic_nav_sale);
+                    saleIndicator.setText(context.getString(R.string.sale_indicator));
+                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context,R.color.sale_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 case 7:
                     saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_new, null));
+                    saleIndicator.setText(context.getString(R.string.new_indicator));
+                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context,R.color.new_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 case 8:
                     saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_best, null));
+                    saleIndicator.setText(context.getString(R.string.best_indicator));
+                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context,R.color.best_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 default:
                     break;

@@ -18,6 +18,7 @@ import junit.framework.Assert;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartDeleteAllConfirmationDialog;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
@@ -33,6 +34,7 @@ public class CartActivity extends BaseActivity {
     private VolleySingleton mVolleySingleton;
     private Context mContext;
     private CartDeleteAllConfirmationDialog cartDeleteАllConfirmationDialog;
+    private ProgressDialogCustom progressDialog;
 
 
     @Override
@@ -43,6 +45,10 @@ public class CartActivity extends BaseActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
+
+        progressDialog = new ProgressDialogCustom(CartActivity.this);
+        progressDialog.setCancelable(false);
+
         Assert.assertNotNull(mTextView);
         mTextView.setText("Korpa");
         setSupportActionBar(mToolbar);
@@ -51,12 +57,14 @@ public class CartActivity extends BaseActivity {
 
         mVolleySingleton = VolleySingleton.getsInstance(this);
         mContainer = (FrameLayout) findViewById(R.id.container);
+
         if (mContainer != null) {
 
             // pull cart content and show it
 
             // check if logged in
             if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+                progressDialog.showDialog("Učitavanje...");
 
                 // Load user data and get UserId
                 User user = MyApplication.getInstance().getPrefManager().getUser();
@@ -70,16 +78,18 @@ public class CartActivity extends BaseActivity {
                     @Override
                     public void webRequestSuccess(boolean success, Cart cart) {
                         if (success) {
+
                             if (cart.getArtikli().size() > 0)
                                 showCartContentFragment(cart);
                             else
                                 showEmptyCartFragment();
                         }
+                        progressDialog.hideDialog();
                     }
 
                     @Override
                     public void webRequestError(String error) {
-
+                        progressDialog.hideDialog();
                     }
                 });
                 content.pullList();

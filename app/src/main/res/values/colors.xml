@@ -62,4 +62,9 @@
     <color name="indicator_3">#66D7B9</color>
     <color name="indicator_4">#FDBC7D</color>
 
+    <!-- Offer indicator colors-->
+    <color name="sale_indicator">#74C6FC</color>
+    <color name="new_indicator">#F5BD64</color>
+    <color name="best_indicator">#F56E64</color>
+
 </resources>

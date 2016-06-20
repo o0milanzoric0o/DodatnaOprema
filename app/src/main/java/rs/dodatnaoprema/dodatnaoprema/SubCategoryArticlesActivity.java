@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Conversions;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.FlipAnimation;
@@ -225,6 +227,10 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     private void searchArticlesByCategory(int id, int from, final int to, int sort) {
 
+        final ProgressDialogCustom progressDialog = new ProgressDialogCustom(SubCategoryArticlesActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.showDialog("Učitavanje...");
+
         PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(this, ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
@@ -268,13 +274,14 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                     } else {
                         noResults();
                     }
+                    progressDialog.hideDialog();
                 }
             }
 
             @Override
             public void webRequestError(String error) {
+                progressDialog.hideDialog();
                 noResults();
-
             }
         });
         content.pullList();
@@ -297,7 +304,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
 
-        if (articles.size()==0) noSearchResults();
+        if (articles.size() == 0) noSearchResults();
     }
 
     private void setNumberOfResults(int number) {

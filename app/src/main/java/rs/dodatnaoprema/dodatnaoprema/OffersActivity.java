@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
@@ -75,6 +76,11 @@ public class OffersActivity extends BaseActivity {
     }
 
     public void viewArtcile(int itemID) {
+
+        final ProgressDialogCustom progressDialog = new ProgressDialogCustom(OffersActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.showDialog("Učitavanje...");
+
         PullWebContent<OneArticle> content =
                 new PullWebContent<OneArticle>(this, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
@@ -88,17 +94,19 @@ public class OffersActivity extends BaseActivity {
                     Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
                     intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
                     startActivity(intent);
-
+                    progressDialog.hideDialog();
 
                     Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
                 } else {
+                    progressDialog.hideDialog();
                     Log.logInfo("LALALA", "FAILED");
                 }
             }
 
             @Override
             public void webRequestError(String error) {
+                progressDialog.hideDialog();
 
             }
         });

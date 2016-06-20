@@ -27,6 +27,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
@@ -183,6 +184,11 @@ public class OneArticleActivity extends BaseActivity {
 
     public void addToCart(int item_id, final int quantity) {
         if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+
+            final ProgressDialogCustom progressDialog = new ProgressDialogCustom(OneArticleActivity.this);
+            progressDialog.setCancelable(false);
+            progressDialog.showDialog("Učitavanje...");
+
             // Load user data and get UserId
             User user = MyApplication.getInstance().getPrefManager().getUser();
             String user_id = user.getId();
@@ -197,6 +203,7 @@ public class OneArticleActivity extends BaseActivity {
                 @Override
                 public void webRequestSuccess(boolean success, ItemAddResponse resp) {
                     if (success) {
+                        progressDialog.hideDialog();
                         if (resp.getSuccess()) {
                             // item is successfully added to cart
                             // update one item display
@@ -231,12 +238,14 @@ public class OneArticleActivity extends BaseActivity {
 
                         } else {
                             /**TODO  couldn't add to cart, God knows why**/
+                            progressDialog.hideDialog();
                         }
                     }
                 }
 
                 @Override
                 public void webRequestError(String error) {
+                    progressDialog.hideDialog();
                     // Web request fail
                     // Create snackbar or something
                     /**TODO Inform the user there was a connection failure...**////

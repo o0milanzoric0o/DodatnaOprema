@@ -23,7 +23,8 @@
     <dimen name="subheader_text_size">12sp</dimen>
 
     <dimen name="category_text_size">18sp</dimen>
-    <dimen name="medium_text_size">16sp</dimen>
+    <dimen name="medium_text_size">14sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
 
     <dimen name="load_more_footer_height_classic">10dp</dimen>
 
@@ -33,4 +34,7 @@
     <dimen name="one_product_text_padding_top_bottom">1dp</dimen>
     <dimen name="one_product_text_padding_left_right">3dp</dimen>
     <dimen name="line_margine">6dp</dimen>
+
+    <!-- Offer indicator -->
+    <dimen name="offer_indicator_radius">30dp</dimen>
 </resources>

@@ -98,6 +98,11 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
+    <style name="OfferIndicator" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="number_picker" parent="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
 </resources>

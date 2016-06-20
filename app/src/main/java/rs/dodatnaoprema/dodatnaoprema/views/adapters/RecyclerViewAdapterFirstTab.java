@@ -23,6 +23,7 @@ import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands;
@@ -105,6 +106,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                 public void onItemClick(Article item, View view) {
 
                     //Start Intent for Single Item Activity
+                    final ProgressDialogCustom progressDialog = new ProgressDialogCustom(context);
+                    progressDialog.setCancelable(false);
+                    progressDialog.showDialog("Učitavanje...");
 
                     int itemID = item.getArtikalId();
                     PullWebContent<OneArticle> content =
@@ -116,21 +120,25 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                             if (success) {
+
                                 Log.logInfo("LALALA", "SUCCESS");
                                 Intent intent = new Intent((MainActivity) context, OneArticleActivity.class);
                                 intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
                                 ((MainActivity) context).startActivityOneArticle(intent);
+                                progressDialog.hideDialog();
 
 
                                 Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
                             } else {
+                                progressDialog.hideDialog();
                                 Log.logInfo("LALALA", "FAILED");
                             }
                         }
 
                         @Override
                         public void webRequestError(String error) {
+                            progressDialog.hideDialog();
 
                         }
                     });

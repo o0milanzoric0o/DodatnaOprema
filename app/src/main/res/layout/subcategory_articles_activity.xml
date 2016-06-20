@@ -69,6 +69,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/AppTheme.AppBarOverlay"
                 app:layout_scrollFlags="scroll|enterAlways"
+                android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <RelativeLayout
