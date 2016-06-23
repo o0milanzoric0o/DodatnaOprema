@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,8 @@ public class AllCategoriesActivity extends BaseActivity {
             public void onItemClick(Category item) {
 
                 Intent intent = new Intent(getApplicationContext(), SubCategoriesActivity.class);
-                intent.putExtra("Potkategorije", item);
+                intent.putExtra("Potkategorije", (Serializable) item.getChild());
+                intent.putExtra("Title", item.getKatsrblat());
                 startActivity(intent);
 
             }

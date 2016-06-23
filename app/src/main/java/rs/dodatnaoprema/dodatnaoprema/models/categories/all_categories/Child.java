@@ -10,80 +10,215 @@ public class Child implements Serializable{
 
     @SerializedName("KategorijaArtikalaId")
     @Expose
-    private Integer KategorijaArtikalaId;
+    private Integer kategorijaArtikalaId;
     @SerializedName("ParentKategorijaArtikalaId")
     @Expose
-    private Integer ParentKategorijaArtikalaId;
+    private Object parentKategorijaArtikalaId;
     @SerializedName("KatIme")
     @Expose
-    private String KatIme;
+    private String katIme;
     @SerializedName("KategorijeVidljivZaMP")
     @Expose
-    private Integer KategorijeVidljivZaMP;
+    private Integer kategorijeVidljivZaMP;
     @SerializedName("KategorijaArtikalaSlika")
     @Expose
-    private String KategorijaArtikalaSlika;
+    private String kategorijaArtikalaSlika;
     @SerializedName("KategorijaArtikalaLink")
     @Expose
-    private String KategorijaArtikalaLink;
+    private String kategorijaArtikalaLink;
     @SerializedName("KategorijaArtikalaActiveMasine")
     @Expose
-    private Integer KategorijaArtikalaActiveMasine;
+    private Integer kategorijaArtikalaActiveMasine;
+    @SerializedName("KategorijaArtikalaActive")
+    @Expose
+    private Integer kategorijaArtikalaActive;
+    @SerializedName("daLiImaPodKat")
+    @Expose
+    private Integer daLiImaPodKat;
+    @SerializedName("KategorijaArtikalaMesto")
+    @Expose
+    private Integer kategorijaArtikalaMesto;
 
     /**
-     * @return The KategorijaArtikalaId
+     *
+     * @return
+     * The kategorijaArtikalaId
      */
     public Integer getKategorijaArtikalaId() {
-        return KategorijaArtikalaId;
+        return kategorijaArtikalaId;
     }
 
-
     /**
-     * @return The ParentKategorijaArtikalaId
+     *
+     * @param kategorijaArtikalaId
+     * The KategorijaArtikalaId
      */
-    public Integer getParentKategorijaArtikalaId() {
-        return ParentKategorijaArtikalaId;
+    public void setKategorijaArtikalaId(Integer kategorijaArtikalaId) {
+        this.kategorijaArtikalaId = kategorijaArtikalaId;
     }
 
+    /**
+     *
+     * @return
+     * The parentKategorijaArtikalaId
+     */
+    public Object getParentKategorijaArtikalaId() {
+        return parentKategorijaArtikalaId;
+    }
 
     /**
-     * @return The Katsrblat
+     *
+     * @param parentKategorijaArtikalaId
+     * The ParentKategorijaArtikalaId
+     */
+    public void setParentKategorijaArtikalaId(Object parentKategorijaArtikalaId) {
+        this.parentKategorijaArtikalaId = parentKategorijaArtikalaId;
+    }
+
+    /**
+     *
+     * @return
+     * The katIme
      */
     public String getKatIme() {
-        return KatIme;
+        return katIme;
     }
 
+    /**
+     *
+     * @param katIme
+     * The KatIme
+     */
+    public void setKatIme(String katIme) {
+        this.katIme = katIme;
+    }
 
     /**
-     * @return The KategorijeVidljivZaMP
+     *
+     * @return
+     * The kategorijeVidljivZaMP
      */
     public Integer getKategorijeVidljivZaMP() {
-        return KategorijeVidljivZaMP;
+        return kategorijeVidljivZaMP;
     }
 
+    /**
+     *
+     * @param kategorijeVidljivZaMP
+     * The KategorijeVidljivZaMP
+     */
+    public void setKategorijeVidljivZaMP(Integer kategorijeVidljivZaMP) {
+        this.kategorijeVidljivZaMP = kategorijeVidljivZaMP;
+    }
 
     /**
-     * @return The KategorijaArtikalaSlika
+     *
+     * @return
+     * The kategorijaArtikalaSlika
      */
     public String getKategorijaArtikalaSlika() {
-        return KategorijaArtikalaSlika;
+        return kategorijaArtikalaSlika;
     }
 
+    /**
+     *
+     * @param kategorijaArtikalaSlika
+     * The KategorijaArtikalaSlika
+     */
+    public void setKategorijaArtikalaSlika(String kategorijaArtikalaSlika) {
+        this.kategorijaArtikalaSlika = kategorijaArtikalaSlika;
+    }
 
     /**
-     * @return The KategorijaArtikalaLink
+     *
+     * @return
+     * The kategorijaArtikalaLink
      */
     public String getKategorijaArtikalaLink() {
-        return KategorijaArtikalaLink;
+        return kategorijaArtikalaLink;
     }
-
 
     /**
-     * @return The KategorijaArtikalaActiveMasine
+     *
+     * @param kategorijaArtikalaLink
+     * The KategorijaArtikalaLink
+     */
+    public void setKategorijaArtikalaLink(String kategorijaArtikalaLink) {
+        this.kategorijaArtikalaLink = kategorijaArtikalaLink;
+    }
+
+    /**
+     *
+     * @return
+     * The kategorijaArtikalaActiveMasine
      */
     public Integer getKategorijaArtikalaActiveMasine() {
-        return KategorijaArtikalaActiveMasine;
+        return kategorijaArtikalaActiveMasine;
     }
-    
+
+    /**
+     *
+     * @param kategorijaArtikalaActiveMasine
+     * The KategorijaArtikalaActiveMasine
+     */
+    public void setKategorijaArtikalaActiveMasine(Integer kategorijaArtikalaActiveMasine) {
+        this.kategorijaArtikalaActiveMasine = kategorijaArtikalaActiveMasine;
+    }
+
+    /**
+     *
+     * @return
+     * The kategorijaArtikalaActive
+     */
+    public Integer getKategorijaArtikalaActive() {
+        return kategorijaArtikalaActive;
+    }
+
+    /**
+     *
+     * @param kategorijaArtikalaActive
+     * The KategorijaArtikalaActive
+     */
+    public void setKategorijaArtikalaActive(Integer kategorijaArtikalaActive) {
+        this.kategorijaArtikalaActive = kategorijaArtikalaActive;
+    }
+
+    /**
+     *
+     * @return
+     * The daLiImaPodKat
+     */
+    public Integer getDaLiImaPodKat() {
+        return daLiImaPodKat;
+    }
+
+    /**
+     *
+     * @param daLiImaPodKat
+     * The daLiImaPodKat
+     */
+    public void setDaLiImaPodKat(Integer daLiImaPodKat) {
+        this.daLiImaPodKat = daLiImaPodKat;
+    }
+
+    /**
+     *
+     * @return
+     * The kategorijaArtikalaMesto
+     */
+    public Integer getKategorijaArtikalaMesto() {
+        return kategorijaArtikalaMesto;
+    }
+
+    /**
+     *
+     * @param kategorijaArtikalaMesto
+     * The KategorijaArtikalaMesto
+     */
+    public void setKategorijaArtikalaMesto(Integer kategorijaArtikalaMesto) {
+        this.kategorijaArtikalaMesto = kategorijaArtikalaMesto;
+    }
+
+
 
 }

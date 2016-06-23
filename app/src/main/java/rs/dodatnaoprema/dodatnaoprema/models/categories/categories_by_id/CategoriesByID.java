@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+
 public class CategoriesByID {
 
     @SerializedName("tag")
@@ -25,7 +27,7 @@ public class CategoriesByID {
     private List<BreadCrump> breadCrump = new ArrayList<BreadCrump>();
     @SerializedName("kategorije")
     @Expose
-    private List<List<SubCategory>> kategorije = new ArrayList<List<SubCategory>>();
+    private List<List<Child>> kategorije = new ArrayList<List<Child>>();
 
     /**
      * @return The tag
@@ -100,14 +102,14 @@ public class CategoriesByID {
     /**
      * @return The kategorije
      */
-    public List<List<SubCategory>> getKategorije() {
+    public List<List<Child>> getKategorije() {
         return kategorije;
     }
 
     /**
      * @param kategorije The kategorije
      */
-    public void setKategorije(List<List<SubCategory>> kategorije) {
+    public void setKategorije(List<List<Child>> kategorije) {
         this.kategorije = kategorije;
     }
 

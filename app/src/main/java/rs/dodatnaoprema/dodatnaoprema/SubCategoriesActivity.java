@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -16,25 +17,35 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubCategories;
 
 public class SubCategoriesActivity extends BaseActivity {
 
+    private VolleySingleton mVolleySingleton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subcategories_activity);
 
         Intent intent = getIntent();
-        List<Child> subCategories;
-        Category item = (Category) intent.getSerializableExtra("Potkategorije");
-        subCategories = item.getChild();
+        List<Child> subCategories = (List<Child>) intent.getSerializableExtra("Potkategorije");
+        String title = intent.getStringExtra("Title");
+
+        //subCategories = item.getChild();
+
+        mVolleySingleton = VolleySingleton.getsInstance(this);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
-        if (mTextView != null) mTextView.setText(item.getKatsrblat());
+        if (mTextView != null) mTextView.setText(title);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -102,11 +113,29 @@ public class SubCategoriesActivity extends BaseActivity {
                 intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
                 startActivity(intent);
 
-
             }
         });
         if (mRecyclerView != null) mRecyclerView.setAdapter(mAdapter);
 
+    }
+
+    private void getCategoriesById(int id) {
+        PullWebContent<CategoriesByID> content =
+                new PullWebContent<CategoriesByID>(this, CategoriesByID.class, UrlEndpoints.getRequestUrlCategoriesById(id), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<CategoriesByID>() {
+            @Override
+            public void webRequestSuccess(boolean success, CategoriesByID articles) {
+                if (success) {
+                    // articles.getKategorije()
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        content.pullList();
     }
 
     @Override
