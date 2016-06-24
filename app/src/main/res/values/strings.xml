@@ -119,6 +119,10 @@
     <string name="cena_txt">Cena:</string>
     <string name="brend_txt">Brend:</string>
     <string name="description_txt">Opis artikla:</string>
+    <string name="id_txt">id:</string>
+    <string name="code_txt">Code:</string>
+    <string name="ask_question">Postavi pitanje</string>
+    <string name="article_category_text">Pripada kategoriji:</string>
 
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>
@@ -130,6 +134,7 @@
     <string name="sort_question">Izaberite način sortiranja</string>
     <string name="txt_brands">Brendovi</string>
     <string name="txt_search_results">Ukupan broj rezultata pretrage: %1$d</string>
+    <string name="articles_category_link"><u>%s</u></string>
 
     <string-array name="sort_options">
         <item>Cena (rastuće)</item>

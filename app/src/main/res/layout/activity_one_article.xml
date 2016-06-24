@@ -18,15 +18,14 @@
             android:background="@color/primary_dark"
             app:elevation="0dp">
 
-
             <include
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primary_dark"
-                />
+                android:background="@color/primary_dark" />
 
         </android.support.design.widget.AppBarLayout>
+
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/root_coordinator"
             android:layout_width="match_parent"
@@ -42,9 +41,9 @@
                     android:id="@+id/collapsing_toolbar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|enterAlways"
                     android:background="@color/primary_dark"
-                    app:contentScrim="@color/primary_dark">
+                    app:contentScrim="@color/primary_dark"
+                    app:layout_scrollFlags="scroll|enterAlways">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -68,16 +67,16 @@
                                 <FrameLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/selected_item"
-                                    android:layout_margin="@dimen/line_margine">
+                                    android:layout_margin="@dimen/line_margine"
+                                    android:background="@drawable/selected_item">
 
                                     <com.android.volley.toolbox.NetworkImageView
                                         android:id="@+id/img_one_product"
                                         android:layout_width="200dp"
                                         android:layout_height="200dp"
                                         android:adjustViewBounds="true"
-                                        android:onClick="morePics"
-                                        android:background="@drawable/image_border"/>
+                                        android:background="@drawable/image_border"
+                                        android:onClick="morePics" />
                                 </FrameLayout>
 
                                 <!-- naziv proizvodjac cena-->
@@ -85,7 +84,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@color/background_white">
-
 
 
                                     <LinearLayout
@@ -99,57 +97,81 @@
                                             style="@style/OneArticleTextView"
                                             android:layout_width="match_parent"
                                             android:textColor="@android:color/holo_red_dark"
-                                            android:textStyle="bold"/>
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/textView_naziv"
                                             style="@style/OneArticleTextView"
                                             android:layout_width="match_parent"
-                                            android:textStyle="bold"/>
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/textView_cena"
                                             style="@style/OneArticleTextView"
                                             android:layout_width="match_parent"
-                                            android:textColor="@android:color/holo_red_dark"/>
+                                            android:textColor="@android:color/holo_red_dark" />
 
                                         <TextView
                                             android:id="@+id/textView_about_price"
                                             style="@style/OneArticleTextView"
-                                            android:layout_width="match_parent"/>
+                                            android:layout_width="match_parent" />
                                     </LinearLayout>
                                 </FrameLayout>
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_margin="@dimen/line_margine">
+
+                                <TextView
+                                    android:id="@+id/article_category_text"
+                                    style="@style/OneArticleTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/white"
+                                    android:gravity="start"
+                                    android:text="@string/article_category_text" />
+                                <TextView
+                                    android:id="@+id/article_category"
+                                    style="@style/OneArticleTextView"
+                                    android:layout_width="match_parent"
+                                    android:textColor="@color/primary_dark"
+                                    android:clickable="true"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/white"
+                                    android:gravity="start" />
+                            </LinearLayout>
 
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_marginLeft="@dimen/line_margine"
                                 android:layout_marginRight="@dimen/line_margine"
-                                android:background="@color/lighter_gray"/>
+                                android:background="@color/lighter_gray" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/line_margine"
+                                android:layout_marginRight="@dimen/line_margine"
                                 android:background="@color/background_white"
                                 android:orientation="horizontal"
-                                android:weightSum="5"
-                                android:layout_marginLeft="@dimen/line_margine"
-                                android:layout_marginRight="@dimen/line_margine">
+                                android:weightSum="5">
 
                                 <RatingBar
                                     android:id="@+id/ratingBar_stars"
                                     style="?android:attr/ratingBarStyleSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
                                     android:gravity="center"
-                                    android:progressTint="@android:color/holo_red_dark"
-                                    android:numStars="5"
                                     android:max="1"
+                                    android:numStars="5"
+                                    android:progressTint="@android:color/holo_red_dark"
                                     android:rating="5.0"
-                                    android:stepSize="0.1"
-                                    android:layout_gravity="center"/>
+                                    android:stepSize="0.1" />
 
 
                                 <View
@@ -157,57 +179,105 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginBottom="@dimen/line_margine"
                                     android:layout_marginTop="@dimen/line_margine"
-                                    android:background="@color/lighter_gray"/>
+                                    android:background="@color/lighter_gray" />
+
                                 <TextView
                                     android:id="@+id/textView_yes_no"
                                     style="@style/OneArticleTextView"
                                     android:layout_width="0dp"
                                     android:layout_gravity="center"
-                                    android:layout_weight="2"/>
+                                    android:layout_weight="1" />
+
                                 <View
                                     android:layout_width="1dp"
                                     android:layout_height="match_parent"
                                     android:layout_marginBottom="@dimen/line_margine"
                                     android:layout_marginTop="@dimen/line_margine"
-                                    android:background="@color/lighter_gray"/>
+                                    android:background="@color/lighter_gray" />
+
                                 <TextView
                                     android:id="@+id/textView_min"
                                     style="@style/OneArticleTextView"
                                     android:layout_width="0dp"
-                                    android:layout_weight="3"/>
+                                    android:layout_gravity="center"
+                                    android:layout_weight="2" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="@dimen/line_margine"
+                                    android:layout_marginTop="@dimen/line_margine"
+                                    android:background="@color/lighter_gray" />
+
+                                <TextView
+                                    android:id="@+id/textView_id"
+                                    style="@style/OneArticleTextView"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/id_txt" />
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="@dimen/line_margine"
+                                    android:layout_marginTop="@dimen/line_margine"
+                                    android:background="@color/lighter_gray" />
+
+                                <TextView
+                                    android:id="@+id/textView_code"
+                                    style="@style/OneArticleTextView"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/code_txt" />
                             </LinearLayout>
 
 
                         </LinearLayout>
 
 
-                                <!--
-                                                           <NumberPicker
-                                                               android:id="@+id/numberPicker"
-                                                               android:layout_width="0dp"
-                                                               android:layout_height="55dp"
-                                                               android:layout_margin="@dimen/line_margine"
-                                                               android:layout_weight="3"
-                                                               android:orientation="vertical"/>
-                                                               -->
-                        <FrameLayout
+                        <!--
+                                                   <NumberPicker
+                                                       android:id="@+id/numberPicker"
+                                                       android:layout_width="0dp"
+                                                       android:layout_height="55dp"
+                                                       android:layout_margin="@dimen/line_margine"
+                                                       android:layout_weight="3"
+                                                       android:orientation="vertical"/> -->
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/line_margine"
                             android:background="@drawable/selected_item"
-                            android:layout_margin="@dimen/line_margine">
+                            android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/textView_korpa"
-                                    style="@style/OneArticleTextView"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:drawableBottom="@drawable/ic_nav_cart"
-                                    android:text="@string/add_to_chart"
-                                    android:onClick="addToCart"
-                                    android:background="@color/background_white"/>
+                            <TextView
+                                android:id="@+id/textView_question"
+                                style="@style/OneArticleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@color/background_white"
+                                android:drawableBottom="@drawable/ic_nav_question"
+                                android:text="@string/ask_question" />
 
-                      </FrameLayout>
+                            <TextView
+                                android:id="@+id/textView_korpa"
+                                style="@style/OneArticleTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:background="@color/background_white"
+                                android:drawableBottom="@drawable/ic_nav_cart"
+                                android:onClick="addToCart"
+                                android:text="@string/add_to_chart" />
 
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -224,8 +294,7 @@
                         android:background="@color/primary"
                         app:layout_collapseMode="pin"
                         app:tabSelectedTextColor="@android:color/white"
-                        app:tabTextAppearance="@style/CustomTabTextStyle"
-                        />
+                        app:tabTextAppearance="@style/CustomTabTextStyle" />
                 </android.support.design.widget.CollapsingToolbarLayout>
 
             </android.support.design.widget.AppBarLayout>

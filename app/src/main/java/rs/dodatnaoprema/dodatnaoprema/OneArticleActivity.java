@@ -12,6 +12,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+
+import java.io.Serializable;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -49,8 +53,11 @@ public class OneArticleActivity extends BaseActivity {
     private TextView mTextViewPrice;
     private TextView mTextViewAboutPrice;
     private RatingBar mRatingBar;
+    private TextView mTextViewId;
+    private TextView mTextViewCode;
     private TextView mTextViewYesNo;
     private TextView mTextViewMin;
+    private TextView mTextViewArticleCategory;
     private TextView mTextViewKorpa;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -75,6 +82,9 @@ public class OneArticleActivity extends BaseActivity {
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
         mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
         mTextViewMin = (TextView) findViewById(R.id.textView_min);
+        mTextViewId = (TextView) findViewById(R.id.textView_id);
+        mTextViewCode = (TextView) findViewById(R.id.textView_code);
+        mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
 
         mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
 
@@ -109,6 +119,23 @@ public class OneArticleActivity extends BaseActivity {
             mTextViewYesNo.setText("nema na stanju");
 
         mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()));
+
+        mTextViewId.append(" "+mOneArticle.getArtikal().getArtikalId());
+        mTextViewCode.append(" "+mOneArticle.getArtikal().getCodeVendor());
+
+        SpannableString content = new SpannableString(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        mTextViewArticleCategory.setText(content);
+       // mTextViewArticleCategory.setText(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
+        mTextViewArticleCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
+                intent.putExtra("Artikli", mOneArticle.getArtikal().getKategorijaArtiklaNaziv());
+                intent.putExtra("ArtikalId", mOneArticle.getArtikal().getKategorijaArtikalId());
+                startActivity(intent);
+            }
+        });
 
 
         Object opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();

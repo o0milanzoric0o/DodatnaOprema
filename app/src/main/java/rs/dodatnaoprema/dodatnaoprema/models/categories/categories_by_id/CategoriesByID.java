@@ -27,7 +27,7 @@ public class CategoriesByID {
     private List<BreadCrump> breadCrump = new ArrayList<BreadCrump>();
     @SerializedName("kategorije")
     @Expose
-    private List<List<Child>> kategorije = new ArrayList<List<Child>>();
+    private List<Child> kategorije = new ArrayList<Child>();
 
     /**
      * @return The tag
@@ -102,14 +102,14 @@ public class CategoriesByID {
     /**
      * @return The kategorije
      */
-    public List<List<Child>> getKategorije() {
+    public List<Child> getKategorije() {
         return kategorije;
     }
 
     /**
      * @param kategorije The kategorije
      */
-    public void setKategorije(List<List<Child>> kategorije) {
+    public void setKategorije(List<Child> kategorije) {
         this.kategorije = kategorije;
     }
 

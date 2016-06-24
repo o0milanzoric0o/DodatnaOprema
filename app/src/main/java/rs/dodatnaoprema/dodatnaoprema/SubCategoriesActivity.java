@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
@@ -30,6 +32,7 @@ import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubCategories;
 public class SubCategoriesActivity extends BaseActivity {
 
     private VolleySingleton mVolleySingleton;
+    private int existSubcategory = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,11 +110,8 @@ public class SubCategoriesActivity extends BaseActivity {
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
                     SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, mHistoryID);
                 }
+                getCategoriesById(item.getKategorijaArtikalaId(), item);
 
-                Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
-                intent.putExtra("Artikli", item.getKatIme());
-                intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
-                startActivity(intent);
 
             }
         });
@@ -119,20 +119,38 @@ public class SubCategoriesActivity extends BaseActivity {
 
     }
 
-    private void getCategoriesById(int id) {
+    private void getCategoriesById(int id, final Child item) {
+
+        final ProgressDialogCustom progressDialog = new ProgressDialogCustom(SubCategoriesActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.showDialog("Učitavanje...");
+
         PullWebContent<CategoriesByID> content =
                 new PullWebContent<CategoriesByID>(this, CategoriesByID.class, UrlEndpoints.getRequestUrlCategoriesById(id), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<CategoriesByID>() {
             @Override
-            public void webRequestSuccess(boolean success, CategoriesByID articles) {
+            public void webRequestSuccess(boolean success, CategoriesByID categoriesByID) {
                 if (success) {
-                    // articles.getKategorije()
+                    existSubcategory = categoriesByID.getKategorije().size();
+                    if (existSubcategory == 0) {
+                        Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
+                        intent.putExtra("Artikli", item.getKatIme());
+                        intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+                        startActivity(intent);
+                        progressDialog.hideDialog();
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), SubCategoriesActivity.class);
+                        intent.putExtra("Potkategorije", (Serializable) categoriesByID.getKategorije());
+                        intent.putExtra("Title", item.getKatIme());
+                        startActivity(intent);
+                        progressDialog.hideDialog();
+                    }
                 }
             }
 
             @Override
             public void webRequestError(String error) {
-
+                progressDialog.hideDialog();
             }
         });
         content.pullList();
