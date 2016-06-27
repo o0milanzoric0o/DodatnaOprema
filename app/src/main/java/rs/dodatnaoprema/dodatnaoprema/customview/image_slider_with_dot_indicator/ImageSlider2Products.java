@@ -66,7 +66,8 @@ public class ImageSlider2Products extends RelativeLayout {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                mhandler.removeCallbacks(mRunnable);
+                mhandler.postDelayed(mRunnable, slideInterval);
             }
 
             @Override
@@ -124,7 +125,7 @@ public class ImageSlider2Products extends RelativeLayout {
                     item_count = 0;
                 }
                 mViewPager.setCurrentItem(item_count, true); // set current item with smooth scroll
-                mhandler.postDelayed(this, slideInterval);
+                // mhandler.postDelayed(this, slideInterval);
             }
         };
         mhandler.postDelayed(mRunnable, slideInterval);

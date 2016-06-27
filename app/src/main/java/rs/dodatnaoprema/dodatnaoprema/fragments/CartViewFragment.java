@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
@@ -42,6 +43,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     private CartViewAdapter mAdapter;
     private ListView listView;
     private Button mBtnBuy;
+    private TextView mTotal;
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
     private VolleySingleton mVolleySingleton;
     private int item_position;
@@ -151,6 +153,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
         listView = (ListView) view.findViewById(R.id.list_view_cart);
         mBtnBuy = (Button) view.findViewById(R.id.btn_cart_buy);
+        mTotal = (TextView) view.findViewById(R.id.tv_total);
+
         mBtnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,6 +178,10 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         listView.setAdapter(mAdapter);
 
         mAdapter.notifyDataSetChanged();
+
+        String tot = String.valueOf(mCart.getUkupnaCena()) +" "+ mCart.getCenaPrikazExt();
+
+        mTotal.setText(tot);
 
         return view;
     }
