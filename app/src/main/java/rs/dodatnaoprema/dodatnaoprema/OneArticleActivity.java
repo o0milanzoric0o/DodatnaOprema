@@ -27,8 +27,6 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-import java.io.Serializable;
-
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
@@ -48,18 +46,7 @@ public class OneArticleActivity extends BaseActivity {
 
     public int quantity;
     private NetworkImageView mImageView;
-    private TextView mTextViewBrendName;
-    private TextView mTextViewProductName;
-    private TextView mTextViewPrice;
-    private TextView mTextViewAboutPrice;
-    private RatingBar mRatingBar;
-    private TextView mTextViewId;
-    private TextView mTextViewCode;
-    private TextView mTextViewYesNo;
-    private TextView mTextViewMin;
-    private TextView mTextViewArticleCategory;
     private TextView mTextViewKorpa;
-    private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private OneArticle mOneArticle;
     private Context mContext;
@@ -74,25 +61,28 @@ public class OneArticleActivity extends BaseActivity {
         mContext = OneArticleActivity.this;
 
         mImageView = (NetworkImageView) findViewById(R.id.img_one_product);
-        mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
-        mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
-        mTextViewPrice = (TextView) findViewById(R.id.textView_cena);
-        mTextViewAboutPrice = (TextView) findViewById(R.id.textView_about_price);
+        TextView mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
+        TextView mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
+        TextView mTextViewPrice = (TextView) findViewById(R.id.textView_cena);
+        TextView mTextViewAboutPrice = (TextView) findViewById(R.id.textView_about_price);
 
-        mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
-        mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
-        mTextViewMin = (TextView) findViewById(R.id.textView_min);
-        mTextViewId = (TextView) findViewById(R.id.textView_id);
-        mTextViewCode = (TextView) findViewById(R.id.textView_code);
-        mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
+        RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
+        TextView mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
+        TextView mTextViewMin = (TextView) findViewById(R.id.textView_min);
+        TextView mTextViewId = (TextView) findViewById(R.id.textView_id);
+        TextView mTextViewCode = (TextView) findViewById(R.id.textView_code);
+        TextView mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
 
         mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         quantity = 0;
 
@@ -101,46 +91,54 @@ public class OneArticleActivity extends BaseActivity {
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
 
 
-        mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
+        if (mTextView != null) mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
 
         mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
-        mTextViewBrendName.setText(mOneArticle.getArtikal().getBrendIme());
-        mTextViewProductName.setText(mOneArticle.getArtikal().getArtikalNaziv());
-        mTextViewPrice.setText(mOneArticle.getArtikal().getCenaSamoBrojFormat() + " " + mOneArticle.getArtikal().getCenaPrikazExt());
-        mTextViewAboutPrice.setText("cena po: " + mOneArticle.getArtikal().getTipUnitCelo());
+        if (mTextViewBrendName != null)
+            mTextViewBrendName.setText(getResources().getString(R.string.brend_txt, mOneArticle.getArtikal().getBrendIme()));
+        if (mTextViewProductName != null)
+            mTextViewProductName.setText(mOneArticle.getArtikal().getArtikalNaziv());
+        if (mTextViewPrice != null)
+            mTextViewPrice.setText(getResources().getString(R.string.cena_txt, mOneArticle.getArtikal().getCenaSamoBrojFormat() + " " + mOneArticle.getArtikal().getCenaPrikazExt()));
+        if (mTextViewAboutPrice != null)
+            mTextViewAboutPrice.setText(getString(R.string.price_by, mOneArticle.getArtikal().getTipUnitCelo()));
 
 
         Integer i = mOneArticle.getArtikal().getOcenaut();
-        mRatingBar.setRating(i);
+        if (mRatingBar != null) mRatingBar.setRating(i);
+        if (mTextViewYesNo != null) {
+            if (mOneArticle.getArtikal().getStanje() == 1)
+                mTextViewYesNo.setText(getString(R.string.text, "ima na stanju"));
+            else mTextViewYesNo.setText(getString(R.string.text, "nema na stanju"));
+        }
+        if (mTextViewMin != null)
+            mTextViewMin.setText(getString(R.string.min_quantity_txt, String.valueOf(mOneArticle.getArtikal().getMozedaseKupi())));
 
-        if (mOneArticle.getArtikal().getStanje() == 1)
-            mTextViewYesNo.setText("ima na stanju");
-        else
-            mTextViewYesNo.setText("nema na stanju");
-
-        mTextViewMin.setText("Minimalna količina za narudžbinu: " + String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()));
-
-        mTextViewId.append(" "+mOneArticle.getArtikal().getArtikalId());
-        mTextViewCode.append(" "+mOneArticle.getArtikal().getCodeVendor());
+        if (mTextViewId != null)
+            mTextViewId.append(" " + mOneArticle.getArtikal().getArtikalId());
+        if (mTextViewCode != null)
+            mTextViewCode.append(" " + mOneArticle.getArtikal().getCodeVendor());
 
         SpannableString content = new SpannableString(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        mTextViewArticleCategory.setText(content);
-       // mTextViewArticleCategory.setText(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
-        mTextViewArticleCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
-                intent.putExtra("Artikli", mOneArticle.getArtikal().getKategorijaArtiklaNaziv());
-                intent.putExtra("ArtikalId", mOneArticle.getArtikal().getKategorijaArtikalId());
-                startActivity(intent);
-            }
-        });
+        if (mTextViewArticleCategory != null) {
+            mTextViewArticleCategory.setText(content);
+            // mTextViewArticleCategory.setText(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
+            mTextViewArticleCategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
+                    intent.putExtra("Artikli", mOneArticle.getArtikal().getKategorijaArtiklaNaziv());
+                    intent.putExtra("ArtikalId", mOneArticle.getArtikal().getKategorijaArtikalId());
+                    startActivity(intent);
+                }
+            });
+        }
 
 
-        Object opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
-        byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
-        String opisText = new String(data);
+        //Object opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
+        // byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
+        //String opisText = new String(data);
         //  mTextViewAbout.setText("Opis artikla");
 
         //  mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
@@ -151,31 +149,33 @@ public class OneArticleActivity extends BaseActivity {
         mNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
         mNumberPicker.setMaxValue(9999);
 */
-        mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
-        mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
-        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
-        final ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle
-                (getSupportFragmentManager(), mTabLayout.getTabCount());
-        mViewPager.setAdapter(adapter);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
+        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
+        if (mTabLayout != null) {
+            mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
+            mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
+            mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
+            final ViewPagerAdapterOneArticle adapter = new ViewPagerAdapterOneArticle
+                    (getSupportFragmentManager(), mTabLayout.getTabCount());
+            mViewPager.setAdapter(adapter);
+            mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+            mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    mViewPager.setCurrentItem(tab.getPosition());
+                }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+                }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+                }
+            });
+        }
 /*
         mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
         setupViewPager(mViewPager);
@@ -187,9 +187,8 @@ public class OneArticleActivity extends BaseActivity {
     public String opis() {
         Object opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
         byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
-        String opisText = new String(data);
 
-        return opisText;
+        return new String(data);
     }
 
     public int getArtikalId() {
@@ -225,7 +224,7 @@ public class OneArticleActivity extends BaseActivity {
             String url = String.format(AppConfig.URL_ADD_CART_ITEM, item_id, quantity, user_id);
             VolleySingleton mVolleySingleton = VolleySingleton.getsInstance(this);
             PullWebContent<ItemAddResponse> content =
-                    new PullWebContent<ItemAddResponse>(this, ItemAddResponse.class, url, mVolleySingleton);
+                    new PullWebContent<>(this, ItemAddResponse.class, url, mVolleySingleton);
             content.setCallbackListener(new WebRequestCallbackInterface<ItemAddResponse>() {
                 @Override
                 public void webRequestSuccess(boolean success, ItemAddResponse resp) {
@@ -234,7 +233,7 @@ public class OneArticleActivity extends BaseActivity {
                         if (resp.getSuccess()) {
                             // item is successfully added to cart
                             // update one item display
-                            mTextViewKorpa.setText("Količina: " + quantity);
+                            mTextViewKorpa.setText(getString(R.string.quantity_txt, quantity));
                             // update toolbar cart icon
                             MyApplication.getInstance().getSessionManager().setCartItemCount(resp.getUkupnaKolicina());
                             Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
@@ -280,8 +279,6 @@ public class OneArticleActivity extends BaseActivity {
             });
             content.pullList();
 
-        } else {
-
         }
     }
 
@@ -316,7 +313,7 @@ public class OneArticleActivity extends BaseActivity {
                                 dialog.cancel();
                             }
                         });
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        //AlertDialog alertDialog = alertDialogBuilder.create();
 
         Dialog d = alertDialogBuilder.setView(aNumberPicker).create();
 

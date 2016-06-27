@@ -92,12 +92,6 @@
                                         android:layout_gravity="center"
                                         android:orientation="vertical">
 
-                                        <TextView
-                                            android:id="@+id/textView_brend_name"
-                                            style="@style/OneArticleTextView"
-                                            android:layout_width="match_parent"
-                                            android:textColor="@android:color/holo_red_dark"
-                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/textView_naziv"
@@ -112,6 +106,11 @@
                                             android:textColor="@android:color/holo_red_dark" />
 
                                         <TextView
+                                            android:id="@+id/textView_brend_name"
+                                            style="@style/OneArticleTextView"
+                                            android:layout_width="match_parent" />
+
+                                        <TextView
                                             android:id="@+id/textView_about_price"
                                             style="@style/OneArticleTextView"
                                             android:layout_width="match_parent" />
@@ -122,8 +121,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_margin="@dimen/line_margine">
+                                android:layout_margin="@dimen/line_margine"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/article_category_text"
@@ -133,15 +132,16 @@
                                     android:background="@android:color/white"
                                     android:gravity="start"
                                     android:text="@string/article_category_text" />
+
                                 <TextView
                                     android:id="@+id/article_category"
                                     style="@style/OneArticleTextView"
                                     android:layout_width="match_parent"
-                                    android:textColor="@color/primary_dark"
-                                    android:clickable="true"
                                     android:layout_height="wrap_content"
                                     android:background="@android:color/white"
-                                    android:gravity="start" />
+                                    android:clickable="true"
+                                    android:gravity="start"
+                                    android:textColor="@color/primary_dark" />
                             </LinearLayout>
 
                             <View

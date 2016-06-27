@@ -14,9 +14,6 @@ import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 
-/**
- * Created by Mirna on 4.5.2016..
- */
 public class OneArticleTabOne extends Fragment {
 
     private WebView mWebViewTab;

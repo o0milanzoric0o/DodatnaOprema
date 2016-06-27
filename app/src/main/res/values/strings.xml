@@ -116,13 +116,17 @@
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
 
-    <string name="cena_txt">Cena:</string>
-    <string name="brend_txt">Brend:</string>
+    <string name="cena_txt">Cena: %s</string>
+    <string name="price_by">cena po: %s</string>
+    <string name="brend_txt">Brend: %s</string>
+    <string name="quantity_txt">Količina: %s</string>
+    <string name="min_quantity_txt">Minimalna količina za narudžbinu: %s</string>
     <string name="description_txt">Opis artikla:</string>
     <string name="id_txt">id:</string>
     <string name="code_txt">Code:</string>
     <string name="ask_question">Postavi pitanje</string>
     <string name="article_category_text">Pripada kategoriji:</string>
+    <string name="text">%s</string>
 
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>
