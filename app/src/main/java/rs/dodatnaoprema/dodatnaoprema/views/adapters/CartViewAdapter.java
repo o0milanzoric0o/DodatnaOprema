@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -58,6 +57,8 @@ public class CartViewAdapter extends ArrayAdapter<Artikli> {
                     itemBtnClickListener.onItemBtnClickListener(position);
             }
         });
+        holder.mItemQuantity.setText(String.valueOf(artikal.getKorpa().getKorpaKolTempArt()));
+        holder.mItemTotal.setText(String.valueOf(artikal.getKorpa().getKorpaCenaPoArtKol()));
         return rowView;
     }
 
@@ -70,7 +71,8 @@ public class CartViewAdapter extends ArrayAdapter<Artikli> {
     }
 
     public class MyViewHolder {
-        public TextView firstLine, secondLine;
+        public TextView firstLine, secondLine, mItemTotal, mItemQuantity;
+
         public NetworkImageView networkImageView;
         public ImageButton imgButton;
 
@@ -79,6 +81,8 @@ public class CartViewAdapter extends ArrayAdapter<Artikli> {
             secondLine = (TextView) view.findViewById(R.id.secondLine);
             imgButton = (ImageButton) view.findViewById(R.id.btn_delete);
             networkImageView = (NetworkImageView) view.findViewById(R.id.productImage);
+            mItemTotal = (TextView) view.findViewById(R.id.tv_item_total);
+            mItemQuantity = (TextView) view.findViewById(R.id.tv_quantity);
         }
     }
 

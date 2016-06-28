@@ -73,7 +73,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         progressDialog = new ProgressDialogCustom(getActivity());
         progressDialog.setCancelable(false);
 
-
         prefs = MyApplication.getInstance().getPrefManager();
         session = MyApplication.getInstance().getSessionManager();
         return view;

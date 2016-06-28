@@ -44,6 +44,9 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     private ListView listView;
     private Button mBtnBuy;
     private TextView mTotal;
+    private TextView mItemPrice;
+    private TextView mItemTotal;
+    private TextView mItemQuantity;
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
     private VolleySingleton mVolleySingleton;
     private int item_position;
@@ -179,7 +182,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
         mAdapter.notifyDataSetChanged();
 
-        String tot = String.valueOf(mCart.getUkupnaCena()) +" "+ mCart.getCenaPrikazExt();
+        String tot = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
 
         mTotal.setText(tot);
 

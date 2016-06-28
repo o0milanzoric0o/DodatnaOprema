@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:descendantFocusability="blocksDescendants"
     android:padding="6dip">
 
-
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/productImage"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -19,35 +17,35 @@
         android:layout_marginRight="6dip" />
 
     <TextView
-        android:id="@+id/secondLine"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@id/productImage"
-        android:layout_toRightOf="@id/productImage"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="@string/app_name"
-        android:textColor="@color/secondary_text"
-        android:textSize="12sp" />
-
-    <TextView
         android:id="@+id/firstLine"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/secondLine"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
         android:layout_toEndOf="@id/productImage"
+        android:layout_toLeftOf="@+id/btn_delete"
         android:layout_toRightOf="@id/productImage"
+        android:layout_toStartOf="@+id/btn_delete"
         android:gravity="center_vertical"
+        android:singleLine="false"
         android:text="@string/app_name"
         android:textColor="@color/primary_text"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/secondLine"
+        android:layout_width="wrap_content"
+        android:layout_height="26dip"
+        android:layout_below="@id/firstLine"
+        android:layout_toLeftOf="@+id/btn_delete"
+        android:layout_toStartOf="@+id/btn_delete"
+        android:ellipsize="marquee"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="123.45 DIN"
+        android:textColor="@color/secondary_text"
+        android:textSize="12sp" />
+
 
     <ImageButton
         android:id="@+id/btn_delete"
@@ -58,5 +56,64 @@
         android:layout_centerVertical="true"
         android:background="#00ffffff"
         android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <LinearLayout
+        android:id="@+id/ll_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/secondLine"
+        android:layout_toLeftOf="@id/btn_delete"
+        android:layout_toStartOf="@id/btn_delete"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:background="@color/base_gray"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:background="@color/base_gray"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_quantity"
+        android:layout_toLeftOf="@id/btn_delete"
+        android:layout_toStartOf="@id/btn_delete"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="left"
+            android:text="Ukupno:" />
+
+        <TextView
+            android:id="@+id/tv_item_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="right"
+            android:text="1234.33 DIN" />
+
+    </LinearLayout>
 
 </RelativeLayout>
