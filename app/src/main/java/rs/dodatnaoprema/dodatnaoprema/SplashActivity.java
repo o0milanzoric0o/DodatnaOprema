@@ -23,6 +23,8 @@ import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.AllCatego
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategories;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.info.Data;
+import rs.dodatnaoprema.dodatnaoprema.models.info.Info;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -33,6 +35,7 @@ public class SplashActivity extends AppCompatActivity {
     Intent intent;
     private List<Category> mAllCategories = new ArrayList<>();
     private List<Article> mArticles = new ArrayList<>();
+    private Data contact;
     private List<Product> mProducts = new ArrayList<>();
     private List<Brand> mBrands = new ArrayList<>();
     private List<YMALCategory> mYMALCategories = new ArrayList<>();
@@ -60,11 +63,13 @@ public class SplashActivity extends AppCompatActivity {
         getAllBrands();
         getYMALCategories();
         getAllCategories();
+        getInfoContact();
+        getInfoHowToBuy();
     }
 
     private void response() {
         requestCounter++;
-        final int numberOfRequests = 7;
+        final int numberOfRequests = 9;
         if (requestCounter == numberOfRequests) {
             startActivity(intent);
             finish();
@@ -78,8 +83,50 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
                 if (success) {
                     mAllCategories = allCategories.getKategorije();
-                   // intent.putExtra("AllCategories", (Serializable) mAllCategories);
+                    // intent.putExtra("AllCategories", (Serializable) mAllCategories);
                     SharedPreferencesUtils.putArrayListCategories(getApplicationContext(), AppConfig.ALL_CATEGORIES, mAllCategories);
+
+                    response();
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
+    }
+
+    private void getInfoContact() {
+        final PullWebContent<Info> content = new PullWebContent<Info>(this, Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_CONTACT), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<Info>() {
+            @Override
+            public void webRequestSuccess(boolean success, Info info) {
+                if (success) {
+                    contact = info.getPodaci();
+                    SharedPreferencesUtils.putString(getApplicationContext(), "INFO_CONTACT", contact.getOpisKategHeadTekst());
+                    response();
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                response();
+            }
+        });
+        content.pullList();
+    }
+
+    private void getInfoHowToBuy() {
+        final PullWebContent<Info> content = new PullWebContent<Info>(this, Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_HOW_TO_BUY), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<Info>() {
+            @Override
+            public void webRequestSuccess(boolean success, Info info) {
+                if (success) {
+                    contact = info.getPodaci();
+                    SharedPreferencesUtils.putString(getApplicationContext(), "INFO_HOW_TO_BUY", contact.getOpisKategHeadTekst());
+                    response();
 
                     response();
                 }
@@ -102,7 +149,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (success) {
                     mArticles = articles.getKategorije();
                     SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.SALE, mArticles);
-                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
+                    // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[0], (Serializable) mArticles);
                     response();
                 }
             }
@@ -124,7 +171,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (success) {
                     mArticles = articles.getKategorije();
                     SharedPreferencesUtils.putArrayListArticle(getApplicationContext(), AppConfig.NEW, mArticles);
-                   // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
+                    // intent.putExtra(AppConfig.FIRST_TAB_ITEMS[1], (Serializable) mArticles);
                     response();
                 }
             }
@@ -190,7 +237,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, AllBrands allBrands) {
                 if (success) {
                     mBrands = allBrands.getBrand();
-                   // intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
+                    // intent.putExtra(AppConfig.ALL_BRANDS, (Serializable) mBrands);
                     SharedPreferencesUtils.putArrayListBrands(getApplicationContext(), AppConfig.ALL_BRANDS, mBrands);
                     response();
                 }
@@ -212,7 +259,7 @@ public class SplashActivity extends AppCompatActivity {
             public void webRequestSuccess(boolean success, YMALCategories ymalCategories) {
                 if (success) {
                     mYMALCategories = ymalCategories.getKategorije();
-                   // intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
+                    // intent.putExtra(AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, (Serializable) mYMALCategories);
                     SharedPreferencesUtils.putArrayListYAML(getApplicationContext(), AppConfig.YOU_MAY_ALSO_LIKE_CATEGORIES, mYMALCategories);
                     response();
                 }

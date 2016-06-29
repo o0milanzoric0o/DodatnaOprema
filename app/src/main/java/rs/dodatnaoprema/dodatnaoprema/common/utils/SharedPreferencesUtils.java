@@ -191,6 +191,19 @@ public class SharedPreferencesUtils {
         return prefs.getInt(key, 0);
 
     }
+    public static void putString(Context context, String key, String value) {
+
+        SharedPreferences.Editor editor = getEditor(context, key);
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static String getString(Context context, String key) {
+
+        SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        return prefs.getString(key, "");
+
+    }
 
     public static String getUserId() {
         MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();

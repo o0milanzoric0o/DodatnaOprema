@@ -32,12 +32,16 @@ public class AppConfig {
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
+    public static final String URL_VALUE_INFO = "textZaInfoJSON";
+    public static final int URL_VALUE_CONTACT = 41;
+    public static final int URL_VALUE_HOW_TO_BUY = 42;
     public static final String URL_VALUE_CATEGORY_SPECIFICATION = "specPoKategorijiSamo";
     public static final String URL_VALUE_CURRENCY_RSD = "rsd";
     public static final String URL_VALUE_LANGUAGE_SRB_LAT = "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
+
     public static final String URL_VALUE_ARTICLE = "artikal";
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
@@ -82,7 +86,6 @@ public class AppConfig {
     public static final String URL_DELETE_CART_ITEM = "http://masinealati.rs/parametri.php?action=obrisiArtikalKorpa&id=%1$s&userId=%2$s";
     public static final String GET_CART = "Korpa";
     public static final String URL_COMPLETE_TRANSACTION = "http://masinealati.rs/parametri.php?action=kupovinaKorpa&userId=%1$s";
-
 
 
     /**

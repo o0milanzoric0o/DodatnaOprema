@@ -2,25 +2,23 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 
-/**
- * Created by Mirna on 4.5.2016..
- */
 public class OneArticleTabTwo extends Fragment {
 
 
+    private WebView mWebViewTab;
     private OneArticleActivity mActivity;
-
-    public OneArticleTabTwo() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,25 @@ public class OneArticleTabTwo extends Fragment {
         mActivity = (OneArticleActivity) getActivity();
 
 
+        byte[] data = Base64.decode(SharedPreferencesUtils.getString(getContext(),"INFO_HOW_TO_BUY"), Base64.DEFAULT);
+
+        LinearLayout.LayoutParams webViewParams =  new
+
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
+        mWebViewTab.setLayoutParams(webViewParams);
+
+
+
+        if (mWebViewTab != null) Log.logInfo("LALALA.........", "mWebViewTab != null");
+        mWebViewTab.loadDataWithBaseURL(null, new String(data), "text/html", "UTF-8", null);
+
+        //  mWebViewTab.loadDataWithBaseURL(null, mActivity.opis(), "text/html", "utf-8", null);
+        // mWebViewTab.requestLayout();
+
+
+        Log.logInfo("LALALA.........", "jjj>"+mActivity.opis().length());
         return mView;
     }
 
