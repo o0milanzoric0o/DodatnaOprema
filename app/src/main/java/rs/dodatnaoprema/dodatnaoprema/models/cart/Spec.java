@@ -1,10 +1,11 @@
-
 package rs.dodatnaoprema.dodatnaoprema.models.cart;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Spec {
+import java.io.Serializable;
+
+public class Spec implements Serializable {
 
     @SerializedName("ImeSpecGrupe")
     @Expose

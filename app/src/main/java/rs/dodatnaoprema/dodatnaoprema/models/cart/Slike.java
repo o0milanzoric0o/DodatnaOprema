@@ -1,10 +1,11 @@
-
 package rs.dodatnaoprema.dodatnaoprema.models.cart;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Slike {
+import java.io.Serializable;
+
+public class Slike implements Serializable {
 
     @SerializedName("IdArtikliSlike")
     @Expose

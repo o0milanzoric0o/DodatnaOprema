@@ -103,6 +103,7 @@ public class CartActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Create web request to delete all cart items.
+                /**TODO  Empty cart web request*/
             }
         });
         cartDeleteАllConfirmationDialog.setNegativeButtonListener(new DialogInterface.OnClickListener() {
@@ -118,7 +119,7 @@ public class CartActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         EmptyCartFragment emptyCartFragment = new EmptyCartFragment();
-        fragmentTransaction.add(R.id.container, emptyCartFragment);
+        fragmentTransaction.replace(R.id.container, emptyCartFragment);
         fragmentTransaction.commit();
     }
 
@@ -127,7 +128,7 @@ public class CartActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         CartViewFragment cartViewFragment = CartViewFragment.newInstance(cart);
-        fragmentTransaction.add(R.id.container, cartViewFragment);
+        fragmentTransaction.replace(R.id.container, cartViewFragment);
         fragmentTransaction.commit();
     }
 

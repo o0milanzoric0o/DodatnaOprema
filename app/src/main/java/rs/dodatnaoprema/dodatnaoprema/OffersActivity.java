@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +91,7 @@ public class OffersActivity extends BaseActivity {
                 if (success) {
                     Log.logInfo("LALALA", "SUCCESS");
                     Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
-                    intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+                    intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
                     startActivity(intent);
                     progressDialog.hideDialog();
 

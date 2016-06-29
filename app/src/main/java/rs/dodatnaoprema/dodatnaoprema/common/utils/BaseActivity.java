@@ -107,6 +107,7 @@ public class BaseActivity extends AppCompatActivity {
             tvItemCount.setVisibility(View.GONE);
         } else {
             tvItemCount.setText(String.valueOf(itemCount));
+            tvItemCount.setVisibility(View.VISIBLE);
         }
         icCart.setOnClickListener(new View.OnClickListener() {
             @Override
