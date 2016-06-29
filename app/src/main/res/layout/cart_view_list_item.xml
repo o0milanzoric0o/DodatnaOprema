@@ -43,7 +43,7 @@
         android:paddingRight="10dp"
         android:singleLine="true"
         android:text="123.45 DIN"
-        android:textColor="@color/secondary_text"
+        android:textColor="@color/secondary_text_red"
         android:textSize="12sp" />
 
 
