@@ -7,7 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
+import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
 
 /**
  * Created by 1 on 3/8/2016.

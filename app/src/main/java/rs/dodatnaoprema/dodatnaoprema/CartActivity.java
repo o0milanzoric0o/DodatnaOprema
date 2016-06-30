@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,10 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartDeleteAllConfirmationDialog;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
+import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemDeleteAllResponse;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
@@ -103,7 +106,51 @@ public class CartActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Create web request to delete all cart items.
-                /**TODO  Empty cart web request*/
+                // check if logged in
+                if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+                    // Load user data and get UserId
+                    progressDialog.showDialog("Učitavanje...");
+                    User user = MyApplication.getInstance().getPrefManager().getUser();
+                    String user_id = user.getId();
+
+                    String url = String.format(AppConfig.URL_DELETE_ALL_CART_ITEMS, user_id);
+
+                    PullWebContent<ItemDeleteAllResponse> content =
+                            new PullWebContent<>(CartActivity.this, ItemDeleteAllResponse.class, url, mVolleySingleton);
+                    content.setCallbackListener(new WebRequestCallbackInterface<ItemDeleteAllResponse>() {
+                        @Override
+                        public void webRequestSuccess(boolean success, ItemDeleteAllResponse resp) {
+                            progressDialog.hideDialog();
+                            if (success) {
+                                if (resp.getSuccess()) {
+                                    // items are successfully deleted
+                                    // show empty cart fragment
+                                    // Set cart item count
+                                    MyApplication.getInstance().getSessionManager().setCartItemCount(0);
+                                    // notify application to update toolbar icon
+                                    Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                                    LocalBroadcastManager.getInstance(CartActivity.this).sendBroadcast(updateToolbar);
+                                    //show emty cart fragment
+                                    showEmptyCartFragment();
+                                } else {
+                                    /**TODO  couldn't delete, God knows why**/
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void webRequestError(String error) {
+                            progressDialog.hideDialog();
+                            // Web request fail
+                            // Create snackbar or something
+                            /**TODO Inform the user there was a connection failure...**////
+                        }
+                    });
+                    content.pullList();
+
+                } else {
+
+                }
             }
         });
         cartDeleteАllConfirmationDialog.setNegativeButtonListener(new DialogInterface.OnClickListener() {

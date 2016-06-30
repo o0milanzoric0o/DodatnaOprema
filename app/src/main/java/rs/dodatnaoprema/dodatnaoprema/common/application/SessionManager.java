@@ -2,7 +2,7 @@ package rs.dodatnaoprema.dodatnaoprema.common.application;
 
 import android.content.Context;
 
-import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
+import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
 
 public class SessionManager {
 

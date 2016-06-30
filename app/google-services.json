@@ -1,33 +1,27 @@
 {
   "project_info": {
-    "project_number": "125491094864",
-    "project_id": "alati-2b56d"
+    "project_number": "391920125528",
+    "firebase_url": "https://masinealati-aa9d8.firebaseio.com",
+    "project_id": "masinealati-aa9d8",
+    "storage_bucket": "masinealati-aa9d8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:125491094864:android:6d34b824d80e405e",
+        "mobilesdk_app_id": "1:391920125528:android:6d34b824d80e405e",
         "android_client_info": {
           "package_name": "rs.dodatnaoprema.dodatnaoprema"
         }
       },
       "oauth_client": [
         {
-          "client_id": "125491094864-e5bug34gsv3dtqo9ld23425bmb3bfgm4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "rs.dodatnaoprema.dodatnaoprema",
-            "certificate_hash": "59774CEEFD957E755ADC7B7F869B54E5CB541830"
-          }
-        },
-        {
-          "client_id": "125491094864-52ni0oamchjp3l66hl8uukijbvvep63d.apps.googleusercontent.com",
+          "client_id": "391920125528-h5bln2b120cr3p5p0mt3r9be8g92qgns.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAeoSN7YXsM8iPk0ftv8R0oQxZfmB2dFPM"
+          "current_key": "AIzaSyBCYxdAgGxxPHngPIoudjln7OPHqkyy7rk"
         }
       ],
       "services": {
@@ -39,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

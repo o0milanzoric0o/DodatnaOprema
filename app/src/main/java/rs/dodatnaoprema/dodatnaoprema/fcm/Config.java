@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema.gcm;
+package rs.dodatnaoprema.dodatnaoprema.fcm;
 
 /**
  * Created by 1 on 4/19/2016.

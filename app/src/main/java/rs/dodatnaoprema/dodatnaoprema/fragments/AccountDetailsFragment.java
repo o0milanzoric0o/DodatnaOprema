@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
-import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 /**

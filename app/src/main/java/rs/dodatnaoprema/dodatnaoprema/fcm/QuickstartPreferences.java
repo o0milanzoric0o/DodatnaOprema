@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rs.dodatnaoprema.dodatnaoprema.gcm;
+package rs.dodatnaoprema.dodatnaoprema.fcm;
 
 public class QuickstartPreferences {
     public static final int GCM_SIGNIN_REQUEST = 8999;

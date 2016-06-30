@@ -25,7 +25,7 @@ import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 
 
 public class BaseActivity extends AppCompatActivity {

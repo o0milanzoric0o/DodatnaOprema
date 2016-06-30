@@ -13,7 +13,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
-import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
+import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;

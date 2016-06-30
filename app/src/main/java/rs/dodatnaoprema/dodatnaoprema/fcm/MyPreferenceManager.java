@@ -1,4 +1,4 @@
-package rs.dodatnaoprema.dodatnaoprema.gcm;
+package rs.dodatnaoprema.dodatnaoprema.fcm;
 
 import android.content.Context;
 import android.content.SharedPreferences;

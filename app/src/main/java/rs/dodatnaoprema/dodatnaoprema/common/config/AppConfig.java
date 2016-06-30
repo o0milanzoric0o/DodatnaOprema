@@ -84,6 +84,7 @@ public class AppConfig {
     public static final String URL_GET_CART = "http://masinealati.rs/parametri.php?action=korpaLista&userId=%1$s";
     public static final String URL_ADD_CART_ITEM = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
     public static final String URL_DELETE_CART_ITEM = "http://masinealati.rs/parametri.php?action=obrisiArtikalKorpa&id=%1$s&userId=%2$s";
+    public static final String URL_DELETE_ALL_CART_ITEMS = "http://masinealati.rs/parametri.php?action=obrisiSveKorpa&userId=%1$s";
     public static final String URL_UPDATE_CART_ITEM_QUANTITY = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
     public static final String GET_CART = "Korpa";
     public static final String URL_COMPLETE_TRANSACTION = "http://masinealati.rs/parametri.php?action=kupovinaKorpa&userId=%1$s";

@@ -48,8 +48,6 @@ dependencies {
     //compile 'com.github.lawloretienne:quickreturn:0.0.3'
     //compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
     compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.google.android.gms:play-services:9.0.2'
-    compile 'com.google.android.gms:play-services-auth:9.0.2'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
@@ -58,7 +56,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.4.0'
     compile 'com.android.support:gridlayout-v7:23.4.0'
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.google.android.gms:play-services-ads:9.0.2'
-    compile 'com.google.android.gms:play-services-gcm:9.0.2'
+
+    compile 'com.google.firebase:firebase-messaging:9.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

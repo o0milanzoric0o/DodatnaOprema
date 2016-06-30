@@ -31,8 +31,8 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
-import rs.dodatnaoprema.dodatnaoprema.gcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.gcm.MyPreferenceManager;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 
