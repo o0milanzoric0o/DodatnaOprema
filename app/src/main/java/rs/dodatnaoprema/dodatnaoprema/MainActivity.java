@@ -131,10 +131,10 @@ public class MainActivity extends FragmentActivity
 
         // [START subscribe_topics]
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-        Log.d(TAG, "Subscribed to " + "news" + " topic");
+        Log.e(TAG, "Subscribed to " + "news" + " topic");
         // [END subscribe_topics]
 
-        Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+        Log.e(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
     }
 
     private void updateCartToolbarIcon() {
