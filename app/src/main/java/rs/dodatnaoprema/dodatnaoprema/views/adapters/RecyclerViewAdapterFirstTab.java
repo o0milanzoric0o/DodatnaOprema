@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -27,6 +28,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands;
+import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
@@ -58,6 +60,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private GridLayoutManager mLayoutManager;
 
+    private RelativeLayout mFirstButton;
+    private RelativeLayout mSecondButton;
     private RelativeLayout mThirdButton;
     private RelativeLayout mFourthButton;
     private VolleySingleton mVolleySingleton;
@@ -176,6 +180,29 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             imageViewPagerWDotIndicator_three_imgs.setAllBrands(allBrands);
             imageViewPagerWDotIndicator_two_imgs.setProductsOfTheWeek(products_of_the_week);
 
+            mFirstButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MainActivity)context).openFragment(context.getString(R.string.contact));
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            mFirstButton.setSelected(false);
+                        }
+                    }, 1000);
+
+                }
+            });
+            mSecondButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MainActivity)context).openFragment(context.getString(R.string.how_to_buy));
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            mSecondButton.setSelected(false);
+                        }
+                    }, 1000);
+                }
+            });
             mThirdButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -264,6 +291,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             imageViewPagerWDotIndicator_three_imgs = (ImageSlider3Brands) itemView.findViewById(R.id.view_pager_dot_ind_0);
             imageViewPagerWDotIndicator_two_imgs = (ImageSlider2Products) itemView.findViewById(R.id.view_pager_dot_ind_1);
 
+            mFirstButton = (RelativeLayout) itemView.findViewById(R.id.first_round_button);
+            mSecondButton = (RelativeLayout) itemView.findViewById(R.id.second_round_button);
             mThirdButton = (RelativeLayout) itemView.findViewById(R.id.third_round_button);
             mFourthButton = (RelativeLayout) itemView.findViewById(R.id.fourth_round_button);
 

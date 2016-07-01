@@ -50,7 +50,6 @@ public class OneArticleTabTwo extends Fragment {
         //  mWebViewTab.loadDataWithBaseURL(null, mActivity.opis(), "text/html", "utf-8", null);
         // mWebViewTab.requestLayout();
 
-
         Log.logInfo("LALALA.........", "jjj>"+mActivity.opis().length());
         return mView;
     }

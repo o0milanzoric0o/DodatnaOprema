@@ -12,6 +12,7 @@
     grid:columnCount="4">
 
     <RelativeLayout
+        android:id="@+id/first_round_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -52,6 +53,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/second_round_button"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -62,7 +64,7 @@
         grid:layout_rowSpan="1">
 
         <FrameLayout
-            android:id="@+id/second_round_button"
+            android:id="@+id/img_second_round_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -83,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/second_round_button"
+            android:layout_below="@+id/img_second_round_button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:gravity="center"
