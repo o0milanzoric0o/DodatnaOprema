@@ -2,11 +2,9 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
@@ -31,7 +29,7 @@ public class OneArticleTabOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View mView = inflater.inflate(R.layout.one_article_tab_one, container, false);
+        final View mView = inflater.inflate(R.layout.web_view, container, false);
         mActivity = (OneArticleActivity) getActivity();
 
         LinearLayout.LayoutParams webViewParams =  new

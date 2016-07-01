@@ -1,6 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,7 +38,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.fragments.InfoFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
@@ -321,10 +319,12 @@ public class MainActivity extends FragmentActivity
             articlesOnSale();
 
         } else if (id == R.id.nav_how_to_buy) {
+            openFragment(getString(R.string.how_to_buy));
 
         } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_contact) {
+            openFragment(getString(R.string.contact));
 
         }
 
@@ -413,10 +413,10 @@ public class MainActivity extends FragmentActivity
         startActivityOneArticle(intent);
     }
 
-    public void openFragment(String title){
+    public void openFragment(String title) {
 
         Bundle args = new Bundle();
-        args.putString("mtitle", title);
+        args.putString("mTitle", title);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         InfoFragmentDialog frag = new InfoFragmentDialog();
         frag.setArguments(args);
