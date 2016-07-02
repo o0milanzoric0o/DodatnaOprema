@@ -41,8 +41,8 @@ public class MyApplication extends MultiDexApplication {
         return pref;
     }
 
-    public SessionManager getSessionManager(){
-        if (sessionManager == null){
+    public SessionManager getSessionManager() {
+        if (sessionManager == null) {
             sessionManager = new SessionManager(this);
         }
         return sessionManager;

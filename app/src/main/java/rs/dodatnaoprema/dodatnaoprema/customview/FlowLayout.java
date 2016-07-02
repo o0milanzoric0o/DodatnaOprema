@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import rs.dodatnaoprema.dodatnaoprema.R;
 
 /**
+ * ******************************
  * Created by milan on 4/4/2016.
+ * ******************************
  */
 public class FlowLayout extends ViewGroup {
     private float paddingVertical;

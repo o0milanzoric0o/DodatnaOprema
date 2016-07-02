@@ -26,9 +26,6 @@ public class AppConfig {
     public static final String URL_PARAM_ID = "id";
     public static final String URL_PARAM_FROM = "od";
     public static final String URL_PARAM_TO = "do";
-    //public static final String URL_PARAM_CURRENCY = "valutasession";
-    //public static final String URL_PARAM_LANGUAGE = "jezik";
-    //public static final String URL_PARAM_BRAND = "brend";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";

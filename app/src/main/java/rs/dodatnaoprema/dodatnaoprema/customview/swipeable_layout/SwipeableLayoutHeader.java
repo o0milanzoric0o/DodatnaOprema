@@ -5,7 +5,9 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 /**
+ * ******************************
  * Created by Win 7 on 8.4.2016.
+ * ******************************
  */
 public class SwipeableLayoutHeader extends FrameLayout implements SwipeRefreshTrigger, SwipeTrigger {
 

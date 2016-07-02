@@ -16,7 +16,9 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 
 /**
+ * ******************************
  * Created by mirna on 8.4.2016.
+ * ******************************
  */
 public class SwipeableLayout extends ViewGroup {
 
@@ -381,65 +383,30 @@ public class SwipeableLayout extends ViewGroup {
         mAutoScroller = new AutoScroller();
     }
 
-    /**
-     * set debug mode(default value false)
-     *
-     * @param debug if true log on, false log off
-     */
     public void setDebug(boolean debug) {
         this.mDebug = debug;
     }
 
-    /**
-     * is refresh function is enabled
-     *
-     * @return
-     */
     public boolean isRefreshEnabled() {
         return mRefreshEnabled;
     }
 
-    /**
-     * switch refresh function on or off
-     *
-     * @param enable
-     */
     public void setRefreshEnabled(boolean enable) {
         this.mRefreshEnabled = enable;
     }
 
-    /**
-     * is load more function is enabled
-     *
-     * @return
-     */
     public boolean isLoadMoreEnabled() {
         return mLoadMoreEnabled;
     }
 
-    /**
-     * switch load more function on or off
-     *
-     * @param enable
-     */
     public void setLoadMoreEnabled(boolean enable) {
         this.mLoadMoreEnabled = enable;
     }
 
-    /**
-     * is current status refreshing
-     *
-     * @return
-     */
     public boolean isRefreshing() {
         return STATUS.isRefreshing(mStatus) && mLoading;
     }
 
-    /**
-     * auto refresh or cancel
-     *
-     * @param refreshing
-     */
     public void setRefreshing(boolean refreshing) {
         if (!isRefreshEnabled() || mHeaderView == null) {
             return;
@@ -474,20 +441,10 @@ public class SwipeableLayout extends ViewGroup {
         }
     }
 
-    /**
-     * is current status loading more
-     *
-     * @return
-     */
     public boolean isLoadingMore() {
         return STATUS.isLoadingMore(mStatus) && mLoading;
     }
 
-    /**
-     * auto loading more or cancel
-     *
-     * @param loadingMore
-     */
     public void setLoadingMore(boolean loadingMore) {
         if (!isLoadMoreEnabled() || mFooterView == null) {
             return;
@@ -522,13 +479,6 @@ public class SwipeableLayout extends ViewGroup {
         }
     }
 
-    /**
-     * set refresh header view, the view must at lease be an implement of {@code SwipeRefreshTrigger}.
-     * the view can also implement {@code SwipeTrigger} for more extension functions
-     *
-     * @param view
-     */
-
     public void setRefreshHeaderView(View view) {
         if (view instanceof SwipeRefreshTrigger) {
             if (mHeaderView != null && mHeaderView != view) {
@@ -542,13 +492,6 @@ public class SwipeableLayout extends ViewGroup {
             Log.logInfo(TAG, "Refresh header view must be an implement of SwipeRefreshTrigger");
         }
     }
-
-    /**
-     * set load more footer view, the view must at least be an implement of SwipeLoadTrigger
-     * the view can also implement {@code SwipeTrigger} for more extension functions
-     *
-     * @param view
-     */
 
     public void setLoadMoreFooterView(View view) {
         if (view instanceof SwipeLoadMoreTrigger) {
@@ -564,157 +507,67 @@ public class SwipeableLayout extends ViewGroup {
         }
     }
 
-    /**
-     * set the style of the refresh header
-     *
-     * @param style
-     */
     public void setSwipeStyle(int style) {
         this.mStyle = style;
         requestLayout();
     }
 
-    /**
-     * set the value of {@link #mRefreshTriggerOffset}.
-     * Default value is the refresh header view height {@link #mHeaderHeight}<p/>
-     * If the offset you set is smaller than {@link #mHeaderHeight} or not set,
-     * using {@link #mHeaderHeight} as default value
-     *
-     * @param offset
-     */
     public void setRefreshTriggerOffset(int offset) {
         mRefreshTriggerOffset = offset;
     }
 
-    /**
-     * set the value of {@link #mLoadMoreTriggerOffset}.
-     * Default value is the load more footer view height {@link #mFooterHeight}<p/>
-     * If the offset you set is smaller than {@link #mFooterHeight} or not set,
-     * using {@link #mFooterHeight} as default value
-     *
-     * @param offset
-     */
     public void setLoadMoreTriggerOffset(int offset) {
         mLoadMoreTriggerOffset = offset;
     }
 
-    /**
-     * Set the final offset you can swipe to refresh.<br/>
-     * If the offset you set is 0(default value) or smaller than {@link #mRefreshTriggerOffset}
-     * there no final offset
-     *
-     * @param offset
-     */
     public void setRefreshFinalDragOffset(int offset) {
         mRefreshFinalDragOffset = offset;
     }
 
-    /**
-     * Set the final offset you can swipe to load more.<br/>
-     * If the offset you set is 0(default value) or smaller than {@link #mLoadMoreTriggerOffset},
-     * there no final offset
-     *
-     * @param offset
-     */
     public void setLoadMoreFinalDragOffset(int offset) {
         mLoadMoreFinalDragOffset = offset;
     }
 
-    /**
-     * set {@link #mReleaseToRefreshingScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setReleaseToRefreshingScrollingDuration(int duration) {
         this.mReleaseToRefreshingScrollingDuration = duration;
     }
 
-    /**
-     * set {@link #mRefreshCompleteDelayDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setRefreshCompleteDelayDuration(int duration) {
         this.mRefreshCompleteDelayDuration = duration;
     }
 
-    /**
-     * set {@link #mRefreshCompleteToDefaultScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setRefreshCompleteToDefaultScrollingDuration(int duration) {
         this.mRefreshCompleteToDefaultScrollingDuration = duration;
     }
 
-    /**
-     * set {@link #mDefaultToRefreshingScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setDefaultToRefreshingScrollingDuration(int duration) {
         this.mDefaultToRefreshingScrollingDuration = duration;
     }
 
-    /**
-     * set {@link #mReleaseToLoadingMoreScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setReleaseToLoadingMoreScrollingDuration(int duration) {
         this.mReleaseToLoadingMoreScrollingDuration = duration;
     }
 
-    /**
-     * set {@link #mLoadMoreCompleteDelayDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setLoadMoreCompleteDelayDuration(int duration) {
         this.mLoadMoreCompleteDelayDuration = duration;
     }
 
-    /**
-     * set {@link #mLoadMoreCompleteToDefaultScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setLoadMoreCompleteToDefaultScrollingDuration(int duration) {
         this.mLoadMoreCompleteToDefaultScrollingDuration = duration;
     }
 
-    /**
-     * set {@link #mDefaultToLoadingMoreScrollingDuration} in milliseconds
-     *
-     * @param duration
-     */
     public void setDefaultToLoadingMoreScrollingDuration(int duration) {
         this.mDefaultToLoadingMoreScrollingDuration = duration;
     }
 
-    /**
-     * set an {@link OnRefreshListener} to listening refresh event
-     *
-     * @param listener
-     */
     public void setOnRefreshListener(OnRefreshListener listener) {
         this.mRefreshListener = listener;
     }
 
-    /**
-     * set an {@link OnLoadMoreListener} to listening load more event
-     *
-     * @param listener
-     */
     public void setOnLoadMoreListener(OnLoadMoreListener listener) {
         this.mLoadMoreListener = listener;
     }
 
-    /**
-     * invoke when {@link AutoScroller#finish()}
-     *
-     * @param autoScrollAbort
-     */
     private void autoScrollFinished(boolean autoScrollAbort) {
         if (mLoading) {
             if (STATUS.isRefreshing(mStatus) && !autoScrollAbort) {
@@ -945,32 +798,16 @@ public class SwipeableLayout extends ViewGroup {
 
     }
 
-    /**
-     * check if it can refresh
-     *
-     * @return
-     */
     private boolean onCheckCanRefresh() {
 
         return mRefreshEnabled && !canChildScrollUp() && mHasHeaderView && mRefreshTriggerOffset > 0;
     }
 
-    /**
-     * check if it can load more
-     *
-     * @return
-     */
     private boolean onCheckCanLoadMore() {
 
         return mLoadMoreEnabled && !canChildScrollDown() && mHasFooterView && mLoadMoreTriggerOffset > 0;
     }
 
-    /**
-     * copy from {@link android.support.v4.widget.SwipeRefreshLayout#canChildScrollUp()}
-     *
-     * @return Whether it is possible for the child view of this layout to
-     * scroll up. Override this if the child view is a custom view.
-     */
     protected boolean canChildScrollUp() {
         if (android.os.Build.VERSION.SDK_INT < 14) {
             if (mTargetView instanceof AbsListView) {
@@ -986,12 +823,6 @@ public class SwipeableLayout extends ViewGroup {
         }
     }
 
-    /**
-     * Whether it is possible for the child view of this layout to
-     * scroll down. Override this if the child view is a custom view.
-     *
-     * @return
-     */
     protected boolean canChildScrollDown() {
         if (android.os.Build.VERSION.SDK_INT < 14) {
             if (mTargetView instanceof AbsListView) {
@@ -1161,11 +992,6 @@ public class SwipeableLayout extends ViewGroup {
         return super.onTouchEvent(event);
     }
 
-    /**
-     * scrolling by physical touch with your fingers
-     *
-     * @param yDiff
-     */
     private void fingerScroll(final float yDiff) {
         float ratio = DEFAULT_DRAG_RATIO;
         if (STATUS.isSwipingToRefresh(mStatus) || STATUS.isReleaseToRefresh(mStatus)) {
@@ -1227,12 +1053,6 @@ public class SwipeableLayout extends ViewGroup {
         updateScroll(yScrolled);
     }
 
-    /**
-     * Process the scrolling(auto or physical) and append the diff values to mTargetOffset
-     * I think it's the most busy and core method. :) a ha ha ha ha...
-     *
-     * @param yScrolled
-     */
     private void updateScroll(final float yScrolled) {
         if (yScrolled == 0) {
             return;
@@ -1331,11 +1151,6 @@ public class SwipeableLayout extends ViewGroup {
         }
     }
 
-    /**
-     * on not active finger up
-     *
-     * @param ev
-     */
     private void onSecondaryPointerUp(MotionEvent ev) {
         final int pointerIndex = MotionEventCompat.getActionIndex(ev);
         final int pointerId = MotionEventCompat.getPointerId(ev, pointerIndex);
@@ -1363,11 +1178,6 @@ public class SwipeableLayout extends ViewGroup {
         return MotionEventCompat.getX(event, index);
     }
 
-    /**
-     * Set the current status for better control
-     *
-     * @param status
-     */
     private void setStatus(int status) {
         mStatus = status;
         if (mDebug) {
@@ -1579,14 +1389,6 @@ public class SwipeableLayout extends ViewGroup {
             }
         }
 
-        /**
-         * The param yScrolled here isn't final pos of y.
-         * It's just like the yScrolled param in the
-         * {@link #//updateScroll(float yScrolled)}
-         *
-         * @param yScrolled
-         * @param duration
-         */
         private void autoScroll(int yScrolled, int duration) {
             removeCallbacks(this);
             mmLastY = 0;

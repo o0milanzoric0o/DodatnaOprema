@@ -20,23 +20,25 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
-//import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
 
+//import github.chenupt.springindicator.SpringIndicator;
+
 /**
+ * ******************************
  * Created by 1 on 3/8/2016.
+ * ******************************
  */
 public class ImageSlider2Products extends RelativeLayout {
 
     private final Handler mhandler = new Handler();
     private LinearLayout mDotsLayout = null;
-   // private SpringIndicator mSpringIndicator = null;
+    // private SpringIndicator mSpringIndicator = null;
     private ViewPager mViewPager = null;
     private ViewPagerAdapter mAdapter = null;
-    private ArrayList<Product> mProductsOfTheWeek = null;
     private Context mcontext;
     private int mdotsCount;
     private ImageView[] mdots;
@@ -90,8 +92,7 @@ public class ImageSlider2Products extends RelativeLayout {
     }
 
     public void setProductsOfTheWeek(ArrayList<Product> productsOfTheWeek) {
-        this.mProductsOfTheWeek = productsOfTheWeek;
-        mAdapter = new ViewPagerAdapter(mcontext, mProductsOfTheWeek);
+        mAdapter = new ViewPagerAdapter(mcontext, productsOfTheWeek);
         mdotsCount = mAdapter.getCount();
         mdots = new ImageView[mdotsCount];
 
@@ -154,7 +155,7 @@ public class ImageSlider2Products extends RelativeLayout {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((RelativeLayout) object);
+            return view == object;
         }
 
         @Override
@@ -176,8 +177,8 @@ public class ImageSlider2Products extends RelativeLayout {
             imageView_left.setImageUrl(mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getSrednjaSlika(), mImageLoader);
             imageView_middle.setImageUrl(mProductArray.get(position).getSrednjaSlika(), mImageLoader);
 
-            String item1_str = mProductArray.get(position-1>=0 ? position-1: mProductArray.size()-1).getArtikalNaziv();
-            item1_str = item1_str + "\n" + mProductArray.get(position-1>=0 ? position-1: mProductArray.size()-1).getCenaBroj();
+            String item1_str = mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getArtikalNaziv();
+            item1_str = item1_str + "\n" + mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaBroj();
             item1_str = item1_str + " DIN";
             tv_item_1.setText(item1_str);
 

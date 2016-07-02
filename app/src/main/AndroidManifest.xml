@@ -99,8 +99,7 @@
             android:name=".fcm.NotificationManagerService"
             android:exported="true">
             <intent-filter>
-                <action
-                    android:name="rs.masinealati.PROCESS_NOTIFICATION" />
+                <action android:name="rs.masinealati.PROCESS_NOTIFICATION" />
             </intent-filter>
         </service>
     </application>

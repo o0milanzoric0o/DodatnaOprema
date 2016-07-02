@@ -1,20 +1,12 @@
 package rs.dodatnaoprema.dodatnaoprema.fcm;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import rs.dodatnaoprema.dodatnaoprema.MainActivity;
-import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.SplashActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {

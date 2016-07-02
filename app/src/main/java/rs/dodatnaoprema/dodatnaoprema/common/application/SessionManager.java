@@ -23,11 +23,11 @@ public class SessionManager {
         return pref.isLoggedIn();
     }
 
-    public void setCartItemCount(int count){
-        pref.setCartItemCount(count);
+    public int getCartItemCount() {
+        return pref.getCartItemCount();
     }
 
-    public int getCartItemCount(){
-        return pref.getCartItemCount();
+    public void setCartItemCount(int count) {
+        pref.setCartItemCount(count);
     }
 }

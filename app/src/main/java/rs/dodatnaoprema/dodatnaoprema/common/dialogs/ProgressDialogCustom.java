@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
+ * ******************************
  * Created by 1 on 1/29/2016.
+ * ******************************
  */
 public class ProgressDialogCustom extends ProgressDialog {
     public ProgressDialogCustom(Context context) {

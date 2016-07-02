@@ -22,6 +22,7 @@ public class SortUtils {
         });
         return articles;
     }
+
     public static List<Article> sortArticlesByPriceDescending(List<Article> articles) {
         Collections.sort(articles, new Comparator<Article>() {
             @Override

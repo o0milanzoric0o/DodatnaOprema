@@ -25,7 +25,9 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
 
 /**
+ * ******************************
  * Created by milan on 5/1/2016.
+ * ******************************
  */
 public class ImageSlider3Brands extends RelativeLayout {
 
@@ -94,8 +96,8 @@ public class ImageSlider3Brands extends RelativeLayout {
     public void setAllBrands(ArrayList<Brand> allBrands) {
         this.mAllBrands.clear();
         // Show only brands with BrendSajt == 2
-        for (int i = 0; i< allBrands.size(); i++){
-            if (allBrands.get(i).getBrendSajt()==2)
+        for (int i = 0; i < allBrands.size(); i++) {
+            if (allBrands.get(i).getBrendSajt() == 2)
                 mAllBrands.add(allBrands.get(i));
         }
 
@@ -162,7 +164,7 @@ public class ImageSlider3Brands extends RelativeLayout {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == ((LinearLayout) object);
+            return view == object;
         }
 
         @Override

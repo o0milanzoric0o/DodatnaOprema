@@ -8,7 +8,9 @@ import android.widget.TextView;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayoutFooter;
 
 /**
+ * ******************************
  * Created by Win 7 on 8.4.2016.
+ * ******************************
  */
 public class FirstTabFooter extends SwipeableLayoutFooter {
     private TextView tvLoadMore;
