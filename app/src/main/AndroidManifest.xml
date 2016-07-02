@@ -66,7 +66,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".signin.SignInActivity"
             android:label="@string/name_sign_in_activity"
@@ -83,21 +82,27 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- [START firebase_service] -->
-        <service
-            android:name=".fcm.MyFirebaseMessagingService">
+        <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_service] -->
         <!-- [START firebase_iid_service] -->
-        <service
-            android:name=".fcm.MyFirebaseInstanceIDService">
+        <service android:name=".fcm.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->
+        <service
+            android:name=".fcm.NotificationManagerService"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="rs.masinealati.PROCESS_NOTIFICATION" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

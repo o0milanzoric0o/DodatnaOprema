@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.Serializable;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
@@ -57,7 +56,7 @@ public class ArticlesGrid extends Fragment {
 
                 int itemID = item.getArtikalId();
                 PullWebContent<OneArticle> content =
-                        new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                        new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
                 Log.logInfo("LALALA", String.valueOf(itemID));
@@ -67,7 +66,7 @@ public class ArticlesGrid extends Fragment {
                         if (success) {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
-                            intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+                            intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
 
                             //OneArticleActivity articleDetails = new OneArticleActivity();
                             startActivity(intent);
@@ -75,9 +74,7 @@ public class ArticlesGrid extends Fragment {
 
                             Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
-                        }
-                        else
-                        {
+                        } else {
                             Log.logInfo("LALALA", "FAILED");
                         }
                     }
@@ -96,12 +93,14 @@ public class ArticlesGrid extends Fragment {
 
         return view;
     }
-    public void updateFragment (List<Article> products){
+
+    public void updateFragment(List<Article> products) {
 
         mAdapter.updateContent(products);
     }
 
     public void scrollToTop() {
-        mRecyclerView.scrollToPosition(0);    }
+        mRecyclerView.scrollToPosition(0);
+    }
 
 }

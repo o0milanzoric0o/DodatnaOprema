@@ -26,22 +26,27 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 
 public class BaseActivity extends AppCompatActivity {
     private BroadcastReceiver mUpdateToolbarBroadcastReceiver;
+    private VolleySingleton mVolleySingleton;
 
     @Override
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateToolbarBroadcastReceiver,
                 new IntentFilter(Config.UPDATE_CART_TOOLBAR_ICON));
+
         updateCartToolbarIcon();
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mVolleySingleton = VolleySingleton.getsInstance(this);
+
         mUpdateToolbarBroadcastReceiver = new BroadcastReceiver() {
 
             @Override
@@ -51,6 +56,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
             }
         };
+
     }
 
     @Override
@@ -117,4 +123,5 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
 }

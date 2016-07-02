@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     private List<YMALCategory> mYMALCategories = new ArrayList<>();
     private int requestCounter = 0;
     private VolleySingleton mVolleySingleton;
+    private boolean skipLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +55,45 @@ public class SplashActivity extends AppCompatActivity {
             rocketAnimation.start();
         }
         mVolleySingleton = VolleySingleton.getsInstance(this);
-        intent = new Intent(getApplicationContext(), MainActivity.class);
 
-        getBestSellingProducts();
-        getProductsOnSale();
-        getNewProducts();
-        getProductsOfTheWeek();
-        getAllBrands();
-        getYMALCategories();
-        getAllCategories();
-        getInfoContact();
-        getInfoHowToBuy();
+        // Handle possible data accompanying notification message.
+        // [START handle_data_extras]
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                // let's see what's inside
+                Log.e("SplashActivity", "Key: " + key + " Value: " + value);
+            }
+        }
+
+
+        // [END handle_data_extras]
+
+        intent = new Intent(getApplicationContext(), MainActivity.class);
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("articleID")) {
+            intent.putExtra("articleID", getIntent().getExtras().getString("articleID"));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            skipLoading = true;
+        }
+
+        intent.putExtra("Kljuc", "vrednost kljuca");
+
+        if (!skipLoading) {
+            getBestSellingProducts();
+            getProductsOnSale();
+            getNewProducts();
+            getProductsOfTheWeek();
+            getAllBrands();
+            getYMALCategories();
+            getAllCategories();
+            getInfoContact();
+            getInfoHowToBuy();
+        }else{
+            // show main activity...
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     private void response() {
@@ -77,7 +106,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getAllCategories() {
-        PullWebContent<AllCategories> content = new PullWebContent<AllCategories>(this, AllCategories.class, UrlEndpoints.getRequestUrlAllCategories(), mVolleySingleton);
+        PullWebContent<AllCategories> content = new PullWebContent<>(AllCategories.class, UrlEndpoints.getRequestUrlAllCategories(), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<AllCategories>() {
             @Override
             public void webRequestSuccess(boolean success, AllCategories allCategories) {
@@ -99,7 +128,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getInfoContact() {
-        final PullWebContent<Info> content = new PullWebContent<Info>(this, Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_CONTACT), mVolleySingleton);
+        final PullWebContent<Info> content = new PullWebContent<>(Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_CONTACT), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<Info>() {
             @Override
             public void webRequestSuccess(boolean success, Info info) {
@@ -119,7 +148,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getInfoHowToBuy() {
-        final PullWebContent<Info> content = new PullWebContent<Info>(this, Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_HOW_TO_BUY), mVolleySingleton);
+        final PullWebContent<Info> content = new PullWebContent<>(Info.class, UrlEndpoints.getRequestUrlInfo(AppConfig.URL_VALUE_HOW_TO_BUY), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<Info>() {
             @Override
             public void webRequestSuccess(boolean success, Info info) {
@@ -142,7 +171,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getProductsOnSale() {
         PullWebContent<ArticlesOnSale> content =
-                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE), mVolleySingleton);
+                new PullWebContent<>(ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_ARTICLES_ON_SALE), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
@@ -164,7 +193,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getNewProducts() {
         PullWebContent<ArticlesOnSale> content =
-                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_NEW_PRODUCTS), mVolleySingleton);
+                new PullWebContent<>(ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_NEW_PRODUCTS), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
@@ -187,7 +216,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getBestSellingProducts() {
         PullWebContent<ArticlesOnSale> content =
-                new PullWebContent<ArticlesOnSale>(this, ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_BEST_SEllING), mVolleySingleton);
+                new PullWebContent<>(ArticlesOnSale.class, UrlEndpoints.getRequestUrlSearchOnSaleAll(AppConfig.URL_VALUE_ID_BEST_SEllING), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesOnSale>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesOnSale articles) {
@@ -208,7 +237,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getProductsOfTheWeek() {
         PullWebContent<ProductsOfTheWeek> content =
-                new PullWebContent<ProductsOfTheWeek>(this, ProductsOfTheWeek.class, AppConfig.URL_PRODUCTS_OF_THE_WEEK, mVolleySingleton);
+                new PullWebContent<>(ProductsOfTheWeek.class, AppConfig.URL_PRODUCTS_OF_THE_WEEK, mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ProductsOfTheWeek>() {
             @Override
             public void webRequestSuccess(boolean success, ProductsOfTheWeek articles) {
@@ -231,7 +260,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getAllBrands() {
         PullWebContent<AllBrands> content =
-                new PullWebContent<AllBrands>(this, AllBrands.class, AppConfig.URL_ALL_BRENDS, mVolleySingleton);
+                new PullWebContent<>(AllBrands.class, AppConfig.URL_ALL_BRENDS, mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<AllBrands>() {
             @Override
             public void webRequestSuccess(boolean success, AllBrands allBrands) {
@@ -253,7 +282,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getYMALCategories() { // get YOU MAY ALSO LIKE CATEGORIES
         PullWebContent<YMALCategories> content =
-                new PullWebContent<YMALCategories>(this, YMALCategories.class, AppConfig.URL_YOU_MAY_ALSO_LIKE_CATEGORIES, mVolleySingleton);
+                new PullWebContent<>(YMALCategories.class, AppConfig.URL_YOU_MAY_ALSO_LIKE_CATEGORIES, mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<YMALCategories>() {
             @Override
             public void webRequestSuccess(boolean success, YMALCategories ymalCategories) {

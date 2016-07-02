@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -19,8 +18,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_on_sale.ArticlesOnSale;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -126,7 +123,7 @@ public class SubCategoriesActivity extends BaseActivity {
         progressDialog.showDialog("Učitavanje...");
 
         PullWebContent<CategoriesByID> content =
-                new PullWebContent<CategoriesByID>(this, CategoriesByID.class, UrlEndpoints.getRequestUrlCategoriesById(id), mVolleySingleton);
+                new PullWebContent<>(CategoriesByID.class, UrlEndpoints.getRequestUrlCategoriesById(id), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<CategoriesByID>() {
             @Override
             public void webRequestSuccess(boolean success, CategoriesByID categoriesByID) {

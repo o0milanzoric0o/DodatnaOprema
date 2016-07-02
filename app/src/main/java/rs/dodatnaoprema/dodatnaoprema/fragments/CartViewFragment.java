@@ -97,7 +97,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                     String url = String.format(AppConfig.URL_DELETE_CART_ITEM, item_id, user_id);
 
                     PullWebContent<ItemDeleteResponse> content =
-                            new PullWebContent<ItemDeleteResponse>(getActivity(), ItemDeleteResponse.class, url, mVolleySingleton);
+                            new PullWebContent<>(ItemDeleteResponse.class, url, mVolleySingleton);
                     content.setCallbackListener(new WebRequestCallbackInterface<ItemDeleteResponse>() {
                         @Override
                         public void webRequestSuccess(boolean success, ItemDeleteResponse resp) {
@@ -244,7 +244,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
             progressDialog.showDialog("Učitavanje...");
 
             PullWebContent<Cart> content =
-                    new PullWebContent<>(getActivity(), Cart.class, url, mVolleySingleton);
+                    new PullWebContent<>(Cart.class, url, mVolleySingleton);
             content.setCallbackListener(new WebRequestCallbackInterface<Cart>() {
                 @Override
                 public void webRequestSuccess(boolean success, Cart cart) {
@@ -311,7 +311,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
             progressBar.setVisibility(View.VISIBLE);
             PullWebContent<ItemUpdateResponse> content =
-                    new PullWebContent<ItemUpdateResponse>(getActivity(), ItemUpdateResponse.class, url, mVolleySingleton);
+                    new PullWebContent<>(ItemUpdateResponse.class, url, mVolleySingleton);
             content.setCallbackListener(new WebRequestCallbackInterface<ItemUpdateResponse>() {
                 @Override
                 public void webRequestSuccess(boolean success, ItemUpdateResponse resp) {
@@ -350,7 +350,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         progressDialog.showDialog("Učitavanje...");
 
         PullWebContent<OneArticle> content =
-                new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
         content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
             @Override

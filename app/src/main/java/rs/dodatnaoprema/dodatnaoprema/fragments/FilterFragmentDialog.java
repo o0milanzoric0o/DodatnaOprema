@@ -184,7 +184,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
     private void subCategoriesSpecifications(int id) {
 
-        PullWebContent<CategorySpecification> content = new PullWebContent<>(getActivity(), CategorySpecification.class, UrlEndpoints.getRequestUrlCategorySpecification(id), mVolleySingleton);
+        PullWebContent<CategorySpecification> content = new PullWebContent<>(CategorySpecification.class, UrlEndpoints.getRequestUrlCategorySpecification(id), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<CategorySpecification>() {
             @Override
             public void webRequestSuccess(boolean success, CategorySpecification categorySpecification) {

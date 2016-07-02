@@ -1,6 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,7 +27,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products;
 import rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider3Brands;
-import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
@@ -116,7 +114,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
                     int itemID = item.getArtikalId();
                     PullWebContent<OneArticle> content =
-                            new PullWebContent<OneArticle>((MainActivity) context, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                            new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
                     Log.logInfo("LALALA", String.valueOf(itemID));
@@ -183,7 +181,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mFirstButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((MainActivity)context).openFragment(context.getString(R.string.contact));
+                    ((MainActivity) context).openFragment(context.getString(R.string.contact));
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             mFirstButton.setSelected(false);
@@ -195,7 +193,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mSecondButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((MainActivity)context).openFragment(context.getString(R.string.how_to_buy));
+                    ((MainActivity) context).openFragment(context.getString(R.string.how_to_buy));
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             mSecondButton.setSelected(false);

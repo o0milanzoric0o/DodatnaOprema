@@ -32,7 +32,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
-import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -59,7 +58,7 @@ public class SecondTab extends Fragment {
     private GridViewAdapter gridAdapter;
 
     private void searchArticlesByCategory(int id, int from, int to, int sort) {
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<ArticlesFilteredByCategory>(getActivity(), ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
@@ -93,7 +92,7 @@ public class SecondTab extends Fragment {
                 //     mArticles.get(position).getArtikalId()
                 Log.logInfo("LALALA", "SUCCESS" + itemID);
                 PullWebContent<OneArticle> content =
-                        new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                        new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
                 Log.logInfo("LALALA", String.valueOf(itemID));

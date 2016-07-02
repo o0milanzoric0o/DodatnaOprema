@@ -22,9 +22,9 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartDeleteAllConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
-import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemDeleteAllResponse;
@@ -76,7 +76,7 @@ public class CartActivity extends BaseActivity {
                 String url = String.format(AppConfig.URL_GET_CART, user_id);
 
                 PullWebContent<Cart> content =
-                        new PullWebContent<>(this, Cart.class, url, mVolleySingleton);
+                        new PullWebContent<>(Cart.class, url, mVolleySingleton);
                 content.setCallbackListener(new WebRequestCallbackInterface<Cart>() {
                     @Override
                     public void webRequestSuccess(boolean success, Cart cart) {
@@ -116,7 +116,7 @@ public class CartActivity extends BaseActivity {
                     String url = String.format(AppConfig.URL_DELETE_ALL_CART_ITEMS, user_id);
 
                     PullWebContent<ItemDeleteAllResponse> content =
-                            new PullWebContent<>(CartActivity.this, ItemDeleteAllResponse.class, url, mVolleySingleton);
+                            new PullWebContent<>(ItemDeleteAllResponse.class, url, mVolleySingleton);
                     content.setCallbackListener(new WebRequestCallbackInterface<ItemDeleteAllResponse>() {
                         @Override
                         public void webRequestSuccess(boolean success, ItemDeleteAllResponse resp) {

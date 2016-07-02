@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -14,10 +15,13 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.SplashActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+
+    private NotificationUtils notificationUtils;
 
     /**
      * Called when message is received.
@@ -33,6 +37,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // message, here is where that should be initiated. See sendNotification method below.
         Log.e(TAG, "From: " + remoteMessage.getFrom());
         Log.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        sendNotification(remoteMessage);
 
     }
     // [END receive_message]
@@ -40,26 +45,69 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     /**
      * Create and show a simple notification containing the received FCM message.
      *
-     * @param messageBody FCM message body received.
+     * @param remoteMessage FCM remote message received.
      */
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void sendNotification(RemoteMessage remoteMessage) {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+//                PendingIntent.FLAG_ONE_SHOT);
+//
+//        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                .setSmallIcon(R.drawable.ic_stat_ic_notification)
+//                .setContentTitle("FCM Message")
+//                .setContentText(messageBody)
+//                .setAutoCancel(true)
+//                .setSound(defaultSoundUri)
+//                .setContentIntent(pendingIntent);
+//
+//        NotificationManager notificationManager =
+//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        String title = remoteMessage.getNotification().getTitle();
+        String message = remoteMessage.getNotification().getBody();
+        String imageURL = remoteMessage.getData().get("imageUrl");
+        long timestamp = remoteMessage.getSentTime();
+        String articleID = remoteMessage.getData().get("articleID");
+
+        Intent intent = new Intent(this, SplashActivity.class);
+        intent.putExtra("articleID", articleID);
+        //intent.setAction("rs.masinealati.PROCESS_NOTIFICATION");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+//                PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_stat_ic_notification)
-                .setContentTitle("FCM Message")
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        showNotificationMessage(getApplicationContext(), title, message, timestamp, intent);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+//        if (TextUtils.isEmpty(imageURL)) {
+//            showNotificationMessage(getApplicationContext(), title, message, timestamp, intent);
+//        }else{
+//            // Show notification with image
+//            Log.e(TAG, "Notification with image...");
+//            showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, intent, imageURL);
+//        }
+
     }
+
+    /**
+     * Showing notification with text only
+     */
+    private void showNotificationMessage(Context context, String title, String message, long timeStamp, Intent intent) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
+    }
+
+    /**
+     * Showing notification with text and image
+     */
+    private void showNotificationMessageWithBigImage(Context context, String title, String message, long timeStamp, Intent intent, String imageUrl) {
+        notificationUtils = new NotificationUtils(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
+    }
+
 }

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import java.io.Serializable;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
@@ -29,8 +28,8 @@ import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSelectedProduct
 
 public class ArticlesList extends Fragment {
 
-    private CustomRecyclerView mRecyclerView;
     private static int firstVisibleInRecyclerView;
+    private CustomRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
     private SubCategoryArticlesActivity activity;
@@ -84,7 +83,7 @@ public class ArticlesList extends Fragment {
                 int itemID = item.getArtikalId();
 
                 PullWebContent<OneArticle> content =
-                        new PullWebContent<OneArticle>(getActivity(), OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                        new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
                 Log.logInfo("LALALA", String.valueOf(itemID));
@@ -94,7 +93,7 @@ public class ArticlesList extends Fragment {
                         if (success) {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
-                            intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+                            intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
 
                             //OneArticleActivity articleDetails = new OneArticleActivity();
                             startActivity(intent);

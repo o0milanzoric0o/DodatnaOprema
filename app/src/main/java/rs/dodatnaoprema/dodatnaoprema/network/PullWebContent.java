@@ -1,8 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema.network;
 
-import android.app.Activity;
-import android.content.Context;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,15 +14,15 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 public class PullWebContent<T> {
 
     public WebRequestCallbackInterface<T> webRequestCallbackInterface;
-    private Context context;
+    //private Context context;
     private String url;
     private Class<T> t;
     private VolleySingleton mVolleySingleton;
 
 
-    public PullWebContent(Activity context, Class<T> mClass, String url, VolleySingleton mVolleySingleton) {
+    public PullWebContent(Class<T> mClass, String url, VolleySingleton mVolleySingleton) {
 
-        this.context = context;
+        //this.context = context;
         webRequestCallbackInterface = null;
         this.url = url;
         this.t = mClass;

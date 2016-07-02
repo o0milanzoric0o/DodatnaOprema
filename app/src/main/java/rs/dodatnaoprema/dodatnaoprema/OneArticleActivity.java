@@ -224,7 +224,7 @@ public class OneArticleActivity extends BaseActivity {
             String url = String.format(AppConfig.URL_ADD_CART_ITEM, item_id, quantity, user_id);
             VolleySingleton mVolleySingleton = VolleySingleton.getsInstance(this);
             PullWebContent<ItemAddResponse> content =
-                    new PullWebContent<>(this, ItemAddResponse.class, url, mVolleySingleton);
+                    new PullWebContent<>(ItemAddResponse.class, url, mVolleySingleton);
             content.setCallbackListener(new WebRequestCallbackInterface<ItemAddResponse>() {
                 @Override
                 public void webRequestSuccess(boolean success, ItemAddResponse resp) {

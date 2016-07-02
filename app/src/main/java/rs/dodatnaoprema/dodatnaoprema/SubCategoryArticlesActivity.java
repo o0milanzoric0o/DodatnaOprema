@@ -1,7 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,38 +45,27 @@ import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
 public class SubCategoryArticlesActivity extends BaseActivity {
 
+    public int selectedSubcategoryId = 0;
     private List<Article> mArticles = new ArrayList<>();
     private List<Article> allSubcategoryArticles = new ArrayList<>();
-
     private List<Article> filteredArticles = new ArrayList<>();
     private List<Brendovus> mBrands = new ArrayList<>();
-
     private List<String> selectedBrands = new ArrayList<>();
-
     private HashMap<Integer, ArrayList<Integer>> selectedSpecifications = new HashMap<>();
-
     private ImageView filterImg;
     private TextView msgNoResults;
     private FrameLayout cardFace;
     private FrameLayout cardBack;
     private RelativeLayout mHeader;
     private RelativeLayout mFooter;
-
     private VolleySingleton mVolleySingleton;
-
     private boolean nextImgStateGrid = true;
     private boolean filtered = false;
-
     private int mArticleId;
     private int sortOption = 0;
     private boolean addedFragments = false;
-
     private String mSubCategoryName;
-
     private int numberOfResults = 0;
-
-    public int selectedSubcategoryId = 0;
-
 
     public List<Article> getArticlesList() {
         return mArticles;
@@ -231,7 +219,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         progressDialog.setCancelable(false);
         progressDialog.showDialog("Učitavanje...");
 
-        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(this, ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
+        PullWebContent<ArticlesFilteredByCategory> content = new PullWebContent<>(ArticlesFilteredByCategory.class, UrlEndpoints.getRequestUrlSearchArticlesByCategory(id, from, to, AppConfig.URL_VALUE_CURRENCY_RSD, AppConfig.URL_VALUE_LANGUAGE_SRB_LAT, sort), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<ArticlesFilteredByCategory>() {
             @Override
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
@@ -288,13 +276,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     }
 
+    public int getClickedSubcategoryId() {
+        return selectedSubcategoryId;
+    }
+
     private void setClickedSubcategoryId(int id) {
 
         selectedSubcategoryId = id;
-    }
-
-    public int getClickedSubcategoryId() {
-        return selectedSubcategoryId;
     }
 
     public void updateList(List<Article> articles) {
@@ -307,20 +295,20 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         if (articles.size() == 0) noSearchResults();
     }
 
-    private void setNumberOfResults(int number) {
-        numberOfResults = number;
-    }
-
     public int getNumberOfResults() {
         return numberOfResults;
     }
 
-    private void setBrands(List<Brendovus> brands) {
-        mBrands = brands;
+    private void setNumberOfResults(int number) {
+        numberOfResults = number;
     }
 
     public List<Brendovus> getBrands() {
         return mBrands;
+    }
+
+    private void setBrands(List<Brendovus> brands) {
+        mBrands = brands;
     }
 
     public void setSelectedSpecifications(Integer key, List<Integer> values) {

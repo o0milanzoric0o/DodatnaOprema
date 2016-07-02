@@ -81,7 +81,7 @@ public class OffersActivity extends BaseActivity {
         progressDialog.showDialog("Učitavanje...");
 
         PullWebContent<OneArticle> content =
-                new PullWebContent<OneArticle>(this, OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+                new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
 
         Log.logInfo("LALALA", String.valueOf(itemID));

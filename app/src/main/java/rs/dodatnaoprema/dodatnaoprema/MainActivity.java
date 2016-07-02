@@ -1,6 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,9 +36,9 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.application.SessionManager;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
+import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.fragments.FilterFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.fragments.InfoFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
@@ -47,6 +46,11 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
+import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
+import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
+import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
+import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapter;
 
@@ -54,7 +58,6 @@ public class MainActivity extends FragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-
 
     AppBarLayout mAppBar;
 
@@ -64,6 +67,8 @@ public class MainActivity extends FragmentActivity
     private Intent intent;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private SessionManager session;
+
+    private VolleySingleton mVolleySingleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,23 +120,24 @@ public class MainActivity extends FragmentActivity
             }
         };
 
+        mVolleySingleton = VolleySingleton.getsInstance(this);
 
-        // If a notification message is tapped, any data accompanying the notification
-        // message is available in the intent extras. In this sample the launcher
-        // intent is fired when the notification is tapped, so any accompanying data would
-        // be handled here. If you want a different intent fired, set the click_action
-        // field of the notification message to the desired intent. The launcher intent
-        // is used when no click_action is specified.
-        //
         // Handle possible data accompanying notification message.
         // [START handle_data_extras]
         if (getIntent().getExtras() != null) {
             for (String key : getIntent().getExtras().keySet()) {
                 String value = getIntent().getExtras().getString(key);
-                Log.d(TAG, "Key: " + key + " Value: " + value);
+                // let's see what's inside
+                Log.e("MainActivity", "Key: " + key + " Value: " + value);
             }
         }
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("articleID")) {
+            int articleID = Integer.valueOf(intent.getExtras().getString("articleID"));
+            viewArtcile(articleID);
+        }
         // [END handle_data_extras]
+
 
         // [START subscribe_topics]
         FirebaseMessaging.getInstance().subscribeToTopic("news");
@@ -174,7 +180,6 @@ public class MainActivity extends FragmentActivity
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.UPDATE_CART_TOOLBAR_ICON));
-
 
     }
 
@@ -413,7 +418,7 @@ public class MainActivity extends FragmentActivity
         startActivityOneArticle(intent);
     }
 
-    public void openFragment(String title){
+    public void openFragment(String title) {
 
         Bundle args = new Bundle();
         args.putString("mtitle", title);
@@ -425,5 +430,44 @@ public class MainActivity extends FragmentActivity
 
     public void startActivityOneArticle(Intent intent) {
         startActivity(intent);
+    }
+
+    public void viewArtcile(int itemID) {
+
+        final ProgressDialogCustom progressDialog = new ProgressDialogCustom(MainActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.showDialog("Učitavanje...");
+
+        PullWebContent<OneArticle> content =
+                new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
+
+
+        rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", String.valueOf(itemID));
+        content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
+            @Override
+            public void webRequestSuccess(boolean success, OneArticle oneArticle) {
+                if (success) {
+                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "SUCCESS");
+                    Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
+                    intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
+                    startActivity(intent);
+                    progressDialog.hideDialog();
+
+                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
+
+                } else {
+                    progressDialog.hideDialog();
+                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "FAILED");
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                progressDialog.hideDialog();
+
+            }
+        });
+
+        content.pullList();
     }
 }
