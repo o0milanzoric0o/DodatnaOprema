@@ -326,10 +326,12 @@ public class MainActivity extends FragmentActivity
             articlesOnSale();
 
         } else if (id == R.id.nav_how_to_buy) {
+            openFragment(getString(R.string.how_to_buy));
 
         } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_contact) {
+            openFragment(getString(R.string.contact));
 
         }
 
@@ -421,7 +423,7 @@ public class MainActivity extends FragmentActivity
     public void openFragment(String title) {
 
         Bundle args = new Bundle();
-        args.putString("mtitle", title);
+        args.putString("mTitle", title);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         InfoFragmentDialog frag = new InfoFragmentDialog();
         frag.setArguments(args);
