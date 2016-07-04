@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.common.utils;
 
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fragments.InfoFragmentDialog;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -85,6 +87,13 @@ public class BaseActivity extends AppCompatActivity {
                 intent.putExtra("AllCategories", (Serializable) SharedPreferencesUtils.getArrayListArticle(this, "SALE"));
                 startActivity(intent);
                 return true;
+            case R.id.item_instructions:
+                Bundle args = new Bundle();
+                args.putString("mTitle", getString(R.string.how_to_buy));
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                InfoFragmentDialog frag = new InfoFragmentDialog();
+                frag.setArguments(args);
+                frag.show(ft, "txn_tag");
 
             default:
                 return super.onOptionsItemSelected(item);

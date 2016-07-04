@@ -26,9 +26,11 @@ public class AppConfig {
     public static final String URL_PARAM_ID = "id";
     public static final String URL_PARAM_FROM = "od";
     public static final String URL_PARAM_TO = "do";
+    public static final String URL_PARAM_SEARCH = "upitsearch";
     public static final String URL_PARAM_SORT_CONTROL = "sortKontrole";
 
     public static final String URL_VALUE_ALL_CATEGORIES = "sveKategorije";
+    public static final String URL_VALUE_SEARCH = "searchAndr";
     public static final String URL_VALUE_INFO = "textZaInfoJSON";
     public static final int URL_VALUE_CONTACT = 41;
     public static final int URL_VALUE_HOW_TO_BUY = 42;
@@ -38,7 +40,6 @@ public class AppConfig {
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";
     public static final String URL_VALUE_ARTICLES_BY_CATEGORY = "artikliPoKateg";
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
-
     public static final String URL_VALUE_ARTICLE = "artikal";
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
