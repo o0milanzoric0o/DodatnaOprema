@@ -3,12 +3,6 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        debug_signing {
-            keyAlias 'debugkeyshared'
-            keyPassword 'android'
-            storeFile file('C:/Users/mirna/AndroidStudioProjects/DodatnaOprema/keys/debugKeystore.jks')
-            storePassword 'android'
-        }
     }
     compileSdkVersion 24
     buildToolsVersion '24.0.0'
@@ -20,7 +14,6 @@ android {
         versionName "1.0"
         // Enabling multidex support.
         multiDexEnabled true
-        signingConfig signingConfigs.debug_signing
     }
     buildTypes {
         release {
@@ -28,7 +21,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.debug_signing
         }
     }
     productFlavors {
@@ -41,12 +33,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    // Dependency for Google Sign-In
-    // Dependency for Google Cloud Messaging
     // Dependency for dot indicator
-    // support for large projects
-    //compile 'com.github.lawloretienne:quickreturn:0.0.3'
-    //compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
+    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.android.support:appcompat-v7:24.0.0'
@@ -56,6 +44,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:24.0.0'
     compile 'com.android.support:gridlayout-v7:24.0.0'
     compile 'com.android.support:multidex:1.0.1'
+    // Dependency for Google Cloud Messaging
     compile 'com.google.firebase:firebase-messaging:9.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
@@ -34,6 +38,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemAddResponse;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
@@ -42,7 +47,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
 
-public class OneArticleActivity extends BaseActivity {
+public class OneArticleActivity extends BaseActivity implements OneArticleImageFragment.OnProductImageGalleryDraw {
 
     public int quantity;
     private NetworkImageView mImageView;
@@ -50,6 +55,7 @@ public class OneArticleActivity extends BaseActivity {
     private ViewPager mViewPager;
     private OneArticle mOneArticle;
     private Context mContext;
+    private ImageGalleryAdapter adapterViewPager;
 
     private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
 
@@ -60,7 +66,8 @@ public class OneArticleActivity extends BaseActivity {
 
         mContext = OneArticleActivity.this;
 
-        mImageView = (NetworkImageView) findViewById(R.id.img_one_product);
+        //mImageView = (NetworkImageView) findViewById(R.id.img_one_product);
+        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
         TextView mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
         TextView mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
         TextView mTextViewPrice = (TextView) findViewById(R.id.textView_cena);
@@ -93,7 +100,13 @@ public class OneArticleActivity extends BaseActivity {
 
         if (mTextView != null) mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
 
-        mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
+        //mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
+        ViewPager vpPager = (ViewPager) findViewById(R.id.vp_gallery);
+        adapterViewPager = new ImageGalleryAdapter(getSupportFragmentManager());
+        adapterViewPager.setImageCount(mOneArticle.getArtikal().getSlike().size());
+        vpPager.setAdapter(adapterViewPager);
+        springIndicator.setViewPager(vpPager);
+
         if (mTextViewBrendName != null)
             mTextViewBrendName.setText(getResources().getString(R.string.brend_txt, mOneArticle.getArtikal().getBrendIme()));
         if (mTextViewProductName != null)
@@ -206,7 +219,6 @@ public class OneArticleActivity extends BaseActivity {
             }
         }, 1000);
     }
-
 
     public void addToCart(int item_id, final int quantity) {
         if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
@@ -337,5 +349,41 @@ public class OneArticleActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public String getProductImage(int position) {
+        String url = null;
+        if (mOneArticle != null && mOneArticle.getArtikal().getSlike().size() > position)
+            url = mOneArticle.getArtikal().getSlike().get(position).getSrednjaSlika();
+        return url;
+    }
 
+    public static class ImageGalleryAdapter extends FragmentPagerAdapter {
+
+        private int imageCount = 0;
+
+        public ImageGalleryAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        // Returns total number of pages
+        @Override
+        public int getCount() {
+            return imageCount;
+        }
+
+        // Returns the fragment to display for that page
+        @Override
+        public Fragment getItem(int position) {
+            return OneArticleImageFragment.newInstance(position);
+        }
+
+        public void setImageCount(int imageCount) {
+            this.imageCount = imageCount;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return String.valueOf(position + 1);
+        }
+    }
 }

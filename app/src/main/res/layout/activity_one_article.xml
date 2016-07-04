@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -62,21 +61,38 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@color/background_white"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
                                 <!-- pic-->
                                 <FrameLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/line_margine"
                                     android:background="@drawable/selected_item">
 
-                                    <com.android.volley.toolbox.NetworkImageView
-                                        android:id="@+id/img_one_product"
-                                        android:layout_width="200dp"
-                                        android:layout_height="200dp"
-                                        android:adjustViewBounds="true"
-                                        android:background="@drawable/image_border"
-                                        android:onClick="morePics" />
+                                    <!--<com.android.volley.toolbox.NetworkImageView-->
+                                    <!--android:id="@+id/img_one_product"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="200dp"-->
+                                    <!--android:adjustViewBounds="true"-->
+                                    <!--android:background="@drawable/image_border"-->
+                                    <!--android:onClick="morePics" />-->
+
+                                    <android.support.v4.view.ViewPager
+                                        android:id="@+id/vp_gallery"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="200dp"></android.support.v4.view.ViewPager>
+
+                                    <github.chenupt.springindicator.SpringIndicator xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/indicator"
+                                        android:layout_width="150dp"
+                                        android:layout_height="56dp"
+                                        android:layout_gravity="bottom|center_horizontal"
+                                        app:siIndicatorColor="@color/blue"
+                                        app:siIndicatorColors="@array/indicator_colors"
+                                        app:siRadiusMax="10dp"
+                                        app:siRadiusMin="5dp"
+                                        app:siSelectedTextColor="@android:color/white"
+                                        app:siTextColor="@color/blue"
+                                        app:siTextSize="14sp" />
                                 </FrameLayout>
 
                                 <!-- naziv proizvodjac cena-->
