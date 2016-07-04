@@ -10,6 +10,7 @@ import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_MACHINE
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_ACTION;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_FROM;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_ID;
+import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_SEARCH;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_SORT_CONTROL;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_PARAM_TO;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_ALL_CATEGORIES;
@@ -19,6 +20,7 @@ import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_A
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORIES_BY_ID;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_CATEGORY_SPECIFICATION;
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_INFO;
+import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_VALUE_SEARCH;
 
 
 public class UrlEndpoints {
@@ -138,6 +140,17 @@ public class UrlEndpoints {
                 + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_ARTICLE
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_ID + URL_CHAR_EQUAL + id;
+
+        return getFullUrl(url);
+    }
+    public static String getSearchResults(String keyWord) {
+
+        // http://masinealati.rs/parametri.php?action=searchAndr&upitsearch=gnf%2035&userId=3
+        String url = URL_MACHINES_AND_TOOLS
+                + URL_CHAR_QUESTION
+                + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_SEARCH
+                + URL_CHAR_AMPERSAND
+                + URL_PARAM_SEARCH + URL_CHAR_EQUAL + keyWord;
 
         return getFullUrl(url);
     }
