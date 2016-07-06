@@ -70,14 +70,27 @@ public class MainActivity extends FragmentActivity
 
     private VolleySingleton mVolleySingleton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
 
         updateCartToolbarIcon();
+
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -103,6 +116,7 @@ public class MainActivity extends FragmentActivity
         initializeTabs();
 
         mAppBar = (AppBarLayout) findViewById(R.id.appBar);
+
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -474,5 +488,4 @@ public class MainActivity extends FragmentActivity
 
         content.pullList();
     }
-
 }
