@@ -74,6 +74,7 @@
         <activity
             android:name=".OneArticleActivity"
             android:label="@string/title_activity_one_article"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity

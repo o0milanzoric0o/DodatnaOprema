@@ -1,9 +1,11 @@
 package rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -21,11 +23,10 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.pagetransformers.ExperimentalPageTransformer;
-
-//import github.chenupt.springindicator.SpringIndicator;
 
 /**
  * ******************************
@@ -88,7 +89,6 @@ public class ImageSlider2Products extends RelativeLayout {
         });
 
         mViewPager.setPageTransformer(true, new ExperimentalPageTransformer());
-
     }
 
     public void setProductsOfTheWeek(ArrayList<Product> productsOfTheWeek) {
@@ -109,7 +109,6 @@ public class ImageSlider2Products extends RelativeLayout {
 
             mDotsLayout.addView(mdots[i], params);
         }
-
 
         mdots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
 
@@ -174,8 +173,28 @@ public class ImageSlider2Products extends RelativeLayout {
             TextView tv_item_2 = (TextView) itemView.findViewById(R.id.tv_price_title_item_2);
 
             ImageLoader mImageLoader = VolleySingleton.getsInstance(mContext).getImageLoader();
-            imageView_left.setImageUrl(mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getSrednjaSlika(), mImageLoader);
-            imageView_middle.setImageUrl(mProductArray.get(position).getSrednjaSlika(), mImageLoader);
+            final int left_position = position - 1 >= 0 ? position - 1 : mProductArray.size() - 1;
+            final int middle_position = position;
+            imageView_left.setImageUrl(mProductArray.get(left_position).getSrednjaSlika(), mImageLoader);
+            imageView_middle.setImageUrl(mProductArray.get(middle_position).getSrednjaSlika(), mImageLoader);
+
+            imageView_left.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent showArticle = new Intent(Config.SHOW_ARTICLE_DETAILS);
+                    showArticle.putExtra("show_article", mProductArray.get(left_position).getArtikalId());
+                    LocalBroadcastManager.getInstance(mcontext).sendBroadcast(showArticle);
+                }
+            });
+
+            imageView_middle.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent showArticle = new Intent(Config.SHOW_ARTICLE_DETAILS);
+                    showArticle.putExtra("show_article", mProductArray.get(middle_position).getArtikalId());
+                    LocalBroadcastManager.getInstance(mcontext).sendBroadcast(showArticle);
+                }
+            });
 
             String item1_str = mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getArtikalNaziv();
             item1_str = item1_str + "\n" + mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaBroj();

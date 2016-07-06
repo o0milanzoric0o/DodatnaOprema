@@ -70,16 +70,14 @@ public class MainActivity extends FragmentActivity
 
     private VolleySingleton mVolleySingleton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
 
         updateCartToolbarIcon();
-
-        //  icMore.setVisibility(View.GONE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,7 +104,6 @@ public class MainActivity extends FragmentActivity
 
         mAppBar = (AppBarLayout) findViewById(R.id.appBar);
 
-
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -116,6 +113,9 @@ public class MainActivity extends FragmentActivity
                     clearUserDrawerInfo();
                 } else if (intent.getAction().equals(Config.UPDATE_CART_TOOLBAR_ICON)) {
                     updateCartToolbarIcon();
+                } else if (intent.getAction().equals(Config.SHOW_ARTICLE_DETAILS)) {
+                    int articleID = intent.getIntExtra("show_article", 0);
+                    viewArtcile(articleID);
                 }
             }
         };
@@ -181,6 +181,8 @@ public class MainActivity extends FragmentActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.UPDATE_CART_TOOLBAR_ICON));
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.SHOW_ARTICLE_DETAILS));
     }
 
     @Override
@@ -472,4 +474,5 @@ public class MainActivity extends FragmentActivity
 
         content.pullList();
     }
+
 }
