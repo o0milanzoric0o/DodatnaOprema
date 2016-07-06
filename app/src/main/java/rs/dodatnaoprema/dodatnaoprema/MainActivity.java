@@ -459,23 +459,16 @@ public class MainActivity extends FragmentActivity
         PullWebContent<OneArticle> content =
                 new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
-
-        rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", String.valueOf(itemID));
         content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
             @Override
             public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                 if (success) {
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "SUCCESS");
                     Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
                     intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
                     startActivity(intent);
                     progressDialog.hideDialog();
-
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
-
                 } else {
                     progressDialog.hideDialog();
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "FAILED");
                 }
             }
 
