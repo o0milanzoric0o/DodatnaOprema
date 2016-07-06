@@ -78,7 +78,6 @@ public class MainActivity extends FragmentActivity
         // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
 
         updateCartToolbarIcon();
-
         ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
         icSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,6 +344,8 @@ public class MainActivity extends FragmentActivity
             openFragment(getString(R.string.how_to_buy));
 
         } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(this, QuestionActivity.class);
+            startActivityOneArticle(intent);
 
         } else if (id == R.id.nav_contact) {
             openFragment(getString(R.string.contact));

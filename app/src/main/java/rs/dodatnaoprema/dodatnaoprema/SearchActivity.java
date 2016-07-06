@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -101,7 +102,7 @@ public class SearchActivity extends BaseActivity {
                         updateList(mArticles);
                     }
                 } else {
-                   // noResults();
+                    // noResults();
                 }
                 removeKeyboard();
                 progressDialog.hideDialog();
@@ -117,45 +118,59 @@ public class SearchActivity extends BaseActivity {
         content.pullList();
 
     }
+
     public List<Article> getArticlesList() {
         return mArticles;
     }
+
     public void updateList(List<Article> articles) {
 
         Log.logInfo("SORT", "" + articles.size());
-       // setNumberOfResults(articles.size());
+        // setNumberOfResults(articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
 
-      //  if (articles.size() == 0)
-           // noSearchResults();
+        //  if (articles.size() == 0)
+        // noSearchResults();
     }
 
-    public void removeKeyboard(){
+    public void removeKeyboard() {
 
         View view = getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-  /*  private void noResults() {
-        mHeader.setVisibility(View.GONE);
-        mFooter.setVisibility(View.GONE);
-        cardBack.setVisibility(View.GONE);
-        cardFace.setVisibility(View.GONE);
 
-        msgNoResults.setVisibility(View.VISIBLE);
-        msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
+    /*  private void noResults() {
+          mHeader.setVisibility(View.GONE);
+          mFooter.setVisibility(View.GONE);
+          cardBack.setVisibility(View.GONE);
+          cardFace.setVisibility(View.GONE);
+
+          msgNoResults.setVisibility(View.VISIBLE);
+          msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
+      }
+
+      private void noSearchResults() {
+          mHeader.setVisibility(View.GONE);
+          cardBack.setVisibility(View.GONE);
+          cardFace.setVisibility(View.GONE);
+
+          msgNoResults.setVisibility(View.VISIBLE);
+          msgNoResults.setText(getString(R.string.msg_no_search_results));
+      }
+  */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
-
-    private void noSearchResults() {
-        mHeader.setVisibility(View.GONE);
-        cardBack.setVisibility(View.GONE);
-        cardFace.setVisibility(View.GONE);
-
-        msgNoResults.setVisibility(View.VISIBLE);
-        msgNoResults.setText(getString(R.string.msg_no_search_results));
-    }
-*/
 }
 
