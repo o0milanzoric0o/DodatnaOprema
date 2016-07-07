@@ -20,11 +20,15 @@
     <string name="info">Informacije</string>
 
     <string name="help_center">Postavite pitanje</string>
-    <string name="how_to_buy">Kako kupiti</string>
+    <string name="how_to_buy">Kako kupiti?</string>
     <string name="contact">Kontakt</string>
 
+    <!-- QuestionActivity-->
     <string name="search_title">Pretraga</string>
     <string name="question_txt">Pitanje</string>
+    <string name="send_msg_txt">Pošalji poruku</string>
+    <string name="delete_msg_txt">Obriši poruku</string>
+
 
     <string name="view_more">još</string>
     <string name="price">xx.xx rsd</string>

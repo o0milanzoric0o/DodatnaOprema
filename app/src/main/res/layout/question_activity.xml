@@ -41,47 +41,46 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical"
-        android:padding="10dp">
+        >
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/email_loginlayout"
+            android:id="@+id/sender_email_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/email_login"
-                android:layout_marginTop="5dp"
+                android:id="@+id/sender_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangular_txt"
+                android:gravity="center_vertical"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
+                android:padding="5dp"
                 android:singleLine="true" />
 
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/password_loginlayout"
+            android:id="@+id/questionlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp">
 
             <EditText
                 android:id="@+id/question_txt"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangular_txt"
+                android:gravity="top"
                 android:hint="@string/question_txt"
                 android:inputType="textMultiLine"
-                android:gravity="top"
                 android:lines="5"
+                android:padding="5dp"
                 android:scrollbars="vertical" />
 
 
@@ -89,30 +88,38 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/signin_button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
-        android:background="@color/primary_dark"
-        android:text="@string/btn_text_sign_in"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-    <Button
-        android:id="@+id/registerhere_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
-        android:background="@color/primary_dark"
-        android:text="@string/btn_text_register_here"
-        android:textColor="#ffffff"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/delete_msg"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/primary_dark"
+            android:text="@string/delete_msg_txt"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/send_msg"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/primary_dark"
+            android:text="@string/send_msg_txt"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </LinearLayout>
