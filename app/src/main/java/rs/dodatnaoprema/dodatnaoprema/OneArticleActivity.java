@@ -55,7 +55,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     private ViewPager mViewPager;
     private OneArticle mOneArticle;
     private Context mContext;
-    private ImageGalleryAdapter adapterViewPager;
 
     private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
 
@@ -79,8 +78,18 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         TextView mTextViewId = (TextView) findViewById(R.id.textView_id);
         TextView mTextViewCode = (TextView) findViewById(R.id.textView_code);
         TextView mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
+        TextView mTextViewSendQuestion = (TextView) findViewById(R.id.textView_question);
 
         mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
+
+        mTextViewSendQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                startActivity(intent);
+            }
+
+        });
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
@@ -102,7 +111,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
         //mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
         ViewPager vpPager = (ViewPager) findViewById(R.id.vp_gallery);
-        adapterViewPager = new ImageGalleryAdapter(getSupportFragmentManager());
+        ImageGalleryAdapter adapterViewPager = new ImageGalleryAdapter(getSupportFragmentManager());
         adapterViewPager.setImageCount(mOneArticle.getArtikal().getSlike().size());
         vpPager.setAdapter(adapterViewPager);
         springIndicator.setViewPager(vpPager);

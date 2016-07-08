@@ -78,6 +78,16 @@ public class MainActivity extends FragmentActivity
         // ImageButton icMore = (ImageButton) findViewById(R.id.toolbar_ic_more);
 
         updateCartToolbarIcon();
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         //  icMore.setVisibility(View.GONE);
 
@@ -116,6 +126,9 @@ public class MainActivity extends FragmentActivity
                     clearUserDrawerInfo();
                 } else if (intent.getAction().equals(Config.UPDATE_CART_TOOLBAR_ICON)) {
                     updateCartToolbarIcon();
+                } else if (intent.getAction().equals(Config.SHOW_ARTICLE_DETAILS)) {
+                    int articleID = intent.getIntExtra("show_article", 0);
+                    viewArtcile(articleID);
                 }
             }
         };
@@ -181,6 +194,8 @@ public class MainActivity extends FragmentActivity
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.UPDATE_CART_TOOLBAR_ICON));
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.SHOW_ARTICLE_DETAILS));
     }
 
     @Override
@@ -329,6 +344,8 @@ public class MainActivity extends FragmentActivity
             openFragment(getString(R.string.how_to_buy));
 
         } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(this, QuestionActivity.class);
+            startActivityOneArticle(intent);
 
         } else if (id == R.id.nav_contact) {
             openFragment(getString(R.string.contact));
@@ -443,23 +460,16 @@ public class MainActivity extends FragmentActivity
         PullWebContent<OneArticle> content =
                 new PullWebContent<>(OneArticle.class, UrlEndpoints.getRequestUrlArticleById(itemID), mVolleySingleton);
 
-
-        rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", String.valueOf(itemID));
         content.setCallbackListener(new WebRequestCallbackInterface<OneArticle>() {
             @Override
             public void webRequestSuccess(boolean success, OneArticle oneArticle) {
                 if (success) {
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "SUCCESS");
                     Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
                     intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
                     startActivity(intent);
                     progressDialog.hideDialog();
-
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
-
                 } else {
                     progressDialog.hideDialog();
-                    rs.dodatnaoprema.dodatnaoprema.common.utils.Log.logInfo("LALALA", "FAILED");
                 }
             }
 

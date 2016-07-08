@@ -219,4 +219,17 @@ public class SharedPreferencesUtils {
         return "";
 
     }
+    public static String getUserEmail() {
+        MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
+        SessionManager session = MyApplication.getInstance().getSessionManager();
+        //String userID = "";
+        if (session.isLoggedIn()) {
+            User user = prefs.getUser();
+            if (user != null) {
+                return user.getEmail();
+            }
+        }
+        return "";
+
+    }
 }

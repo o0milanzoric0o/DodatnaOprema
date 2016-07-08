@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.SearchActivity;
 import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
+import rs.dodatnaoprema.dodatnaoprema.models.search.Search;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -32,17 +36,19 @@ public class ArticlesList extends Fragment {
     private CustomRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
-    private SubCategoryArticlesActivity activity;
+    private Activity activity;
     private FrameLayout mHeader;
     private RecyclerViewSelectedProducts mAdapter;
 
     private VolleySingleton mVolleySingleton;
 
+    private List<Article> articles = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
 
-        activity = (SubCategoryArticlesActivity) getActivity();
+
+        activity =  getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setFlingFactor(1);
@@ -75,8 +81,14 @@ public class ArticlesList extends Fragment {
                 firstVisibleInRecyclerView = currentFirstVisible;
             }
         });*/
+        if (activity instanceof SubCategoryArticlesActivity){
+            articles = ((SubCategoryArticlesActivity)activity).getArticlesList();
+        }
+        else {
+            articles = ((SearchActivity)activity).getArticlesList();
+        }
 
-        mAdapter = new RecyclerViewSelectedProducts(getActivity(), activity.getArticlesList(), true, 1, new RecyclerViewSelectedProducts.OnItemClickListener() {
+        mAdapter = new RecyclerViewSelectedProducts(getActivity(), articles, true, 1, new RecyclerViewSelectedProducts.OnItemClickListener() {
             @Override
             public void onItemClick(Article item, View view) {
                 ///Start Intent for Single Item Activity

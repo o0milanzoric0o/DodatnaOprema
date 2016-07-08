@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema.network;
 
 
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 
 import static rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig.URL_CHAR_AMPERSAND;
@@ -151,6 +152,8 @@ public class UrlEndpoints {
                 + URL_PARAM_ACTION + URL_CHAR_EQUAL + URL_VALUE_SEARCH
                 + URL_CHAR_AMPERSAND
                 + URL_PARAM_SEARCH + URL_CHAR_EQUAL + keyWord;
+
+        Log.logInfo("URL", url);
 
         return getFullUrl(url);
     }

@@ -5,10 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +27,9 @@ import java.io.Serializable;
 import rs.dodatnaoprema.dodatnaoprema.CartActivity;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
+import rs.dodatnaoprema.dodatnaoprema.QuestionActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.SearchActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
@@ -52,15 +58,16 @@ public class BaseActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Config.UPDATE_CART_TOOLBAR_ICON)) {
                     updateCartToolbarIcon();
+                    setSearchButton();
                 }
             }
         };
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.pop_up_menu, menu);
+
         return true;
     }
 
@@ -94,6 +101,9 @@ public class BaseActivity extends AppCompatActivity {
                 InfoFragmentDialog frag = new InfoFragmentDialog();
                 frag.setArguments(args);
                 frag.show(ft, "txn_tag");
+            case R.id.item_question:
+                intent = new Intent(getApplicationContext(), QuestionActivity.class);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -126,6 +136,19 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    protected void setSearchButton() {
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
             }
         });
     }
