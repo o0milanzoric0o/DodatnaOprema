@@ -51,6 +51,10 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".signin.AccountActivity"
+            android:label="@string/signing_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".QuestionActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -75,11 +79,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".signin.SignInActivity"
-            android:label="@string/name_sign_in_activity"
-            android:theme="@style/ThemeOverlay.MyNoTitleActivity" />
-        <activity android:name=".signin.AccountActivity" />
         <activity
             android:name=".OneArticleActivity"
             android:label="@string/title_activity_one_article"

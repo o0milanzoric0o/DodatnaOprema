@@ -81,7 +81,7 @@
     <string name="title_text">Google Sign-In\nQuickstart</string>
     <string name="name_sign_in_activity">SignInActivity</string>
     <!-- Button labels -->
-    <string name="sign_out">Sign Out</string>
+    <string name="sign_out">Odjavi se</string>
     <string name="disconnect">Disconnect</string>
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
@@ -202,6 +202,7 @@
     <string name="next">Nastavi</string>
     <string name="progress_update_user_data">Slanje podataka o korisniku</string>
     <string name="progress_completing_transaction">Pravljenje narudžbine</string>
+    <string name="info_title">Informacija</string>
 
 
 </resources>

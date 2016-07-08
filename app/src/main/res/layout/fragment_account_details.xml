@@ -21,7 +21,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="@dimen/g_top_margin"
             android:contentDescription="@string/desc_google_icon"
-            android:src="@drawable/googleg_color" />
+            android:src="@drawable/chainsaw_128" />
 
         <TextView
             android:id="@+id/title_text"
@@ -75,8 +75,18 @@
                 android:id="@+id/sign_out_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:text="@string/sign_out"
+                android:theme="@style/ThemeOverlay.MyDarkButton" />
+
+            <Button
+                android:id="@+id/btn_keep_shopping"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="@string/continue_shopping"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
         </LinearLayout>

@@ -23,6 +23,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.User;
  */
 public class AccountDetailsFragment extends Fragment implements View.OnClickListener {
     Button signOut;
+    Button keepShopping;
     TextView title;
     TextView status;
     TextView details;
@@ -40,6 +41,8 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_account_details, container, false);
         signOut = (Button) view.findViewById(R.id.sign_out_button);
         signOut.setOnClickListener(this);
+        keepShopping = (Button) view.findViewById(R.id.btn_keep_shopping);
+        keepShopping.setOnClickListener(this);
         imageView = (ImageView) view.findViewById(R.id.user_photo);
         title = (TextView) view.findViewById(R.id.title_text);
         status = (TextView) view.findViewById(R.id.status);
@@ -101,6 +104,9 @@ public class AccountDetailsFragment extends Fragment implements View.OnClickList
 
                 // Commit the transaction
                 transaction.commit();
+                break;
+            case R.id.btn_keep_shopping:
+                getActivity().finish();
                 break;
         }
     }

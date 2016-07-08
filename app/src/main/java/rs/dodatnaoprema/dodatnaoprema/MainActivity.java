@@ -236,7 +236,7 @@ public class MainActivity extends FragmentActivity
             }
         });
 
-        ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.googleg_color));
+        ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.chainsaw_128));
     }
 
     public void initializeTabs() {

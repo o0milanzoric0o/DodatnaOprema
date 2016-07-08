@@ -1,7 +1,11 @@
 package rs.dodatnaoprema.dodatnaoprema.common.application;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -70,5 +74,17 @@ public class MyApplication extends MultiDexApplication {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public static void hideKeyboard(Context ctx) {
+        InputMethodManager inputManager = (InputMethodManager) ctx
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View v = ((Activity) ctx).getCurrentFocus();
+        if (v == null)
+            return;
+
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 }

@@ -195,7 +195,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         // and add the transaction to the back stack
                         transaction.replace(R.id.fragment_container, accountDetailsFragment);
                         //transaction.addToBackStack(null);
-
+                        MyApplication.hideKeyboard(getContext());
                         // Commit the transaction
                         transaction.commit();
 

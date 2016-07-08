@@ -35,8 +35,8 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.InfoDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -45,6 +45,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
+import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
 
 public class OneArticleActivity extends BaseActivity implements OneArticleImageFragment.OnProductImageGalleryDraw {
@@ -165,7 +166,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
         //  mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 
-        Log.logInfo("LALALA.....", ".............");
 /*
         mNumberPicker = (NumberPicker)findViewById(R.id.numberPicker);
         mNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
@@ -300,6 +300,18 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             });
             content.pullList();
 
+        } else {
+            InfoDialog infoDialog = new InfoDialog(this);
+            infoDialog.setDialogMessage("Morate se ulogovati.");
+            infoDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Handle the login action
+                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                    startActivity(intent);
+                }
+            });
+            infoDialog.create().show();
         }
     }
 
