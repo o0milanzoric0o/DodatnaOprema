@@ -123,6 +123,7 @@
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
 
+    <!--OneArticleActivity-->
     <string name="cena_txt">Cena: %s</string>
     <string name="price_by">cena po: %s</string>
     <string name="brend_txt">Brend: %s</string>

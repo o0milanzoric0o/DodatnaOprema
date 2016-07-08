@@ -63,22 +63,10 @@ public class BaseActivity extends AppCompatActivity {
             }
         };
     }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
 
-        if (getApplicationContext() instanceof QuestionActivity) {
-
-            menu.findItem(R.id.item_instructions).setVisible(false);
-        }
-
-        return super.onPrepareOptionsMenu(menu);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.pop_up_menu, menu);
-        if (getApplicationContext() instanceof QuestionActivity) {
-
-        }
 
         return true;
     }

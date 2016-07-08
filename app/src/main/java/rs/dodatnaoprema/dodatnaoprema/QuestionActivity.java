@@ -1,9 +1,12 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -71,7 +74,7 @@ public class QuestionActivity extends BaseActivity {
                             public void onResponse(String response) {
                                 // response
                                 Log.d("Response", response);
-                                Toast.makeText(getApplicationContext(), "Poruka je uspešno poslata!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Poruka je uspešno poslata!", Toast.LENGTH_LONG).show();
                                 progressDialog.hideDialog();
                                 onBackPressed();
                             }
@@ -82,14 +85,14 @@ public class QuestionActivity extends BaseActivity {
                                 // error
                                 Log.d("Error.Response", "Error");
                                 progressDialog.hideDialog();
-                                Toast.makeText(getApplicationContext(), "Greška pri slanju poruke, pokušajte ponovo!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Greška pri slanju poruke, pokušajte ponovo!", Toast.LENGTH_LONG).show();
 
                             }
                         }
                 ) {
                     @Override
                     protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
+                        Map<String, String> params = new HashMap<>();
 
                         params.put("email", emailTxt.getText().toString());
                         params.put("pitanje", questionTxt.getText().toString());
@@ -104,6 +107,15 @@ public class QuestionActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.item_question).setEnabled(false);
+        SpannableString s = new SpannableString(menu.findItem(R.id.item_question).getTitle());
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), 0);
+        menu.findItem(R.id.item_question).setTitle(s);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -114,4 +126,5 @@ public class QuestionActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

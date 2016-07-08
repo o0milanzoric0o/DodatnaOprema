@@ -2,9 +2,13 @@ package rs.dodatnaoprema.dodatnaoprema;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -30,6 +34,7 @@ public class OffersActivity extends BaseActivity {
     private CustomRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private RecyclerViewSelectedProducts mAdapter;
+    private String mSubCategoryName;
 
     private VolleySingleton mVolleySingleton;
 
@@ -44,7 +49,7 @@ public class OffersActivity extends BaseActivity {
         TextView mTextView = (TextView) findViewById(R.id.title);
 
         Intent intent = getIntent();
-        String mSubCategoryName = intent.getStringExtra("Artikli");
+        mSubCategoryName = intent.getStringExtra("Artikli");
         articles = (List<Article>) intent.getSerializableExtra("AllCategories");
         if (mTextView != null) mTextView.setText(mSubCategoryName);
 
@@ -111,6 +116,19 @@ public class OffersActivity extends BaseActivity {
         });
 
         content.pullList();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (mSubCategoryName.equalsIgnoreCase(AppConfig.FIRST_TAB_ITEMS[0])) {
+
+            menu.findItem(R.id.item_sale).setEnabled(false);
+            SpannableString s = new SpannableString(menu.findItem(R.id.item_sale).getTitle());
+            s.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), 0);
+            menu.findItem(R.id.item_sale).setTitle(s);
+
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
