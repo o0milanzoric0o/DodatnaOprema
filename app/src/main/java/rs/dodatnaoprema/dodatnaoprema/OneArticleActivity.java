@@ -21,6 +21,7 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RatingBar;
@@ -100,6 +101,17 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             getSupportActionBar().setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         quantity = 0;
 

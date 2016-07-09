@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -28,6 +30,16 @@ public class AllCategoriesActivity extends BaseActivity {
         setContentView(R.layout.all_categories_activity);
         Intent intent = getIntent();
 
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
 

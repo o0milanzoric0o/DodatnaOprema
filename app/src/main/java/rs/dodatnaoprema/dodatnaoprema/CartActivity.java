@@ -49,6 +49,17 @@ public class CartActivity extends BaseActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
 
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         progressDialog = new ProgressDialogCustom(CartActivity.this);
         progressDialog.setCancelable(false);
 

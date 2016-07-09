@@ -125,6 +125,17 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         }
         mVolleySingleton = VolleySingleton.getsInstance(this);
 
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         if (mTextView != null) mTextView.setText(mSubCategoryName);

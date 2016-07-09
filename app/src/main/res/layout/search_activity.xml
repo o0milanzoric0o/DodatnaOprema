@@ -35,10 +35,13 @@
                   android:layout_height="?attr/actionBarSize"
                   android:background="@android:color/transparent" /> -->
             <TextView
-                android:id="@+id/no_results_message"
+                android:id="@+id/search_message"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/medium_text_size"
+                android:padding="@dimen/standard_padding"
+                android:text="@string/search_instruction_txt"
                 android:visibility="gone"/>
 
             <FrameLayout
@@ -78,29 +81,37 @@
                     android:layout_height="wrap_content">
 
                     <!-- Spinner with sort options -->
-                    <EditText
-                        android:id="@+id/searh_text"
-                        android:textColor="@color/primary_text"
-                        android:imeOptions="actionSearch"
-                        android:inputType="text"
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        />
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
 
-                    <!--Grid/List image indicator-->
-                    <ImageButton
-                        android:id="@+id/list_grid_change_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:alpha="0.3"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:contentDescription="@string/image_description"
-                        android:padding="@dimen/standard_padding"
-                        android:src="@drawable/ic_search_white_24dp" />
+                        <EditText
+                            android:id="@+id/search_text"
+                            android:textColor="@color/primary_text"
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
+                            android:textColorHighlight="@color/circle_stroke"
+                            android:textColorLink="@color/circle_stroke"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="35dp"
+                            android:paddingEnd="35dp"/>
+
+                        <Button
+                            android:id="@+id/clearable_button_clear"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_toLeftOf="@id/search_text"
+                            android:layout_toStartOf="@id/search_text"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:alpha="0.3"
+                            android:background="@drawable/ic_clear_black_24dp" />
+                    </RelativeLayout>
+
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>

@@ -11,6 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,6 +57,17 @@ public class OffersActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         mRecyclerView = (CustomRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setNestedScrollingEnabled(true);

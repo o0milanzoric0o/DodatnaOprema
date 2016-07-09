@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -52,6 +53,16 @@ public class SubCategoriesActivity extends BaseActivity {
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
+        icSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         CustomRecyclerView mRecyclerView = (CustomRecyclerView) findViewById(R.id.recycler_view_subcategories);
 

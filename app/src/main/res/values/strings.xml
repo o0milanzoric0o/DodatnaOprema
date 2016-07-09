@@ -171,6 +171,10 @@
     <string name="filter_txt">Filter</string>
     <string name="title_activity_one_article">OneArticleActivity</string>
 
+    <!--SearchActivity-->
+    <string name="search_instruction_txt">Unesite ključnu reč za pretragu</string>
+    <string name="no_search_results">Nema rezultata za  reč \"%s\"</string>
+
     <!-- Special offer indicators-->
     <string name="sale_indicator">SALE</string>
     <string name="new_indicator">NEW</string>

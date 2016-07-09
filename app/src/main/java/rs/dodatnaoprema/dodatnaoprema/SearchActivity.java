@@ -3,13 +3,18 @@ package rs.dodatnaoprema.dodatnaoprema;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,15 +38,25 @@ public class SearchActivity extends BaseActivity {
     private List<Article> mArticles = new ArrayList<>();
     private List<String> searchHistory = new ArrayList<>();
 
+    private FrameLayout cardFace;
+    private TextView message;
+    private boolean addedFragments = false;
+
+    private Button btn_clear;
+    private EditText searchTxt;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_activity);
 
-        ImageButton searchBtn = (ImageButton) findViewById(R.id.list_grid_change_btn);
-
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
         if (mTextView != null) mTextView.setText(getString(R.string.search_title));
+
+        cardFace = (FrameLayout) findViewById(R.id.articles_content_list);
+        btn_clear = (Button) findViewById(R.id.clearable_button_clear);
+        btn_clear.setVisibility(RelativeLayout.GONE);
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -51,7 +66,30 @@ public class SearchActivity extends BaseActivity {
         ImageButton icSearch = (ImageButton) findViewById(R.id.toolbar_btn_search);
         icSearch.setVisibility(View.GONE);
 
-        final EditText searchTxt = (EditText) findViewById(R.id.searh_text);
+        message = (TextView) findViewById(R.id.search_message);
+        message.setVisibility(View.VISIBLE);
+
+        searchTxt = (EditText) findViewById(R.id.search_text);
+
+        searchTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0)
+                    btn_clear.setVisibility(RelativeLayout.VISIBLE);
+                else
+                    btn_clear.setVisibility(RelativeLayout.INVISIBLE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         searchTxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -65,14 +103,23 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
+        btn_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchTxt.setText("");
+
+            }
+        });
+
         mVolleySingleton = VolleySingleton.getsInstance(this);
     }
 
-    private void search(String keyWord) {
+    private void search(final String keyWord) {
 
         final ProgressDialogCustom progressDialog = new ProgressDialogCustom(SearchActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.showDialog("Učitavanje...");
+
 
         PullWebContent<Search> content = new PullWebContent<>(Search.class, UrlEndpoints.getSearchResults(keyWord), mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<Search>() {
@@ -83,24 +130,31 @@ public class SearchActivity extends BaseActivity {
                     Log.logInfo("SEARCH", searchResults.getSuccess().toString());
                     mArticles = searchResults.getArtikli();
 
-                    Log.logInfo("ARTIKLI", "" + mArticles.size());
                     if (mArticles.size() > 0) {
+                        cardFace.setVisibility(View.VISIBLE);
+                        message.setVisibility(View.GONE);
+                        Log.logInfo("ARTIKLI", "" + mArticles.size());
 
-                        getFragmentManager()
-                                .beginTransaction()
-                                .add(R.id.articles_content_list, new ArticlesList())
-                                // Add this transaction to the back stack, allowing users to press Back
-                                // to get to the front of the card.
-                                .addToBackStack(null)
-                                // Commit the transaction.
-                                .commit();
+                        if (!addedFragments) {
 
+                            addedFragments = true;
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .add(R.id.articles_content_list, new ArticlesList())
+                                    // Add this transaction to the back stack, allowing users to press Back
+                                    // to get to the front of the card.
+                                    .addToBackStack(null)
+                                    // Commit the transaction.
+                                    .commit();
+                        } else {
+                            updateList(mArticles);
+                        }
                     } else {
-
-                        updateList(mArticles);
+                        cardFace.setVisibility(View.GONE);
+                        message.setVisibility(View.VISIBLE);
+                        message.setText(getString(R.string.no_search_results, keyWord));
                     }
-                } else {
-                    // noResults();
+
                 }
                 removeKeyboard();
                 progressDialog.hideDialog();
