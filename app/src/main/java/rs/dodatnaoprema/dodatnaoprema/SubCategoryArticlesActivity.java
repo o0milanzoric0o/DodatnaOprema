@@ -298,12 +298,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
     public void updateList(List<Article> articles) {
 
-        Log.logInfo("SORT", "" + articles.size());
+        Log.logInfo("SORT ACTIVITY", "" + articles.size());
+        Log.logInfo("SORT ACTIVITY", "" + allSubcategoryArticles.size());
         setNumberOfResults(articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
-
-        if (articles.size() == 0) noSearchResults();
+        Log.logInfo("SORT", "" + articles.size());
+        // if (articles.size() == 0) noSearchResults();
     }
 
     public int getNumberOfResults() {
@@ -338,6 +339,12 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         return selectedSpecifications;
     }
 
+    public void clearSelectedSpecification() {
+
+
+        selectedSpecifications = new HashMap<>();
+    }
+
     //check if some of filter's options is selected
 
     public boolean isFiltered() {
@@ -355,10 +362,11 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         filteredArticles = new ArrayList<>();
         filtered = true;
-
+        Log.logInfo("SORT ALL", "" + mArticles.size());
+        Log.logInfo("SORT SIZE", "" + getSelectedSpecification().size());
         selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
         //price filter
-        for (Article article : allSubcategoryArticles) {
+        for (Article article : mArticles) {
 
             if (hasSpecifications(article)) {
                 if (Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) >= down && Conversions.priceStringToFloat(article.getCenaSamoBrojFormat()) <= up)
@@ -371,6 +379,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         filteredArticles.add(article);
                     }
             }
+
         }
         updateList(filteredArticles);
     }
@@ -431,8 +440,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     }
 
     private void noResults() {
-        mHeader.setVisibility(View.GONE);
-        mFooter.setVisibility(View.GONE);
+        //  mHeader.setVisibility(View.GONE);
+        //  mFooter.setVisibility(View.GONE);
         cardBack.setVisibility(View.GONE);
         cardFace.setVisibility(View.GONE);
 

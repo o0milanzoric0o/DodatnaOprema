@@ -133,11 +133,11 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
                 if (priceOptionSelected != 0) {
                     ((SubCategoryArticlesActivity) getActivity()).setFiltered(true);
-                }
-
-                if (numberOfSelectedBrands > 0) {
+                } else if (((SubCategoryArticlesActivity) getActivity()).getSelectedSpecification().size() > 0) {
                     ((SubCategoryArticlesActivity) getActivity()).setFiltered(true);
-                }
+                } else if (numberOfSelectedBrands > 0) {
+                    ((SubCategoryArticlesActivity) getActivity()).setFiltered(true);
+                } else ((SubCategoryArticlesActivity) getActivity()).setFiltered(false);
                 dismiss();
             }
         });
@@ -163,6 +163,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
                 //set activity filter indicator to false
                 ((SubCategoryArticlesActivity) getActivity()).setFiltered(false);
+                ((SubCategoryArticlesActivity) getActivity()).clearSelectedSpecification();
             }
         });
 

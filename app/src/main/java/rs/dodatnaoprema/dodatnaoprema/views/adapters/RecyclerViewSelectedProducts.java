@@ -4,12 +4,10 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -18,6 +16,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -172,7 +171,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     }
 
     public void updateContent(List<Article> articles) {
-
+        Log.logInfo("SORT RECYCLER VIEW", "" + articles.size());
         this.products = articles;
         notifyDataSetChanged();
     }

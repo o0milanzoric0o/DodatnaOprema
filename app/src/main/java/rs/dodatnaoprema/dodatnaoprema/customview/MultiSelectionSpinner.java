@@ -192,6 +192,23 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(buildSelectedItemString());
     }
+    public void setSelections(List<Integer> selectedIndices) {
+        for (int i = 0; i < mSelection.length; i++) {
+            mSelection[i] = false;
+            mSelectionAtStart[i] = false;
+        }
+        for (int index : selectedIndices) {
+            if (index >= 0 && index < mSelection.length) {
+                mSelection[index] = true;
+                mSelectionAtStart[index] = true;
+            } else {
+                throw new IllegalArgumentException("Index " + index
+                        + " is out of bounds.");
+            }
+        }
+        simple_adapter.clear();
+        simple_adapter.add(buildSelectedItemString());
+    }
 
     public List<String> getSelectedStrings() {
         List<String> selection = new LinkedList<>();

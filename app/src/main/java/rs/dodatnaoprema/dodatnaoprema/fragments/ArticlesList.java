@@ -22,7 +22,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
-import rs.dodatnaoprema.dodatnaoprema.models.search.Search;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -106,8 +105,6 @@ public class ArticlesList extends Fragment {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
-
-                            //OneArticleActivity articleDetails = new OneArticleActivity();
                             startActivity(intent);
 
 
@@ -135,7 +132,7 @@ public class ArticlesList extends Fragment {
     }
 
     public void updateFragment(List<Article> products) {
-
+        Log.logInfo("SORT FRAGMENT", "" +products.size());
         mAdapter.updateContent(products);
     }
 
