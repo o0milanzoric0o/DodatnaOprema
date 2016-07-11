@@ -304,7 +304,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
         Log.logInfo("SORT", "" + articles.size());
-        // if (articles.size() == 0) noSearchResults();
+        if (articles.size() == 0) noSearchResults();
+        else positiveResults();
+    }
+
+    public void resetFilter() {
+
+        updateList(mArticles);
     }
 
     public int getNumberOfResults() {
@@ -440,13 +446,22 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     }
 
     private void noResults() {
-        //  mHeader.setVisibility(View.GONE);
-        //  mFooter.setVisibility(View.GONE);
+        mHeader.setVisibility(View.GONE);
+        mFooter.setVisibility(View.GONE);
         cardBack.setVisibility(View.GONE);
         cardFace.setVisibility(View.GONE);
 
         msgNoResults.setVisibility(View.VISIBLE);
         msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
+    }
+
+    private void positiveResults() {
+        mHeader.setVisibility(View.VISIBLE);
+        mFooter.setVisibility(View.VISIBLE);
+        cardBack.setVisibility(View.VISIBLE);
+        cardFace.setVisibility(View.VISIBLE);
+
+        msgNoResults.setVisibility(View.GONE);
     }
 
     private void noSearchResults() {

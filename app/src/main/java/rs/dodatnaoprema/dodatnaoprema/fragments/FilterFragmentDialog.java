@@ -164,6 +164,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
                 //set activity filter indicator to false
                 ((SubCategoryArticlesActivity) getActivity()).setFiltered(false);
                 ((SubCategoryArticlesActivity) getActivity()).clearSelectedSpecification();
+                ((SubCategoryArticlesActivity) getActivity()).resetFilter();
             }
         });
 

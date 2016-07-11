@@ -145,6 +145,7 @@
     <string name="btn_filter">Filter</string>
     <string name="sort_question">Izaberite način sortiranja</string>
     <string name="txt_brands">Brendovi</string>
+    <string name="txt_cena_filter">Cena</string>
     <string name="txt_search_results">Ukupan broj rezultata pretrage: %1$d</string>
     <string name="articles_category_link"><u>%s</u></string>
 

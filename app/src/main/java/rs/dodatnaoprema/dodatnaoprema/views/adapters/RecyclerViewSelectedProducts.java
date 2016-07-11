@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +108,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.product_list, parent, false);
         } else {
+
             itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.product_grid, parent, false);
         }
@@ -125,8 +127,8 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             holder.setIsRecyclable(false);
 
             productName.setText(products.get(position - existHeader).getArtikalNaziv().trim());
-            brandName.setText(context.getResources().getString(R.string.brend_txt,products.get(position - existHeader).getBrendIme().trim()));
-            price.setText(context.getResources().getString(R.string.cena_txt,products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt()));
+            brandName.setText(context.getResources().getString(R.string.brend_txt, products.get(position - existHeader).getBrendIme().trim()));
+            price.setText(context.getResources().getString(R.string.cena_txt, products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt()));
             if (products.get(position - existHeader).getStanje() > 0) {
                 stockState.setText(context.getString(R.string.stock_state_available));
             } else {
@@ -139,6 +141,14 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             }
             if (list && products.get(position - existHeader).getArtikalKratakOpis().toString().length() > 0) {
                 shortDescription.append(" " + products.get(position - existHeader).getArtikalKratakOpis().toString());
+            }
+            if (!list && existHeader == 1) {
+                ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+                StaggeredGridLayoutManager.LayoutParams sglp = (StaggeredGridLayoutManager.LayoutParams) lp;
+
+                sglp.setFullSpan(position == 0);
+
+                holder.itemView.setLayoutParams(sglp);
             }
 
             switch (products.get(position - existHeader).getArtikalNaAkciji()) {
