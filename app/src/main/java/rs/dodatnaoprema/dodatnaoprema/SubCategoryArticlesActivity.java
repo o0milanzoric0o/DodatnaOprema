@@ -460,8 +460,13 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private void positiveResults() {
         mHeader.setVisibility(View.VISIBLE);
         mFooter.setVisibility(View.VISIBLE);
-        cardBack.setVisibility(View.VISIBLE);
-        cardFace.setVisibility(View.VISIBLE);
+        if (nextImgStateGrid) {
+            cardBack.setVisibility(View.GONE);
+            cardFace.setVisibility(View.VISIBLE);
+        } else {
+            cardBack.setVisibility(View.VISIBLE);
+            cardFace.setVisibility(View.GONE);
+        }
 
         msgNoResults.setVisibility(View.GONE);
     }
