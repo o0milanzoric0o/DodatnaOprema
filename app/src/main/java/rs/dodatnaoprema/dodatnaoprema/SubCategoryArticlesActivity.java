@@ -84,6 +84,8 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         cardBack = (FrameLayout) findViewById(R.id.articles_content_grid);
         mHeader = (RelativeLayout) findViewById(R.id.sort_header);
 
+        cardBack.setVisibility(View.GONE);
+
         Intent intent = getIntent();
         mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
