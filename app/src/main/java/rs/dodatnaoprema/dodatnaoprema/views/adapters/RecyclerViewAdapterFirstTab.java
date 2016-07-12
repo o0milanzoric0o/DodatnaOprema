@@ -159,12 +159,12 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                 @Override
                 public void onClick(View v) {
 
-                    viewMore.setSelected(true);
+                /*    viewMore.setSelected(true);
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             viewMore.setSelected(false);
                         }
-                    }, 1000);
+                    }, 1000);*/
 
                     Intent intent = new Intent((MainActivity) context, OffersActivity.class);
                     intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[holder.getAdapterPosition() - 1]);
@@ -280,6 +280,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
 
         }
+
     }
 
     class ViewHolderHeader extends RecyclerView.ViewHolder {
