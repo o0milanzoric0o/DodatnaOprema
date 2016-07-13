@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -37,8 +38,8 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private int existHeader;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
 
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
+    public static final int TYPE_HEADER = 0;
+    public static final int TYPE_ITEM = 1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -143,12 +144,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
                 shortDescription.append(" " + products.get(position - existHeader).getArtikalKratakOpis().toString());
             }
             if (!list && existHeader == 1) {
-                ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-                StaggeredGridLayoutManager.LayoutParams sglp = (StaggeredGridLayoutManager.LayoutParams) lp;
 
-                sglp.setFullSpan(position == 0);
-
-                holder.itemView.setLayoutParams(sglp);
             }
 
             switch (products.get(position - existHeader).getArtikalNaAkciji()) {
@@ -201,4 +197,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
         return TYPE_ITEM;
     }
+
+
 }

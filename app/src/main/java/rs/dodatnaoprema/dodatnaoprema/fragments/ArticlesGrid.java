@@ -43,7 +43,7 @@ public class ArticlesGrid extends Fragment {
         mRecyclerView.setNestedScrollingEnabled(true);
 
         // use a linear layout manager
-        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -88,6 +88,19 @@ public class ArticlesGrid extends Fragment {
                 content.pullList();
 
                 Log.logInfo("LALALA", "GRID");
+            }
+        });
+        mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch (mAdapter.getItemViewType(position)) {
+                    case RecyclerViewSelectedProducts.TYPE_HEADER:
+                        return 2;
+                    case RecyclerViewSelectedProducts.TYPE_ITEM:
+                        return 1;
+                    default:
+                        return -1;
+                }
             }
         });
         mRecyclerView.setAdapter(mAdapter);
