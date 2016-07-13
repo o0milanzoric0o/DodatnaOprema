@@ -9,6 +9,7 @@
     <rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
+        android:background="@android:color/white"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:scrollbars="vertical" />

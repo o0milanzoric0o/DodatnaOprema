@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -56,7 +58,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private TextView msgNoResults;
     private FrameLayout cardFace;
     private FrameLayout cardBack;
-    private RelativeLayout mHeader;
+    private AppBarLayout mHeader;
     private RelativeLayout mFooter;
     private VolleySingleton mVolleySingleton;
     private boolean nextImgStateGrid = true;
@@ -82,7 +84,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         msgNoResults = (TextView) findViewById(R.id.no_results_message);
         cardFace = (FrameLayout) findViewById(R.id.articles_content_list);
         cardBack = (FrameLayout) findViewById(R.id.articles_content_grid);
-        mHeader = (RelativeLayout) findViewById(R.id.sort_header);
+        mHeader = (AppBarLayout) findViewById(R.id.sort_header);
 
         cardBack.setVisibility(View.GONE);
 
@@ -396,6 +398,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     protected void onDestroy() {
 
         super.onDestroy();
+        SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
+        SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
+        setFiltered(false);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        filteredArticles = mArticles;
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_BRANDS_KEY);
         SharedPreferencesUtils.clearSharedPreferences(this, AppConfig.SELECTED_PRICES_KEY);
         setFiltered(false);
