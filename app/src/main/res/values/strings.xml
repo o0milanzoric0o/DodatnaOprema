@@ -29,9 +29,10 @@
     <string name="send_msg_txt">Pošalji poruku</string>
     <string name="delete_msg_txt">Obriši poruku</string>
 
-
+    <!--Short product info-->
     <string name="view_more">još</string>
     <string name="price">xx.xx rsd</string>
+    <string name="article_specification">%1$s ==> %2$s</string>
     <string name="image_description">slika proizvoda</string>
     <string name="group_name">Naziv categories</string>
 

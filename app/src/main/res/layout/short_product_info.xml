@@ -42,6 +42,13 @@
         android:gravity="start"
         android:text=""
         android:textSize="@dimen/small_text_size" />
+    <rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView
+    android:id="@+id/specification_list"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:scrollbars="vertical" />
 
 
 </LinearLayout>

@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -52,7 +51,6 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private List<Article> allSubcategoryArticles = new ArrayList<>();
     private List<Article> filteredArticles = new ArrayList<>();
     private List<Brendovus> mBrands = new ArrayList<>();
-    private List<String> selectedBrands = new ArrayList<>();
     private HashMap<Integer, ArrayList<Integer>> selectedSpecifications = new HashMap<>();
     private ImageView filterImg;
     private TextView msgNoResults;
@@ -374,7 +372,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         filtered = true;
         Log.logInfo("SORT ALL", "" + mArticles.size());
         Log.logInfo("SORT SIZE", "" + getSelectedSpecification().size());
-        selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
+        List<String> selectedBrands = SharedPreferencesUtils.getArrayList(this, AppConfig.SELECTED_BRANDS_KEY);
         //price filter
         for (Article article : mArticles) {
 
@@ -433,7 +431,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
         int filterItems = getSelectedSpecification().size();
         int passFilter = 0;
-        boolean inc = false;
+        boolean inc;
 
         if (getSelectedSpecification().size() == 0) return true;
         if (article.getSpec().size() > 0) {
@@ -443,7 +441,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
 
                 for (ArticleSpec spec : article.getSpec()) {
 
-                    if (spec.getIdSpecGrupe() == entry.getKey() && entry.getValue().contains(spec.getIdSpecVrednosti())) {
+                    if (spec.getIdSpecGrupe().equals(entry.getKey()) && entry.getValue().contains(spec.getIdSpecVrednosti())) {
                         passFilter++;
                         inc = true;
                     }

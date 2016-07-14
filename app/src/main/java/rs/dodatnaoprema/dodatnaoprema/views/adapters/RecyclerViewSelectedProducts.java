@@ -10,6 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -19,7 +20,9 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -36,6 +39,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private Context context;
     private boolean list;
     private int existHeader;
+    private CustomRecyclerView mSpecificationList;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
 
     public static final int TYPE_HEADER = 0;
@@ -47,6 +51,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
             brandName = (TextView) view.findViewById(R.id.brandName);
+            mSpecificationList = (CustomRecyclerView) view.findViewById(R.id.specification_list);
 
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
@@ -127,6 +132,8 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             ((MyViewHolder) holder).bind(products.get(position - existHeader), listener);
             holder.setIsRecyclable(false);
 
+            ListViewSpecificationAdapter adapter = new ListViewSpecificationAdapter(context, products.get(position - existHeader).getSpec());
+            mSpecificationList.setAdapter(adapter);
             productName.setText(products.get(position - existHeader).getArtikalNaziv().trim());
             brandName.setText(context.getResources().getString(R.string.brend_txt, products.get(position - existHeader).getBrendIme().trim()));
             price.setText(context.getResources().getString(R.string.cena_txt, products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt()));
