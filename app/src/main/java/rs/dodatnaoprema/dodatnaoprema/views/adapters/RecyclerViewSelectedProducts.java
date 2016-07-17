@@ -4,13 +4,11 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -20,9 +18,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -36,10 +32,13 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private TextView shortDescription;
     private TextView saleIndicator;
 
+    private TextView spec1;
+    private TextView spec2;
+    private TextView spec3;
+
     private Context context;
     private boolean list;
     private int existHeader;
-    private CustomRecyclerView mSpecificationList;
     private final RecyclerViewSelectedProducts.OnItemClickListener listener;
 
     public static final int TYPE_HEADER = 0;
@@ -51,14 +50,15 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
             brandName = (TextView) view.findViewById(R.id.brandName);
-            mSpecificationList = (CustomRecyclerView) view.findViewById(R.id.specification_list);
 
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
             saleIndicator = (TextView) view.findViewById(R.id.saleIndicator);
 
-
+            spec1 = (TextView) view.findViewById(R.id.item_spec_1);
+            spec2 = (TextView) view.findViewById(R.id.item_spec_2);
+            spec3 = (TextView) view.findViewById(R.id.item_spec_3);
             if (list) {
                 shortDescription = (TextView) view.findViewById(R.id.short_description_txt);
             }
@@ -132,8 +132,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             ((MyViewHolder) holder).bind(products.get(position - existHeader), listener);
             holder.setIsRecyclable(false);
 
-            ListViewSpecificationAdapter adapter = new ListViewSpecificationAdapter(context, products.get(position - existHeader).getSpec());
-            mSpecificationList.setAdapter(adapter);
             productName.setText(products.get(position - existHeader).getArtikalNaziv().trim());
             brandName.setText(context.getResources().getString(R.string.brend_txt, products.get(position - existHeader).getBrendIme().trim()));
             price.setText(context.getResources().getString(R.string.cena_txt, products.get(position - existHeader).getCenaSamoBrojFormat() + " " + products.get(position - existHeader).getCenaPrikazExt()));
@@ -150,8 +148,32 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             if (list && products.get(position - existHeader).getArtikalKratakOpis().toString().length() > 0) {
                 shortDescription.append(" " + products.get(position - existHeader).getArtikalKratakOpis().toString());
             }
-            if (!list && existHeader == 1) {
+            if (products.get(position - existHeader).getSpec().size() > 0) {
 
+                if (products.get(position - existHeader).getSpec().size() >= 1) {
+                    spec1.setVisibility(View.VISIBLE);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        spec1.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(0).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(0).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
+                    } else {
+                        spec1.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(0).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(0).getVredSpecGrupe() + "</font>")));
+                    }
+                }
+                if (products.get(position - existHeader).getSpec().size() >= 2) {
+                    spec2.setVisibility(View.VISIBLE);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        spec2.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(1).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(1).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
+                    } else {
+                        spec2.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(1).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(1).getVredSpecGrupe() + "</font>")));
+                    }
+                }
+                if (products.get(position - existHeader).getSpec().size() >= 3) {
+                    spec3.setVisibility(View.VISIBLE);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        spec3.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(2).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(2).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
+                    } else {
+                        spec3.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(2).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(2).getVredSpecGrupe() + "</font>")));
+                    }
+                }
             }
 
             switch (products.get(position - existHeader).getArtikalNaAkciji()) {
