@@ -260,7 +260,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getAllBrands() {
         PullWebContent<AllBrands> content =
-                new PullWebContent<>(AllBrands.class, AppConfig.URL_ALL_BRENDS, mVolleySingleton);
+                new PullWebContent<>(AllBrands.class, AppConfig.URL_ALL_BRENDS_FRONT_PAGE, mVolleySingleton);
         content.setCallbackListener(new WebRequestCallbackInterface<AllBrands>() {
             @Override
             public void webRequestSuccess(boolean success, AllBrands allBrands) {

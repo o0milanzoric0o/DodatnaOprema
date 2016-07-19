@@ -124,8 +124,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                             if (success) {
 
                                 Log.logInfo("LALALA", "SUCCESS");
-                                Intent intent = new Intent((MainActivity) context, OneArticleActivity.class);
-                                intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+                                Intent intent = new Intent(context, OneArticleActivity.class);
+                                intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
                                 ((MainActivity) context).startActivityOneArticle(intent);
                                 progressDialog.hideDialog();
 

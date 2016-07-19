@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.util.ArrayList;
+
+import rs.dodatnaoprema.dodatnaoprema.FullScreenImageViewActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -64,6 +68,16 @@ public class OneArticleImageFragment extends Fragment {
         if (mListener != null) {
             ImageLoader mImageLoader = VolleySingleton.getsInstance(getActivity()).getImageLoader();
             nimage.setImageUrl(mListener.getProductImage(imagePosition), mImageLoader);
+            nimage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Launch Full Screen image Viewer
+                    Intent i = new Intent(getActivity(), FullScreenImageViewActivity.class);
+                    i.putExtra("position", imagePosition);
+                    i.putStringArrayListExtra("urls", mListener.getProductImgLargeUrls());
+                    getActivity().startActivity(i);
+                }
+            });
         }
 
         return v;
@@ -98,5 +112,6 @@ public class OneArticleImageFragment extends Fragment {
      */
     public interface OnProductImageGalleryDraw {
         String getProductImage(int position);
+        ArrayList<String> getProductImgLargeUrls();
     }
 }

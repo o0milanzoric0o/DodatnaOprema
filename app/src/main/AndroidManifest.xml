@@ -58,7 +58,6 @@
             android:name=".QuestionActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".OffersActivity"
             android:label="@string/app_name"
@@ -82,7 +81,6 @@
         <activity
             android:name=".OneArticleActivity"
             android:label="@string/title_activity_one_article"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
@@ -111,6 +109,10 @@
                 <action android:name="rs.masinealati.PROCESS_NOTIFICATION" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".FullScreenImageViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

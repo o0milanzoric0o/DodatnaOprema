@@ -84,14 +84,14 @@ public class OffersActivity extends BaseActivity {
             @Override
             public void onItemClick(Article item, View view) {
                 ///Start Intent for Single Item Activity
-                viewArtcile(item.getArtikalId());
+                viewArticle(item.getArtikalId());
             }
         });
         mRecyclerView.setAdapter(mAdapter);
 
     }
 
-    public void viewArtcile(int itemID) {
+    public void viewArticle(int itemID) {
 
         final ProgressDialogCustom progressDialog = new ProgressDialogCustom(OffersActivity.this);
         progressDialog.setCancelable(false);

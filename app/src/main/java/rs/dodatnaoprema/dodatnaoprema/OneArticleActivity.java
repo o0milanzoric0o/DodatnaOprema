@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import java.util.ArrayList;
+
 import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -60,6 +62,23 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
     private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
 
+    SpringIndicator springIndicator;
+    TextView mTextViewBrendName;
+    TextView mTextViewProductName;
+    TextView mTextViewPrice;
+    TextView mTextViewAboutPrice;
+
+    RatingBar mRatingBar;
+    TextView mTextViewYesNo;
+    TextView mTextViewMin;
+    TextView mTextViewId;
+    TextView mTextViewCode;
+    TextView mTextViewArticleCategory;
+    TextView mTextViewSendQuestion;
+
+    Toolbar mToolbar;
+    TextView mTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,19 +87,19 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         mContext = OneArticleActivity.this;
 
         //mImageView = (NetworkImageView) findViewById(R.id.img_one_product);
-        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
-        TextView mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
-        TextView mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
-        TextView mTextViewPrice = (TextView) findViewById(R.id.textView_cena);
-        TextView mTextViewAboutPrice = (TextView) findViewById(R.id.textView_about_price);
+        springIndicator = (SpringIndicator) findViewById(R.id.indicator);
+        mTextViewBrendName = (TextView) findViewById(R.id.textView_brend_name);
+        mTextViewProductName = (TextView) findViewById(R.id.textView_naziv);
+        mTextViewPrice = (TextView) findViewById(R.id.textView_cena);
+        mTextViewAboutPrice = (TextView) findViewById(R.id.textView_about_price);
 
-        RatingBar mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
-        TextView mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
-        TextView mTextViewMin = (TextView) findViewById(R.id.textView_min);
-        TextView mTextViewId = (TextView) findViewById(R.id.textView_id);
-        TextView mTextViewCode = (TextView) findViewById(R.id.textView_code);
-        TextView mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
-        TextView mTextViewSendQuestion = (TextView) findViewById(R.id.textView_question);
+        mRatingBar = (RatingBar) findViewById(R.id.ratingBar_stars);
+        mTextViewYesNo = (TextView) findViewById(R.id.textView_yes_no);
+        mTextViewMin = (TextView) findViewById(R.id.textView_min);
+        mTextViewId = (TextView) findViewById(R.id.textView_id);
+        mTextViewCode = (TextView) findViewById(R.id.textView_code);
+        mTextViewArticleCategory = (TextView) findViewById(R.id.article_category);
+        mTextViewSendQuestion = (TextView) findViewById(R.id.textView_question);
 
         mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
 
@@ -93,8 +112,8 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
         });
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView mTextView = (TextView) findViewById(R.id.title);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTextView = (TextView) findViewById(R.id.title);
         setSupportActionBar(mToolbar);
 
         if (getSupportActionBar() != null) {
@@ -113,10 +132,22 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             }
         });
 
+        fillViews(getIntent());
+/*
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
+        setupViewPager(mViewPager);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
+        mTabLayout.setupWithViewPager(mViewPager);*/
+    }
+
+
+    private void fillViews(Intent intent){
         quantity = 0;
 
 
-        mOneArticle = (OneArticle) getIntent().getExtras().get(AppConfig.ABOUT_PRODUCT);
+        mOneArticle = (OneArticle) intent.getExtras().get(AppConfig.ABOUT_PRODUCT);
+        Toast.makeText(this, "ONE ARTICLE ON CREATE", Toast.LENGTH_LONG).show();
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
 
 
@@ -210,12 +241,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
                 }
             });
         }
-/*
-        mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
-        setupViewPager(mViewPager);
-
-        mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
-        mTabLayout.setupWithViewPager(mViewPager);*/
     }
 
     public String opis() {
@@ -228,17 +253,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     public int getArtikalId() {
 
         return mOneArticle.getArtikal().getArtikalId();
-    }
-
-    public void morePics(View v) {
-        //selected_item.xml
-        Toast.makeText(this.getApplicationContext(), "wqeqeqeqe", Toast.LENGTH_LONG).show();
-        mImageView.setSelected(true);
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                mImageView.setSelected(false);
-            }
-        }, 1000);
     }
 
     public void addToCart(int item_id, final int quantity) {
@@ -390,6 +404,21 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         return url;
     }
 
+    @Override
+    public ArrayList<String> getProductImgLargeUrls() {
+        ArrayList<String> result = new ArrayList<>();
+
+        if (mOneArticle != null && mOneArticle.getArtikal().getSlike().size() > 0) {
+            int size = mOneArticle.getArtikal().getSlike().size();
+            String url = "";
+            for (int i = 0; i < size; i++) {
+                url = mOneArticle.getArtikal().getSlike().get(i).getVelikaSlika();
+                result.add(url);
+            }
+        }
+        return result;
+    }
+
     public static class ImageGalleryAdapter extends FragmentPagerAdapter {
 
         private int imageCount = 0;
@@ -418,5 +447,18 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         public CharSequence getPageTitle(int position) {
             return String.valueOf(position + 1);
         }
+    }
+
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        fillViews(intent);
+//    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

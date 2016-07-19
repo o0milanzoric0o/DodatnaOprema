@@ -127,8 +127,9 @@ public class MainActivity extends FragmentActivity
                 } else if (intent.getAction().equals(Config.UPDATE_CART_TOOLBAR_ICON)) {
                     updateCartToolbarIcon();
                 } else if (intent.getAction().equals(Config.SHOW_ARTICLE_DETAILS)) {
+                    Log.e(TAG, "SHOW ARTICLE DETAILS");
                     int articleID = intent.getIntExtra("show_article", 0);
-                    viewArtcile(articleID);
+                    viewArticle(articleID);
                 }
             }
         };
@@ -147,7 +148,7 @@ public class MainActivity extends FragmentActivity
 
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("articleID")) {
             int articleID = Integer.valueOf(intent.getExtras().getString("articleID"));
-            viewArtcile(articleID);
+            viewArticle(articleID);
         }
         // [END handle_data_extras]
 
@@ -158,6 +159,9 @@ public class MainActivity extends FragmentActivity
         // [END subscribe_topics]
 
         Log.e(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+
+        // register receivers
+        registerReceivers();
     }
 
     private void updateCartToolbarIcon() {
@@ -181,10 +185,8 @@ public class MainActivity extends FragmentActivity
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
+    private void registerReceivers(){
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.SET_USER_INFO));
 
@@ -196,6 +198,11 @@ public class MainActivity extends FragmentActivity
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.SHOW_ARTICLE_DETAILS));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -451,7 +458,7 @@ public class MainActivity extends FragmentActivity
         startActivity(intent);
     }
 
-    public void viewArtcile(int itemID) {
+    public void viewArticle(int itemID) {
 
         final ProgressDialogCustom progressDialog = new ProgressDialogCustom(MainActivity.this);
         progressDialog.setCancelable(false);

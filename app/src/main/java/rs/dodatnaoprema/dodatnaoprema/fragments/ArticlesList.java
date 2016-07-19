@@ -47,7 +47,7 @@ public class ArticlesList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
 
 
-        activity =  getActivity();
+        activity = getActivity();
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setFlingFactor(1);
@@ -80,11 +80,10 @@ public class ArticlesList extends Fragment {
                 firstVisibleInRecyclerView = currentFirstVisible;
             }
         });*/
-        if (activity instanceof SubCategoryArticlesActivity){
-            articles = ((SubCategoryArticlesActivity)activity).getArticlesList();
-        }
-        else {
-            articles = ((SearchActivity)activity).getArticlesList();
+        if (activity instanceof SubCategoryArticlesActivity) {
+            articles = ((SubCategoryArticlesActivity) activity).getArticlesList();
+        } else {
+            articles = ((SearchActivity) activity).getArticlesList();
         }
 
         mAdapter = new RecyclerViewSelectedProducts(getActivity(), articles, true, 1, new RecyclerViewSelectedProducts.OnItemClickListener() {
@@ -132,7 +131,7 @@ public class ArticlesList extends Fragment {
     }
 
     public void updateFragment(List<Article> products) {
-        Log.logInfo("SORT FRAGMENT", "" +products.size());
+        Log.logInfo("SORT FRAGMENT", "" + products.size());
         mAdapter.updateContent(products);
     }
 

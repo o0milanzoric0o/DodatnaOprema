@@ -44,6 +44,7 @@ public class AppConfig {
 
     public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
     public static final String URL_ALL_BRENDS = "http://masinealati.rs/parametri.php?action=listaBrendova";
+    public static final String URL_ALL_BRENDS_FRONT_PAGE = "http://masinealati.rs/parametri.php?action=sviBrendoviNaslovna";
     public static final String URL_YOU_MAY_ALSO_LIKE_CATEGORIES = "http://masinealati.rs/parametri.php?action=kategYouMayAlso&limit=10";
 
     public static final int URL_VALUE_ID_ARTICLES_ON_SALE = 6;

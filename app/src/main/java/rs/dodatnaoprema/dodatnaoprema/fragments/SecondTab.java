@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +101,7 @@ public class SecondTab extends Fragment {
                         if (success) {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
-                            intent.putExtra(AppConfig.ABOUT_PRODUCT, (Serializable) oneArticle);
+                            intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
 
                             startActivity(intent);
 
