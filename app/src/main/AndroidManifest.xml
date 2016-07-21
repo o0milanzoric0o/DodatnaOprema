@@ -37,6 +37,10 @@
                 android:value="rs.dodatnaoprema.dodatnaoprema.AllCategoriesActivity" />
         </activity>
         <activity
+            android:name=".InfoActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SubCategoryArticlesActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

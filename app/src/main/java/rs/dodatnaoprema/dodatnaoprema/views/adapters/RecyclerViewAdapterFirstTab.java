@@ -181,7 +181,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mFirstButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((MainActivity) context).openFragment(context.getString(R.string.contact));
+                    ((MainActivity) context).info(context.getString(R.string.contact));
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             mFirstButton.setSelected(false);
@@ -193,7 +193,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mSecondButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((MainActivity) context).openFragment(context.getString(R.string.how_to_buy));
+                    ((MainActivity) context).info(context.getString(R.string.how_to_buy));
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
                             mSecondButton.setSelected(false);

@@ -39,7 +39,6 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.fragments.InfoFragmentDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
@@ -433,6 +432,12 @@ public class MainActivity extends FragmentActivity
 
         intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
         intent.putExtra("SveKategorije", (Serializable) mAllCategories);
+        startActivity(intent);
+    }
+    public void info(String title) {
+
+        intent = new Intent(getApplicationContext(), InfoActivity.class);
+        intent.putExtra("infoTip", title);
         startActivity(intent);
     }
 

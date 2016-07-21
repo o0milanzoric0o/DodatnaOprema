@@ -1,18 +1,13 @@
 package rs.dodatnaoprema.dodatnaoprema.common.utils;
 
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +20,7 @@ import junit.framework.Assert;
 import java.io.Serializable;
 
 import rs.dodatnaoprema.dodatnaoprema.CartActivity;
+import rs.dodatnaoprema.dodatnaoprema.InfoActivity;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.OffersActivity;
 import rs.dodatnaoprema.dodatnaoprema.QuestionActivity;
@@ -33,7 +29,6 @@ import rs.dodatnaoprema.dodatnaoprema.SearchActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
-import rs.dodatnaoprema.dodatnaoprema.fragments.InfoFragmentDialog;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -95,12 +90,15 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.item_instructions:
-                Bundle args = new Bundle();
-                args.putString("mTitle", getString(R.string.how_to_buy));
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                InfoFragmentDialog frag = new InfoFragmentDialog();
-                frag.setArguments(args);
-                frag.show(ft, "txn_tag");
+                //Bundle args = new Bundle();
+                intent = new Intent(this, InfoActivity.class);
+                intent.putExtra("infoTip", getString(R.string.how_to_buy));
+                // intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
+                //args.putString("mTitle", getString(R.string.how_to_buy));
+                //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                // InfoFragmentDialog frag = new InfoFragmentDialog();
+                // frag.setArguments(args);
+                // frag.show(ft, "txn_tag");
             case R.id.item_question:
                 intent = new Intent(getApplicationContext(), QuestionActivity.class);
                 startActivity(intent);
