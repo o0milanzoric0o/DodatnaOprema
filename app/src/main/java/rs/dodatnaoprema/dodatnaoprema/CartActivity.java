@@ -24,7 +24,9 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartDeleteAllConfirmationDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewFragment;
+import rs.dodatnaoprema.dodatnaoprema.fragments.CartViewOfflineFragment;
 import rs.dodatnaoprema.dodatnaoprema.fragments.EmptyCartFragment;
+import rs.dodatnaoprema.dodatnaoprema.models.OfflineCart;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemDeleteAllResponse;
@@ -108,7 +110,13 @@ public class CartActivity extends BaseActivity {
                 });
                 content.pullList();
             } else {
-                showEmptyCartFragment();
+                // Show offline cart content
+                Integer offlineCartItemCount = MyApplication.getInstance().getSessionManager().getOfflineCartItemCount();
+                if (offlineCartItemCount > 0){
+                    showOfflineCartContent();
+                }else{
+                    showEmptyCartFragment();
+                }
             }
         }
 
@@ -160,7 +168,17 @@ public class CartActivity extends BaseActivity {
                     content.pullList();
 
                 } else {
-
+                    // Clear offline cart
+                    OfflineCart offlineCart = MyApplication.getInstance().getPrefManager().loadOfflineCart();
+                    if (offlineCart != null){
+                        offlineCart.clearCart();
+                        MyApplication.getInstance().getSessionManager().setOfflineCartItemCount(offlineCart.getTotalQuantity());
+                    }
+                    // notify application to update toolbar icon
+                    Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                    LocalBroadcastManager.getInstance(CartActivity.this).sendBroadcast(updateToolbar);
+                    //show emty cart fragment
+                    showEmptyCartFragment();
                 }
             }
         });
@@ -187,6 +205,16 @@ public class CartActivity extends BaseActivity {
 
         CartViewFragment cartViewFragment = CartViewFragment.newInstance(cart);
         fragmentTransaction.replace(R.id.container, cartViewFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void showOfflineCartContent(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        OfflineCart offlineCart = MyApplication.getInstance().getPrefManager().loadOfflineCart();
+        CartViewOfflineFragment cartViewOfflineFragment = CartViewOfflineFragment.newInstance(offlineCart);
+        fragmentTransaction.replace(R.id.container, cartViewOfflineFragment);
         fragmentTransaction.commit();
     }
 

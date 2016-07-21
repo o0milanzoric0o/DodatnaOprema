@@ -150,11 +150,11 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
             @Override
             public void onClick(View v) {
                 // Launch fragment to fill user data
-                Fragment userDataFragment = new CartUserDataFragment();
+                Fragment userDataFragment = CartUserDataFragment.newInstance(mTotal.getText().toString());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                 // Replace whatever is in the container view with this fragment
-                transaction.replace(R.id.container, userDataFragment);
+                transaction.add(R.id.container, userDataFragment);
                 transaction.commit();
             }
         });
@@ -207,7 +207,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int itemID = mCart.getArtikli().get(position).getArtikalId();
-        viewArtcile(itemID);
+        viewArticle(itemID);
 
     }
 
@@ -343,7 +343,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
-    public void viewArtcile(int itemID) {
+    public void viewArticle(int itemID) {
 
         final ProgressDialogCustom progressDialog = new ProgressDialogCustom(getActivity());
         progressDialog.setCancelable(false);

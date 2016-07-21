@@ -1,32 +1,27 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -39,7 +34,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
-import rs.dodatnaoprema.dodatnaoprema.dialogs.InfoDialog;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.NumberPickerDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
@@ -48,26 +43,16 @@ import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
-import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.ViewPagerAdapterOneArticle;
 
-public class OneArticleActivity extends BaseActivity implements OneArticleImageFragment.OnProductImageGalleryDraw {
+public class OneArticleActivity extends BaseActivity implements OneArticleImageFragment.OnProductImageGalleryDraw, NumberPickerDialog.NumberPickerDialogListener {
 
     public int quantity;
-    private NetworkImageView mImageView;
-    private TextView mTextViewKorpa;
-    private ViewPager mViewPager;
-    private OneArticle mOneArticle;
-    private Context mContext;
-
-    private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
-
     SpringIndicator springIndicator;
     TextView mTextViewBrendName;
     TextView mTextViewProductName;
     TextView mTextViewPrice;
     TextView mTextViewAboutPrice;
-
     RatingBar mRatingBar;
     TextView mTextViewYesNo;
     TextView mTextViewMin;
@@ -75,9 +60,14 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     TextView mTextViewCode;
     TextView mTextViewArticleCategory;
     TextView mTextViewSendQuestion;
-
     Toolbar mToolbar;
     TextView mTextView;
+    private NetworkImageView mImageView;
+    private TextView mTextViewKorpa;
+    private ViewPager mViewPager;
+    private OneArticle mOneArticle;
+    private Context mContext;
+    private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,12 +132,11 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     }
 
 
-    private void fillViews(Intent intent){
+    private void fillViews(Intent intent) {
         quantity = 0;
 
 
         mOneArticle = (OneArticle) intent.getExtras().get(AppConfig.ABOUT_PRODUCT);
-        Toast.makeText(this, "ONE ARTICLE ON CREATE", Toast.LENGTH_LONG).show();
         ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
 
 
@@ -327,61 +316,58 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             content.pullList();
 
         } else {
-            InfoDialog infoDialog = new InfoDialog(this);
-            infoDialog.setDialogMessage("Morate se ulogovati.");
-            infoDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
+//            InfoDialog infoDialog = new InfoDialog(this);
+//            infoDialog.setDialogMessage("Morate se ulogovati.");
+//            infoDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    // Handle the login action
+//                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
+//            infoDialog.create().show();
+            // We are not logged in, but enable adding to cart anyway
+            MyApplication.getInstance().getSessionManager().addItemOfflineCart(item_id, quantity, mOneArticle.getArtikal().getCenaPrikazBroj(), mOneArticle.getArtikal().getArtikalNaziv(), mOneArticle.getArtikal().getSlike(), mOneArticle.getArtikal().getCenaPrikazExt(), mOneArticle.getArtikal().getMinimalnaKolArt());
+            // get total item quantity
+
+            String totalQuantity = String.valueOf(MyApplication.getInstance().getSessionManager().getOfflineCartItemCount());
+            // Update toolbar Icon
+            Log.e("Korpa quant:", String.valueOf(quantity));
+            Log.e("Korpa tot_quant:", totalQuantity);
+            Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+            LocalBroadcastManager.getInstance(mContext).sendBroadcast(updateToolbar);
+            // Inform the user
+            cartItemAddConfirmationDialog = new CartItemAddConfirmationDialog(mContext);
+
+            cartItemAddConfirmationDialog.setDialogMessage(String.format("U korpi imate ukupno %1s artikala.", totalQuantity));
+            cartItemAddConfirmationDialog.setPositiveButtonListener(new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // Handle the login action
-                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                public void onClick(DialogInterface dialog, int which) {
+                    // Launch cart view activity
+                    Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                     startActivity(intent);
+                    // close one article activity
+                    finish();
                 }
             });
-            infoDialog.create().show();
+
+            cartItemAddConfirmationDialog.setNegativeButtonListener(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do nothing, just let the dialog close...
+                }
+            });
+
+            cartItemAddConfirmationDialog.create().show();
         }
     }
 
-    public void addToCart(View v) {
-
-        final NumberPicker aNumberPicker = new NumberPicker(mContext, null, R.style.number_picker);
-        aNumberPicker.setMaxValue(9999);
-        aNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
-        aNumberPicker.setLayoutParams(new NumberPicker.LayoutParams(NumberPicker.LayoutParams.WRAP_CONTENT, NumberPicker.LayoutParams.WRAP_CONTENT));
-        aNumberPicker.setOrientation(LinearLayout.VERTICAL);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-        alertDialogBuilder.setTitle("Odaberite količinu");
-
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("Izaberi",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-
-                                quantity = aNumberPicker.getValue();
-                                // Try to add to cart
-                                addToCart(getArtikalId(), quantity);
-                            }
-                        })
-                .setNegativeButton("Otkaži",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                quantity = 0;
-                                mTextViewKorpa.setText(R.string.add_to_chart);
-                                dialog.cancel();
-                            }
-                        });
-        //AlertDialog alertDialog = alertDialogBuilder.create();
-
-        Dialog d = alertDialogBuilder.setView(aNumberPicker).create();
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(d.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        d.show();
-        d.getWindow().setAttributes(lp);
+    public void showNumberPicker(View v) {
+        // Create an instance of the dialog fragment and show it
+        NumberPickerDialog aNumberPicker = NumberPickerDialog.newInstance(mOneArticle.getArtikal().getMozedaseKupi(), 9999);
+        //       aNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
+        aNumberPicker.show(getSupportFragmentManager(), "NumberPickerDialog");
     }
 
     @Override
@@ -419,6 +405,25 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         return result;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void onNumberPickerDialogPositiveClick(DialogFragment dialog) {
+        quantity = ((NumberPickerDialog) dialog).getNumberPicked();
+        // Try to add to cart
+        addToCart(getArtikalId(), quantity);
+    }
+
+    @Override
+    public void onNumberPickerDialogNegativeClick(DialogFragment dialog) {
+        quantity = 0;
+        mTextViewKorpa.setText(R.string.add_to_chart);
+    }
+
     public static class ImageGalleryAdapter extends FragmentPagerAdapter {
 
         private int imageCount = 0;
@@ -447,18 +452,5 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         public CharSequence getPageTitle(int position) {
             return String.valueOf(position + 1);
         }
-    }
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        fillViews(intent);
-//    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 }

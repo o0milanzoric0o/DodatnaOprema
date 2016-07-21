@@ -3,6 +3,7 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,6 +38,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.User;
  */
 public class CartUserDataFragment extends Fragment {
 
+    private static String PARAM1 = "param1";
     private EditText et_name;
     private EditText et_last_name;
     private EditText et_email;
@@ -46,17 +49,35 @@ public class CartUserDataFragment extends Fragment {
     private EditText et_phone;
     private EditText et_comment;
     private Button btn_next;
+    private TextView tv_total;
 
+    private String mtotal_price;
     private ProgressDialogCustom progressDialog;
 
     public CartUserDataFragment() {
         // Required empty public constructor
     }
 
+    public static CartUserDataFragment newInstance(String total_price) {
+
+        CartUserDataFragment f = new CartUserDataFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(PARAM1, total_price);
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null)
+            mtotal_price = (String) getArguments().getSerializable(PARAM1);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart_user_data, container, false);
         et_name = (EditText) view.findViewById(R.id.et_name);
@@ -68,7 +89,7 @@ public class CartUserDataFragment extends Fragment {
         et_mobile = (EditText) view.findViewById(R.id.et_mobile);
         et_comment = (EditText) view.findViewById(R.id.et_comment);
         et_phone = (EditText) view.findViewById(R.id.et_phone);
-
+        tv_total = (TextView) view.findViewById(R.id.tv_total);
         btn_next = (Button) view.findViewById(R.id.btn_cart_buy);
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,9 +123,12 @@ public class CartUserDataFragment extends Fragment {
 //                    user.setFirmID();
 //                    user.setFirmPIB();
 //                    user.setFirmAddress();
-
-                    // Make web requests to Change user data, and finish transaction
-                    updateUserData();
+                    if (MyApplication.getInstance().getSessionManager().isLoggedIn()) {
+                        // Make web requests to Change user data, and finish transaction
+                        updateUserData();
+                    } else {
+                        completeTransactionLoggedOff();
+                    }
 
                 } else {
                     // show snackbar to enter credentials
@@ -113,37 +137,42 @@ public class CartUserDataFragment extends Fragment {
                 }
 
             }
+
         });
 
+        progressDialog = new ProgressDialogCustom(getContext());
+        progressDialog.setCancelable(false);
 
         // Load user data and fill text views
         User user = MyApplication.getInstance().getPrefManager().getUser();
-        if (!user.getName().equals("null")) {
-            et_name.setText(user.getName());
+
+        if (user != null) {
+            if (!user.getName().equals("null")) {
+                et_name.setText(user.getName());
+            }
+            if (!user.getLast_name().equals("null")) {
+                et_last_name.setText(user.getLast_name());
+            }
+            if (!user.getEmail().equals("null")) {
+                et_email.setText(user.getEmail());
+            }
+            if (!user.getAddress().equals("null")) {
+                et_address.setText(user.getAddress());
+            }
+            if (!user.getCity().equals("null")) {
+                et_city.setText(user.getCity());
+            }
+            if (!user.getZip_code().equals("null")) {
+                et_zip.setText(user.getZip_code());
+            }
+            if (!user.getMobile().equals("null")) {
+                et_mobile.setText(user.getMobile());
+            }
+            if (!user.getPhone().equals("null")) {
+                et_phone.setText(user.getPhone());
+            }
         }
-        if (!user.getLast_name().equals("null")) {
-            et_last_name.setText(user.getLast_name());
-        }
-        if (!user.getEmail().equals("null")) {
-            et_email.setText(user.getEmail());
-        }
-        if (!user.getAddress().equals("null")) {
-            et_address.setText(user.getAddress());
-        }
-        if (!user.getCity().equals("null")) {
-            et_city.setText(user.getCity());
-        }
-        if (!user.getZip_code().equals("null")) {
-            et_zip.setText(user.getZip_code());
-        }
-        if (!user.getMobile().equals("null")) {
-            et_mobile.setText(user.getMobile());
-        }
-        if (!user.getPhone().equals("null")) {
-            et_phone.setText(user.getPhone());
-        }
-        progressDialog = new ProgressDialogCustom(getContext());
-        progressDialog.setCancelable(false);
+        tv_total.setText(mtotal_price);
 
         return view;
     }
@@ -185,7 +214,6 @@ public class CartUserDataFragment extends Fragment {
                     boolean success = jObj.getBoolean("success");
 
                     if (success) {
-
 
 
                         completeTransaction();
@@ -251,7 +279,7 @@ public class CartUserDataFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 progressDialog.hideDialog();
-                Log.logInfo("COMPLETE TRANSACTION REQUEST",response);
+                Log.logInfo("COMPLETE TRANSACTION REQUEST", response);
                 try {
 
                     JSONObject jObj = new JSONObject(response);
@@ -300,5 +328,9 @@ public class CartUserDataFragment extends Fragment {
         strReq.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_TIMEOUT_MS, AppConfig.DEFAULT_MAX_RETRIES, AppConfig.DEFAULT_BACKOFF_MULT));
         // Adding request to  queue
         MyApplication.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    private void completeTransactionLoggedOff(){
+        //** TODO create method body...Send JSON with user order to server/
     }
 }

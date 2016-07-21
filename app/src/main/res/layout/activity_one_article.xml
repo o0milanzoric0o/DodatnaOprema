@@ -290,7 +290,7 @@
                                 android:layout_weight="1"
                                 android:background="@color/background_white"
                                 android:drawableBottom="@drawable/ic_nav_cart"
-                                android:onClick="addToCart"
+                                android:onClick="showNumberPicker"
                                 android:text="@string/add_to_chart" />
 
                         </LinearLayout>

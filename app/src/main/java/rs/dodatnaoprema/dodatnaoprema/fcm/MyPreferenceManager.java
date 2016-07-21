@@ -5,6 +5,14 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
+import rs.dodatnaoprema.dodatnaoprema.models.OfflineCart;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 /**
@@ -22,6 +30,7 @@ public class MyPreferenceManager {
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
     private static final String KEY_CART_ITEM_COUNT = "CartItemCount";
+    private static final String KEY_OFFLINE_CART_ITEM_COUNT = "OfflineCartItemCount";
 
     private static final String KEY_GENERAL_NAME = "KomitentNaziv";
     private static final String KEY_NAME = "KomitentIme";
@@ -47,6 +56,11 @@ public class MyPreferenceManager {
     // Shared pref mode
     int PRIVATE_MODE = 0;
     private String TAG = MyPreferenceManager.class.getSimpleName();
+
+    private static final String OFFLINE_CART = "OfflineCart";
+    private static final Type OFFLINE_CART_TYPE = new TypeToken<OfflineCart>() {}.getType();
+    private OfflineCart offlineCart;
+
 
     // Constructor
     public MyPreferenceManager(Context context) {
@@ -171,4 +185,27 @@ public class MyPreferenceManager {
         editor.commit();
     }
 
+    public int getOfflineCartItemCount() {
+        return pref.getInt(KEY_OFFLINE_CART_ITEM_COUNT, 0);
+    }
+
+    public void setOfflineCartItemCount(int count) {
+        editor.putInt(KEY_OFFLINE_CART_ITEM_COUNT, count);
+        editor.commit();
+    }
+
+    public void saveOfflineCart (OfflineCart offlineCart) {
+        editor.putString(OFFLINE_CART, new Gson().toJson(offlineCart));
+        editor.commit();
+        this.offlineCart = offlineCart;
+    }
+
+    public OfflineCart loadOfflineCart() {
+        if (offlineCart == null) {
+            offlineCart = new Gson().fromJson(pref.getString(OFFLINE_CART, null), OFFLINE_CART_TYPE);
+        }
+        if (offlineCart == null)
+            offlineCart = new OfflineCart();
+        return offlineCart;
+    }
 }

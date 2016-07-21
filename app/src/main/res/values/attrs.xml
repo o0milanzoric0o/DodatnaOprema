@@ -28,4 +28,14 @@
         <attr name="default_to_loading_more_scrolling_duration" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="NumberPicker">
+        <attr name="np_dividerColor" format="color" />
+        <attr name="np_formatter" format="string" />
+        <attr name="np_focusable" format="boolean" />
+        <attr name="np_max" format="integer" />
+        <attr name="np_min" format="integer" />
+        <attr name="np_textColor" format="color" />
+        <attr name="np_textSize" format="dimension" />
+        <attr name="np_typeface" format="string" />
+    </declare-styleable>
 </resources>
