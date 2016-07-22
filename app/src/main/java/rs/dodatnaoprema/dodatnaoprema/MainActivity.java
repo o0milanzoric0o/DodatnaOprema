@@ -347,14 +347,14 @@ public class MainActivity extends FragmentActivity
             articlesOnSale();
 
         } else if (id == R.id.nav_how_to_buy) {
-            openFragment(getString(R.string.how_to_buy));
+            info(getString(R.string.how_to_buy));
 
         } else if (id == R.id.nav_help) {
             Intent intent = new Intent(this, QuestionActivity.class);
             startActivityOneArticle(intent);
 
         } else if (id == R.id.nav_contact) {
-            openFragment(getString(R.string.contact));
+            info(getString(R.string.contact));
 
         }
 
@@ -449,15 +449,6 @@ public class MainActivity extends FragmentActivity
         startActivityOneArticle(intent);
     }
 
-    public void openFragment(String title) {
-
-        Bundle args = new Bundle();
-        args.putString("mTitle", title);
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        InfoFragmentDialog frag = new InfoFragmentDialog();
-        frag.setArguments(args);
-        frag.show(ft, "txn_tag");
-    }
 
     public void startActivityOneArticle(Intent intent) {
         startActivity(intent);
