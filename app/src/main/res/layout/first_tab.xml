@@ -38,7 +38,6 @@
 
             <include layout="@layout/recycler_view" />
 
-            <!--TODO ovde ide four_productsts.xml i ako treba jos nesto.... ne znam sta????? -->
         </LinearLayout>
     </ScrollView>
     <!-- swipeable footer that enables transition from the first to the second tab  -->

@@ -34,6 +34,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemAddConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.InfoDialog;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.NumberPickerDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
@@ -299,8 +300,9 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
                             cartItemAddConfirmationDialog.create().show();
 
                         } else {
-                            /**TODO  couldn't add to cart, God knows why**/
                             progressDialog.hideDialog();
+                            InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo dodavanje artikla.");
+                            infoDialog.show(getSupportFragmentManager(),"InfoDialog");
                         }
                     }
                 }
@@ -310,7 +312,8 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
                     progressDialog.hideDialog();
                     // Web request fail
                     // Create snackbar or something
-                    /**TODO Inform the user there was a connection failure...**////
+                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                    infoDialog.show(getSupportFragmentManager(),"InfoDialog");
                 }
             });
             content.pullList();

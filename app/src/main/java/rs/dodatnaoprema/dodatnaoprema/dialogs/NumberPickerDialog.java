@@ -4,11 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.customview.NumberPicker;
@@ -21,7 +21,6 @@ import rs.dodatnaoprema.dodatnaoprema.customview.NumberPicker;
 public class NumberPickerDialog extends DialogFragment {
     // Use this instance of the interface to deliver action events
     NumberPickerDialogListener mListener;
-    private View dialog_view;
     private NumberPicker numberPicker;
 
     public static NumberPickerDialog newInstance(int min, int max) {
@@ -37,13 +36,14 @@ public class NumberPickerDialog extends DialogFragment {
         return numberPicker.getValue();
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        dialog_view = inflater.inflate(R.layout.number_picker_dialog_layout, null);
+        View dialog_view = inflater.inflate(R.layout.number_picker_dialog_layout, null);
         numberPicker = (NumberPicker) dialog_view.findViewById(R.id.number_picker);
         numberPicker.setMinValue(getArguments().getInt("min"));
         numberPicker.setMaxValue(getArguments().getInt("max"));
@@ -85,8 +85,8 @@ public class NumberPickerDialog extends DialogFragment {
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface NumberPickerDialogListener {
-        public void onNumberPickerDialogPositiveClick(DialogFragment dialog);
+        void onNumberPickerDialogPositiveClick(DialogFragment dialog);
 
-        public void onNumberPickerDialogNegativeClick(DialogFragment dialog);
+        void onNumberPickerDialogNegativeClick(DialogFragment dialog);
     }
 }

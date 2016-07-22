@@ -28,6 +28,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.dialogs.CartItemDeleteConfirmationDialog;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.InfoDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.Cart;
@@ -108,7 +109,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                                     pullCartContent();
 
                                 } else {
-                                    /**TODO  couldn't delete, God knows why**/
+                                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo brisanje artikla.");
+                                    infoDialog.show(getFragmentManager(),"InfoDialog");
                                 }
                             }
                         }
@@ -117,7 +119,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                         public void webRequestError(String error) {
                             // Web request fail
                             // Create snackbar or something
-                            /**TODO Inform the user there was a connection failure...**////
+                            InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                            infoDialog.show(getFragmentManager(),"InfoDialog");
                         }
                     });
                     content.pullList();
@@ -323,17 +326,20 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                             pullCartContent();
 
                         } else {
-                            /**TODO  couldn't update, God knows why**/
+                            InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo dodavanje artikla.");
+                            infoDialog.show(getFragmentManager(),"InfoDialog");
                         }
                     }
                 }
 
                 @Override
                 public void webRequestError(String error) {
+                    progressBar.setVisibility(View.GONE);
                     // Web request fail
                     // Create snackbar or something
-                    /**TODO Inform the user there was a connection failure...**////
-                    progressBar.setVisibility(View.GONE);
+                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                    infoDialog.show(getFragmentManager(),"InfoDialog");
+
                 }
             });
             content.pullList();
