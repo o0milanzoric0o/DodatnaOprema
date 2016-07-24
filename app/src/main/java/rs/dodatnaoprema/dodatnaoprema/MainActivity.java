@@ -1,6 +1,5 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -185,7 +184,7 @@ public class MainActivity extends FragmentActivity
     }
 
 
-    private void registerReceivers(){
+    private void registerReceivers() {
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.SET_USER_INFO));
 
@@ -328,6 +327,8 @@ public class MainActivity extends FragmentActivity
         } else if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_chart) {
+            Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_best) {
             Intent intent = new Intent(this, OffersActivity.class);
@@ -434,6 +435,7 @@ public class MainActivity extends FragmentActivity
         intent.putExtra("SveKategorije", (Serializable) mAllCategories);
         startActivity(intent);
     }
+
     public void info(String title) {
 
         intent = new Intent(getApplicationContext(), InfoActivity.class);

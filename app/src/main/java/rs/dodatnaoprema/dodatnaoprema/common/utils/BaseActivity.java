@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import junit.framework.Assert;
 
@@ -29,6 +28,7 @@ import rs.dodatnaoprema.dodatnaoprema.SearchActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.signin.AccountActivity;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -80,7 +80,10 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
 
             case R.id.item_signing:
-                Toast.makeText(this, "Clicked: Menu No. 2 - SubMenu No .1", Toast.LENGTH_SHORT).show();
+                // Handle the login action
+                intent = new Intent(this, AccountActivity.class);
+                startActivity(intent);
+
                 return true;
 
             case R.id.item_sale:
@@ -90,18 +93,14 @@ public class BaseActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.item_instructions:
-                //Bundle args = new Bundle();
                 intent = new Intent(this, InfoActivity.class);
                 intent.putExtra("infoTip", getString(R.string.how_to_buy));
-                // intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[0]);
-                //args.putString("mTitle", getString(R.string.how_to_buy));
-                //FragmentTransaction ft = getFragmentManager().beginTransaction();
-                // InfoFragmentDialog frag = new InfoFragmentDialog();
-                // frag.setArguments(args);
-                // frag.show(ft, "txn_tag");
-            case R.id.item_question:
-                intent = new Intent(getApplicationContext(), QuestionActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.item_question:
+                intent = new Intent(this, QuestionActivity.class);
+                startActivity(intent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
