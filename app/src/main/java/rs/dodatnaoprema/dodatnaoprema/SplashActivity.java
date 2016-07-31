@@ -88,7 +88,7 @@ public class SplashActivity extends AppCompatActivity {
             getAllCategories();
             getInfoContact();
             getInfoHowToBuy();
-        }else{
+        } else {
             // show main activity...
             startActivity(intent);
             finish();

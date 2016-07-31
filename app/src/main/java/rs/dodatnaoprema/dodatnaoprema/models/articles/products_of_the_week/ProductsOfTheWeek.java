@@ -28,70 +28,90 @@ public class ProductsOfTheWeek implements Serializable {
     private List<Product> artikli = new ArrayList<Product>();
 
     /**
-     * @return The tag
+     *
+     * @return
+     *     The tag
      */
     public String getTag() {
         return tag;
     }
 
     /**
-     * @param tag The tag
+     *
+     * @param tag
+     *     The tag
      */
     public void setTag(String tag) {
         this.tag = tag;
     }
 
     /**
-     * @return The success
+     *
+     * @return
+     *     The success
      */
     public Boolean getSuccess() {
         return success;
     }
 
     /**
-     * @param success The success
+     *
+     * @param success
+     *     The success
      */
     public void setSuccess(Boolean success) {
         this.success = success;
     }
 
     /**
-     * @return The error
+     *
+     * @return
+     *     The error
      */
     public Integer getError() {
         return error;
     }
 
     /**
-     * @param error The error
+     *
+     * @param error
+     *     The error
      */
     public void setError(Integer error) {
         this.error = error;
     }
 
     /**
-     * @return The errorMsg
+     *
+     * @return
+     *     The errorMsg
      */
     public String getErrorMsg() {
         return errorMsg;
     }
 
     /**
-     * @param errorMsg The error_msg
+     *
+     * @param errorMsg
+     *     The error_msg
      */
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 
     /**
-     * @return The artikli
+     *
+     * @return
+     *     The artikli
      */
     public List<Product> getArtikli() {
         return artikli;
     }
 
     /**
-     * @param artikli The artikli
+     *
+     * @param artikli
+     *     The artikli
      */
     public void setArtikli(List<Product> artikli) {
         this.artikli = artikli;

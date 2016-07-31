@@ -47,7 +47,9 @@ public class CartViewOfflineFragment extends Fragment implements AdapterView.OnI
     private ListView listView;
     private Button mBtnBuy;
     private TextView mTotal;
-    private String mtot;
+    private TextView mShipping;
+    private TextView mPrice;
+    //private String mtot;
 
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
     private VolleySingleton mVolleySingleton;
@@ -102,12 +104,14 @@ public class CartViewOfflineFragment extends Fragment implements AdapterView.OnI
         listView = (ListView) view.findViewById(R.id.list_view_cart);
         mBtnBuy = (Button) view.findViewById(R.id.btn_cart_buy);
         mTotal = (TextView) view.findViewById(R.id.tv_total);
+        mShipping = (TextView) view.findViewById(R.id.tv_shipping);
+        mPrice = (TextView) view.findViewById(R.id.tv_price);
 
         mBtnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Launch fragment to fill user data
-                Fragment userDataFragment = CartUserDataFragment.newInstance(mtot);
+                Fragment userDataFragment = CartUserDataFragment.newInstance(mTotal.getText().toString());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                 // Replace whatever is in the container view with this fragment
@@ -128,9 +132,16 @@ public class CartViewOfflineFragment extends Fragment implements AdapterView.OnI
 
         mAdapter.notifyDataSetChanged();
 
-        mtot = String.valueOf(mOfflineCart.getTotalPrice()) + " " + mOfflineCart.getPrice_ext();
 
-        mTotal.setText(mtot);
+        //**TODO shipping is hardcoded right now, fix it in the future
+
+        String tot = mOfflineCart.getTotalPrice(200) + " " + mOfflineCart.getPrice_ext();
+        String price = mOfflineCart.getTotalPrice(0) + " " + mOfflineCart.getPrice_ext();
+        String shipping = String.valueOf(200) + " " + mOfflineCart.getPrice_ext();
+
+        mTotal.setText(tot);
+        mPrice.setText(price);
+        mShipping.setText(shipping);
 
         return view;
     }
@@ -200,10 +211,17 @@ public class CartViewOfflineFragment extends Fragment implements AdapterView.OnI
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
 
         // Update total price
-        String tot = mOfflineCart.getTotalPrice() + " " + mOfflineCart.getPrice_ext();
-        mTotal.setText(tot);
+        //**TODO shipping is hardcoded right now, fix it in the future
 
-        if (Float.valueOf(mOfflineCart.getTotalPrice())==0.0f){
+        String tot = mOfflineCart.getTotalPrice(200) + " " + mOfflineCart.getPrice_ext();
+        String price = mOfflineCart.getTotalPrice(0) + " " + mOfflineCart.getPrice_ext();
+        String shipping = String.valueOf(200) + " " + mOfflineCart.getPrice_ext();
+
+        mTotal.setText(tot);
+        mPrice.setText(price);
+        mShipping.setText(shipping);
+
+        if (Float.valueOf(mOfflineCart.getTotalPrice(0)) == 0.0f) {
             //show emty cart fragment
             Fragment emptyCartFragment = new EmptyCartFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();

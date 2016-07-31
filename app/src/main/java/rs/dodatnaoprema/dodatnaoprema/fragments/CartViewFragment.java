@@ -51,6 +51,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
     private ListView listView;
     private Button mBtnBuy;
     private TextView mTotal;
+    private TextView mShipping;
+    private TextView mPrice;
 
     private CartItemDeleteConfirmationDialog cartItemDeleteConfirmationDialog;
     private VolleySingleton mVolleySingleton;
@@ -110,7 +112,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
                                 } else {
                                     InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo brisanje artikla.");
-                                    infoDialog.show(getFragmentManager(),"InfoDialog");
+                                    infoDialog.show(getFragmentManager(), "InfoDialog");
                                 }
                             }
                         }
@@ -120,7 +122,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                             // Web request fail
                             // Create snackbar or something
                             InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
-                            infoDialog.show(getFragmentManager(),"InfoDialog");
+                            infoDialog.show(getFragmentManager(), "InfoDialog");
                         }
                     });
                     content.pullList();
@@ -148,6 +150,8 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
         listView = (ListView) view.findViewById(R.id.list_view_cart);
         mBtnBuy = (Button) view.findViewById(R.id.btn_cart_buy);
         mTotal = (TextView) view.findViewById(R.id.tv_total);
+        mShipping = (TextView) view.findViewById(R.id.tv_shipping);
+        mPrice = (TextView) view.findViewById(R.id.tv_price);
 
         mBtnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,9 +178,13 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
         mAdapter.notifyDataSetChanged();
 
-        String tot = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
+        String tot = String.valueOf(mCart.getUkupnaCena() + mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
+        String price = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
+        String shipping = String.valueOf(mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
 
         mTotal.setText(tot);
+        mPrice.setText(price);
+        mShipping.setText(shipping);
 
         return view;
     }
@@ -286,8 +294,13 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
 
                         // Update total price
-                        String tot = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
+                        String tot = String.valueOf(mCart.getUkupnaCena() + mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
+                        String price = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
+                        String shipping = String.valueOf(mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
+
                         mTotal.setText(tot);
+                        mPrice.setText(price);
+                        mShipping.setText(shipping);
 
                     }
                     progressDialog.hideDialog();
@@ -327,7 +340,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
 
                         } else {
                             InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo dodavanje artikla.");
-                            infoDialog.show(getFragmentManager(),"InfoDialog");
+                            infoDialog.show(getFragmentManager(), "InfoDialog");
                         }
                     }
                 }
@@ -338,7 +351,7 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                     // Web request fail
                     // Create snackbar or something
                     InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
-                    infoDialog.show(getFragmentManager(),"InfoDialog");
+                    infoDialog.show(getFragmentManager(), "InfoDialog");
 
                 }
             });

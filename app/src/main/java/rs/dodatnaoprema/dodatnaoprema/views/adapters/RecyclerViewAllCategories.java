@@ -178,6 +178,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
+        /** TODO  Sometimes categories is null, why? Figure it out, and fix it.*/
         return categories.size() + existHistory;
     }
 

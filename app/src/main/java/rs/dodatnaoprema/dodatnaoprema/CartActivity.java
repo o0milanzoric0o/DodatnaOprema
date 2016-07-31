@@ -95,7 +95,15 @@ public class CartActivity extends BaseActivity {
                     @Override
                     public void webRequestSuccess(boolean success, Cart cart) {
                         if (success) {
+                            // Update cart items count
+                            // Set cart item count
+                            int count = (cart.getArtikli().size() > 0 ? cart.getUkupnaKolicina() : 0);
+                            MyApplication.getInstance().getSessionManager().setCartItemCount(count);
 
+                            updateCartToolbarIcon();
+                            // Update Navigation Drawer from main activity
+                            Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                            LocalBroadcastManager.getInstance(CartActivity.this).sendBroadcast(updateToolbar);
                             if (cart.getArtikli().size() > 0)
                                 showCartContentFragment(cart);
                             else
@@ -113,9 +121,9 @@ public class CartActivity extends BaseActivity {
             } else {
                 // Show offline cart content
                 Integer offlineCartItemCount = MyApplication.getInstance().getSessionManager().getOfflineCartItemCount();
-                if (offlineCartItemCount > 0){
+                if (offlineCartItemCount > 0) {
                     showOfflineCartContent();
-                }else{
+                } else {
                     showEmptyCartFragment();
                 }
             }
@@ -154,7 +162,7 @@ public class CartActivity extends BaseActivity {
                                     showEmptyCartFragment();
                                 } else {
                                     InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo brisanje artikla.");
-                                    infoDialog.show(getSupportFragmentManager(),"InfoDialog");
+                                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
                                 }
                             }
                         }
@@ -165,7 +173,7 @@ public class CartActivity extends BaseActivity {
                             // Web request fail
                             // Create snackbar or something
                             InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
-                            infoDialog.show(getSupportFragmentManager(),"InfoDialog");
+                            infoDialog.show(getSupportFragmentManager(), "InfoDialog");
                         }
                     });
                     content.pullList();
@@ -173,7 +181,7 @@ public class CartActivity extends BaseActivity {
                 } else {
                     // Clear offline cart
                     OfflineCart offlineCart = MyApplication.getInstance().getPrefManager().loadOfflineCart();
-                    if (offlineCart != null){
+                    if (offlineCart != null) {
                         offlineCart.clearCart();
                         MyApplication.getInstance().getSessionManager().setOfflineCartItemCount(offlineCart.getTotalQuantity());
                     }
@@ -211,7 +219,7 @@ public class CartActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
-    private void showOfflineCartContent(){
+    private void showOfflineCartContent() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

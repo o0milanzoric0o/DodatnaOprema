@@ -195,7 +195,7 @@
     <string name="continue_shopping">Nastavi</string>
     <string name="clear_cart">Isprazni korpu</string>
     <string name="buy">Kupi</string>
-    <string name="total">Ukupno:</string>
+    <string name="total"><b>UKUPNO:</b></string>
     <string name="delete_all_confirmation_question">Da li želite da ispraznite korpu?</string>
     <string name="address_hint">Adresa za slanje</string>
     <string name="city_hint">Grad</string>
@@ -218,5 +218,7 @@
     <string name="roboto_medium">sans-serif-medium</string>
 
     <string name="number_picker_formatter">%02d</string>
+    <string name="shipping">Troškovi prevoza:</string>
+    <string name="price_label">Cena:</string>
 
 </resources>

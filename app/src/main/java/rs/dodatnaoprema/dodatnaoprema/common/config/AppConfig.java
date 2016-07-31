@@ -42,7 +42,7 @@ public class AppConfig {
     public static final String URL_VALUE_ARTICLES_ON_SALE = "artNaAkciji";
     public static final String URL_VALUE_ARTICLE = "artikal";
 
-    public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/cron/crongotovoMob/preporuka-nedelje-cron.json";
+    public static final String URL_PRODUCTS_OF_THE_WEEK = "http://masinealati.rs/parametri.php?action=artNaAkciji&id=9&od=0&do=25";
     public static final String URL_ALL_BRENDS = "http://masinealati.rs/parametri.php?action=listaBrendova";
     public static final String URL_ALL_BRENDS_FRONT_PAGE = "http://masinealati.rs/parametri.php?action=sviBrendoviNaslovna";
     public static final String URL_YOU_MAY_ALSO_LIKE_CATEGORIES = "http://masinealati.rs/parametri.php?action=kategYouMayAlso&limit=10";
@@ -87,6 +87,7 @@ public class AppConfig {
     public static final String URL_UPDATE_CART_ITEM_QUANTITY = "http://masinealati.rs/parametri.php?action=dodajArtikalKorpa&id=%1$s&br=%2$s&userId=%3$s";
     public static final String GET_CART = "Korpa";
     public static final String URL_COMPLETE_TRANSACTION = "http://masinealati.rs/parametri.php?action=kupovinaKorpa&userId=%1$s";
+    public static final String URL_COMPLETE_TRANSACTION_UNREGISTERED_USER = "http://masinealati.rs/parametri.php?action=kupovinaKorpaUnregistered";
 
 
     /**

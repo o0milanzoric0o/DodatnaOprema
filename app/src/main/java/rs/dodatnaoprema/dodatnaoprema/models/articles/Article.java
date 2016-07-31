@@ -59,7 +59,7 @@ public class Article implements Serializable {
     private String TipUnitCelo;
     @SerializedName("MinimalnaKolArt")
     @Expose
-    private Object MinimalnaKolArt;
+    private Integer MinimalnaKolArt;
     @SerializedName("slikaMain")
     @Expose
     private Object slikaMain;
@@ -206,7 +206,7 @@ public class Article implements Serializable {
     /**
      * @return The MinimalnaKolArt
      */
-    public Object getMinimalnaKolArt() {
+    public Integer getMinimalnaKolArt() {
         return MinimalnaKolArt;
     }
 

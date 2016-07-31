@@ -1,456 +1,455 @@
 package rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week;
 
-/**
- * Created by 1 on 4/28/2016.
- */
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     @SerializedName("ArtikalId")
     @Expose
-    private Integer ArtikalId;
+    private Integer artikalId;
     @SerializedName("ArtikalNaziv")
     @Expose
-    private String ArtikalNaziv;
-    @SerializedName("NaAkciji")
+    private String artikalNaziv;
+    @SerializedName("ArtikalKratakOpis")
     @Expose
-    private Integer NaAkciji;
+    private String artikalKratakOpis;
+    @SerializedName("ArtikalNaAkciji")
+    @Expose
+    private Integer artikalNaAkciji;
     @SerializedName("urlArtiklaLink")
     @Expose
     private String urlArtiklaLink;
-    @SerializedName("link")
+    @SerializedName("cenaPrikaz")
     @Expose
-    private String link;
-    @SerializedName("cenaBroj")
+    private String cenaPrikaz;
+    @SerializedName("cenaPrikazBroj")
     @Expose
-    private String cenaBroj;
-    @SerializedName("pravaMp")
+    private Double cenaPrikazBroj;
+    @SerializedName("cenaSamoBrojFormat")
     @Expose
-    private String pravaMp;
+    private String cenaSamoBrojFormat;
+    @SerializedName("cenaPrikazExt")
+    @Expose
+    private String cenaPrikazExt;
     @SerializedName("pozovite")
     @Expose
-    private Object pozovite;
-    @SerializedName("brend")
+    private String pozovite;
+    @SerializedName("BrendIme")
     @Expose
-    private String brend;
-    @SerializedName("ArtikalKratakOpis")
+    private String brendIme;
+    @SerializedName("BrendId")
     @Expose
-    private Object ArtikalKratakOpis;
+    private Integer brendId;
+    @SerializedName("TipUnit")
+    @Expose
+    private String tipUnit;
+    @SerializedName("TipUnitCelo")
+    @Expose
+    private String tipUnitCelo;
+    @SerializedName("IdUnit")
+    @Expose
+    private Integer idUnit;
+    @SerializedName("MinimalnaKolArt")
+    @Expose
+    private Integer minimalnaKolArt;
+    @SerializedName("slikaMain")
+    @Expose
+    private String slikaMain;
     @SerializedName("stanje")
     @Expose
     private Integer stanje;
+    @SerializedName("codeVendor")
+    @Expose
+    private String codeVendor;
     @SerializedName("mozedasekupi")
     @Expose
     private Integer mozedasekupi;
-    @SerializedName("minimalnaKol")
-    @Expose
-    private Integer minimalnaKol;
-    @SerializedName("tipUnit")
-    @Expose
-    private String tipUnit;
-    @SerializedName("tipUnitcelo")
-    @Expose
-    private String tipUnitcelo;
     @SerializedName("ocenaut")
     @Expose
-    private String ocenaut;
-    @SerializedName("KategorijaArtikalaIdOS")
+    private Integer ocenaut;
+    @SerializedName("KategorijaArtiklaNaziv")
     @Expose
-    private Integer KategorijaArtikalaIdOS;
-    @SerializedName("KategorijaArtikalaNaziv")
+    private String kategorijaArtiklaNaziv;
+    @SerializedName("KategorijaArtikalId")
     @Expose
-    private String KategorijaArtikalaNaziv;
+    private Integer kategorijaArtikalId;
     @SerializedName("KategorijaArtikalaLink")
     @Expose
-    private String KategorijaArtikalaLink;
-    @SerializedName("mala_slika")
+    private String kategorijaArtikalaLink;
+    @SerializedName("spec")
     @Expose
-    private String malaSlika;
-    @SerializedName("srednja_slika")
+    private List<Object> spec = new ArrayList<Object>();
+    @SerializedName("slike")
     @Expose
-    private String srednjaSlika;
+    private List<Slike> slike = new ArrayList<Slike>();
 
     /**
-     *
-     * @return
-     *     The ArtikalId
+     * @return The artikalId
      */
     public Integer getArtikalId() {
-        return ArtikalId;
+        return artikalId;
     }
 
     /**
-     *
-     * @param ArtikalId
-     *     The ArtikalId
+     * @param artikalId The ArtikalId
      */
-    public void setArtikalId(Integer ArtikalId) {
-        this.ArtikalId = ArtikalId;
+    public void setArtikalId(Integer artikalId) {
+        this.artikalId = artikalId;
     }
 
     /**
-     *
-     * @return
-     *     The ArtikalNaziv
+     * @return The artikalNaziv
      */
     public String getArtikalNaziv() {
-        return ArtikalNaziv;
+        return artikalNaziv;
     }
 
     /**
-     *
-     * @param ArtikalNaziv
-     *     The ArtikalNaziv
+     * @param artikalNaziv The ArtikalNaziv
      */
-    public void setArtikalNaziv(String ArtikalNaziv) {
-        this.ArtikalNaziv = ArtikalNaziv;
+    public void setArtikalNaziv(String artikalNaziv) {
+        this.artikalNaziv = artikalNaziv;
     }
 
     /**
-     *
-     * @return
-     *     The NaAkciji
+     * @return The artikalKratakOpis
      */
-    public Integer getNaAkciji() {
-        return NaAkciji;
+    public String getArtikalKratakOpis() {
+        return artikalKratakOpis;
     }
 
     /**
-     *
-     * @param NaAkciji
-     *     The NaAkciji
+     * @param artikalKratakOpis The ArtikalKratakOpis
      */
-    public void setNaAkciji(Integer NaAkciji) {
-        this.NaAkciji = NaAkciji;
+    public void setArtikalKratakOpis(String artikalKratakOpis) {
+        this.artikalKratakOpis = artikalKratakOpis;
     }
 
     /**
-     *
-     * @return
-     *     The urlArtiklaLink
+     * @return The artikalNaAkciji
+     */
+    public Integer getArtikalNaAkciji() {
+        return artikalNaAkciji;
+    }
+
+    /**
+     * @param artikalNaAkciji The ArtikalNaAkciji
+     */
+    public void setArtikalNaAkciji(Integer artikalNaAkciji) {
+        this.artikalNaAkciji = artikalNaAkciji;
+    }
+
+    /**
+     * @return The urlArtiklaLink
      */
     public String getUrlArtiklaLink() {
         return urlArtiklaLink;
     }
 
     /**
-     *
-     * @param urlArtiklaLink
-     *     The urlArtiklaLink
+     * @param urlArtiklaLink The urlArtiklaLink
      */
     public void setUrlArtiklaLink(String urlArtiklaLink) {
         this.urlArtiklaLink = urlArtiklaLink;
     }
 
     /**
-     *
-     * @return
-     *     The link
+     * @return The cenaPrikaz
      */
-    public String getLink() {
-        return link;
+    public String getCenaPrikaz() {
+        return cenaPrikaz;
     }
 
     /**
-     *
-     * @param link
-     *     The link
+     * @param cenaPrikaz The cenaPrikaz
      */
-    public void setLink(String link) {
-        this.link = link;
+    public void setCenaPrikaz(String cenaPrikaz) {
+        this.cenaPrikaz = cenaPrikaz;
     }
 
     /**
-     *
-     * @return
-     *     The cenaBroj
+     * @return The cenaPrikazBroj
      */
-    public String getCenaBroj() {
-        return cenaBroj;
+    public Double getCenaPrikazBroj() {
+        return cenaPrikazBroj;
     }
 
     /**
-     *
-     * @param cenaBroj
-     *     The cenaBroj
+     * @param cenaPrikazBroj The cenaPrikazBroj
      */
-    public void setCenaBroj(String cenaBroj) {
-        this.cenaBroj = cenaBroj;
+    public void setCenaPrikazBroj(Double cenaPrikazBroj) {
+        this.cenaPrikazBroj = cenaPrikazBroj;
     }
 
     /**
-     *
-     * @return
-     *     The pravaMp
+     * @return The cenaSamoBrojFormat
      */
-    public String getPravaMp() {
-        return pravaMp;
+    public String getCenaSamoBrojFormat() {
+        return cenaSamoBrojFormat;
     }
 
     /**
-     *
-     * @param pravaMp
-     *     The pravaMp
+     * @param cenaSamoBrojFormat The cenaSamoBrojFormat
      */
-    public void setPravaMp(String pravaMp) {
-        this.pravaMp = pravaMp;
+    public void setCenaSamoBrojFormat(String cenaSamoBrojFormat) {
+        this.cenaSamoBrojFormat = cenaSamoBrojFormat;
     }
 
     /**
-     *
-     * @return
-     *     The pozovite
+     * @return The cenaPrikazExt
      */
-    public Object getPozovite() {
+    public String getCenaPrikazExt() {
+        return cenaPrikazExt;
+    }
+
+    /**
+     * @param cenaPrikazExt The cenaPrikazExt
+     */
+    public void setCenaPrikazExt(String cenaPrikazExt) {
+        this.cenaPrikazExt = cenaPrikazExt;
+    }
+
+    /**
+     * @return The pozovite
+     */
+    public String getPozovite() {
         return pozovite;
     }
 
     /**
-     *
-     * @param pozovite
-     *     The pozovite
+     * @param pozovite The pozovite
      */
-    public void setPozovite(Object pozovite) {
+    public void setPozovite(String pozovite) {
         this.pozovite = pozovite;
     }
 
     /**
-     *
-     * @return
-     *     The brend
+     * @return The brendIme
      */
-    public String getBrend() {
-        return brend;
+    public String getBrendIme() {
+        return brendIme;
     }
 
     /**
-     *
-     * @param brend
-     *     The brend
+     * @param brendIme The BrendIme
      */
-    public void setBrend(String brend) {
-        this.brend = brend;
+    public void setBrendIme(String brendIme) {
+        this.brendIme = brendIme;
     }
 
     /**
-     *
-     * @return
-     *     The ArtikalKratakOpis
+     * @return The brendId
      */
-    public Object getArtikalKratakOpis() {
-        return ArtikalKratakOpis;
+    public Integer getBrendId() {
+        return brendId;
     }
 
     /**
-     *
-     * @param ArtikalKratakOpis
-     *     The ArtikalKratakOpis
+     * @param brendId The BrendId
      */
-    public void setArtikalKratakOpis(Object ArtikalKratakOpis) {
-        this.ArtikalKratakOpis = ArtikalKratakOpis;
+    public void setBrendId(Integer brendId) {
+        this.brendId = brendId;
     }
 
     /**
-     *
-     * @return
-     *     The stanje
-     */
-    public Integer getStanje() {
-        return stanje;
-    }
-
-    /**
-     *
-     * @param stanje
-     *     The stanje
-     */
-    public void setStanje(Integer stanje) {
-        this.stanje = stanje;
-    }
-
-    /**
-     *
-     * @return
-     *     The mozedasekupi
-     */
-    public Integer getMozedasekupi() {
-        return mozedasekupi;
-    }
-
-    /**
-     *
-     * @param mozedasekupi
-     *     The mozedasekupi
-     */
-    public void setMozedasekupi(Integer mozedasekupi) {
-        this.mozedasekupi = mozedasekupi;
-    }
-
-    /**
-     *
-     * @return
-     *     The minimalnaKol
-     */
-    public Integer getMinimalnaKol() {
-        return minimalnaKol;
-    }
-
-    /**
-     *
-     * @param minimalnaKol
-     *     The minimalnaKol
-     */
-    public void setMinimalnaKol(Integer minimalnaKol) {
-        this.minimalnaKol = minimalnaKol;
-    }
-
-    /**
-     *
-     * @return
-     *     The tipUnit
+     * @return The tipUnit
      */
     public String getTipUnit() {
         return tipUnit;
     }
 
     /**
-     *
-     * @param tipUnit
-     *     The tipUnit
+     * @param tipUnit The TipUnit
      */
     public void setTipUnit(String tipUnit) {
         this.tipUnit = tipUnit;
     }
 
     /**
-     *
-     * @return
-     *     The tipUnitcelo
+     * @return The tipUnitCelo
      */
-    public String getTipUnitcelo() {
-        return tipUnitcelo;
+    public String getTipUnitCelo() {
+        return tipUnitCelo;
     }
 
     /**
-     *
-     * @param tipUnitcelo
-     *     The tipUnitcelo
+     * @param tipUnitCelo The TipUnitCelo
      */
-    public void setTipUnitcelo(String tipUnitcelo) {
-        this.tipUnitcelo = tipUnitcelo;
+    public void setTipUnitCelo(String tipUnitCelo) {
+        this.tipUnitCelo = tipUnitCelo;
     }
 
     /**
-     *
-     * @return
-     *     The ocenaut
+     * @return The idUnit
      */
-    public String getOcenaut() {
+    public Integer getIdUnit() {
+        return idUnit;
+    }
+
+    /**
+     * @param idUnit The IdUnit
+     */
+    public void setIdUnit(Integer idUnit) {
+        this.idUnit = idUnit;
+    }
+
+    /**
+     * @return The minimalnaKolArt
+     */
+    public Integer getMinimalnaKolArt() {
+        return minimalnaKolArt;
+    }
+
+    /**
+     * @param minimalnaKolArt The MinimalnaKolArt
+     */
+    public void setMinimalnaKolArt(Integer minimalnaKolArt) {
+        this.minimalnaKolArt = minimalnaKolArt;
+    }
+
+    /**
+     * @return The slikaMain
+     */
+    public String getSlikaMain() {
+        return slikaMain;
+    }
+
+    /**
+     * @param slikaMain The slikaMain
+     */
+    public void setSlikaMain(String slikaMain) {
+        this.slikaMain = slikaMain;
+    }
+
+    /**
+     * @return The stanje
+     */
+    public Integer getStanje() {
+        return stanje;
+    }
+
+    /**
+     * @param stanje The stanje
+     */
+    public void setStanje(Integer stanje) {
+        this.stanje = stanje;
+    }
+
+    /**
+     * @return The codeVendor
+     */
+    public String getCodeVendor() {
+        return codeVendor;
+    }
+
+    /**
+     * @param codeVendor The codeVendor
+     */
+    public void setCodeVendor(String codeVendor) {
+        this.codeVendor = codeVendor;
+    }
+
+    /**
+     * @return The mozedasekupi
+     */
+    public Integer getMozedasekupi() {
+        return mozedasekupi;
+    }
+
+    /**
+     * @param mozedasekupi The mozedasekupi
+     */
+    public void setMozedasekupi(Integer mozedasekupi) {
+        this.mozedasekupi = mozedasekupi;
+    }
+
+    /**
+     * @return The ocenaut
+     */
+    public Integer getOcenaut() {
         return ocenaut;
     }
 
     /**
-     *
-     * @param ocenaut
-     *     The ocenaut
+     * @param ocenaut The ocenaut
      */
-    public void setOcenaut(String ocenaut) {
+    public void setOcenaut(Integer ocenaut) {
         this.ocenaut = ocenaut;
     }
 
     /**
-     *
-     * @return
-     *     The KategorijaArtikalaIdOS
+     * @return The kategorijaArtiklaNaziv
      */
-    public Integer getKategorijaArtikalaIdOS() {
-        return KategorijaArtikalaIdOS;
+    public String getKategorijaArtiklaNaziv() {
+        return kategorijaArtiklaNaziv;
     }
 
     /**
-     *
-     * @param KategorijaArtikalaIdOS
-     *     The KategorijaArtikalaIdOS
+     * @param kategorijaArtiklaNaziv The KategorijaArtiklaNaziv
      */
-    public void setKategorijaArtikalaIdOS(Integer KategorijaArtikalaIdOS) {
-        this.KategorijaArtikalaIdOS = KategorijaArtikalaIdOS;
+    public void setKategorijaArtiklaNaziv(String kategorijaArtiklaNaziv) {
+        this.kategorijaArtiklaNaziv = kategorijaArtiklaNaziv;
     }
 
     /**
-     *
-     * @return
-     *     The KategorijaArtikalaNaziv
+     * @return The kategorijaArtikalId
      */
-    public String getKategorijaArtikalaNaziv() {
-        return KategorijaArtikalaNaziv;
+    public Integer getKategorijaArtikalId() {
+        return kategorijaArtikalId;
     }
 
     /**
-     *
-     * @param KategorijaArtikalaNaziv
-     *     The KategorijaArtikalaNaziv
+     * @param kategorijaArtikalId The KategorijaArtikalId
      */
-    public void setKategorijaArtikalaNaziv(String KategorijaArtikalaNaziv) {
-        this.KategorijaArtikalaNaziv = KategorijaArtikalaNaziv;
+    public void setKategorijaArtikalId(Integer kategorijaArtikalId) {
+        this.kategorijaArtikalId = kategorijaArtikalId;
     }
 
     /**
-     *
-     * @return
-     *     The KategorijaArtikalaLink
+     * @return The kategorijaArtikalaLink
      */
     public String getKategorijaArtikalaLink() {
-        return KategorijaArtikalaLink;
+        return kategorijaArtikalaLink;
     }
 
     /**
-     *
-     * @param KategorijaArtikalaLink
-     *     The KategorijaArtikalaLink
+     * @param kategorijaArtikalaLink The KategorijaArtikalaLink
      */
-    public void setKategorijaArtikalaLink(String KategorijaArtikalaLink) {
-        this.KategorijaArtikalaLink = KategorijaArtikalaLink;
+    public void setKategorijaArtikalaLink(String kategorijaArtikalaLink) {
+        this.kategorijaArtikalaLink = kategorijaArtikalaLink;
     }
 
     /**
-     *
-     * @return
-     *     The malaSlika
+     * @return The spec
      */
-    public String getMalaSlika() {
-        return malaSlika;
+    public List<Object> getSpec() {
+        return spec;
     }
 
     /**
-     *
-     * @param malaSlika
-     *     The mala_slika
+     * @param spec The spec
      */
-    public void setMalaSlika(String malaSlika) {
-        this.malaSlika = malaSlika;
+    public void setSpec(List<Object> spec) {
+        this.spec = spec;
     }
 
     /**
-     *
-     * @return
-     *     The srednjaSlika
+     * @return The slike
      */
-    public String getSrednjaSlika() {
-        return srednjaSlika;
+    public List<Slike> getSlike() {
+        return slike;
     }
 
     /**
-     *
-     * @param srednjaSlika
-     *     The srednja_slika
+     * @param slike The slike
      */
-    public void setSrednjaSlika(String srednjaSlika) {
-        this.srednjaSlika = srednjaSlika;
+    public void setSlike(List<Slike> slike) {
+        this.slike = slike;
     }
 
 }

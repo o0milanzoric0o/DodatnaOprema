@@ -1,6 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.models;
 
-import android.util.Log;
+import org.json.JSONArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class OfflineCart implements Serializable {
     private ArrayList<OfflineCartItem> items;
     private String price_ext;  // DIN, EUR etc.
 
-    public void addItem(int item_id, int quantity, String price, String title, List<Pictures> pics, String price_ext, Object minQuantity) {
+    public void addItem(int item_id, int quantity, String price, String title, List<Pictures> pics, String price_ext, Integer minQuantity) {
         if (items == null) {
             items = new ArrayList<>();
         }
@@ -29,9 +29,7 @@ public class OfflineCart implements Serializable {
         item.setTitle(title);
         item.setPictures(pics);
         item.setPrice_ext(price_ext);
-//        Log.e("ADD ITEM:", minQuantity.toString());
-        //**TODO USE REAL MIN QUANTITY/
-        item.setMinQuantity(1);
+        item.setMinQuantity(minQuantity);
         this.price_ext = price_ext;
         items.add(item);
     }
@@ -76,14 +74,15 @@ public class OfflineCart implements Serializable {
         return quantity;
     }
 
-    public String getTotalPrice(){
-        Float total = 0.0f;
+    public String getTotalPrice(float shipping) {
+        Float total = shipping;
         if (items != null) {
             for (int i = 0; i < items.size(); i++) {
                 total += items.get(i).getTotal_price();
             }
         }
-        return String.valueOf(total);
+        //TODO Figure out what to do with local representation of numbers...
+        return String.format("%.02f", total);
     }
 
     public ArrayList<OfflineCartItem> getItems() {
@@ -100,5 +99,15 @@ public class OfflineCart implements Serializable {
 
     public void setPrice_ext(String price_ext) {
         this.price_ext = price_ext;
+    }
+
+    public JSONArray getItemsJSONArray() {
+        JSONArray jsonArray = new JSONArray();
+        if (items != null) {
+            for (int i = 0; i < items.size(); i++) {
+                jsonArray.put(items.get(i).getJSON());
+            }
+        }
+        return jsonArray;
     }
 }

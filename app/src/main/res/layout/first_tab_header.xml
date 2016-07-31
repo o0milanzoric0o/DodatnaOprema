@@ -10,7 +10,8 @@
         android:id="@+id/view_pager_dot_ind_0"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        app:slideInterval="5000" />
+        android:visibility="gone"
+        app:slideInterval="5000"/>
 
     <rs.dodatnaoprema.dodatnaoprema.customview.image_slider_with_dot_indicator.ImageSlider2Products
         android:id="@+id/view_pager_dot_ind_1"

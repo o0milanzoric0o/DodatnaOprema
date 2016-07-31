@@ -2,10 +2,12 @@ package rs.dodatnaoprema.dodatnaoprema.fragments;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +36,9 @@ import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.dialogs.InfoDialog;
+import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.models.OfflineCart;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 
 /**
@@ -107,6 +115,7 @@ public class CartUserDataFragment extends Fragment {
 
                     // Change User Object
                     User user = MyApplication.getInstance().getPrefManager().getUser();
+                    if (user == null) user = new User();
                     //user.setGeneral_name();
                     user.setName(et_name.getText().toString().trim());
                     user.setLast_name(et_last_name.getText().toString().trim());
@@ -222,6 +231,8 @@ public class CartUserDataFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo slanje podataka.");
+                    infoDialog.show(getFragmentManager(), "InfoDialog");
                 }
 
             }
@@ -230,7 +241,8 @@ public class CartUserDataFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.hideDialog();
-
+                InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                infoDialog.show(getFragmentManager(), "InfoDialog");
             }
         }) {
 
@@ -295,6 +307,14 @@ public class CartUserDataFragment extends Fragment {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
+                                        // Clear cart in user session on the phone
+                                        // Set cart item count
+                                        MyApplication.getInstance().getSessionManager().setCartItemCount(0);
+                                        // notify application to update toolbar icon
+                                        Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                                        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
+                                        // Close cart activity...
+                                        getActivity().finish();
                                     }
                                 });
                         alertDialog.show();
@@ -303,6 +323,8 @@ public class CartUserDataFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo pravljenje narudžbe.");
+                    infoDialog.show(getFragmentManager(), "InfoDialog");
                 }
 
             }
@@ -311,7 +333,8 @@ public class CartUserDataFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.hideDialog();
-
+                InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                infoDialog.show(getFragmentManager(), "InfoDialog");
             }
         }) {
 
@@ -330,7 +353,99 @@ public class CartUserDataFragment extends Fragment {
         MyApplication.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void completeTransactionLoggedOff(){
-        //** TODO create method body...Send JSON with user order to server/
+    private void completeTransactionLoggedOff() {
+        // prepare json object that contains the data to send
+        JSONObject jsonObject = new JSONObject();
+        JSONArray cartItems = MyApplication.getInstance().getSessionManager().getCartItemsJsonArray();
+
+        try {
+            jsonObject.accumulate("KomitentIme", et_name.getText());
+            jsonObject.accumulate("KomitentPrezime", et_last_name.getText());
+            jsonObject.accumulate("KomitentAdresa", et_address.getText());
+            jsonObject.accumulate("KomitentPosBroj", et_zip.getText());
+            jsonObject.accumulate("KomitentMesto", et_city.getText());
+            jsonObject.accumulate("KomitentTelefon", et_phone.getText());
+            jsonObject.accumulate("KomitentMobTel", et_mobile.getText());
+            jsonObject.accumulate("email", et_email.getText());
+            jsonObject.accumulate("napomena", et_comment.getText());
+            jsonObject.accumulate("valutaId", 1);
+            jsonObject.accumulate("jezikId", 1);
+            jsonObject.accumulate("korpa", cartItems);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String tag_string_req = "req_complete_tans_offline_user";
+        progressDialog.showDialog(getString(R.string.progress_completing_transaction));
+
+        String url = String.format(AppConfig.URL_COMPLETE_TRANSACTION_UNREGISTERED_USER);
+
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST,
+                url, jsonObject, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                progressDialog.hideDialog();
+                Log.logInfo("COMPLETE TRANSACTION REQUEST UNREG", response.toString());
+                try {
+                    boolean success = response.getBoolean("success");
+
+                    if (success) {
+                        // Inform the user to check his email to confirm the order
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                        alertDialog.setTitle("Kupovina");
+                        alertDialog.setMessage("Uspešno ste obavili kupovinu.");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+
+                                        // Clear offline cart
+                                        OfflineCart offlineCart = MyApplication.getInstance().getPrefManager().loadOfflineCart();
+                                        if (offlineCart != null) {
+                                            offlineCart.clearCart();
+                                            MyApplication.getInstance().getPrefManager().saveOfflineCart(offlineCart);
+                                            MyApplication.getInstance().getSessionManager().setOfflineCartItemCount(offlineCart.getTotalQuantity());
+                                        }
+                                        // notify application to update toolbar icon
+                                        Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
+                                        LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
+
+                                        // Close cart activity...
+                                        getActivity().finish();
+                                    }
+                                });
+                        alertDialog.show();
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo pravljenje narudžbe.");
+                    infoDialog.show(getFragmentManager(), "InfoDialog");
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.hideDialog();
+                InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
+                infoDialog.show(getFragmentManager(), "InfoDialog");
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        strReq.setRetryPolicy(new DefaultRetryPolicy(AppConfig.DEFAULT_TIMEOUT_MS * 2, AppConfig.DEFAULT_MAX_RETRIES * 0, AppConfig.DEFAULT_BACKOFF_MULT));
+        // Adding request to  queue
+        MyApplication.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 }

@@ -97,7 +97,7 @@ public class ImageSlider3Brands extends RelativeLayout {
         this.mAllBrands.clear();
         // Show only brands with BrendSajt == 2
         for (int i = 0; i < allBrands.size(); i++) {
-            if (allBrands.get(i).getBrendSajt() == 2)
+            if (allBrands.get(i).getBrendSajtMasine() == 1 && allBrands.get(i).getBrendNaslovna() == 1)
                 mAllBrands.add(allBrands.get(i));
         }
 
@@ -119,8 +119,8 @@ public class ImageSlider3Brands extends RelativeLayout {
             mDotsLayout.addView(mdots[i], params);
         }
 
-
-        mdots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
+        if (mdots.length >= 1)
+            mdots[0].setImageDrawable(ContextCompat.getDrawable(mcontext, R.drawable.selecteditem_dot));
 
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);

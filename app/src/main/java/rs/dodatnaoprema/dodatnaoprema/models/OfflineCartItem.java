@@ -1,5 +1,8 @@
 package rs.dodatnaoprema.dodatnaoprema.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -82,5 +85,17 @@ public class OfflineCartItem implements Serializable {
 
     public void setMinQuantity(Integer minQuantity) {
         this.minQuantity = minQuantity;
+    }
+
+    public JSONObject getJSON(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.accumulate("artikalID", item_id);
+            jsonObject.accumulate("cena", total_price);
+            jsonObject.accumulate("kolicina", quantity);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  jsonObject;
     }
 }

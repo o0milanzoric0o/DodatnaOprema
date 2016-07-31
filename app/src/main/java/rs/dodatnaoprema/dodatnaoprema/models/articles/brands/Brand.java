@@ -9,156 +9,213 @@ public class Brand implements Serializable {
 
     @SerializedName("BrendId")
     @Expose
-    private Integer BrendId;
+    private Integer brendId;
     @SerializedName("BrendIme")
     @Expose
-    private String BrendIme;
+    private String brendIme;
     @SerializedName("BrendLink")
     @Expose
-    private String BrendLink;
+    private String brendLink;
     @SerializedName("BrendSlikaMala")
     @Expose
-    private String BrendSlikaMala;
+    private String brendSlikaMala;
     @SerializedName("BrendSlika172")
     @Expose
-    private String BrendSlika172;
+    private String brendSlika172;
     @SerializedName("BrendActive")
     @Expose
-    private String BrendActive;
+    private Integer brendActive;
     @SerializedName("BrendNaslovna")
     @Expose
-    private Object BrendNaslovna;
+    private Integer brendNaslovna;
     @SerializedName("BrendShow")
     @Expose
-    private Integer BrendShow;
+    private Integer brendShow;
     @SerializedName("BrendSajt")
     @Expose
-    private Integer BrendSajt;
+    private Integer brendSajt;
+    @SerializedName("BrendSajtMasine")
+    @Expose
+    private Integer brendSajtMasine;
 
     /**
-     * @return The BrendId
+     *
+     * @return
+     *     The brendId
      */
     public Integer getBrendId() {
-        return BrendId;
+        return brendId;
     }
 
     /**
-     * @param BrendId The BrendId
+     *
+     * @param brendId
+     *     The BrendId
      */
-    public void setBrendId(Integer BrendId) {
-        this.BrendId = BrendId;
+    public void setBrendId(Integer brendId) {
+        this.brendId = brendId;
     }
 
     /**
-     * @return The BrendIme
+     *
+     * @return
+     *     The brendIme
      */
     public String getBrendIme() {
-        return BrendIme;
+        return brendIme;
     }
 
     /**
-     * @param BrendIme The BrendIme
+     *
+     * @param brendIme
+     *     The BrendIme
      */
-    public void setBrendIme(String BrendIme) {
-        this.BrendIme = BrendIme;
+    public void setBrendIme(String brendIme) {
+        this.brendIme = brendIme;
     }
 
     /**
-     * @return The BrendLink
+     *
+     * @return
+     *     The brendLink
      */
     public String getBrendLink() {
-        return BrendLink;
+        return brendLink;
     }
 
     /**
-     * @param BrendLink The BrendLink
+     *
+     * @param brendLink
+     *     The BrendLink
      */
-    public void setBrendLink(String BrendLink) {
-        this.BrendLink = BrendLink;
+    public void setBrendLink(String brendLink) {
+        this.brendLink = brendLink;
     }
 
     /**
-     * @return The BrendSlikaMala
+     *
+     * @return
+     *     The brendSlikaMala
      */
     public String getBrendSlikaMala() {
-        return BrendSlikaMala;
+        return brendSlikaMala;
     }
 
     /**
-     * @param BrendSlikaMala The BrendSlikaMala
+     *
+     * @param brendSlikaMala
+     *     The BrendSlikaMala
      */
-    public void setBrendSlikaMala(String BrendSlikaMala) {
-        this.BrendSlikaMala = BrendSlikaMala;
+    public void setBrendSlikaMala(String brendSlikaMala) {
+        this.brendSlikaMala = brendSlikaMala;
     }
 
     /**
-     * @return The BrendSlika172
+     *
+     * @return
+     *     The brendSlika172
      */
     public String getBrendSlika172() {
-        return BrendSlika172;
+        return brendSlika172;
     }
 
     /**
-     * @param BrendSlika172 The BrendSlika172
+     *
+     * @param brendSlika172
+     *     The BrendSlika172
      */
-    public void setBrendSlika172(String BrendSlika172) {
-        this.BrendSlika172 = BrendSlika172;
+    public void setBrendSlika172(String brendSlika172) {
+        this.brendSlika172 = brendSlika172;
     }
 
     /**
-     * @return The BrendActive
+     *
+     * @return
+     *     The brendActive
      */
-    public String getBrendActive() {
-        return BrendActive;
+    public Integer getBrendActive() {
+        return brendActive;
     }
 
     /**
-     * @param BrendActive The BrendActive
+     *
+     * @param brendActive
+     *     The BrendActive
      */
-    public void setBrendActive(String BrendActive) {
-        this.BrendActive = BrendActive;
+    public void setBrendActive(Integer brendActive) {
+        this.brendActive = brendActive;
     }
 
     /**
-     * @return The BrendNaslovna
+     *
+     * @return
+     *     The brendNaslovna
      */
-    public Object getBrendNaslovna() {
-        return BrendNaslovna;
+    public Integer getBrendNaslovna() {
+        return brendNaslovna;
     }
 
     /**
-     * @param BrendNaslovna The BrendNaslovna
+     *
+     * @param brendNaslovna
+     *     The BrendNaslovna
      */
-    public void setBrendNaslovna(Object BrendNaslovna) {
-        this.BrendNaslovna = BrendNaslovna;
+    public void setBrendNaslovna(Integer brendNaslovna) {
+        this.brendNaslovna = brendNaslovna;
     }
 
     /**
-     * @return The BrendShow
+     *
+     * @return
+     *     The brendShow
      */
     public Integer getBrendShow() {
-        return BrendShow;
+        return brendShow;
     }
 
     /**
-     * @param BrendShow The BrendShow
+     *
+     * @param brendShow
+     *     The BrendShow
      */
-    public void setBrendShow(Integer BrendShow) {
-        this.BrendShow = BrendShow;
+    public void setBrendShow(Integer brendShow) {
+        this.brendShow = brendShow;
     }
 
     /**
-     * @return The BrendSajt
+     *
+     * @return
+     *     The brendSajt
      */
     public Integer getBrendSajt() {
-        return BrendSajt;
+        return brendSajt;
     }
 
     /**
-     * @param BrendSajt The BrendSajt
+     *
+     * @param brendSajt
+     *     The BrendSajt
      */
-    public void setBrendSajt(Integer BrendSajt) {
-        this.BrendSajt = BrendSajt;
+    public void setBrendSajt(Integer brendSajt) {
+        this.brendSajt = brendSajt;
+    }
+
+    /**
+     *
+     * @return
+     *     The brendSajtMasine
+     */
+    public Integer getBrendSajtMasine() {
+        return brendSajtMasine;
+    }
+
+    /**
+     *
+     * @param brendSajtMasine
+     *     The BrendSajtMasine
+     */
+    public void setBrendSajtMasine(Integer brendSajtMasine) {
+        this.brendSajtMasine = brendSajtMasine;
     }
 
 }

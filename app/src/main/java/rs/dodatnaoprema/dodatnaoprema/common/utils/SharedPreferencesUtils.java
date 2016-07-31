@@ -219,6 +219,7 @@ public class SharedPreferencesUtils {
         return "";
 
     }
+
     public static String getUserEmail() {
         MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
         SessionManager session = MyApplication.getInstance().getSessionManager();

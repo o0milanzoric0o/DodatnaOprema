@@ -3,6 +3,8 @@ package rs.dodatnaoprema.dodatnaoprema.common.application;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
@@ -54,11 +56,16 @@ public class SessionManager {
         pref.saveOfflineCart(offlineCart);
     }
 
-    public void addItemOfflineCart(int item_id, int quantity, String price, String title, List<Pictures> pics, String price_ext, Object minQuantity) {
+    public void addItemOfflineCart(int item_id, int quantity, String price, String title, List<Pictures> pics, String price_ext, Integer minQuantity) {
         OfflineCart offlineCart = pref.loadOfflineCart();
         offlineCart.addItem(item_id, quantity, price, title, pics, price_ext, minQuantity);
         Log.e("Korpa get_tot_quant:", String.valueOf(offlineCart.getTotalQuantity()));
         setOfflineCartItemCount(offlineCart.getTotalQuantity());
         pref.saveOfflineCart(offlineCart);
+    }
+
+    public JSONArray getCartItemsJsonArray(){
+        OfflineCart offlineCart = pref.loadOfflineCart();
+        return offlineCart.getItemsJSONArray();
     }
 }

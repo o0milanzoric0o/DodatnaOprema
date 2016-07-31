@@ -191,7 +191,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/tv_total_label"
                 android:layout_toRightOf="@id/tv_total_label"
-                android:text="3345.232 DIN"
+                android:text="xxx.xx DIN"
                 android:textColor="@color/accent" />
 
             <Button

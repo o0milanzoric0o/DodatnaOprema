@@ -333,7 +333,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             // We are not logged in, but enable adding to cart anyway
             MyApplication.getInstance().getSessionManager().addItemOfflineCart(item_id, quantity, mOneArticle.getArtikal().getCenaPrikazBroj(), mOneArticle.getArtikal().getArtikalNaziv(), mOneArticle.getArtikal().getSlike(), mOneArticle.getArtikal().getCenaPrikazExt(), mOneArticle.getArtikal().getMinimalnaKolArt());
             // get total item quantity
-
             String totalQuantity = String.valueOf(MyApplication.getInstance().getSessionManager().getOfflineCartItemCount());
             // Update toolbar Icon
             Log.e("Korpa quant:", String.valueOf(quantity));
@@ -368,7 +367,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
     public void showNumberPicker(View v) {
         // Create an instance of the dialog fragment and show it
-        NumberPickerDialog aNumberPicker = NumberPickerDialog.newInstance(mOneArticle.getArtikal().getMozedaseKupi(), 9999);
+        NumberPickerDialog aNumberPicker = NumberPickerDialog.newInstance(mOneArticle.getArtikal().getMinimalnaKolArt(), 999);
         //       aNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
         aNumberPicker.show(getSupportFragmentManager(), "NumberPickerDialog");
     }

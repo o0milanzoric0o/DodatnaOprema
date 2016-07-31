@@ -175,8 +175,16 @@ public class ImageSlider2Products extends RelativeLayout {
             ImageLoader mImageLoader = VolleySingleton.getsInstance(mContext).getImageLoader();
             final int left_position = position - 1 >= 0 ? position - 1 : mProductArray.size() - 1;
             final int middle_position = position;
-            imageView_left.setImageUrl(mProductArray.get(left_position).getSrednjaSlika(), mImageLoader);
-            imageView_middle.setImageUrl(mProductArray.get(middle_position).getSrednjaSlika(), mImageLoader);
+
+            String l_image_url = mProductArray.get(left_position).getSlikaMain();
+            if (mProductArray.get(left_position).getSlike()!=null && mProductArray.get(left_position).getSlike().size()>0)
+                l_image_url = mProductArray.get(left_position).getSlike().get(0).getSrednjaSlika();
+            imageView_left.setImageUrl(l_image_url, mImageLoader);
+
+            String m_image_url = mProductArray.get(middle_position).getSlikaMain();
+            if (mProductArray.get(middle_position).getSlike()!=null && mProductArray.get(middle_position).getSlike().size()>0)
+                m_image_url = mProductArray.get(middle_position).getSlike().get(0).getSrednjaSlika();
+            imageView_middle.setImageUrl(m_image_url, mImageLoader);
 
             imageView_left.setOnClickListener(new OnClickListener() {
                 @Override
@@ -197,13 +205,13 @@ public class ImageSlider2Products extends RelativeLayout {
             });
 
             String item1_str = mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getArtikalNaziv();
-            item1_str = item1_str + "\n" + mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaBroj();
-            item1_str = item1_str + " DIN";
+            item1_str = item1_str + "\n" + mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaSamoBrojFormat();
+            item1_str += mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaPrikazExt();
             tv_item_1.setText(item1_str);
 
             String item2_str = mProductArray.get(position).getArtikalNaziv();
-            item2_str = item2_str + "\n" + mProductArray.get(position).getCenaBroj();
-            item2_str = item2_str + " DIN";
+            item2_str = item2_str + "\n" + mProductArray.get(position).getCenaSamoBrojFormat();
+            item2_str += mProductArray.get(position).getCenaPrikazExt();
             tv_item_2.setText(item2_str);
 
             container.addView(itemView);
