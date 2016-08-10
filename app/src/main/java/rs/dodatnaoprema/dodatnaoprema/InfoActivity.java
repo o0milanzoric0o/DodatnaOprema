@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -60,6 +62,7 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_HOW_TO_BUY"), Base64.DEFAULT);
         } else {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_CONTACT"), Base64.DEFAULT);
+            Log.e("InfoActivity","Info Contact");
             map.setVisibility(View.VISIBLE);
             MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
@@ -105,8 +108,10 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         // googleMap.addMarker(new MarkerOptions().position(new LatLng(44.8066679, 20.4691681)).title("Marker"));
 
+        Log.e("InfoActivity"," OnMapReady");
+
         LatLng latLng = new LatLng(44.806664, 20.471357);
-        googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Мобилни центар")).showInfoWindow();
+        googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Mobilni centar").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).showInfoWindow();
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
     }
