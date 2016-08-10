@@ -15,14 +15,18 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.List;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 
 
-public class InfoActivity extends BaseActivity {
+public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
     private String title;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class InfoActivity extends BaseActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);
+
+        LinearLayout map = (LinearLayout) findViewById(R.id.mapHolder);
 
         Intent intent = getIntent();
         title = intent.getStringExtra("infoTip");
@@ -54,6 +60,9 @@ public class InfoActivity extends BaseActivity {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_HOW_TO_BUY"), Base64.DEFAULT);
         } else {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_CONTACT"), Base64.DEFAULT);
+            map.setVisibility(View.VISIBLE);
+            MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
         }
 
         mWebViewTab.setWebViewClient(new WebViewClient() {
@@ -61,6 +70,7 @@ public class InfoActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mWebViewTab.setVisibility(View.VISIBLE);
+
             }
         });
         mWebViewTab.loadDataWithBaseURL(null, new String(data), "text/html", "UTF-8", null);
@@ -89,5 +99,15 @@ public class InfoActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // googleMap.addMarker(new MarkerOptions().position(new LatLng(44.8066679, 20.4691681)).title("Marker"));
+
+        LatLng latLng = new LatLng(44.806664, 20.471357);
+        googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Мобилни центар")).showInfoWindow();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
     }
 }
