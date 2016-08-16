@@ -149,7 +149,7 @@ public class ImageSlider2Products extends RelativeLayout {
 
         @Override
         public int getCount() {
-            return mProductArray.size();
+            return mProductArray.size() / 2;
         }
 
         @Override
@@ -168,23 +168,23 @@ public class ImageSlider2Products extends RelativeLayout {
 
             itemView = LayoutInflater.from(mContext).inflate(R.layout.view_pager_item_double_version, container, false);
             NetworkImageView imageView_left = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_1);
-            NetworkImageView imageView_middle = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_2);
+            NetworkImageView imageView_right = (NetworkImageView) itemView.findViewById(R.id.img_pager_item_2);
             TextView tv_item_1 = (TextView) itemView.findViewById(R.id.tv_price_title_item_1);
             TextView tv_item_2 = (TextView) itemView.findViewById(R.id.tv_price_title_item_2);
 
             ImageLoader mImageLoader = VolleySingleton.getsInstance(mContext).getImageLoader();
-            final int left_position = position - 1 >= 0 ? position - 1 : mProductArray.size() - 1;
-            final int middle_position = position;
+            final int left_position = position * 2;
+            final int right_position = left_position + 1;
 
             String l_image_url = mProductArray.get(left_position).getSlikaMain();
             if (mProductArray.get(left_position).getSlike()!=null && mProductArray.get(left_position).getSlike().size()>0)
                 l_image_url = mProductArray.get(left_position).getSlike().get(0).getSrednjaSlika();
             imageView_left.setImageUrl(l_image_url, mImageLoader);
 
-            String m_image_url = mProductArray.get(middle_position).getSlikaMain();
-            if (mProductArray.get(middle_position).getSlike()!=null && mProductArray.get(middle_position).getSlike().size()>0)
-                m_image_url = mProductArray.get(middle_position).getSlike().get(0).getSrednjaSlika();
-            imageView_middle.setImageUrl(m_image_url, mImageLoader);
+            String m_image_url = mProductArray.get(right_position).getSlikaMain();
+            if (mProductArray.get(right_position).getSlike()!=null && mProductArray.get(right_position).getSlike().size()>0)
+                m_image_url = mProductArray.get(right_position).getSlike().get(0).getSrednjaSlika();
+            imageView_right.setImageUrl(m_image_url, mImageLoader);
 
             imageView_left.setOnClickListener(new OnClickListener() {
                 @Override
@@ -195,23 +195,23 @@ public class ImageSlider2Products extends RelativeLayout {
                 }
             });
 
-            imageView_middle.setOnClickListener(new OnClickListener() {
+            imageView_right.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent showArticle = new Intent(Config.SHOW_ARTICLE_DETAILS);
-                    showArticle.putExtra("show_article", mProductArray.get(middle_position).getArtikalId());
+                    showArticle.putExtra("show_article", mProductArray.get(right_position).getArtikalId());
                     LocalBroadcastManager.getInstance(mcontext).sendBroadcast(showArticle);
                 }
             });
 
-            String item1_str = mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getArtikalNaziv();
-            item1_str = item1_str + "\n" + mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaSamoBrojFormat();
-            item1_str += mProductArray.get(position - 1 >= 0 ? position - 1 : mProductArray.size() - 1).getCenaPrikazExt();
+            String item1_str = mProductArray.get(left_position).getArtikalNaziv();
+            item1_str = item1_str + "\n" + mProductArray.get(left_position).getCenaSamoBrojFormat();
+            item1_str += mProductArray.get(left_position).getCenaPrikazExt();
             tv_item_1.setText(item1_str);
 
-            String item2_str = mProductArray.get(position).getArtikalNaziv();
-            item2_str = item2_str + "\n" + mProductArray.get(position).getCenaSamoBrojFormat();
-            item2_str += mProductArray.get(position).getCenaPrikazExt();
+            String item2_str = mProductArray.get(right_position).getArtikalNaziv();
+            item2_str = item2_str + "\n" + mProductArray.get(right_position).getCenaSamoBrojFormat();
+            item2_str += mProductArray.get(right_position).getCenaPrikazExt();
             tv_item_2.setText(item2_str);
 
             container.addView(itemView);
