@@ -15,7 +15,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAllCategories;
 
@@ -41,7 +43,10 @@ public class AllCategoriesActivity extends BaseActivity {
             }
         });
 
-        allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
+        //allCategories = (List<Category>) intent.getSerializableExtra("SveKategorije");
+        // Get all categories from shared prefs
+        allCategories = SharedPreferencesUtils.getArrayListCategories(this, AppConfig.ALL_CATEGORIES);
+
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTextView = (TextView) findViewById(R.id.title);

@@ -432,7 +432,8 @@ public class MainActivity extends FragmentActivity
     public void viewAllCategories() {
 
         intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
-        intent.putExtra("SveKategorije", (Serializable) mAllCategories);
+        // Not going to put allCategories in an intent, better get it from shared prefs
+        //intent.putExtra("SveKategorije", (Serializable) mAllCategories);
         startActivity(intent);
     }
 
