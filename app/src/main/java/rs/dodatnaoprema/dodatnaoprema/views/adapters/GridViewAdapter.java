@@ -16,6 +16,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.you_may_also_like.GridItem;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 /**
@@ -24,13 +25,18 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
-    private List<Article> data = new ArrayList();
+    private List<GridItem> data = new ArrayList();
 
-    public GridViewAdapter(Context context, int layoutResourceId, List<Article> articles) {
+    public GridViewAdapter(Context context, int layoutResourceId, List<GridItem> articles) {
         super(context, layoutResourceId, articles);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = articles;
+    }
+
+    @Override
+    public int getCount() {
+        return data.size();
     }
 
     @Override
@@ -49,14 +55,14 @@ public class GridViewAdapter extends ArrayAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        Article article = data.get(position);
+        GridItem article = data.get(position);
         holder.imageTitle.setText(article.getArtikalNaziv());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         holder.image.setImageUrl(article.getSlike().get(0).getSrednjaSlika(), mImageLoader);
         return row;
     }
 
-    public void updateContent(List<Article> articles) {
+    public void updateContent(List<GridItem> articles) {
         // clear and add to keep the old object reference
         this.data.clear();
         this.data.addAll(articles);

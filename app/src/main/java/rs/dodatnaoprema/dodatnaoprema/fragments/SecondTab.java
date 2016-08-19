@@ -29,10 +29,14 @@ import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
+import rs.dodatnaoprema.dodatnaoprema.models.you_may_also_like.GridItem;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -53,6 +57,7 @@ public class SecondTab extends Fragment {
     private View last_clicked_btn;
     private ViewGroup.LayoutParams param;
     private List<Article> mArticles = new ArrayList<>();
+    private List<GridItem> mGridItems = new ArrayList<>();
     private GridView gridView;
     private GridViewAdapter gridAdapter;
 
@@ -63,8 +68,16 @@ public class SecondTab extends Fragment {
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
                     mArticles = articlesFilteredByCategory.getArtikli();
-                    gridAdapter.updateContent(mArticles);
-
+                    mGridItems.clear();
+                    for (Article article: mArticles
+                         ) {
+                            GridItem gi = new GridItem();
+                            gi.setArtikalId(article.getArtikalId());
+                            gi.setArtikalNaziv(article.getArtikalNaziv());
+                            gi.setSlike(article.getSlike());
+                            mGridItems.add(gi);
+                    }
+                    gridAdapter.updateContent(mGridItems);
                 }
             }
 
@@ -77,17 +90,34 @@ public class SecondTab extends Fragment {
 
     }
 
+    public void setDefaultContent(){
+        // get products of the week
+        mArticles.clear();
+        List<Product> products = SharedPreferencesUtils.getArrayListProducts(getContext(), AppConfig.THE_PRODUCTS_OF_THE_WEEK);
+        mGridItems.clear();
+        for (Product product: products
+                ) {
+            GridItem gi = new GridItem();
+            gi.setArtikalId(product.getArtikalId());
+            gi.setArtikalNaziv(product.getArtikalNaziv());
+            gi.setSlike(product.getSlike());
+            mGridItems.add(gi);
+        }
+//        mArticles = articlesFilteredByCategory.getArtikli();
+        gridAdapter.updateContent(mGridItems);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.you_may_also_like_product, container, false);
         gridView = (GridView) mView.findViewById(R.id.gridView);
-        gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, mArticles);
+        gridAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, mGridItems);
         gridView.setAdapter(gridAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int itemID = ((Article) gridView.getItemAtPosition(position)).getArtikalId();
+                int itemID = ((GridItem) gridView.getItemAtPosition(position)).getArtikalId();
                 //     mArticles.get(position).getArtikalId()
                 Log.logInfo("LALALA", "SUCCESS" + itemID);
                 PullWebContent<OneArticle> content =
@@ -125,6 +155,7 @@ public class SecondTab extends Fragment {
         });
         mVolleySingleton = VolleySingleton.getsInstance(getContext());
         mArticles = new ArrayList<>();
+        mGridItems = new ArrayList<>();
 
         final MainActivity mainActivity = (MainActivity) getActivity();
 
@@ -195,6 +226,9 @@ public class SecondTab extends Fragment {
                 }
             }
         });
+
+        // Set default content to be products of the week
+        setDefaultContent();
         return mView;
     }
 

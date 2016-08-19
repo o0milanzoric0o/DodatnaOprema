@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
+
 public class Product implements Serializable {
 
     @SerializedName("ArtikalId")
@@ -86,7 +88,7 @@ public class Product implements Serializable {
     private List<Object> spec = new ArrayList<Object>();
     @SerializedName("slike")
     @Expose
-    private List<Slike> slike = new ArrayList<Slike>();
+    private List<Pictures> slike = new ArrayList<Pictures>();
 
     /**
      * @return The artikalId
@@ -441,14 +443,14 @@ public class Product implements Serializable {
     /**
      * @return The slike
      */
-    public List<Slike> getSlike() {
+    public List<Pictures> getSlike() {
         return slike;
     }
 
     /**
      * @param slike The slike
      */
-    public void setSlike(List<Slike> slike) {
+    public void setSlike(List<Pictures> slike) {
         this.slike = slike;
     }
 
