@@ -79,7 +79,7 @@
                                     <android.support.v4.view.ViewPager
                                         android:id="@+id/vp_gallery"
                                         android:layout_width="match_parent"
-                                        android:layout_height="200dp"/>
+                                        android:layout_height="200dp" />
 
                                     <github.chenupt.springindicator.SpringIndicator xmlns:app="http://schemas.android.com/apk/res-auto"
                                         android:id="@+id/indicator"
@@ -315,12 +315,17 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager_one_article"
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_one_article"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </android.support.v4.widget.NestedScrollView>
         </android.support.design.widget.CoordinatorLayout>
     </LinearLayout>
 

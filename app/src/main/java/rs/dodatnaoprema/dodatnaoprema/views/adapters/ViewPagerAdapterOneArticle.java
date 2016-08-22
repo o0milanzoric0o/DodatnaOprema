@@ -2,19 +2,12 @@ package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabOne;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabTwo;
 
-/**
- * Created by Mirna on 4.5.2016..
- */
 public class ViewPagerAdapterOneArticle extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 

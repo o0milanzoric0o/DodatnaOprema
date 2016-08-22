@@ -40,7 +40,6 @@ public class OneArticleTabOne extends Fragment {
         mWebViewTab.setLayoutParams(webViewParams);
 
 
-
         if (mWebViewTab != null) Log.logInfo("LALALA.........", "mWebViewTab != null");
         mWebViewTab.loadDataWithBaseURL(null, "<style>img{display: inline;height: auto;max-width: 100%;}</style>" + mActivity.opis(), "text/html", "UTF-8", null);
 

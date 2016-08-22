@@ -23,9 +23,6 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-
 import java.util.ArrayList;
 
 import github.chenupt.springindicator.SpringIndicator;
@@ -63,7 +60,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     TextView mTextViewSendQuestion;
     Toolbar mToolbar;
     TextView mTextView;
-    private NetworkImageView mImageView;
     private TextView mTextViewKorpa;
     private ViewPager mViewPager;
     private OneArticle mOneArticle;
@@ -138,10 +134,10 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
 
         mOneArticle = (OneArticle) intent.getExtras().get(AppConfig.ABOUT_PRODUCT);
-        ImageLoader mImageLoader = VolleySingleton.getsInstance(this).getImageLoader();
 
 
-        if (mTextView != null) mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
+        if (mTextView != null && mOneArticle != null)
+            mTextView.setText(mOneArticle.getArtikal().getArtikalNaziv());
 
         //mImageView.setImageUrl(mOneArticle.getArtikal().getSlike().get(0).getSrednjaSlika(), mImageLoader);
         ViewPager vpPager = (ViewPager) findViewById(R.id.vp_gallery);
@@ -302,7 +298,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
                         } else {
                             progressDialog.hideDialog();
                             InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Nije uspelo dodavanje artikla.");
-                            infoDialog.show(getSupportFragmentManager(),"InfoDialog");
+                            infoDialog.show(getSupportFragmentManager(), "InfoDialog");
                         }
                     }
                 }
@@ -313,7 +309,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
                     // Web request fail
                     // Create snackbar or something
                     InfoDialog infoDialog = InfoDialog.newInstance("Greška", "Proverite internet konekciju.");
-                    infoDialog.show(getSupportFragmentManager(),"InfoDialog");
+                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
                 }
             });
             content.pullList();
@@ -398,7 +394,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
         if (mOneArticle != null && mOneArticle.getArtikal().getSlike().size() > 0) {
             int size = mOneArticle.getArtikal().getSlike().size();
-            String url = "";
+            String url;
             for (int i = 0; i < size; i++) {
                 url = mOneArticle.getArtikal().getSlike().get(i).getVelikaSlika();
                 result.add(url);
