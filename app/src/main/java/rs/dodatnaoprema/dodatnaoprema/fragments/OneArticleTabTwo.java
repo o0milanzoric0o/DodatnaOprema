@@ -46,7 +46,7 @@ public class OneArticleTabTwo extends Fragment {
         mWebViewTab.setLayoutParams(webViewParams);
 
 
-        if (mWebViewTab != null) Log.logInfo("LALALA.........", "mWebViewTab != null");
+
         mWebViewTab.loadDataWithBaseURL(null, new String(data), "text/html", "UTF-8", null);
 
         //  mWebViewTab.loadDataWithBaseURL(null, mActivity.opis(), "text/html", "utf-8", null);
