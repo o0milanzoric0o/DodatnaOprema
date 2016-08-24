@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/primary_dark"
                     app:contentScrim="@color/primary_dark"
-                    app:layout_scrollFlags="scroll|enterAlways|snap">
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <LinearLayout
                         android:layout_width="match_parent"
