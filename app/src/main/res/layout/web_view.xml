@@ -6,13 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <WebView
-        android:id="@+id/mWebViewTab"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/one_product_padding"
-       />
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <WebView
+            android:id="@+id/mWebViewTab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/one_product_padding" />
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

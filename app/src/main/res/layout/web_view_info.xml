@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <WebView
-        android:id="@+id/mWebViewTab"
+        android:id="@+id/mWebViewInfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/one_product_padding" />

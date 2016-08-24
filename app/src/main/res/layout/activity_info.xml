@@ -21,7 +21,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        layout="@layout/web_view"
+        layout="@layout/web_view_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

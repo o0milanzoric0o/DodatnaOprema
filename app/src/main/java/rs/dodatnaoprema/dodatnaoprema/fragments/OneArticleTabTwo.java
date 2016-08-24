@@ -27,7 +27,7 @@ public class OneArticleTabTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View mView = inflater.inflate(R.layout.one_article_tab_two, container, false);
+        final View mView = inflater.inflate(R.layout.web_view, container, false);
         OneArticleActivity mActivity = (OneArticleActivity) getActivity();
 
 
@@ -37,12 +37,12 @@ public class OneArticleTabTwo extends Fragment {
 
                 LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        WebView mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
-        if (Build.VERSION.SDK_INT >= 19) {
+       WebView mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
+       /*  if (Build.VERSION.SDK_INT >= 19) {
             mWebViewTab.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         } else {
             mWebViewTab.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
+        }*/
         mWebViewTab.setLayoutParams(webViewParams);
 
 

@@ -7,15 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 
 public class OneArticleTabOne extends Fragment {
-
-    private WebView mWebViewTab;
-    private OneArticleActivity mActivity;
 
     public OneArticleTabOne() {
     }
@@ -30,13 +28,13 @@ public class OneArticleTabOne extends Fragment {
                              Bundle savedInstanceState) {
 
         final View mView = inflater.inflate(R.layout.web_view, container, false);
-        mActivity = (OneArticleActivity) getActivity();
+        OneArticleActivity mActivity = (OneArticleActivity) getActivity();
 
-        NestedScrollView.LayoutParams webViewParams = new
+        LinearLayout.LayoutParams webViewParams = new
 
-                NestedScrollView.LayoutParams(NestedScrollView.LayoutParams.MATCH_PARENT, NestedScrollView.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
+        WebView mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
 
         mWebViewTab.setLayoutParams(webViewParams);
         mWebViewTab.setScrollContainer(false);

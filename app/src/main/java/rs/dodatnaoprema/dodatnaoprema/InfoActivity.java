@@ -55,7 +55,7 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
 
                 LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        final WebView mWebViewTab = (WebView) findViewById(R.id.mWebViewTab);
+        final WebView mWebViewTab = (WebView) findViewById(R.id.mWebViewInfo);
         mWebViewTab.setVisibility(View.GONE);
         mWebViewTab.setLayoutParams(webViewParams);
         if (title != null && title.equals(getString(R.string.how_to_buy))) {
