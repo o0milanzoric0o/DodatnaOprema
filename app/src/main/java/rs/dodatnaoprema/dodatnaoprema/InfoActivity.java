@@ -111,8 +111,11 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
         Log.e("InfoActivity"," OnMapReady");
 
         LatLng latLng = new LatLng(44.806664, 20.471357);
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+        //googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
         googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Mobilni centar").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).showInfoWindow();
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+
     }
 }
