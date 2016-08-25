@@ -4,9 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.List;
+
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabOne;
+import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabThree;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleTabTwo;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 
 public class ViewPagerAdapterOneArticle extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -25,9 +29,13 @@ public class ViewPagerAdapterOneArticle extends FragmentStatePagerAdapter {
                 Log.logInfo("LALALA.....", "1");
                 return tab1;
             case 1:
-                OneArticleTabTwo tab2 = new OneArticleTabTwo();
-                Log.logInfo("LALALA.....", "2");
+                OneArticleTabThree tab2 = new OneArticleTabThree();
+                Log.logInfo("LALALA.....", "1");
                 return tab2;
+            case 2:
+                OneArticleTabTwo tab3 = new OneArticleTabTwo();
+                Log.logInfo("LALALA.....", "3");
+                return tab3;
             default:
                 return null;
         }

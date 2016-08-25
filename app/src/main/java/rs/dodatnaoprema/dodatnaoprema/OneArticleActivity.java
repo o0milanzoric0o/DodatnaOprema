@@ -24,6 +24,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import github.chenupt.springindicator.SpringIndicator;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
@@ -36,6 +37,8 @@ import rs.dodatnaoprema.dodatnaoprema.dialogs.NumberPickerDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemAddResponse;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -203,6 +206,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         if (mTabLayout != null) {
             mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));
+            mTabLayout.addTab(mTabLayout.newTab().setText("Specifikacije"));
             mTabLayout.addTab(mTabLayout.newTab().setText("Kako kupiti"));
             mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
             mViewPager = (ViewPager) findViewById(R.id.viewpager_one_article);
@@ -401,6 +405,10 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             }
         }
         return result;
+    }
+
+    public List<ArticleSpec> getArticleSpecification() {
+        return mOneArticle.getArtikal().getSpec();
     }
 
     @Override
