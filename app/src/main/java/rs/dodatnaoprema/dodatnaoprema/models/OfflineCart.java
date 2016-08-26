@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Pictures;
 
@@ -81,8 +82,7 @@ public class OfflineCart implements Serializable {
                 total += items.get(i).getTotal_price();
             }
         }
-        //TODO Figure out what to do with local representation of numbers...
-        return String.format("%.02f", total);
+        return String.format(Locale.US, "%.02f", total);
     }
 
     public ArrayList<OfflineCartItem> getItems() {

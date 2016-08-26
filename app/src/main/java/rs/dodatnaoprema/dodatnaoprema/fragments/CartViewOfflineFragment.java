@@ -221,6 +221,8 @@ public class CartViewOfflineFragment extends Fragment implements AdapterView.OnI
         mPrice.setText(price);
         mShipping.setText(shipping);
 
+        //String offline_price = mOfflineCart.getTotalPrice(0);
+
         if (Float.valueOf(mOfflineCart.getTotalPrice(0)) == 0.0f) {
             //show emty cart fragment
             Fragment emptyCartFragment = new EmptyCartFragment();
