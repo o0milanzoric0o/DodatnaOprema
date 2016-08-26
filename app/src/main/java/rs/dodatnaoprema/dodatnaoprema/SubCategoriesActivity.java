@@ -86,38 +86,7 @@ public class SubCategoriesActivity extends BaseActivity {
             @Override
             public void onItemClick(Child item, final View view) {
 
-                ArrayList<String> mHistory;
-                ArrayList<String> mHistoryID;
 
-                mHistory = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_KEY);
-                mHistoryID = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_ID_KEY);
-
-                if (mHistory.contains(item.getKatIme())) { //check if subcategory shortcut exists
-                    // move existing shortcut to the beginning of the array
-                    mHistory.remove(item.getKatIme());
-                    mHistoryID.remove(String.valueOf(item.getKategorijaArtikalaId()));
-
-                    mHistory.add(0, item.getKatIme());
-                    mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
-                } else {
-                    // create new subcategory shortcut at the beginning of the array
-                    mHistory.add(0, item.getKatIme());
-                    mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
-                }
-
-                //clear existing history
-                SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_KEY);
-                SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_ID_KEY);
-
-                //
-                if (mHistory.size() >= 4) { // limit size of history array to 4 items
-                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<>(mHistory.subList(0, 4)));
-                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, new ArrayList<>(mHistoryID.subList(0, 4)));
-
-                } else {
-                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
-                    SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, mHistoryID);
-                }
                 getCategoriesById(item.getKategorijaArtikalaId(), item);
 
 
@@ -141,6 +110,7 @@ public class SubCategoriesActivity extends BaseActivity {
                 if (success) {
                     existSubcategory = categoriesByID.getKategorije().size();
                     if (existSubcategory == 0) {
+                        setHistory(item);
                         Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
                         intent.putExtra("Artikli", item.getKatIme());
                         intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
@@ -162,6 +132,43 @@ public class SubCategoriesActivity extends BaseActivity {
             }
         });
         content.pullList();
+    }
+
+    public void setHistory(Child item) {
+
+        ArrayList<String> mHistory;
+        ArrayList<String> mHistoryID;
+
+        mHistory = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_KEY);
+        mHistoryID = SharedPreferencesUtils.getArrayList(getApplication(), AppConfig.HISTORY_ID_KEY);
+
+        if (mHistory.contains(item.getKatIme())) { //check if subcategory shortcut exists
+            // move existing shortcut to the beginning of the array
+            mHistory.remove(item.getKatIme());
+            mHistoryID.remove(String.valueOf(item.getKategorijaArtikalaId()));
+
+            mHistory.add(0, item.getKatIme());
+            mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
+        } else {
+            // create new subcategory shortcut at the beginning of the array
+            mHistory.add(0, item.getKatIme());
+            mHistoryID.add(0, String.valueOf(item.getKategorijaArtikalaId()));
+        }
+
+        //clear existing history
+        SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_KEY);
+        SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_ID_KEY);
+
+        //
+        if (mHistory.size() >= 4) { // limit size of history array to 4 items
+            SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<>(mHistory.subList(0, 4)));
+            SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, new ArrayList<>(mHistoryID.subList(0, 4)));
+
+        } else {
+            SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, mHistory);
+            SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, mHistoryID);
+        }
+
     }
 
     @Override

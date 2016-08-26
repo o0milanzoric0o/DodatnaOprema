@@ -26,6 +26,7 @@ import java.util.Map;
 
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.FieldValidators;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -78,43 +79,49 @@ public class QuestionActivity extends BaseActivity {
             public void onClick(View view) {
 
                 final ProgressDialogCustom progressDialog = new ProgressDialogCustom(QuestionActivity.this);
-                progressDialog.setCancelable(false);
-                progressDialog.showDialog("Učitavanje...");
+                if (!FieldValidators.isValidEmail(emailTxt.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Neispravno uneta email adresa!", Toast.LENGTH_LONG).show();
+                } else if (questionTxt.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Niste uneli tekst poruke!", Toast.LENGTH_LONG).show();
+                } else {
+                    progressDialog.setCancelable(false);
+                    progressDialog.showDialog("Učitavanje...");
 
-                StringRequest postRequest = new StringRequest(Request.Method.POST, "http://masinealati.rs/parametri.php",
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // response
-                                Log.d("Response", response);
-                                Toast.makeText(getApplicationContext(), "Poruka je uspešno poslata!", Toast.LENGTH_LONG).show();
-                                progressDialog.hideDialog();
-                                onBackPressed();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // error
-                                Log.d("Error.Response", "Error");
-                                progressDialog.hideDialog();
-                                Toast.makeText(getApplicationContext(), "Greška pri slanju poruke, pokušajte ponovo!", Toast.LENGTH_LONG).show();
+                    StringRequest postRequest = new StringRequest(Request.Method.POST, "http://masinealati.rs/parametri.php",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // response
+                                    Log.d("Response", response);
+                                    Toast.makeText(getApplicationContext(), "Poruka je uspešno poslata!", Toast.LENGTH_LONG).show();
+                                    progressDialog.hideDialog();
+                                    onBackPressed();
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // error
+                                    Log.d("Error.Response", "Error");
+                                    progressDialog.hideDialog();
+                                    Toast.makeText(getApplicationContext(), "Greška pri slanju poruke, pokušajte ponovo!", Toast.LENGTH_LONG).show();
 
+                                }
                             }
+                    ) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+
+                            params.put("email", emailTxt.getText().toString());
+                            params.put("pitanje", questionTxt.getText().toString());
+                            params.put("action", "posaljiMailAndr");
+
+                            return params;
                         }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<>();
-
-                        params.put("email", emailTxt.getText().toString());
-                        params.put("pitanje", questionTxt.getText().toString());
-                        params.put("action", "posaljiMailAndr");
-
-                        return params;
-                    }
-                };
-                mVolleySingleton.addToRequestQueue(postRequest);
+                    };
+                    mVolleySingleton.addToRequestQueue(postRequest);
+                }
             }
         });
     }

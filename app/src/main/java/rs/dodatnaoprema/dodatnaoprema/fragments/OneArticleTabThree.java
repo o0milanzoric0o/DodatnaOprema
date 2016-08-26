@@ -50,24 +50,6 @@ public class OneArticleTabThree extends Fragment {
             linearLayout.addView(textView);
         }
 
-      /*  LinearLayout.LayoutParams webViewParams = new
-
-                LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        WebView mWebViewTab = (WebView) mView.findViewById(R.id.mWebViewTab);
-
-        mWebViewTab.setLayoutParams(webViewParams);
-        mWebViewTab.setScrollContainer(false);
-
-
-        if (mWebViewTab != null) Log.logInfo("LALALA.........", "mWebViewTab != null");
-        mWebViewTab.loadDataWithBaseURL(null, "<style>img{display: inline;height: auto;max-width: 100%;}</style>" + mActivity.opis(), "text/html", "UTF-8", null);
-
-        //  mWebViewTab.loadDataWithBaseURL(null, mActivity.opis(), "text/html", "utf-8", null);
-        // mWebViewTab.requestLayout();
-
-
-        Log.logInfo("LALALA.........", "jjj>" + mActivity.opis().length());*/
         return mView;
     }
 

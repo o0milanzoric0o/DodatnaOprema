@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-public class Child implements Serializable{
+public class Child implements Serializable {
 
     @SerializedName("KategorijaArtikalaId")
     @Expose
@@ -40,185 +40,144 @@ public class Child implements Serializable{
     private Integer kategorijaArtikalaMesto;
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaId
+     * @return The kategorijaArtikalaId
      */
     public Integer getKategorijaArtikalaId() {
         return kategorijaArtikalaId;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaId
-     * The KategorijaArtikalaId
+     * @param kategorijaArtikalaId The KategorijaArtikalaId
      */
     public void setKategorijaArtikalaId(Integer kategorijaArtikalaId) {
         this.kategorijaArtikalaId = kategorijaArtikalaId;
     }
 
     /**
-     *
-     * @return
-     * The parentKategorijaArtikalaId
+     * @return The parentKategorijaArtikalaId
      */
     public Object getParentKategorijaArtikalaId() {
         return parentKategorijaArtikalaId;
     }
 
     /**
-     *
-     * @param parentKategorijaArtikalaId
-     * The ParentKategorijaArtikalaId
+     * @param parentKategorijaArtikalaId The ParentKategorijaArtikalaId
      */
     public void setParentKategorijaArtikalaId(Object parentKategorijaArtikalaId) {
         this.parentKategorijaArtikalaId = parentKategorijaArtikalaId;
     }
 
     /**
-     *
-     * @return
-     * The katIme
+     * @return The katIme
      */
     public String getKatIme() {
         return katIme;
     }
 
     /**
-     *
-     * @param katIme
-     * The KatIme
+     * @param katIme The KatIme
      */
     public void setKatIme(String katIme) {
         this.katIme = katIme;
     }
 
     /**
-     *
-     * @return
-     * The kategorijeVidljivZaMP
+     * @return The kategorijeVidljivZaMP
      */
     public Integer getKategorijeVidljivZaMP() {
         return kategorijeVidljivZaMP;
     }
 
     /**
-     *
-     * @param kategorijeVidljivZaMP
-     * The KategorijeVidljivZaMP
+     * @param kategorijeVidljivZaMP The KategorijeVidljivZaMP
      */
     public void setKategorijeVidljivZaMP(Integer kategorijeVidljivZaMP) {
         this.kategorijeVidljivZaMP = kategorijeVidljivZaMP;
     }
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaSlika
+     * @return The kategorijaArtikalaSlika
      */
     public String getKategorijaArtikalaSlika() {
         return kategorijaArtikalaSlika;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaSlika
-     * The KategorijaArtikalaSlika
+     * @param kategorijaArtikalaSlika The KategorijaArtikalaSlika
      */
     public void setKategorijaArtikalaSlika(String kategorijaArtikalaSlika) {
         this.kategorijaArtikalaSlika = kategorijaArtikalaSlika;
     }
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaLink
+     * @return The kategorijaArtikalaLink
      */
     public String getKategorijaArtikalaLink() {
         return kategorijaArtikalaLink;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaLink
-     * The KategorijaArtikalaLink
+     * @param kategorijaArtikalaLink The KategorijaArtikalaLink
      */
     public void setKategorijaArtikalaLink(String kategorijaArtikalaLink) {
         this.kategorijaArtikalaLink = kategorijaArtikalaLink;
     }
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaActiveMasine
+     * @return The kategorijaArtikalaActiveMasine
      */
     public Integer getKategorijaArtikalaActiveMasine() {
         return kategorijaArtikalaActiveMasine;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaActiveMasine
-     * The KategorijaArtikalaActiveMasine
+     * @param kategorijaArtikalaActiveMasine The KategorijaArtikalaActiveMasine
      */
     public void setKategorijaArtikalaActiveMasine(Integer kategorijaArtikalaActiveMasine) {
         this.kategorijaArtikalaActiveMasine = kategorijaArtikalaActiveMasine;
     }
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaActive
+     * @return The kategorijaArtikalaActive
      */
     public Integer getKategorijaArtikalaActive() {
         return kategorijaArtikalaActive;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaActive
-     * The KategorijaArtikalaActive
+     * @param kategorijaArtikalaActive The KategorijaArtikalaActive
      */
     public void setKategorijaArtikalaActive(Integer kategorijaArtikalaActive) {
         this.kategorijaArtikalaActive = kategorijaArtikalaActive;
     }
 
     /**
-     *
-     * @return
-     * The daLiImaPodKat
+     * @return The daLiImaPodKat
      */
     public Integer getDaLiImaPodKat() {
         return daLiImaPodKat;
     }
 
     /**
-     *
-     * @param daLiImaPodKat
-     * The daLiImaPodKat
+     * @param daLiImaPodKat The daLiImaPodKat
      */
     public void setDaLiImaPodKat(Integer daLiImaPodKat) {
         this.daLiImaPodKat = daLiImaPodKat;
     }
 
     /**
-     *
-     * @return
-     * The kategorijaArtikalaMesto
+     * @return The kategorijaArtikalaMesto
      */
     public Integer getKategorijaArtikalaMesto() {
         return kategorijaArtikalaMesto;
     }
 
     /**
-     *
-     * @param kategorijaArtikalaMesto
-     * The KategorijaArtikalaMesto
+     * @param kategorijaArtikalaMesto The KategorijaArtikalaMesto
      */
     public void setKategorijaArtikalaMesto(Integer kategorijaArtikalaMesto) {
         this.kategorijaArtikalaMesto = kategorijaArtikalaMesto;
     }
-
 
 
 }
