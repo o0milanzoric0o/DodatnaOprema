@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
@@ -301,8 +302,8 @@ public class CartUserDataFragment extends Fragment {
                     if (success) {
                         // Inform the user to check his email to confirm the order
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                        alertDialog.setTitle("Narudžbina");
-                        alertDialog.setMessage("Proverite email da potvrdite narudžbinu.");
+                        alertDialog.setTitle(getString(R.string.order_success_title));
+                        alertDialog.setMessage(getString(R.string.order_success_message));
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -314,6 +315,10 @@ public class CartUserDataFragment extends Fragment {
                                         Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
                                         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
                                         // Close cart activity...
+                                        // Get back to home activity
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
                                         getActivity().finish();
                                     }
                                 });
@@ -393,8 +398,8 @@ public class CartUserDataFragment extends Fragment {
                     if (success) {
                         // Inform the user to check his email to confirm the order
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                        alertDialog.setTitle("Kupovina");
-                        alertDialog.setMessage("Uspešno ste obavili kupovinu.");
+                        alertDialog.setTitle(getString(R.string.order_success_title));
+                        alertDialog.setMessage(getString(R.string.order_success_message));
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -412,6 +417,10 @@ public class CartUserDataFragment extends Fragment {
                                         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
 
                                         // Close cart activity...
+                                        // Get back to home activity
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
                                         getActivity().finish();
                                     }
                                 });

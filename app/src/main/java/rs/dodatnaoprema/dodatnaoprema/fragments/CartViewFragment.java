@@ -270,8 +270,6 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                             // Launching  empty cart fragment
                             MyApplication.getInstance().getSessionManager().setCartItemCount(0);
 
-
-                            Toast.makeText(getActivity(), "Removed last item", Toast.LENGTH_SHORT).show();
                             Fragment emptyCartFragment = new EmptyCartFragment();
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -286,21 +284,21 @@ public class CartViewFragment extends Fragment implements AdapterView.OnItemClic
                             mAdapter.setItemBtnClickListner(CartViewFragment.this);
                             mAdapter.setChangeItemQuantityListener(CartViewFragment.this);
                             listView.setAdapter(mAdapter);
+
+                            // Update total price
+                            String tot = String.valueOf(mCart.getUkupnaCena() + mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
+                            String price = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
+                            String shipping = String.valueOf(mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
+
+                            mTotal.setText(tot);
+                            mPrice.setText(price);
+                            mShipping.setText(shipping);
                         }
 
                         //mUpdateToolbarIconCallback.UpdateCartToolbarIcon();
                         // Update Navigation Drawer from main activity
                         Intent updateToolbar = new Intent(Config.UPDATE_CART_TOOLBAR_ICON);
                         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(updateToolbar);
-
-                        // Update total price
-                        String tot = String.valueOf(mCart.getUkupnaCena() + mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
-                        String price = String.valueOf(mCart.getUkupnaCena()) + " " + mCart.getCenaPrikazExt();
-                        String shipping = String.valueOf(mCart.getPrevoz()) + " " + mCart.getCenaPrikazExt();
-
-                        mTotal.setText(tot);
-                        mPrice.setText(price);
-                        mShipping.setText(shipping);
 
                     }
                     progressDialog.hideDialog();

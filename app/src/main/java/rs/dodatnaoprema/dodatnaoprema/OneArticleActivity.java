@@ -37,7 +37,6 @@ import rs.dodatnaoprema.dodatnaoprema.dialogs.NumberPickerDialog;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
 import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
-import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemAddResponse;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
@@ -92,6 +91,22 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         mTextViewSendQuestion = (TextView) findViewById(R.id.textView_question);
 
         mTextViewKorpa = (TextView) findViewById(R.id.textView_korpa);
+        mTextViewKorpa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // price exists
+                if (mOneArticle.getArtikal().getStanje() == 0) { // no available quantity
+                    InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikla nema na stanju.");
+                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
+                } else if (mOneArticle.getArtikal().getCenaPrikaz() == null || mOneArticle.getArtikal().getMozedaseKupi() == 0) {
+                    // no price so can't add it to cart. Inform the user
+                    InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikal se može naručiti samo telefonom.");
+                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
+                } else {
+                    showNumberPicker(view);
+                }
+            }
+        });
 
         mTextViewSendQuestion.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -55,7 +55,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="#00ffffff"
-        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+        android:src="@drawable/ic_clear_black_24dp" />
 
     <LinearLayout
         android:id="@+id/ll_quantity"

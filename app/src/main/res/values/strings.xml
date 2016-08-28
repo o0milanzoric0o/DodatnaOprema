@@ -221,5 +221,7 @@
     <string name="number_picker_formatter">%02d</string>
     <string name="shipping">Troškovi prevoza:</string>
     <string name="price_label">Cena:</string>
+    <string name="order_success_title">Kupovina</string>
+    <string name="order_success_message">Uspešno je obavljena kupovina.\nPotvrda o narudžbini je poslata na Vašu e-mail adresu.</string>
 
 </resources>

@@ -4,20 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.android.gms.vision.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,7 +162,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
                 for (String subcategory : mHistory
                         ) {
 
-                    addNewButton(subcategory, mHistoryID.get(mHistory.indexOf(subcategory)));
+                    historyList.addView(addNewButton(subcategory, mHistoryID.get(mHistory.indexOf(subcategory))));
 
                 }
             }
@@ -198,19 +202,21 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         void onItemClick(Category item);
     }
 
-    private Button addNewButton(final String subcategory, final String id) {
+    private TextView addNewButton(final String subcategory, final String id) {
 
-        ViewGroup.LayoutParams param = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.WRAP_CONTENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT);
 
-        final Button btn = new Button(historyList.getContext());
-        btn.setLayoutParams(param);
-        btn.setBackgroundResource(R.drawable.history_btn);
-        btn.setPadding(5, 5, 5, 5);
-        btn.setClickable(true);
+        final TextView tv = new TextView(historyList.getContext());
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        tv.setLayoutParams(param);
+        tv.setBackgroundResource(R.drawable.history_btn);
+        tv.setPadding(30,30,30,30);
+        tv.setGravity(Gravity.CENTER);
+        tv.setClickable(true);
+
+        tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -218,15 +224,15 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             }
         });
 
-        btn.setText(subcategory);
-        btn.setAllCaps(false);
-        btn.setTextColor(ContextCompat.getColor(historyList.getContext(), R.color.btnTextColor));
-        btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-        btn.setMinHeight(80);
-        btn.setMinimumHeight(80);
+        tv.setText(subcategory);
+        tv.setAllCaps(false);
+        tv.setTextColor(ContextCompat.getColor(historyList.getContext(), R.color.btnTextColor));
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        tv.setMinHeight(80);
+        tv.setMinimumHeight(80);
 
-        historyList.addView(btn);
-        return btn;
+
+        return tv;
     }
 
 }
