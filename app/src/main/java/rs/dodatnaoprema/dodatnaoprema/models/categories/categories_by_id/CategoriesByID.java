@@ -3,12 +3,13 @@ package rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 
-public class CategoriesByID {
+public class CategoriesByID implements Serializable{
 
     @SerializedName("tag")
     @Expose

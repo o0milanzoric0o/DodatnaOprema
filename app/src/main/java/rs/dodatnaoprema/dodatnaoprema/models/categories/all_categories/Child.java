@@ -38,7 +38,9 @@ public class Child implements Serializable {
     @SerializedName("KategorijaArtikalaMesto")
     @Expose
     private Integer kategorijaArtikalaMesto;
-
+    @SerializedName("kolikoImaArt")
+    @Expose
+    private Integer kolikoImaArt;
     /**
      * @return The kategorijaArtikalaId
      */
@@ -179,5 +181,17 @@ public class Child implements Serializable {
         this.kategorijaArtikalaMesto = kategorijaArtikalaMesto;
     }
 
+    /**
+     * @return The kolikoImaArt
+     */
+    public Integer getkolikoImaArt() {
+        return kolikoImaArt;
+    }
 
+    /**
+     * @param kolikoImaArt The kolikoImaArt
+     */
+    public void setkolikoImaArt(Integer kolikoImaArt) {
+        this.kolikoImaArt = kolikoImaArt;
+    }
 }

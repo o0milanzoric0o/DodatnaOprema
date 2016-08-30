@@ -324,7 +324,8 @@ public class CartUserDataFragment extends Fragment {
                                 });
                         alertDialog.show();
                     } else {
-
+                        InfoDialog infoDialog = InfoDialog.newInstance("Greška", jObj.getString("error_msg"));
+                        infoDialog.show(getFragmentManager(), "InfoDialog");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -426,7 +427,8 @@ public class CartUserDataFragment extends Fragment {
                                 });
                         alertDialog.show();
                     } else {
-
+                        InfoDialog infoDialog = InfoDialog.newInstance("Greška", response.getString("error_msg"));
+                        infoDialog.show(getFragmentManager(), "InfoDialog");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

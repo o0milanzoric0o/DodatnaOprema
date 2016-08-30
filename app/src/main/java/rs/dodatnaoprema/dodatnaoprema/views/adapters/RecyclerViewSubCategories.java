@@ -22,6 +22,7 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
     private List<Child> subcategories;
     private NetworkImageView subcategoryImg;
     private TextView subcategoryName;
+    private TextView subcategoryCount;
     private Context context;
     private final RecyclerViewSubCategories.OnItemClickListener listener;
 
@@ -33,6 +34,7 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
             super(view);
             subcategoryName = (TextView) view.findViewById(R.id.subcategoryText);
             subcategoryImg = (NetworkImageView) view.findViewById(R.id.subcategoryImage);
+            subcategoryCount = (TextView) view.findViewById(R.id.subcategoryCount);
 
         }
 
@@ -81,6 +83,11 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
         subcategoryName.setText(subcategories.get(position).getKatIme().trim());
         ImageLoader mImageLoader = VolleySingleton.getsInstance(context).getImageLoader();
         subcategoryImg.setImageUrl(subcategories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
+
+        if (subcategories.get(position).getDaLiImaPodKat() > 0)
+            subcategoryCount.setText("...");
+        else
+            subcategoryCount.setText(String.valueOf(subcategories.get(position).getkolikoImaArt()));
     }
 
 
