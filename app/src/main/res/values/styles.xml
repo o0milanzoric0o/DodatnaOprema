@@ -23,9 +23,12 @@
 
     <style name="CustomTabTextStyle" parent="TextAppearance.Design.Tab">
         <!-- Customize Tab Text Style. -->
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">#8AFFFFFF</item>
         <item name="textAllCaps">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
     <style name="CustomNavigationDrawerLayout" parent="Widget.Design.NavigationView">
@@ -46,15 +49,15 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
 
     </style>
-    
+
     <!-- Activity with no Title -->
     <style name="ThemeOverlay.MyNoTitleActivity" parent="AppTheme">
         <item name="windowActionBar">false</item>
@@ -93,17 +96,19 @@
     </style>
 
 
-    <style name="Filter.DIALOG" parent="AppTheme" >
-       <item name="android:windowNoTitle">true</item>
+    <style name="Filter.DIALOG" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
         <!-- <item name="android:windowFullscreen">true</item>-->
         <item name="android:windowIsFloating">false</item>
     </style>
+
 
     <style name="OfferIndicator" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="number_picker" parent="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+    <style name="number_picker" parent="@android:style/Theme.NoTitleBar.Fullscreen" />
 
 </resources>

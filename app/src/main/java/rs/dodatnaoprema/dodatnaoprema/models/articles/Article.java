@@ -75,6 +75,9 @@ public class Article implements Serializable {
     @SerializedName("ocenaut")
     @Expose
     private Integer ocenaut;
+    @SerializedName("ArtikalBrPregleda")
+    @Expose
+    private Integer artikalBrPregleda;
     @SerializedName("KategorijaArtiklaNaziv")
     @Expose
     private String KategorijaArtiklaNaziv;
@@ -243,6 +246,20 @@ public class Article implements Serializable {
      */
     public Integer getOcenaut() {
         return ocenaut;
+    }
+
+    /**
+     * @return The artikalBrPregleda
+     */
+    public Integer getArtikalBrPregleda() {
+        return artikalBrPregleda;
+    }
+
+    /**
+     * @param artikalBrPregleda The ArtikalBrPregleda
+     */
+    public void setArtikalBrPregleda(Integer artikalBrPregleda) {
+        this.artikalBrPregleda = artikalBrPregleda;
     }
 
     /**

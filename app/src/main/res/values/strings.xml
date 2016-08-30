@@ -150,8 +150,11 @@
     <string name="articles_category_link"><u>%s</u></string>
 
     <string-array name="sort_options">
+        <item>Po gledanosti</item>
         <item>Cena (rastuće)</item>
         <item>Cena (opadajuće)</item>
+        <item>Po nazivu</item>
+        <item>Po poslednje dodatom proizvodu</item>
     </string-array>
 
     <string-array name="price_options">

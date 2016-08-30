@@ -90,6 +90,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
 
+
         Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item, getResources().getStringArray(R.array.sort_options));
@@ -105,7 +106,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         sortOption = 0;
                         // mArticles = SortUtils.sortArticlesByPriceAscending(mArticles);
                         //Log.logInfo("SORT", ""+mArticles.size());
-                        updateList(SortUtils.sortArticlesByPriceAscending(filteredArticles));
+                        updateList(SortUtils.sortArticlesByNumberOfViewsDescending(filteredArticles));
 
                         //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_ASCENDING);
                     } else if (position == 1 && sortOption != 1) {
@@ -113,7 +114,28 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                         //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
                         // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
                         Log.logInfo("SORT", "" + filteredArticles.size());
+                        updateList(SortUtils.sortArticlesByPriceAscending(filteredArticles));
+
+                    } else if (position == 2 && sortOption != 2) {
+                        sortOption = 2;
+                        //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                        // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
+                        Log.logInfo("SORT", "" + filteredArticles.size());
                         updateList(SortUtils.sortArticlesByPriceDescending(filteredArticles));
+
+                    } else if (position == 3 && sortOption != 3) {
+                        sortOption = 3;
+                        //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                        // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
+                        Log.logInfo("SORT", "" + filteredArticles.size());
+                        updateList(SortUtils.sortArticlesByNameAscending(filteredArticles));
+
+                    } else if (position == 4 && sortOption != 4) {
+                        sortOption = 4;
+                        //searchArticlesByCategory(getmArticleId(), 0, 100, AppConfig.SORT_DESCENDING);
+                        // mArticles = SortUtils.sortArticlesByPriceDescending(mArticles);
+                        Log.logInfo("SORT", "" + filteredArticles.size());
+                        updateList(SortUtils.sortArticlesByIdDescending(filteredArticles));
 
                     }
 
@@ -239,7 +261,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
                 if (success) {
 
                     // mArticles = articlesFilteredByCategory.getArtikli();
-                    mArticles = SortUtils.sortArticlesByPriceAscending(articlesFilteredByCategory.getArtikli());
+                    mArticles = SortUtils.sortArticlesByNumberOfViewsDescending(articlesFilteredByCategory.getArtikli());
                     filteredArticles = mArticles;
                     allSubcategoryArticles = articlesFilteredByCategory.getArtikli();
 
