@@ -35,18 +35,18 @@
                 android:gravity="center"
                 android:lines="2"
                 android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/subcategoryCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:gravity="center"
-                android:lines="1"
-                android:paddingRight="5dp"
-                android:paddingBottom="5dp"
-                android:textColor="#757575" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/subcategoryCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:lines="1"
+            android:layout_margin="5dp"
+            android:textColor="@color/primary_dark" />
 
         <View
             android:layout_width="match_parent"
