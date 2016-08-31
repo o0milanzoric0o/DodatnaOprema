@@ -85,7 +85,7 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
         subcategoryImg.setImageUrl(subcategories.get(position).getKategorijaArtikalaSlika(), mImageLoader);
 
         if (subcategories.get(position).getDaLiImaPodKat() > 0)
-            subcategoryCount.setText("...");
+            subcategoryCount.setText(". . .");
         else
             subcategoryCount.setText(String.valueOf(subcategories.get(position).getkolikoImaArt()));
     }
