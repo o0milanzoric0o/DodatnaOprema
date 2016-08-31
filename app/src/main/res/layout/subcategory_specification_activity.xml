@@ -1,132 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/base_gray"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <android.support.design.widget.AppBarLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="@dimen/no_elevation">
-
-        <include
-            layout="@layout/empty_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.AppBarLayout>
-
-    <TextView
-        android:id="@+id/searchResultsNumber"
-        android:layout_below="@+id/appBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/txt_search_results"
-        android:textAllCaps="true" />
-
-    <LinearLayout
-        android:id="@+id/priceLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/searchResultsNumber"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/txt_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight=".5"
-            android:text="@string/txt_cena_filter"
-            android:textAllCaps="true" />
-
-        <Spinner
-            android:id="@+id/pricesFilter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight=".5" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/specificationLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/priceLayout"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/subcategoryBrands"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight=".5"
-            android:text="@string/txt_brands"
-            android:textAllCaps="true" />
-
-        <rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner
-            android:id="@+id/multiSelectionSpinnerBrands"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight=".5" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/specificationLayout">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_specifications"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </FrameLayout>
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/light_gray">
+        android:background="@color/base_gray"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
-            android:id="@+id/applyBtn"
-            android:layout_width="wrap_content"
+        <android.support.design.widget.AppBarLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="10dp"
-            android:clickable="true"
-            android:text="@string/apply"
-            android:textAllCaps="true"
-            android:textColor="@color/primary" />
+            app:elevation="@dimen/no_elevation">
 
-        <Button
-            android:id="@+id/resetBtn"
-            android:layout_width="wrap_content"
+            <include
+                layout="@layout/empty_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/searchResultsNumber"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="end"
-            android:layout_toLeftOf="@+id/applyBtn"
-            android:layout_toStartOf="@+id/applyBtn"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="10dp"
-            android:text="@string/reset"
-            android:textAllCaps="true"
-            android:clickable="true"
-            android:textColor="@color/secondary_text" />
+            android:layout_below="@+id/appBar"
+            android:layout_margin="10dp"
+            android:text="@string/txt_search_results"
+            android:textAllCaps="true" />
+
+        <LinearLayout
+            android:id="@+id/priceLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchResultsNumber"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txt_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight=".5"
+                android:text="@string/txt_cena_filter"
+                android:textAllCaps="true" />
+
+            <Spinner
+                android:id="@+id/pricesFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight=".5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/specificationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/priceLayout"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/subcategoryBrands"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight=".5"
+                android:text="@string/txt_brands"
+                android:textAllCaps="true" />
+
+            <rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner
+                android:id="@+id/multiSelectionSpinnerBrands"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight=".5" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/specificationLayout">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_specifications"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_gray">
+
+            <Button
+                android:id="@+id/applyBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="10dp"
+                android:text="@string/apply"
+                android:textAllCaps="true"
+                android:textColor="@color/primary" />
+
+            <Button
+                android:id="@+id/resetBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="end"
+                android:layout_toLeftOf="@+id/applyBtn"
+                android:layout_toStartOf="@+id/applyBtn"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="10dp"
+                android:text="@string/reset"
+                android:textAllCaps="true"
+                android:textColor="@color/secondary_text" />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
-
-
-</RelativeLayout>
+</ScrollView>
