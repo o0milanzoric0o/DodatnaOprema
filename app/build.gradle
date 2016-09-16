@@ -10,8 +10,8 @@ android {
         applicationId "rs.dodatnaoprema.dodatnaoprema"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 9
-        versionName "1.4.4"
+        versionCode 10
+        versionName "1.4.5"
         // Enabling multidex support.
         multiDexEnabled true
     }
@@ -24,6 +24,12 @@ android {
         }
     }
     productFlavors {
+        flavor_test{
+            buildConfigField 'String', 'TOPIC', '"test"'
+        }
+        flavor_prod{
+            buildConfigField 'String', 'TOPIC', '"news"'
+        }
     }
     dexOptions {
         incremental false

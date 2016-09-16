@@ -152,8 +152,8 @@ public class MainActivity extends FragmentActivity
 
 
         // [START subscribe_topics]
-        FirebaseMessaging.getInstance().subscribeToTopic("news");
-        Log.e(TAG, "Subscribed to " + "news" + " topic");
+        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.TOPIC);
+        Log.e(TAG, "Subscribed to " + BuildConfig.TOPIC + " topic");
         // [END subscribe_topics]
 
         Log.e(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
