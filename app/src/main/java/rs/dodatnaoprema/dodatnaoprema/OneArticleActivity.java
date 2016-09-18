@@ -162,7 +162,12 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         ImageGalleryAdapter adapterViewPager = new ImageGalleryAdapter(getSupportFragmentManager());
         adapterViewPager.setImageCount(mOneArticle.getArtikal().getSlike().size());
         vpPager.setAdapter(adapterViewPager);
-        springIndicator.setViewPager(vpPager);
+        if (adapterViewPager.getCount() > 0)
+            springIndicator.setViewPager(vpPager);
+        else {
+            // No product images so hide spring indicator
+            springIndicator.setVisibility(View.GONE);
+        }
 
         if (mTextViewBrendName != null)
             mTextViewBrendName.setText(getResources().getString(R.string.brend_txt, mOneArticle.getArtikal().getBrendIme()));
