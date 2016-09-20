@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import rs.dodatnaoprema.dodatnaoprema.FullScreenImageViewActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
+import rs.dodatnaoprema.dodatnaoprema.customview.NetworkImageWithLabel;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
 /**
@@ -78,6 +80,32 @@ public class OneArticleImageFragment extends Fragment {
                     getActivity().startActivity(i);
                 }
             });
+            switch (mListener.getArtikalNaAkciji()) {
+                case 6:
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.sale_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelBackgroundColor(ContextCompat.getColor(getActivity(), R.color.sale_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelText(getActivity().getString(R.string.sale_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.sale_indicator), PorterDuff.Mode.SRC_ATOP);
+                    break;
+                case 7:
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.new_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelBackgroundColor(ContextCompat.getColor(getActivity(), R.color.new_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelText(getActivity().getString(R.string.new_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.new_indicator), PorterDuff.Mode.SRC_ATOP);
+                    break;
+                case 8:
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.best_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelBackgroundColor(ContextCompat.getColor(getActivity(), R.color.best_indicator));
+                    ((NetworkImageWithLabel) nimage).setLabelText(getActivity().getString(R.string.best_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.best_indicator), PorterDuff.Mode.SRC_ATOP);
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         return v;
@@ -112,6 +140,9 @@ public class OneArticleImageFragment extends Fragment {
      */
     public interface OnProductImageGalleryDraw {
         String getProductImage(int position);
+
         ArrayList<String> getProductImgLargeUrls();
+
+        Integer getArtikalNaAkciji();
     }
 }

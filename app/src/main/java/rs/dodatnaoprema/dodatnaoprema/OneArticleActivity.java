@@ -427,6 +427,13 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         return result;
     }
 
+    @Override
+    public Integer getArtikalNaAkciji() {
+        if (mOneArticle != null)
+            return mOneArticle.getArtikal().getArtikalNaAkciji();
+        return -1;
+    }
+
     public List<ArticleSpec> getArticleSpecification() {
         return mOneArticle.getArtikal().getSpec();
     }

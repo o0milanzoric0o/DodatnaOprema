@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <rs.dodatnaoprema.dodatnaoprema.customview.NetworkImageWithLabel
         android:id="@+id/img_one_product"
         android:layout_width="match_parent"
         android:layout_height="200dp"

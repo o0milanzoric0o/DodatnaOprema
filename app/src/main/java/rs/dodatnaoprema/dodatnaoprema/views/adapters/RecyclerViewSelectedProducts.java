@@ -18,6 +18,7 @@ import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
+import rs.dodatnaoprema.dodatnaoprema.customview.NetworkImageWithLabel;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 
@@ -178,19 +179,25 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
 
             switch (products.get(position - existHeader).getArtikalNaAkciji()) {
                 case 6:
-                    saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setText(context.getString(R.string.sale_indicator));
-                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.sale_indicator), PorterDuff.Mode.SRC_ATOP);
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.sale_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelBackgroundColor(ContextCompat.getColor(context, R.color.sale_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelText(context.getString(R.string.sale_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.sale_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 case 7:
-                    saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setText(context.getString(R.string.new_indicator));
-                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.new_indicator), PorterDuff.Mode.SRC_ATOP);
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.new_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelBackgroundColor(ContextCompat.getColor(context, R.color.new_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelText(context.getString(R.string.new_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.new_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 case 8:
-                    saleIndicator.setVisibility(View.VISIBLE);
-                    saleIndicator.setText(context.getString(R.string.best_indicator));
-                    saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.best_indicator), PorterDuff.Mode.SRC_ATOP);
+                    //saleIndicator.setVisibility(View.VISIBLE);
+                    //saleIndicator.setText(context.getString(R.string.best_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelBackgroundColor(ContextCompat.getColor(context, R.color.best_indicator));
+                    ((NetworkImageWithLabel) productImg).setLabelText(context.getString(R.string.best_indicator));
+                    //saleIndicator.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.best_indicator), PorterDuff.Mode.SRC_ATOP);
                     break;
                 default:
                     break;
