@@ -33,6 +33,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubcategorySpecification;
 
+
 public class FilterFragmentDialog extends DialogFragment implements AdapterView.OnItemSelectedListener, MultiSelectionSpinner.OnMultipleItemsSelectedListener {
 
     private RecyclerView mRecyclerView;
@@ -85,6 +86,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
         final MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) root.findViewById(R.id.multiSelectionSpinnerBrands);
         if (multiSelectionSpinner != null) {
             if (brandNames.size() > 0) {
+                Log.logDebug("BRENDOVI",""+mBrands.size());
                 multiSelectionSpinner.setItems(brandNames);
                 multiSelectionSpinner.setListener(this);
             } else {

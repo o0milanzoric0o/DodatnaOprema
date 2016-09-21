@@ -84,6 +84,7 @@
         </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/subCatSpecificationLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/specificationLayout">
@@ -100,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_below="@+id/subCatSpecificationLayout"
             android:background="@color/light_gray">
 
             <Button
