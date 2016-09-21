@@ -32,11 +32,13 @@ public class SubCategoriesActivity extends BaseActivity {
     private VolleySingleton mVolleySingleton;
     private int existSubcategory = 0;
 
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subcategories_activity);
 
         Intent intent = getIntent();
+        // this is unchecked, but guaranteed to work
         List<Child> subCategories = (List<Child>) intent.getSerializableExtra("Potkategorije");
         String title = intent.getStringExtra("Title");
 

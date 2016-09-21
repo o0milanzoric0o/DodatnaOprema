@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +13,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.google.android.gms.vision.text.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -89,7 +85,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
         }
     }
-
+    @SuppressWarnings("unchecked")
     public RecyclerViewAllCategories(Context context, List<Category> categories, OnItemClickListener listener) {
 
         this.categories = categories;
@@ -98,12 +94,12 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         SharedPreferences prefs = context.getSharedPreferences(AppConfig.HISTORY_KEY, Context.MODE_PRIVATE);
         SharedPreferences prefsID = context.getSharedPreferences(AppConfig.HISTORY_ID_KEY, Context.MODE_PRIVATE);
         try {
+            // unchecked cast here, but guaranteed to work
             this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(AppConfig.HISTORY_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
+            // unchecked cast here, but guaranteed to work
             this.mHistoryID = (ArrayList<String>) ObjectSerializer.deserialize(prefsID.getString(AppConfig.HISTORY_ID_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         this.existHistory = (mHistory.size() != 0) ? 1 : 0;
@@ -212,7 +208,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
         tv.setLayoutParams(param);
         tv.setBackgroundResource(R.drawable.history_btn);
-        tv.setPadding(30,30,30,30);
+        tv.setPadding(30, 30, 30, 30);
         tv.setGravity(Gravity.CENTER);
         tv.setClickable(true);
 
@@ -220,7 +216,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
 
-                ((AllCategoriesActivity)context).shortcutArticles(subcategory, id);
+                ((AllCategoriesActivity) context).shortcutArticles(subcategory, id);
             }
         });
 

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
+    android:background="@drawable/nav_header_pattern"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,9 +13,9 @@
         android:id="@+id/id_user_photo"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:paddingStart="24dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
+        android:paddingStart="24dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/chainsaw_128" />
 
@@ -25,20 +23,24 @@
         android:id="@+id/id_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="24dp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="24dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:paddingStart="24dp"
         android:text="@string/user_name_unavailable"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/id_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="24dp"
+        android:layout_above="@id/id_user_name"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:text="" />
+        android:paddingStart="24dp"
+        android:text=""
+        android:textSize="18sp" />
 
-</LinearLayout>
+</RelativeLayout>

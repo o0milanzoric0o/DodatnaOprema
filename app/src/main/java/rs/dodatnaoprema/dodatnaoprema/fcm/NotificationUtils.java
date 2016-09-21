@@ -175,10 +175,16 @@ public class NotificationUtils {
         notificationManager.notify(Config.NOTIFICATION_ID, notification);
     }
 
+    @SuppressWarnings("deprecation")
     private void showBigNotification(Bitmap bitmap, NotificationCompat.Builder mBuilder, int icon, String title, String message, long timeMillis, PendingIntent resultPendingIntent, Uri alarmSound) {
         NotificationCompat.BigPictureStyle bigPictureStyle = new NotificationCompat.BigPictureStyle();
         bigPictureStyle.setBigContentTitle(title);
-        bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            bigPictureStyle.setSummaryText(Html.fromHtml(message, Html.FROM_HTML_MODE_COMPACT).toString());
+        }else {
+            // This one is deprecated, but called for versions < N
+            bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
+        }
         bigPictureStyle.bigPicture(bitmap);
         Notification notification;
         notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
@@ -208,8 +214,7 @@ public class NotificationUtils {
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            return BitmapFactory.decodeStream(input);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
