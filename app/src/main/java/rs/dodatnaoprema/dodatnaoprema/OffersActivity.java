@@ -41,6 +41,7 @@ public class OffersActivity extends BaseActivity {
 
     private List<Article> articles = new ArrayList<>();
 
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class OffersActivity extends BaseActivity {
 
         Intent intent = getIntent();
         mSubCategoryName = intent.getStringExtra("Artikli");
+        // this cast is unchecked, but guaranteed to work
         articles = (List<Article>) intent.getSerializableExtra("AllCategories");
         if (mTextView != null) mTextView.setText(mSubCategoryName);
 

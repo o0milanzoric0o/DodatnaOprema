@@ -125,6 +125,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
 
@@ -150,12 +151,12 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
                 shortDescription.append(" " + products.get(position - existHeader).getArtikalKratakOpis().toString());
             }
             if (products.get(position - existHeader).getSpec().size() > 0) {
-
                 if (products.get(position - existHeader).getSpec().size() >= 1) {
                     spec1.setVisibility(View.VISIBLE);
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                         spec1.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(0).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(0).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
+                        // This one is deprecated, but called for versions < N
                         spec1.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(0).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(0).getVredSpecGrupe() + "</font>")));
                     }
                 }
@@ -164,6 +165,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                         spec2.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(1).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(1).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
+                        // This one is deprecated, but called for versions < N
                         spec2.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(1).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(1).getVredSpecGrupe() + "</font>")));
                     }
                 }
@@ -172,6 +174,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                         spec3.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(2).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(2).getVredSpecGrupe() + "</font>"), Html.FROM_HTML_MODE_LEGACY));
                     } else {
+                        // This one is deprecated, but called for versions < N
                         spec3.setText(Html.fromHtml(context.getString(R.string.article_specification, products.get(position - existHeader).getSpec().get(2).getImeSpecGrupe(), "<font color='#cc0000'>" + products.get(position - existHeader).getSpec().get(2).getVredSpecGrupe() + "</font>")));
                     }
                 }

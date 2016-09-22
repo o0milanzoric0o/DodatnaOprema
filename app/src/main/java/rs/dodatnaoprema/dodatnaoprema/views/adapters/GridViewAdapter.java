@@ -28,6 +28,7 @@ public class GridViewAdapter extends ArrayAdapter {
     private List<GridItem> data = new ArrayList();
 
     public GridViewAdapter(Context context, int layoutResourceId, List<GridItem> articles) {
+        // noinspection unchecked
         super(context, layoutResourceId, articles);
         this.layoutResourceId = layoutResourceId;
         this.context = context;

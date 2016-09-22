@@ -867,7 +867,7 @@ public class SwipeableLayout extends ViewGroup {
                         && !(STATUS.isRefreshing(mStatus) || STATUS.isLoadingMore(mStatus))) {
                     mAutoScroller.abortIfRunning();
                 }
-                mActivePointerId = MotionEventCompat.getPointerId(event, 0);
+                mActivePointerId = event.getPointerId(0);
                 mInitDownY = getMotionEventY(event, mActivePointerId);
                 mInitDownX = getMotionEventX(event, mActivePointerId);
                 if (mInitDownY == INVALID_COORDINATE) {
@@ -928,7 +928,7 @@ public class SwipeableLayout extends ViewGroup {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                mActivePointerId = MotionEventCompat.getPointerId(event, 0);
+                mActivePointerId = event.getPointerId(0);
                 return true;
             case MotionEvent.ACTION_MOVE:
                 // take over the ACTION_MOVE event from SwipeToLoadLayout#onInterceptTouchEvent()
@@ -965,7 +965,7 @@ public class SwipeableLayout extends ViewGroup {
                 return true;
             case MotionEvent.ACTION_POINTER_DOWN: {
                 final int pointerIndex = MotionEventCompat.getActionIndex(event);
-                final int pointerId = MotionEventCompat.getPointerId(event, pointerIndex);
+                final int pointerId = event.getPointerId(pointerIndex);
                 if (pointerId != INVALID_POINTER) {
                     mActivePointerId = pointerId;
                 }
@@ -1153,29 +1153,29 @@ public class SwipeableLayout extends ViewGroup {
 
     private void onSecondaryPointerUp(MotionEvent ev) {
         final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-        final int pointerId = MotionEventCompat.getPointerId(ev, pointerIndex);
+        final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
             // This was our active pointer going up. Choose a new
             // active pointer and adjust accordingly.
             final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-            mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
+            mActivePointerId = ev.getPointerId(newPointerIndex);
         }
     }
 
     private float getMotionEventY(MotionEvent event, int activePointerId) {
-        final int index = MotionEventCompat.findPointerIndex(event, activePointerId);
+        final int index = event.findPointerIndex(activePointerId);
         if (index < 0) {
             return INVALID_COORDINATE;
         }
-        return MotionEventCompat.getY(event, index);
+        return event.getY(index);
     }
 
     private float getMotionEventX(MotionEvent event, int activePointId) {
-        final int index = MotionEventCompat.findPointerIndex(event, activePointId);
+        final int index = event.findPointerIndex(activePointId);
         if (index < 0) {
             return INVALID_COORDINATE;
         }
-        return MotionEventCompat.getX(event, index);
+        return event.getX(index);
     }
 
     private void setStatus(int status) {
