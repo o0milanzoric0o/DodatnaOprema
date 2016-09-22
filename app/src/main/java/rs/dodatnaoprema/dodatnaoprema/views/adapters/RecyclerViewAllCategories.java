@@ -106,7 +106,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        this.existHistory = (mHistory.size() != 0) ? 1 : 0;
+        this.existHistory = 0;
     }
 
     @Override
@@ -212,7 +212,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
         tv.setLayoutParams(param);
         tv.setBackgroundResource(R.drawable.history_btn);
-        tv.setPadding(30,30,30,30);
+        tv.setPadding(30, 30, 30, 30);
         tv.setGravity(Gravity.CENTER);
         tv.setClickable(true);
 
@@ -220,7 +220,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
             @Override
             public void onClick(View v) {
 
-                ((AllCategoriesActivity)context).shortcutArticles(subcategory, id);
+                ((AllCategoriesActivity) context).shortcutArticles(subcategory, id);
             }
         });
 
