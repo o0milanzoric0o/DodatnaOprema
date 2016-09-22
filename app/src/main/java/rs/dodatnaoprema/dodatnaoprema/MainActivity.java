@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -38,6 +40,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fcm.Config;
+import rs.dodatnaoprema.dodatnaoprema.fcm.MyPreferenceManager;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
@@ -87,7 +90,9 @@ public class MainActivity extends FragmentActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //  icMore.setVisibility(View.GONE);
+
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             /** Called when a drawer has settled in a completely open state. */
@@ -100,12 +105,25 @@ public class MainActivity extends FragmentActivity
                     clearUserDrawerInfo();
                 }
             }
+
         };
         drawer.addDrawerListener(toggle);
 
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        // Prepare navigation drawer menu notifications enable
+        MenuItem notifications_en = navigationView.getMenu().getItem(3);
+        MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
+        if (!prefs.getNotificationsEnabled()) {
+            notifications_en.setTitle(R.string.enable_push_notifications);
+            notifications_en.setIcon(R.drawable.ic_nav_notifications_off);
+        } else {
+            notifications_en.setTitle(R.string.disable_push_notifications);
+            notifications_en.setIcon(R.drawable.ic_nav_notifications_on);
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
         initializeTabs();
@@ -158,6 +176,7 @@ public class MainActivity extends FragmentActivity
 
         // register receivers
         registerReceivers();
+
     }
 
     private void updateCartToolbarIcon() {
@@ -256,7 +275,7 @@ public class MainActivity extends FragmentActivity
                 (getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.addOnTabSelectedListener (new TabLayout.OnTabSelectedListener() {
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
@@ -355,6 +374,19 @@ public class MainActivity extends FragmentActivity
         } else if (id == R.id.nav_contact) {
             info(getString(R.string.contact));
 
+        } else if (id == R.id.nav_notifications) {
+            MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
+            boolean isEn = !prefs.getNotificationsEnabled();
+            prefs.setNotificationsEnabled(isEn);
+            if (!isEn) {
+                item.setTitle(R.string.enable_push_notifications);
+                item.setIcon(R.drawable.ic_nav_notifications_off);
+                Snackbar.make(findViewById(android.R.id.content), "Notifikacije isključene.", Snackbar.LENGTH_SHORT).show();
+            } else {
+                item.setTitle(R.string.disable_push_notifications);
+                item.setIcon(R.drawable.ic_nav_notifications_on);
+                Snackbar.make(findViewById(android.R.id.content), "Notifikacije uključene.", Snackbar.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -8,6 +8,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import rs.dodatnaoprema.dodatnaoprema.SplashActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -27,9 +28,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        Log.e(TAG, "From: " + remoteMessage.getFrom());
-        Log.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
-        sendNotification(remoteMessage);
+        //Log.e(TAG, "From: " + remoteMessage.getFrom());
+        //Log.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        MyPreferenceManager prefs = MyApplication.getInstance().getPrefManager();
+        if(prefs.getNotificationsEnabled()) // If notifications are enabled, send it
+            sendNotification(remoteMessage);
 
     }
     // [END receive_message]
@@ -58,8 +61,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 //
 //        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-        String title = remoteMessage.getNotification().getTitle();
-        String message = remoteMessage.getNotification().getBody();
+        //String title = remoteMessage.getNotification().getTitle();
+        //String message = remoteMessage.getNotification().getBody();
+        String title = remoteMessage.getData().get("title");
+        String message = remoteMessage.getData().get("text");
+
         String imageURL = remoteMessage.getData().get("imageUrl");
         long timestamp = remoteMessage.getSentTime();
         String articleID = remoteMessage.getData().get("articleID");

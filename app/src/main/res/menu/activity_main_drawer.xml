@@ -15,9 +15,9 @@
             android:icon="@drawable/ic_nav_cart"
             android:title="@string/cart" />
         <item
-            android:id="@+id/checkable_menu"
-            android:checkable="true"
-            android:title="Push notification" />
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_nav_notifications_on"
+            android:title="" />
     </group>
 
     <item android:title="@string/recommendation">

@@ -5,8 +5,6 @@ package rs.dodatnaoprema.dodatnaoprema.fcm;
  */
 public class Config {
 
-    // global topic to receive app wide push notifications
-    public static final String TOPIC_NEWS = "test";
     // broadcast receiver intent filters
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";

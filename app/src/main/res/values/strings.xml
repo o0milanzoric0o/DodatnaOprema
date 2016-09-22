@@ -226,5 +226,7 @@
     <string name="price_label">Cena:</string>
     <string name="order_success_title">Kupovina</string>
     <string name="order_success_message">Uspešno je obavljena kupovina.\nPotvrda o narudžbini je poslata na Vašu e-mail adresu.</string>
+    <string name="disable_push_notifications">Isključi notifikacije</string>
+    <string name="enable_push_notifications">Uključi notifikacije</string>
 
 </resources>

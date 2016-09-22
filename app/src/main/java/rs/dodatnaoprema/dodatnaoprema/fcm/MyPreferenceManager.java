@@ -27,6 +27,7 @@ public class MyPreferenceManager {
     private static final String KEY_USER_PHOTO = "user_photo";
 
     private static final String KEY_NOTIFICATIONS = "notifications";
+    private static final String KEY_ENABLE_NOTIFICATIONS = "enable_notifications";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
     private static final String KEY_CART_ITEM_COUNT = "CartItemCount";
@@ -164,6 +165,14 @@ public class MyPreferenceManager {
         editor.commit();
     }
 
+    public void setNotificationsEnabled(boolean enabled){
+        editor.putBoolean(KEY_ENABLE_NOTIFICATIONS, enabled);
+        editor.commit();
+    }
+
+    public boolean getNotificationsEnabled(){
+        return pref.getBoolean(KEY_ENABLE_NOTIFICATIONS, true);
+    }
 
     public void setLogin(boolean isLoggedIn) {
 
