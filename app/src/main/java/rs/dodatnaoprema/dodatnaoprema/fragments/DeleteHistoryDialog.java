@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,20 +16,20 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 
 public class DeleteHistoryDialog extends DialogFragment {
 
-    private Button no;
-    private Button yes;
     private boolean clickedNo = false;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.history_delete_dialog, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.history_delete_dialog, null);
 
-        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        if (getDialog().getWindow() != null) {
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
 
-        no = (Button) view.findViewById(R.id.cancelBtn);
-        yes = (Button) view.findViewById(R.id.deleteBtn);
+        Button no = (Button) view.findViewById(R.id.cancelBtn);
+        Button yes = (Button) view.findViewById(R.id.deleteBtn);
 
 
         yes.setOnClickListener(new View.OnClickListener() {

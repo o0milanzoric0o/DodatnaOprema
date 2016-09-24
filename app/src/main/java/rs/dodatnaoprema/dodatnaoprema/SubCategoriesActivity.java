@@ -162,7 +162,7 @@ public class SubCategoriesActivity extends BaseActivity {
         SharedPreferencesUtils.clearSharedPreferences(getApplication(), AppConfig.HISTORY_ID_KEY);
 
         //
-        if (mHistory.size() >= 10) { // limit size of history array to 4 items
+        if (mHistory.size() >= 10) { // limit size of history array to 10 items
             SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_KEY, new ArrayList<>(mHistory.subList(0, 10)));
             SharedPreferencesUtils.putArrayList(getApplication(), AppConfig.HISTORY_ID_KEY, new ArrayList<>(mHistoryID.subList(0, 10)));
 

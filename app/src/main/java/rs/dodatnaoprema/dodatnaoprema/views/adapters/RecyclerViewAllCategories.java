@@ -35,7 +35,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
     private List<Category> categories;
     private NetworkImageView productImg;
-    TextView categoryName;
+    private TextView categoryName;
     private Context context;
     private final OnItemClickListener listener;
 
@@ -45,20 +45,20 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
     private int existHistory;
 
-    ImageButton deleteBtn;
+    private ImageButton deleteBtn;
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    private class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             categoryName = (TextView) view.findViewById(R.id.categoryText);
             productImg = (NetworkImageView) view.findViewById(R.id.categoryImage);
         }
 
-        public void bind(final Category item, final OnItemClickListener listener) {
+        void bind(final Category item, final OnItemClickListener listener) {
             //   ...
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,9 +75,9 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    class ViewHolderHeader extends RecyclerView.ViewHolder {
+    private class ViewHolderHeader extends RecyclerView.ViewHolder {
 
-        public ViewHolderHeader(View itemView) {
+        ViewHolderHeader(View itemView) {
 
             super(itemView);
             historyList = (ViewGroup) itemView.findViewById(R.id.flow_layout_history);

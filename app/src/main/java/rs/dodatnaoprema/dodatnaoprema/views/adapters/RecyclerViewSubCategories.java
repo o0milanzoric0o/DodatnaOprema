@@ -27,9 +27,9 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
     private final RecyclerViewSubCategories.OnItemClickListener listener;
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
 
             super(view);
             subcategoryName = (TextView) view.findViewById(R.id.subcategoryText);
@@ -38,7 +38,7 @@ public class RecyclerViewSubCategories extends RecyclerView.Adapter<RecyclerView
 
         }
 
-        public void bind(final Child item, final OnItemClickListener listener) {
+        void bind(final Child item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

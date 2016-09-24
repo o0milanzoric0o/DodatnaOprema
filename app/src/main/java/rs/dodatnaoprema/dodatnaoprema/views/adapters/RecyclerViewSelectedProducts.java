@@ -1,7 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.views.adapters;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     private TextView brandName;
     private TextView stockState;
     private TextView shortDescription;
-    private TextView saleIndicator;
 
     private TextView spec1;
     private TextView spec2;
@@ -45,9 +43,9 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ITEM = 1;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    private class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             productName = (TextView) view.findViewById(R.id.subcategoryName);
             brandName = (TextView) view.findViewById(R.id.brandName);
@@ -55,7 +53,6 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             price = (TextView) view.findViewById(R.id.productPrice);
             stockState = (TextView) view.findViewById(R.id.stockState);
             productImg = (NetworkImageView) view.findViewById(R.id.productImage);
-            saleIndicator = (TextView) view.findViewById(R.id.saleIndicator);
 
             spec1 = (TextView) view.findViewById(R.id.item_spec_1);
             spec2 = (TextView) view.findViewById(R.id.item_spec_2);
@@ -65,7 +62,7 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
             }
         }
 
-        public void bind(final Article item, final OnItemClickListener listener) {
+        void bind(final Article item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,9 +80,9 @@ public class RecyclerViewSelectedProducts extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    class ViewHolderHeader extends RecyclerView.ViewHolder {
+    private class ViewHolderHeader extends RecyclerView.ViewHolder {
 
-        public ViewHolderHeader(View itemView) {
+        ViewHolderHeader(View itemView) {
 
             super(itemView);
 
