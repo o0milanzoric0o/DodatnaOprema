@@ -338,7 +338,7 @@ public class MainActivity extends FragmentActivity
 
         if (id == R.id.nav_account) {
             // Handle the login action
-            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+            Intent intent = new Intent(this, AccountActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_home) {

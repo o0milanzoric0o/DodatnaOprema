@@ -1,6 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
-import android.content.Context;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,30 +16,29 @@ import android.widget.TextView;
 
 import net.steamcrafted.materialiconlib.MaterialDrawableBuilder;
 
-import rs.dodatnaoprema.dodatnaoprema.Interface.SignInCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Utils;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class AccNameFragment extends Fragment {
 
-public class LoginFragment extends Fragment {
-    EditText etEmailLogin;
-    EditText etPasswordLogin;
-
-    private TextView tv_passToggle;
     private FloatingActionButton fab;
     private Toolbar toolbar;
-    private String email;
-    private String pass;
+    private String name;
+    private String last_name;
+    private EditText ed_name;
+    private EditText ed_last_name;
+    private Bundle args;
 
-    private SignInCallbackInterface mCallback;
-
-    public LoginFragment() {
+    public AccNameFragment() {
         // Required empty public constructor
     }
 
-    public static LoginFragment newInstance(Toolbar toolbar, FloatingActionButton fab) {
-        LoginFragment f = new LoginFragment();
+    public static AccNameFragment newInstance(Toolbar toolbar, FloatingActionButton fab) {
+        AccNameFragment f = new AccNameFragment();
         // TODO do we need to pass some args here?
         f.fab = fab;
         f.toolbar = toolbar;
@@ -51,38 +49,27 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        etPasswordLogin = (EditText) view.findViewById(R.id.et_password);
-        tv_passToggle = (TextView) view.findViewById(R.id.tv_pass_toggle_label);
-        tv_passToggle.setTag(0);
-        tv_passToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if ((Integer) view.getTag() == 0) {
-                    tv_passToggle.setText(R.string.pass_toggle_label_hide);
-                    tv_passToggle.setTag(1);
-                    etPasswordLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    etPasswordLogin.setSelection(etPasswordLogin.getText().length());
-                } else if ((Integer) view.getTag() == 1) {
-                    tv_passToggle.setText(R.string.pass_toggle_label_show);
-                    tv_passToggle.setTag(0);
-                    etPasswordLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    etPasswordLogin.setSelection(etPasswordLogin.getText().length());
-                }
-            }
-        });
-
-        etEmailLogin = (EditText) view.findViewById(R.id.et_email);
-
+        View view = inflater.inflate(R.layout.fragment_acc_name, container, false);
+        ed_name = (EditText) view.findViewById(R.id.et_name);
+        ed_last_name = (EditText) view.findViewById(R.id.et_last_name);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = etEmailLogin.getText().toString();
-                pass = etPasswordLogin.getText().toString();
-                if (email.trim().length() > 0 && pass.trim().length() > 0) {
-                    mCallback.onLogInClick(email, pass);
+                // TODO validate fields
+                name = ed_name.getText().toString();
+                last_name = ed_last_name.getText().toString();
+                if (name.trim().length() > 0 && last_name.trim().length() > 0) {
+                    args = new Bundle();
+                    args.putString("name", name);
+                    args.putString("last_name", last_name);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    // Show signIn fragment
+                    AccEmailFragment accEmailFragment = AccEmailFragment.newInstance(toolbar, fab, args);
+                    fragmentTransaction.replace(R.id.fragment_container, accEmailFragment);
+                    fragmentTransaction.commit();
                 } else {
                     // show snackbar to enter credentials
                     Snackbar.make(fab, "Morate uneti podatke.", Snackbar.LENGTH_LONG)
@@ -91,29 +78,15 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        loginToolbar();
+        accNameToolbar();
         fab.setImageDrawable(Utils.getMaterialIconDrawable(getActivity(), MaterialDrawableBuilder.IconValue.ARROW_RIGHT, R.color.colorTextWhite));
         fab.show();
 
+        // Inflate the layout for this fragment
         return view;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (SignInCallbackInterface) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement SignInCallbackInterface");
-        }
-    }
-
-    private void loginToolbar() {
+    private void accNameToolbar() {
         toolbar.setTitle("");
         //setSupportActionBar(toolbar);
 
@@ -137,11 +110,7 @@ public class LoginFragment extends Fragment {
 
         TextView tv = (TextView) toolbar.findViewById(R.id.tv_toolbar_txt);
         tv.setText("");
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
+
+
 }

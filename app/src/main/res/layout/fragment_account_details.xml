@@ -1,96 +1,201 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_dark"
-    android:orientation="vertical"
-    android:weightSum="4">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/user_photo"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="@dimen/g_top_margin"
-            android:contentDescription="@string/desc_google_icon"
-            android:src="@drawable/chainsaw_128" />
-
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:text="@string/title_text"
-            android:textColor="@android:color/white"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/signed_out"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fadeScrollbars="true"
-            android:gravity="center"
-            android:maxLines="5"
-            android:padding="10dp"
-            android:scrollbars="vertical"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-    </LinearLayout>
+    tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.AccDetailsFragment">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/primary_light">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/sign_out_and_disconnect"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            tools:visibility="visible">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/sign_in_activity_vertical_margin"
+            android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+            android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+            android:layout_marginTop="50dp"
+            android:text="@string/acc_change_user_data"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/sign_out_button"
-                android:layout_width="0dp"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="@string/sign_out"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_keep_shopping"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="@string/continue_shopping"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+                <TextView
+                    android:id="@+id/tv_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/acc_name_label"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_last_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/acc_last_name_label"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_address_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/address_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_shipping_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_city_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/city_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_zip_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/zip_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_zip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_email_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/email_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_mobile_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/mobile_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_phone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
+                    android:text="@string/phone_hint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorTextWhite" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="@color/colorTextWhite"
+                    android:textSize="@dimen/user_data_edit_text_size" />
+            </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 
-</LinearLayout>
+</FrameLayout>
+

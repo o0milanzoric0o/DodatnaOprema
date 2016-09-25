@@ -38,6 +38,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     // Dependency for dot indicator
     compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
+    compile 'net.steamcrafted:materialiconlib:1.1.1'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.github.linger1216:labelview:v1.1.1'

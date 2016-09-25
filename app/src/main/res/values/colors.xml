@@ -17,6 +17,7 @@
         <color name="view.pager.selected.item.color">#FF4081</color>-->
 
     <color name="background_white">#FFFFFF</color>
+    <color name="colorTextWhite">#FFFFFF</color>
     <color name="background_gray">#FEFEFE</color>
     <color name="view_more_colour">#FAFAFA</color>
 

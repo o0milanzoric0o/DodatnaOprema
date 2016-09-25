@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.LoginFragment">
+    tools:context="rs.dodatnaoprema.dodatnaoprema.fragments.AccNameFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_login"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -19,75 +19,57 @@
             android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginTop="50dp"
-            android:text="@string/title_log_in"
+            android:text="@string/acc_enter_name"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/tv_email_label"
+            android:id="@+id/tv_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/tv_login"
+            android:layout_below="@id/tv_title"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
-            android:text="@string/email_hint"
+            android:text="@string/acc_name_label"
             android:textAllCaps="true"
             android:textColor="@color/colorTextWhite" />
 
         <EditText
-            android:id="@+id/et_email"
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_email_label"
-            android:inputType="textEmailAddress"
+            android:layout_below="@id/tv_name_label"
+            android:inputType="textPersonName"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/tv_pass_label"
+            android:id="@+id/tv_last_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/et_email"
+            android:layout_below="@id/et_name"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
             android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
-            android:text="@string/pass_hint"
+            android:text="@string/acc_last_name_label"
             android:textAllCaps="true"
             android:textColor="@color/colorTextWhite" />
 
-        <TextView
-            android:id="@+id/tv_pass_toggle_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/et_email"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="@dimen/sign_in_activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/sign_in_activity_horizontal_margin"
-            android:layout_marginRight="@dimen/sign_in_activity_horizontal_margin"
-            android:layout_marginStart="@dimen/sign_in_activity_horizontal_margin"
-            android:layout_marginTop="@dimen/sign_in_activity_vertical_margin"
-            android:text="@string/pass_toggle_label_show"
-            android:textColor="@color/colorTextWhite" />
-
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_pass_label"
-            android:inputType="textPassword"
+            android:layout_below="@id/tv_last_name_label"
+            android:inputType="textPersonName"
             android:textColor="@color/colorTextWhite"
             android:textSize="30sp" />
 
     </RelativeLayout>
-
-
 </FrameLayout>

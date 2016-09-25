@@ -110,15 +110,18 @@
     <string name="last_name_hint">Prezime</string>
     <string name="email_hint">Email</string>
     <string name="pass_hint">Šifra</string>
-    <string name="btn_text_register">Registruj</string>
+    <string name="pass_toggle_label_show">Pokaži</string>
+    <string name="pass_toggle_label_hide">Sakrij</string>
+    <string name="btn_text_register">Napravi nalog</string>
     <string name="text_already_have_account">Ako već imate nalog:
         <u>kliknite ovde.</u>
     </string>
     <string name="text_logged_in">Povezani ste</string>
+    <string name="title_log_in">Prijavi se</string>
     <string name="text_logged_out">Niste povezani</string>
     <string name="btn_text_logout">Odveži se</string>
     <string name="text_web_site">masinealati.rs</string>
-    <string name="btn_text_sign_in">Poveži se</string>
+    <string name="btn_text_sign_in">Već imam nalog</string>
     <string name="btn_text_register_here">Registruj me</string>
     <string name="OK">OK</string>
 
@@ -228,5 +231,15 @@
     <string name="order_success_message">Uspešno je obavljena kupovina.\nPotvrda o narudžbini je poslata na Vašu e-mail adresu.</string>
     <string name="disable_push_notifications">Isključi notifikacije</string>
     <string name="enable_push_notifications">Uključi notifikacije</string>
+    <string name="sign_in_title">Dobrodošli na MašineAlati</string>
+    <string name="disclaimer_text">Vaši podaci neće biti ustupani trećim licima.</string>
+
+    <string name="acc_enter_name">Vaše ime?</string>
+    <string name="acc_name_label">Ime</string>
+    <string name="acc_last_name_label">Prezime</string>
+    <string name="acc_enter_email">Vaša email adresa?</string>
+    <string name="acc_enter_pass">Izaberite šifru</string>
+    <string name="acc_enter_pass_desc">Šifra mora imati bar 8 karaktera.</string>
+    <string name="acc_change_user_data">Koristnički podaci</string>
 
 </resources>

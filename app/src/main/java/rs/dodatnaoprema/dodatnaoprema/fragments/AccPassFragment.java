@@ -1,5 +1,6 @@
 package rs.dodatnaoprema.dodatnaoprema.fragments;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,38 +23,45 @@ import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.application.MyApplication;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Utils;
 
-
-public class LoginFragment extends Fragment {
-    EditText etEmailLogin;
-    EditText etPasswordLogin;
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class AccPassFragment extends Fragment {
 
     private TextView tv_passToggle;
     private FloatingActionButton fab;
     private Toolbar toolbar;
+    private EditText ed_pass;
+    private String name;
+    private String last_name;
     private String email;
     private String pass;
+    private Bundle args;
+
 
     private SignInCallbackInterface mCallback;
 
-    public LoginFragment() {
+    public AccPassFragment() {
         // Required empty public constructor
     }
 
-    public static LoginFragment newInstance(Toolbar toolbar, FloatingActionButton fab) {
-        LoginFragment f = new LoginFragment();
+    public static AccPassFragment newInstance(Toolbar toolbar, FloatingActionButton fab, Bundle bundle) {
+        AccPassFragment f = new AccPassFragment();
         // TODO do we need to pass some args here?
         f.fab = fab;
         f.toolbar = toolbar;
-        //Bundle args = new Bundle();
+        f.setArguments(bundle);
         return f;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        etPasswordLogin = (EditText) view.findViewById(R.id.et_password);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_acc_pass, container, false);
+        ed_pass = (EditText) view.findViewById(R.id.et_password);
+
         tv_passToggle = (TextView) view.findViewById(R.id.tv_pass_toggle_label);
         tv_passToggle.setTag(0);
         tv_passToggle.setOnClickListener(new View.OnClickListener() {
@@ -62,42 +70,46 @@ public class LoginFragment extends Fragment {
                 if ((Integer) view.getTag() == 0) {
                     tv_passToggle.setText(R.string.pass_toggle_label_hide);
                     tv_passToggle.setTag(1);
-                    etPasswordLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    etPasswordLogin.setSelection(etPasswordLogin.getText().length());
+                    ed_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    ed_pass.setSelection(ed_pass.getText().length());
                 } else if ((Integer) view.getTag() == 1) {
                     tv_passToggle.setText(R.string.pass_toggle_label_show);
                     tv_passToggle.setTag(0);
-                    etPasswordLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    etPasswordLogin.setSelection(etPasswordLogin.getText().length());
+                    ed_pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    ed_pass.setSelection(ed_pass.getText().length());
                 }
             }
         });
 
-        etEmailLogin = (EditText) view.findViewById(R.id.et_email);
 
+        args = getArguments();
+        name = args.getString("name");
+        last_name = args.getString("last_name");
+        email = args.getString("email");
 
+        // Inflate the layout for this fragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = etEmailLogin.getText().toString();
-                pass = etPasswordLogin.getText().toString();
-                if (email.trim().length() > 0 && pass.trim().length() > 0) {
-                    mCallback.onLogInClick(email, pass);
+                // TODO validate password
+                pass = ed_pass.getText().toString();
+                if (pass.trim().length() >= 8) {
+                    mCallback.onCreateAccClick(name, last_name, email, pass);
                 } else {
                     // show snackbar to enter credentials
-                    Snackbar.make(fab, "Morate uneti podatke.", Snackbar.LENGTH_LONG)
+                    Snackbar.make(fab, "Šifra nema dovoljno karaktera.", Snackbar.LENGTH_LONG)
                             .show();
                 }
             }
         });
 
-        loginToolbar();
+        accPassToolbar();
         fab.setImageDrawable(Utils.getMaterialIconDrawable(getActivity(), MaterialDrawableBuilder.IconValue.ARROW_RIGHT, R.color.colorTextWhite));
         fab.show();
 
+        // Inflate the layout for this fragment
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -113,7 +125,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void loginToolbar() {
+    private void accPassToolbar() {
         toolbar.setTitle("");
         //setSupportActionBar(toolbar);
 
@@ -128,8 +140,8 @@ public class LoginFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                         // Show signIn fragment
-                        SignInFragment signInFragment = SignInFragment.newInstance(toolbar, fab);
-                        fragmentTransaction.replace(R.id.fragment_container, signInFragment);
+                        AccEmailFragment accEmailFragment = AccEmailFragment.newInstance(toolbar, fab, args);
+                        fragmentTransaction.replace(R.id.fragment_container, accEmailFragment);
                         fragmentTransaction.commit();
                     }
                 }
@@ -137,11 +149,5 @@ public class LoginFragment extends Fragment {
 
         TextView tv = (TextView) toolbar.findViewById(R.id.tv_toolbar_txt);
         tv.setText("");
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 }

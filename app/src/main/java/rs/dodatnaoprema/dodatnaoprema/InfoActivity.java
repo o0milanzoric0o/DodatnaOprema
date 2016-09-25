@@ -62,10 +62,11 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_HOW_TO_BUY"), Base64.DEFAULT);
         } else {
             data = Base64.decode(SharedPreferencesUtils.getString(this, "INFO_CONTACT"), Base64.DEFAULT);
-            Log.e("InfoActivity","Info Contact");
+            Log.e("InfoActivity", "Info Contact");
             map.setVisibility(View.VISIBLE);
             MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
+
         }
 
         mWebViewTab.setWebViewClient(new WebViewClient() {
@@ -108,7 +109,7 @@ public class InfoActivity extends BaseActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         // googleMap.addMarker(new MarkerOptions().position(new LatLng(44.8066679, 20.4691681)).title("Marker"));
 
-        Log.e("InfoActivity"," OnMapReady");
+        Log.e("InfoActivity", " OnMapReady");
 
         LatLng latLng = new LatLng(44.806664, 20.471357);
 

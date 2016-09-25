@@ -34,7 +34,13 @@
     <dimen name="one_product_text_padding_top_bottom">1dp</dimen>
     <dimen name="one_product_text_padding_left_right">3dp</dimen>
     <dimen name="line_margine">6dp</dimen>
+    <dimen name="activity_sign_in_vertical_margin_btn">8dp</dimen>
+
+    <dimen name="sign_in_activity_horizontal_margin">16dp</dimen>
+    <dimen name="sign_in_activity_vertical_margin">16dp</dimen>
+    <dimen name="user_data_edit_text_size">24sp</dimen>
 
     <!-- Offer indicator -->
     <dimen name="offer_indicator_radius">30dp</dimen>
+
 </resources>
