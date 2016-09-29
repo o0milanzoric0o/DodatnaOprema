@@ -187,7 +187,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             else mTextViewYesNo.setText(getString(R.string.text, "nema na stanju"));
         }
         if (mTextViewMin != null)
-            mTextViewMin.setText(getString(R.string.min_quantity_txt, String.valueOf(mOneArticle.getArtikal().getMozedaseKupi())));
+            mTextViewMin.setText(getString(R.string.min_quantity_txt, String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()),String.valueOf(mOneArticle.getArtikal().getTipUnit())));
 
         if (mTextViewId != null)
             mTextViewId.append(" " + mOneArticle.getArtikal().getArtikalId());

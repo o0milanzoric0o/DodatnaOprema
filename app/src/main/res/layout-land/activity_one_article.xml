@@ -78,18 +78,21 @@
                         android:id="@+id/textView_naziv"
                         style="@style/OneArticleTextView"
                         android:layout_width="match_parent"
+                        android:textSize="@dimen/large_text_size"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textView_cena"
                         style="@style/OneArticleTextView"
                         android:layout_width="match_parent"
-                        android:textColor="@android:color/holo_red_dark" />
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/large_text_size" />
 
                     <TextView
                         android:id="@+id/textView_brend_name"
                         style="@style/OneArticleTextView"
-                        android:layout_width="match_parent" />
+                        android:layout_width="match_parent"
+                        />
 
                     <TextView
                         android:id="@+id/textView_about_price"

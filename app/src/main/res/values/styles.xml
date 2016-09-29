@@ -91,7 +91,7 @@
     </style>
 
 
-    <style name="OneArticleTextView" parent="@android:style/TextAppearance.Medium">
+    <style name="OneArticleTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:paddingBottom">@dimen/one_product_text_padding_top_bottom</item>
         <item name="android:paddingLeft">@dimen/one_product_text_padding_left_right</item>
         <item name="android:paddingRight">@dimen/one_product_text_padding_left_right</item>
@@ -102,7 +102,7 @@
         <item name="android:text">Medium Text</item>
         <item name="android:background">@color/background_white</item>
         <item name="android:textColor">@color/primary_text</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textSize">@dimen/extra_small_text_size</item>
     </style>
 
 

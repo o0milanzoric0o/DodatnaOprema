@@ -23,8 +23,10 @@
     <dimen name="subheader_text_size">12sp</dimen>
 
     <dimen name="category_text_size">18sp</dimen>
+    <dimen name="large_text_size">16sp</dimen>
     <dimen name="medium_text_size">14sp</dimen>
     <dimen name="small_text_size">12sp</dimen>
+    <dimen name="extra_small_text_size">10sp</dimen>
 
     <dimen name="load_more_footer_height_classic">10dp</dimen>
 

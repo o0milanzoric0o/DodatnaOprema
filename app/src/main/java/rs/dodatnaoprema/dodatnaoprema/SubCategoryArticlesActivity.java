@@ -66,6 +66,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private boolean addedFragments = false;
     private String mSubCategoryName;
     private int numberOfResults = 0;
+    private TextView breadCrumpList;
 
     public List<Article> getArticlesList() {
         return mArticles;
