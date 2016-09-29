@@ -469,7 +469,7 @@ public class MainActivity extends FragmentActivity
 
     public void info(String title) {
 
-        intent = new Intent(getApplicationContext(), InfoActivity.class);
+        intent = new Intent(this, InfoActivity.class);
         intent.putExtra("infoTip", title);
         startActivity(intent);
     }
