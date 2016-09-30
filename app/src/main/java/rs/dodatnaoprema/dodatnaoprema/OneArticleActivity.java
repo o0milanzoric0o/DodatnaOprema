@@ -96,12 +96,14 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             public void onClick(View view) {
                 // price exists
                 if (mOneArticle.getArtikal().getStanje() == 0) { // no available quantity
-                    InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikla nema na stanju.");
-                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
+                    openContactActivity();
+                  /*  InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikla nema na stanju.");
+                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");*/
                 } else if (mOneArticle.getArtikal().getCenaPrikaz() == null || mOneArticle.getArtikal().getMozedaseKupi() == 0) {
                     // no price so can't add it to cart. Inform the user
-                    InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikal se može naručiti samo telefonom.");
-                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");
+                  /*  InfoDialog infoDialog = InfoDialog.newInstance("Ne može se dodati u korpu", "Artikal se može naručiti samo telefonom.");
+                    infoDialog.show(getSupportFragmentManager(), "InfoDialog");*/
+                    openContactActivity();
                 } else {
                     showNumberPicker(view);
                 }
@@ -187,7 +189,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             else mTextViewYesNo.setText(getString(R.string.text, "nema na stanju"));
         }
         if (mTextViewMin != null)
-            mTextViewMin.setText(getString(R.string.min_quantity_txt, String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()),String.valueOf(mOneArticle.getArtikal().getTipUnit())));
+            mTextViewMin.setText(getString(R.string.min_quantity_txt, String.valueOf(mOneArticle.getArtikal().getMozedaseKupi()), String.valueOf(mOneArticle.getArtikal().getTipUnit())));
 
         if (mTextViewId != null)
             mTextViewId.append(" " + mOneArticle.getArtikal().getArtikalId());
@@ -211,12 +213,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         }
 
 
-        //Object opisObject = mOneArticle.getArtikal().getOpisArtikliTekstovi();
-        // byte[] data = Base64.decode(opisObject.toString(), Base64.DEFAULT);
-        //String opisText = new String(data);
-        //  mTextViewAbout.setText("Opis artikla");
 
-        //  mWebView.loadDataWithBaseURL(null, opisText, "text/html", "utf-8", null);
 
 /*
         mNumberPicker = (NumberPicker)findViewById(R.id.numberPicker);
@@ -250,6 +247,11 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
                 }
             });
+        }
+        if (mOneArticle.getArtikal().getStanje() == 0) {
+            mTextViewKorpa.setText(getString(R.string.no_product_txt));
+        } else if (mOneArticle.getArtikal().getCenaPrikaz() == null || mOneArticle.getArtikal().getMozedaseKupi() == 0) {
+            mTextViewKorpa.setText(getString(R.string.call_for_product_txt));
         }
     }
 
@@ -485,5 +487,11 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         public CharSequence getPageTitle(int position) {
             return String.valueOf(position + 1);
         }
+    }
+
+    public void openContactActivity() {
+        Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
+        intent.putExtra("infoTip", getString(R.string.contact));
+        startActivity(intent);
     }
 }

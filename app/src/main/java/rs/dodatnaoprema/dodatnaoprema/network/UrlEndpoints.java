@@ -51,6 +51,7 @@ public class UrlEndpoints {
 
         return getFullUrl(url);
     }
+
     public static String getRequestUrlInfo(int id) {
 
         // http://masinealati.rs/parametri.php?action=textZaInfoJSON&id=42
@@ -144,6 +145,7 @@ public class UrlEndpoints {
 
         return getFullUrl(url);
     }
+
     public static String getSearchResults(String keyWord) {
 
         // http://masinealati.rs/parametri.php?action=searchAndr&upitsearch=gnf%2035&userId=3
@@ -159,6 +161,7 @@ public class UrlEndpoints {
     }
 
     private static String getFullUrl(String url) {
+        Log.logInfo("FULL_URL", url);
         if (!SharedPreferencesUtils.getUserId().equals("")) {
 
             return url + "&userId=" + SharedPreferencesUtils.getUserId();

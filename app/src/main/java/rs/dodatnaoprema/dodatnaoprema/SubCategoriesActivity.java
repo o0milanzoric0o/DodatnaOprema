@@ -17,9 +17,11 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -27,7 +29,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSubCategories;
 
-public class SubCategoriesActivity extends BaseActivity {
+public class SubCategoriesActivity extends BaseActivity implements Serializable {
 
     private VolleySingleton mVolleySingleton;
     private int existSubcategory = 0;
@@ -111,11 +113,17 @@ public class SubCategoriesActivity extends BaseActivity {
             public void webRequestSuccess(boolean success, CategoriesByID categoriesByID) {
                 if (success) {
                     existSubcategory = categoriesByID.getKategorije().size();
+                    String breadCrupmList = "";
+                    for (int i = 0; i < categoriesByID.getBreadCrump().size(); i++) {
+                        breadCrupmList = breadCrupmList + " " + categoriesByID.getBreadCrump().get(i).getIme();
+                    }
+                    Log.logDebug("breadCrupm", " " + breadCrupmList);
                     if (existSubcategory == 0) {
                         setHistory(item);
                         Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
                         intent.putExtra("Artikli", item.getKatIme());
                         intent.putExtra("ArtikalId", item.getKategorijaArtikalaId());
+
                         startActivity(intent);
                         progressDialog.hideDialog();
                     } else {

@@ -130,6 +130,8 @@
     <string name="price_by">cena po: %s</string>
     <string name="brend_txt">Brend: %s</string>
     <string name="quantity_txt">Količina: %d</string>
+    <string name="no_product_txt">Nema na stanju. Pozovite nas.</string>
+    <string name="call_for_product_txt">Artikal se može naručiti samo putem telefona.</string>
     <string name="min_quantity_txt">Minimalna količina za narudžbinu: %1$s %2$s</string>
     <string name="description_txt">Opis artikla:</string>
     <string name="id_txt">id:</string>

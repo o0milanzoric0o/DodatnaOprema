@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,12 +40,13 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
-public class SubCategoryArticlesActivity extends BaseActivity {
+public class SubCategoryArticlesActivity extends BaseActivity implements Serializable{
 
     public int selectedSubcategoryId = 0;
     private List<Article> mArticles = new ArrayList<>();
@@ -67,6 +69,7 @@ public class SubCategoryArticlesActivity extends BaseActivity {
     private String mSubCategoryName;
     private int numberOfResults = 0;
     private TextView breadCrumpList;
+    private List<BreadCrump> breadCrumps;
 
     public List<Article> getArticlesList() {
         return mArticles;
@@ -84,13 +87,15 @@ public class SubCategoryArticlesActivity extends BaseActivity {
         cardFace = (FrameLayout) findViewById(R.id.articles_content_list);
         cardBack = (FrameLayout) findViewById(R.id.articles_content_grid);
         mHeader = (AppBarLayout) findViewById(R.id.sort_header);
+        breadCrumpList = (TextView) findViewById(R.id.breadCrupmList);
 
         cardBack.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
-
+       // breadCrumps = (List<BreadCrump>) intent.getSerializableExtra("breadCrupm");
+       // Log.logInfo("BREAD", "SIZE " + breadCrumps.size());
 
         Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

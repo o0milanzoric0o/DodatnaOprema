@@ -77,49 +77,47 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <LinearLayout
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:alpha="0.9">
 
-
-
-                    <RelativeLayout
+                    <!-- Spinner with sort options -->
+                    <TextView
+                        android:id="@+id/breadCrupmList"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="Sve kategorije"
+                        android:theme="@style/CustomSpinnerItemStyle" />
 
-                        <!-- Spinner with sort options -->
-                        <TextView
-                            android:id="@+id/breadCrupmList"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sve kategorije"
-                            android:layout_margin="10dp"
-                            android:theme="@style/CustomSpinnerItemStyle" />
-                        <Spinner
-                            android:id="@+id/spinner_sort"
-                            android:layout_width="180dp"
-                            android:layout_margin="10dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/breadCrupmList"
-                            android:popupBackground="@color/base_gray"
-                            android:theme="@style/CustomSpinnerItemStyle" />
+                    <Spinner
+                        android:id="@+id/spinner_sort"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/breadCrupmList"
+                        android:layout_margin="10dp"
+                        android:popupBackground="@color/base_gray"
+                        android:theme="@style/CustomSpinnerItemStyle" />
 
-                        <!--Grid/List image indicator-->
-                        <ImageButton
-                            android:id="@+id/list_grid_change_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBottom="@+id/spinner_sort"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true"
-                            android:alpha="0.3"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:contentDescription="@string/image_description"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/ic_view_module_black_24dp" />
-                    </RelativeLayout>
-                </LinearLayout>
+                    <!--Grid/List image indicator-->
+                    <ImageButton
+                        android:id="@+id/list_grid_change_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/spinner_sort"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:alpha="0.3"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="@string/image_description"
+                        android:src="@drawable/ic_view_module_black_24dp" />
+                </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
