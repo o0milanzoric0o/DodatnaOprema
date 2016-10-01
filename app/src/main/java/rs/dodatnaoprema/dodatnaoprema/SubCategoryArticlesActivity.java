@@ -294,7 +294,8 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
 
                     Log.logInfo("ARTIKLI", "" + mArticles.size());
                     if (mArticles.size() > 0) {
-
+                        mHeader.setVisibility(View.VISIBLE);
+                        mFooter.setVisibility(View.VISIBLE);
                         if (!addedFragments) {
 
                             addedFragments = true;
@@ -384,8 +385,11 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
         ((ArticlesGrid) getFragmentManager().findFragmentById(R.id.articles_content_grid)).updateFragment(articles);
         Log.logInfo("SORT", "" + articles.size());
-        if (articles.size() == 0) noSearchResults();
-        else positiveResults();
+        if (articles.size() == 0) {
+            noSearchResults();
+        } else {
+            positiveResults();
+        }
     }
 
     public void resetFilter() {

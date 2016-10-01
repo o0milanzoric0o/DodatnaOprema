@@ -224,5 +224,10 @@ public class SearchActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
 

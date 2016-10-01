@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:background="@color/base_gray"
             android:theme="@style/AppTheme.AppBarOverlay"
+            android:visibility="gone"
             android:windowActionBarOverlay="true">
 
             <android.support.v7.widget.Toolbar
@@ -88,7 +89,8 @@
                         android:id="@+id/flow_layout_finalpath"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        />
 
                     <Spinner
                         android:id="@+id/spinner_sort"
@@ -125,6 +127,7 @@
             android:alpha="0.7"
             android:background="@color/base_gray"
             android:clickable="true"
+            android:visibility="gone"
             app:layout_behavior=".QuickReturnFooterBehavior">
 
             <ImageView

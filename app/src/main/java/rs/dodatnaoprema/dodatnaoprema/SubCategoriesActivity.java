@@ -55,6 +55,7 @@ public class SubCategoriesActivity extends BaseActivity implements Serializable 
         pathList = (ViewGroup) findViewById(R.id.flow_layout_path);
 
         if (breadCrumpList.size() > 0) {
+            pathList.setVisibility(View.VISIBLE);
             pathList.addView(addNewButton("Sve kategorije", "0"));
             if (breadCrumpList.size() > 1) {
                 pathList.addView(addSeparator());

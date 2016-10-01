@@ -30,6 +30,7 @@
 
             <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
                 android:id="@+id/flow_layout_path"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp" />
