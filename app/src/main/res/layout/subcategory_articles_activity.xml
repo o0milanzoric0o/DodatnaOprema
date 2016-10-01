@@ -81,25 +81,20 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.9">
+                    android:alpha="0.7">
 
                     <!-- Spinner with sort options -->
-                    <TextView
-                        android:id="@+id/breadCrupmList"
+                    <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
+                        android:id="@+id/flow_layout_finalpath"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="Sve kategorije"
-                        android:theme="@style/CustomSpinnerItemStyle" />
+                        android:layout_margin="4dp" />
 
                     <Spinner
                         android:id="@+id/spinner_sort"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/breadCrupmList"
+                        android:layout_below="@id/flow_layout_finalpath"
                         android:layout_margin="10dp"
                         android:popupBackground="@color/base_gray"
                         android:theme="@style/CustomSpinnerItemStyle" />

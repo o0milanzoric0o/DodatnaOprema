@@ -7,9 +7,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -41,12 +48,13 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.articles_filtered_by_category.ArticlesFilteredByCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 import rs.dodatnaoprema.dodatnaoprema.network.WebRequestCallbackInterface;
 
-public class SubCategoryArticlesActivity extends BaseActivity implements Serializable{
+public class SubCategoryArticlesActivity extends BaseActivity implements Serializable {
 
     public int selectedSubcategoryId = 0;
     private List<Article> mArticles = new ArrayList<>();
@@ -68,8 +76,7 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
     private boolean addedFragments = false;
     private String mSubCategoryName;
     private int numberOfResults = 0;
-    private TextView breadCrumpList;
-    private List<BreadCrump> breadCrumps;
+    private ViewGroup pathList;
 
     public List<Article> getArticlesList() {
         return mArticles;
@@ -87,15 +94,27 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
         cardFace = (FrameLayout) findViewById(R.id.articles_content_list);
         cardBack = (FrameLayout) findViewById(R.id.articles_content_grid);
         mHeader = (AppBarLayout) findViewById(R.id.sort_header);
-        breadCrumpList = (TextView) findViewById(R.id.breadCrupmList);
 
         cardBack.setVisibility(View.GONE);
+        pathList = (ViewGroup) findViewById(R.id.flow_layout_finalpath);
 
         Intent intent = getIntent();
         mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
-       // breadCrumps = (List<BreadCrump>) intent.getSerializableExtra("breadCrupm");
-       // Log.logInfo("BREAD", "SIZE " + breadCrumps.size());
+        List<BreadCrump> breadCrumpList = (List<BreadCrump>) intent.getSerializableExtra("breadCrump");
+        if (breadCrumpList.size() > 0) {
+            pathList.addView(addNewButton("Sve kategorije", "0"));
+            if (breadCrumpList.size() > 1) {
+                pathList.addView(addSeparator());
+            }
+            for (int i = 0; i < breadCrumpList.size() - 1; i++) {
+                pathList.addView(addNewButton(breadCrumpList.get(i).getIme(), breadCrumpList.get(i).getIdBc().toString()));
+
+                if (breadCrumpList.size() > 0 && i < breadCrumpList.size() - 2) {
+                    pathList.addView(addSeparator());
+                }
+            }
+        }
 
         Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -317,6 +336,37 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
 
     }
 
+    private void getCategories(int id, final String categoryName) {
+
+        final ProgressDialogCustom progressDialog = new ProgressDialogCustom(SubCategoryArticlesActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.showDialog("Učitavanje...");
+
+        PullWebContent<CategoriesByID> content =
+                new PullWebContent<>(CategoriesByID.class, UrlEndpoints.getRequestUrlCategoriesById(id), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<CategoriesByID>() {
+            @Override
+            public void webRequestSuccess(boolean success, CategoriesByID categoriesByID) {
+                if (success) {
+
+                    Intent intent = new Intent(getApplicationContext(), SubCategoriesActivity.class);
+                    intent.putExtra("Potkategorije", (Serializable) categoriesByID.getKategorije());
+                    intent.putExtra("breadCrump", (Serializable) categoriesByID.getBreadCrump());
+                    intent.putExtra("Title", categoryName);
+                    startActivity(intent);
+                    progressDialog.hideDialog();
+
+                }
+            }
+
+            @Override
+            public void webRequestError(String error) {
+                progressDialog.hideDialog();
+            }
+        });
+        content.pullList();
+    }
+
     public int getClickedSubcategoryId() {
         return selectedSubcategoryId;
     }
@@ -515,6 +565,76 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
 
         msgNoResults.setVisibility(View.VISIBLE);
         msgNoResults.setText(getString(R.string.msg_no_search_results));
+    }
+
+    private TextView addNewButton(final String subcategory, final String id) {
+
+        RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.WRAP_CONTENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT);
+
+        SpannableString content = new SpannableString(subcategory);
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+
+        final TextView tv = new TextView(pathList.getContext());
+
+        tv.setLayoutParams(param);
+        tv.setPadding(2, 2, 2, 2);
+        tv.setGravity(Gravity.CENTER);
+        tv.setClickable(true);
+        tv.setMaxLines(1);
+        tv.setEllipsize(TextUtils.TruncateAt.END);
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (subcategory.equalsIgnoreCase("Sve kategorije")) {
+                    Intent intent = new Intent(getApplicationContext(), AllCategoriesActivity.class);
+                    // Not going to put allCategories in an intent, better get it from shared prefs
+                    //intent.putExtra("SveKategorije", (Serializable) mAllCategories);
+                    startActivity(intent);
+                } else {
+                    getCategories(Integer.parseInt(id), subcategory);
+                }
+            }
+        });
+
+        tv.setText(content);
+        tv.setAllCaps(false);
+        tv.setTextColor(ContextCompat.getColor(pathList.getContext(), R.color.primary_dark));
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        tv.setMinHeight(10);
+        tv.setMaxWidth(300);
+        tv.setMinimumHeight(10);
+
+
+        return tv;
+    }
+
+    private TextView addSeparator() {
+
+        RecyclerView.LayoutParams param = new RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.WRAP_CONTENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT);
+
+        final TextView tv = new TextView(pathList.getContext());
+
+        tv.setLayoutParams(param);
+        tv.setPadding(2, 2, 2, 2);
+        tv.setGravity(Gravity.CENTER);
+        tv.setMaxLines(1);
+        tv.setEllipsize(TextUtils.TruncateAt.END);
+
+        tv.setText(">");
+        tv.setAllCaps(false);
+        tv.setTextColor(ContextCompat.getColor(pathList.getContext(), R.color.btnTextColor));
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+        tv.setMinHeight(10);
+        tv.setMaxWidth(300);
+        tv.setMinimumHeight(10);
+
+
+        return tv;
     }
 
 }

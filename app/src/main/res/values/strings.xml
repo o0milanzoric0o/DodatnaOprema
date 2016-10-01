@@ -140,6 +140,8 @@
     <string name="article_category_text">Pripada kategoriji:</string>
     <string name="no_spec">Nema specifikacija</string>
     <string name="text">%s</string>
+    <string name="underlined_text"><u>%s</u></string>
+
 
     <string name="stock_state_available">ima na stanju</string>
     <string name="stock_state_sold">rasprodato</string>

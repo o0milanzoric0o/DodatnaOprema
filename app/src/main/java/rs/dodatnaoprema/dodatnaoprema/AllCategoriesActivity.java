@@ -36,6 +36,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fragments.DeleteHistoryDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAllCategories;
 
 public class AllCategoriesActivity extends BaseActivity {
@@ -164,6 +165,7 @@ public class AllCategoriesActivity extends BaseActivity {
 
                 Intent intent = new Intent(getApplicationContext(), SubCategoriesActivity.class);
                 intent.putExtra("Potkategorije", (Serializable) item.getChild());
+                intent.putExtra("breadCrump", new ArrayList<BreadCrump>());
                 intent.putExtra("Title", item.getKatsrblat());
                 startActivity(intent);
 

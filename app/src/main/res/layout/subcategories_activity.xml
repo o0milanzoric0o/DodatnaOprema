@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/button_holder_background"
@@ -18,15 +19,28 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <rs.dodatnaoprema.dodatnaoprema.customview.FlowLayout
+                android:id="@+id/flow_layout_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp" />
+
+        </FrameLayout>
 
         <rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView
             android:id="@+id/recycler_view_subcategories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

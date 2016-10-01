@@ -3,9 +3,11 @@ package rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BreadCrump {
+import java.io.Serializable;
 
-    @SerializedName("ime")
+public class BreadCrump implements Serializable{
+
+    @SerializedName("BrendIme")
     @Expose
     private String ime;
     @SerializedName("link")
