@@ -117,6 +117,8 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
                 }
             }
         }
+        Log.logInfo("VISINA", ""+pathList.getMeasuredHeight());
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT

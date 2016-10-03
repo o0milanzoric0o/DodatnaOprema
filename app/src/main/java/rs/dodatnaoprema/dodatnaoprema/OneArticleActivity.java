@@ -476,7 +476,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
         private int imageCount = 0;
 
-        public ImageGalleryAdapter(FragmentManager fragmentManager) {
+        ImageGalleryAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -492,7 +492,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
             return OneArticleImageFragment.newInstance(position);
         }
 
-        public void setImageCount(int imageCount) {
+        void setImageCount(int imageCount) {
             this.imageCount = imageCount;
         }
 
