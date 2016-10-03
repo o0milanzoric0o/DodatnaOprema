@@ -13,12 +13,12 @@ public class SortUtils {
         Collections.sort(articles, new Comparator<Article>() {
             @Override
             public int compare(Article a1, Article a2) {
-                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) - Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()) >= 0)
+                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) == Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()))
+                    return 0;
+                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) > Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()))
                     return 1;
-                else
-                    return -1;
+                return -1;
             }
-
         });
         return articles;
     }
@@ -27,12 +27,12 @@ public class SortUtils {
         Collections.sort(articles, new Comparator<Article>() {
             @Override
             public int compare(Article a1, Article a2) {
-                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) - Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()) >= 0)
+                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) == Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()))
+                    return 0;
+                if (Conversions.priceStringToFloat(a1.getCenaSamoBrojFormat()) > Conversions.priceStringToFloat(a2.getCenaSamoBrojFormat()))
                     return -1;
-                else
-                    return 1;
+                return 1;
             }
-
         });
         return articles;
     }
@@ -54,12 +54,12 @@ public class SortUtils {
         Collections.sort(articles, new Comparator<Article>() {
             @Override
             public int compare(Article a1, Article a2) {
-                if (a1.getArtikalBrPregleda() - a2.getArtikalBrPregleda() >= 0)
+                if (a1.getArtikalBrPregleda().equals(a2.getArtikalBrPregleda()))
+                    return 0;
+                if (a1.getArtikalBrPregleda() > a2.getArtikalBrPregleda())
                     return -1;
-                else
-                    return 1;
+                return 1;
             }
-
         });
         return articles;
     }
@@ -68,10 +68,11 @@ public class SortUtils {
         Collections.sort(articles, new Comparator<Article>() {
             @Override
             public int compare(Article a1, Article a2) {
-                if (a1.getArtikalId() - a2.getArtikalId() >= 0)
+                if (a1.getArtikalId().equals(a2.getArtikalId()))
+                    return 0;
+                if (a1.getArtikalId() > a2.getArtikalId())
                     return -1;
-                else
-                    return 1;
+                return 1;
             }
 
         });

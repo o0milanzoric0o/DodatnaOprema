@@ -285,14 +285,12 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
             public void webRequestSuccess(boolean success, ArticlesFilteredByCategory articlesFilteredByCategory) {
                 if (success) {
 
-                    // mArticles = articlesFilteredByCategory.getArtikli();
                     mArticles = SortUtils.sortArticlesByNumberOfViewsDescending(articlesFilteredByCategory.getArtikli());
                     filteredArticles = mArticles;
                     allSubcategoryArticles = articlesFilteredByCategory.getArtikli();
 
                     mBrands = articlesFilteredByCategory.getBrendovi();
 
-                    Log.logInfo("ARTIKLI", "" + mArticles.size());
                     if (mArticles.size() > 0) {
                         mHeader.setVisibility(View.VISIBLE);
                         mFooter.setVisibility(View.VISIBLE);
