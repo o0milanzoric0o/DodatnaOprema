@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -46,6 +45,7 @@ import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.brands.Brand;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.products_of_the_week.Product;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrupmByID;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.you_may_also_like_categories.YMALCategory;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -502,7 +502,7 @@ public class MainActivity extends FragmentActivity
                 if (success) {
                     Intent intent = new Intent(getApplicationContext(), OneArticleActivity.class);
                     intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
-                    startActivity(intent);
+                    getBreadCrupmListByCategoryId(oneArticle.getArtikal().getKategorijaArtikalId(), intent);
                     progressDialog.hideDialog();
                 } else {
                     progressDialog.hideDialog();
@@ -517,5 +517,30 @@ public class MainActivity extends FragmentActivity
         });
 
         content.pullList();
+    }
+
+    public void getBreadCrupmListByCategoryId(int id, final Intent intent) {
+
+
+        PullWebContent<BreadCrupmByID> content = new PullWebContent<>(BreadCrupmByID.class, UrlEndpoints.getBreadCrump(id), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<BreadCrupmByID>() {
+            @Override
+            public void webRequestSuccess(boolean success, BreadCrupmByID breadCrumpList) {
+                if (success) {
+
+                    intent.putExtra("breadCrump", (Serializable) breadCrumpList.getBreadCrump());
+                    startActivity(intent);
+
+                }
+            }
+
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        content.pullList();
+
     }
 }

@@ -4,7 +4,6 @@ package rs.dodatnaoprema.dodatnaoprema;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
@@ -25,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,7 @@ import rs.dodatnaoprema.dodatnaoprema.fragments.OneArticleImageFragment;
 import rs.dodatnaoprema.dodatnaoprema.models.User;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.ArticleSpec;
 import rs.dodatnaoprema.dodatnaoprema.models.cart.ItemAddResponse;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -69,6 +70,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
     private OneArticle mOneArticle;
     private Context mContext;
     private CartItemAddConfirmationDialog cartItemAddConfirmationDialog;
+    private List<BreadCrump> breadCrumpList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +162,7 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
 
         mOneArticle = (OneArticle) intent.getExtras().get(AppConfig.ABOUT_PRODUCT);
+        breadCrumpList = (List<BreadCrump>) intent.getExtras().get("breadCrump");
 
 
         if (mTextView != null && mOneArticle != null)
@@ -205,14 +208,16 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         SpannableString content = new SpannableString(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         if (mTextViewArticleCategory != null) {
-            mTextViewArticleCategory.setText(content);
-            // mTextViewArticleCategory.setText(getString(R.string.articles_category_link, mOneArticle.getArtikal().getKategorijaArtiklaNaziv()));
+            mTextViewArticleCategory.setText(" ");
+            mTextViewArticleCategory.append(content);
             mTextViewArticleCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getApplicationContext(), SubCategoryArticlesActivity.class);
                     intent.putExtra("Artikli", mOneArticle.getArtikal().getKategorijaArtiklaNaziv());
                     intent.putExtra("ArtikalId", mOneArticle.getArtikal().getKategorijaArtikalId());
+                    intent.putExtra("breadCrump", (Serializable) breadCrumpList);
+
                     startActivity(intent);
                 }
             });
@@ -256,10 +261,10 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
         }
         if (mOneArticle.getArtikal().getStanje() == 0) {
             mTextViewKorpa.setText(getString(R.string.no_product_txt));
-            mTextViewKorpa.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            mTextViewKorpa.setBackgroundColor(ContextCompat.getColor(this, R.color.no_products_button_color));
         } else if (mOneArticle.getArtikal().getCenaPrikaz() == null || mOneArticle.getArtikal().getMozedaseKupi() == 0) {
             mTextViewKorpa.setText(getString(R.string.call_for_product_txt));
-            mTextViewKorpa.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark));
+            mTextViewKorpa.setBackgroundColor(ContextCompat.getColor(this, R.color.no_products_button_color));
         }
     }
 

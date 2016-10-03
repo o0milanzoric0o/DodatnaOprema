@@ -35,6 +35,7 @@ public class AppConfig {
     public static final int URL_VALUE_CONTACT = 41;
     public static final int URL_VALUE_HOW_TO_BUY = 42;
     public static final String URL_VALUE_CATEGORY_SPECIFICATION = "specPoKategorijiSamo";
+    public static final String URL_VALUE_BREADCRUMP = "breadCrumpodIdKategFull";
     public static final String URL_VALUE_CURRENCY_RSD = "rsd";
     public static final String URL_VALUE_LANGUAGE_SRB_LAT = "srblat";
     public static final String URL_VALUE_CATEGORIES_BY_ID = "kategorijePoId";

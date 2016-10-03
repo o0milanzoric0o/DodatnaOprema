@@ -69,7 +69,7 @@
     <color name="new_indicator">#F5BD64</color>
     <color name="best_indicator">#F56E64</color>
 
-    <!--<color name="sale_indicator">#0000ff</color>-->
+    <color name="no_products_button_color">#fa8181</color>
     <!--<color name="new_indicator">#00ff00</color>-->
     <!--<color name="best_indicator">#ff0000</color>-->
 </resources>

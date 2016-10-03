@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.OneArticleActivity;
@@ -67,6 +68,7 @@ public class ArticlesGrid extends Fragment {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
+                            intent.putExtra("breadCrump", (Serializable) ((SubCategoryArticlesActivity)getActivity()).getBreadCrump());
 
                             //OneArticleActivity articleDetails = new OneArticleActivity();
                             startActivity(intent);

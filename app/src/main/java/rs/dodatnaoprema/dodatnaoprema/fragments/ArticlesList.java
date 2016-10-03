@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,6 +105,8 @@ public class ArticlesList extends Fragment {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
+                            intent.putExtra("breadCrump", (Serializable) ((SubCategoryArticlesActivity)getActivity()).getBreadCrump());
+
                             startActivity(intent);
 
 

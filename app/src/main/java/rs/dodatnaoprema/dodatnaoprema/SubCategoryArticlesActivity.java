@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -77,6 +78,7 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
     private String mSubCategoryName;
     private int numberOfResults = 0;
     private ViewGroup pathList;
+    private List<BreadCrump> breadCrumpList;
 
     public List<Article> getArticlesList() {
         return mArticles;
@@ -101,7 +103,7 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
         Intent intent = getIntent();
         mSubCategoryName = intent.getStringExtra("Artikli");
         mArticleId = intent.getIntExtra("ArtikalId", 0);
-        List<BreadCrump> breadCrumpList = (List<BreadCrump>) intent.getSerializableExtra("breadCrump");
+        breadCrumpList = (List<BreadCrump>) intent.getSerializableExtra("breadCrump");
         if (breadCrumpList.size() > 0) {
             pathList.addView(addNewButton("Sve kategorije", "0"));
             if (breadCrumpList.size() > 1) {
@@ -115,7 +117,13 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
                 }
             }
         }
-
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, pathList.getHeight(), 0, 0);
+        cardFace.setLayoutParams(params);
+        cardBack.setLayoutParams(params);
         Spinner mSpinner = (Spinner) findViewById(R.id.spinner_sort);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item, getResources().getStringArray(R.array.sort_options));
@@ -637,6 +645,10 @@ public class SubCategoryArticlesActivity extends BaseActivity implements Seriali
 
 
         return tv;
+    }
+
+    public List<BreadCrump> getBreadCrump() {
+        return breadCrumpList;
     }
 
 }

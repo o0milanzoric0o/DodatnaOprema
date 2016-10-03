@@ -137,7 +137,7 @@
     <string name="id_txt">Id:</string>
     <string name="code_txt">Code:</string>
     <string name="ask_question">Postavi pitanje</string>
-    <string name="article_category_text">Pripada kategoriji:</string>
+    <string name="article_category_text">Pripada kategoriji: </string>
     <string name="no_spec">Nema specifikacija</string>
     <string name="text">%s</string>
     <string name="underlined_text"><u>%s</u></string>

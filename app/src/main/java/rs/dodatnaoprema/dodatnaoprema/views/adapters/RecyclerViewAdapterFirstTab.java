@@ -43,9 +43,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_FOOTER = 2;
 
-    HashMap<String, List<Article>> items = new HashMap<>();
-    ArrayList<Product> products_of_the_week;
-    ArrayList<Brand> allBrands;
+    private HashMap<String, List<Article>> items = new HashMap<>();
+    private ArrayList<Product> products_of_the_week;
+    private ArrayList<Brand> allBrands;
 
     private TextView categoryName;
     private Button viewMore;
@@ -55,8 +55,6 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     private Context context;
     private RecyclerView mRecyclerView;
-
-    private GridLayoutManager mLayoutManager;
 
     private RelativeLayout mFirstButton;
     private RelativeLayout mSecondButton;
@@ -126,9 +124,8 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                                 Log.logInfo("LALALA", "SUCCESS");
                                 Intent intent = new Intent(context, OneArticleActivity.class);
                                 intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
-                                ((MainActivity) context).startActivityOneArticle(intent);
+                                ((MainActivity) context).getBreadCrupmListByCategoryId(oneArticle.getArtikal().getKategorijaArtikalId(), intent);
                                 progressDialog.hideDialog();
-
 
                                 Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
 
@@ -166,7 +163,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
                         }
                     }, 1000);*/
 
-                    Intent intent = new Intent((MainActivity) context, OffersActivity.class);
+                    Intent intent = new Intent(context, OffersActivity.class);
                     intent.putExtra("Artikli", AppConfig.FIRST_TAB_ITEMS[holder.getAdapterPosition() - 1]);
                     intent.putExtra("AllCategories", (Serializable) items.get(AppConfig.FIRST_TAB_ITEMS[holder.getAdapterPosition() - 1]));
                     ((MainActivity) context).startActivityOneArticle(intent);
@@ -253,9 +250,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         return position == (getItemCount() - 1);
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    private class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
 
             super(view);
 
@@ -264,6 +261,7 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
             mRecyclerView = (RecyclerView) view.findViewById(R.id.gridView);
 
             int spacing = context.getResources().getDimensionPixelSize(R.dimen.recycler_view_space);
+            GridLayoutManager mLayoutManager;
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(4, spacing, 0));
                 mLayoutManager = new GridLayoutManager(context, 4, GridLayoutManager.VERTICAL, false);
@@ -283,9 +281,9 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
 
     }
 
-    class ViewHolderHeader extends RecyclerView.ViewHolder {
+    private class ViewHolderHeader extends RecyclerView.ViewHolder {
 
-        public ViewHolderHeader(View itemView) {
+        ViewHolderHeader(View itemView) {
             super(itemView);
             imageViewPagerWDotIndicator_three_imgs = (ImageSlider3Brands) itemView.findViewById(R.id.view_pager_dot_ind_0);
             imageViewPagerWDotIndicator_two_imgs = (ImageSlider2Products) itemView.findViewById(R.id.view_pager_dot_ind_1);
@@ -298,11 +296,12 @@ public class RecyclerViewAdapterFirstTab extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    class ViewHolderFooter extends RecyclerView.ViewHolder {
+    private class ViewHolderFooter extends RecyclerView.ViewHolder {
 
-        public ViewHolderFooter(View itemView) {
+        ViewHolderFooter(View itemView) {
             super(itemView);
         }
     }
+
 
 }
