@@ -52,13 +52,6 @@
                 android:background="@color/button_holder_background" />
 
 
-            <FrameLayout
-                android:id="@+id/articles_content_grid"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/button_holder_background"
-                android:visibility="gone" />
-
         </LinearLayout>
 
         <android.support.design.widget.AppBarLayout
@@ -76,14 +69,11 @@
                 android:minHeight="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <RelativeLayout
-                    android:id="@+id/sort_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <!-- Spinner with sort options -->
                     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="fill_parent"
+                        android:id="@+id/sort_header"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <EditText
@@ -96,7 +86,9 @@
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
                             android:paddingRight="35dp"
-                            android:paddingEnd="35dp"/>
+                            android:paddingEnd="35dp"
+                            android:paddingStart="35dp"
+                            android:paddingLeft="35dp"/>
 
                         <Button
                             android:id="@+id/clearable_button_clear"
@@ -112,8 +104,6 @@
                             android:alpha="0.3"
                             android:background="@drawable/ic_clear_black_24dp" />
                     </RelativeLayout>
-
-                </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 

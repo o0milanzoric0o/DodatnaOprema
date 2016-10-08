@@ -66,21 +66,6 @@ public class ArticlesList extends Fragment {
 
         mVolleySingleton = VolleySingleton.getsInstance(this.getActivity());
 
-       /* mRecyclerView.addOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                int currentFirstVisible = mLayoutManager.findFirstVisibleItemPosition();
-
-                if (currentFirstVisible > firstVisibleInRecyclerView)
-                    mHeader.setVisibility(View.VISIBLE);
-                else
-                    mHeader.setVisibility(View.GONE);
-
-                firstVisibleInRecyclerView = currentFirstVisible;
-            }
-        });*/
         if (activity instanceof SubCategoryArticlesActivity) {
             articles = ((SubCategoryArticlesActivity) activity).getArticlesList();
         } else {
@@ -105,13 +90,12 @@ public class ArticlesList extends Fragment {
                             Log.logInfo("LALALA", "SUCCESS");
                             Intent intent = new Intent(getActivity(), OneArticleActivity.class);
                             intent.putExtra(AppConfig.ABOUT_PRODUCT, oneArticle);
-                            intent.putExtra("breadCrump", (Serializable) ((SubCategoryArticlesActivity)getActivity()).getBreadCrump());
-
-                            startActivity(intent);
-
-
-                            Log.logInfo("LALALA", oneArticle.getArtikal().getArtikalNaziv());
-
+                            if (getActivity() instanceof SubCategoryArticlesActivity) {
+                                intent.putExtra("breadCrump", (Serializable) ((SubCategoryArticlesActivity) getActivity()).getBreadCrump());
+                                startActivity(intent);
+                            } else {
+                                ((SearchActivity) getActivity()).getBreadCrupmListByCategoryId(oneArticle.getArtikal().getKategorijaArtikalId(), intent);
+                            }
                         } else {
                             Log.logInfo("LALALA", "FAILED");
                         }
