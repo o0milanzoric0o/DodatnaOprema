@@ -1,6 +1,7 @@
 package rs.dodatnaoprema.dodatnaoprema;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,8 @@ import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.fragments.ArticlesList;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
+import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrupmByID;
 import rs.dodatnaoprema.dodatnaoprema.models.search.Search;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
 import rs.dodatnaoprema.dodatnaoprema.network.UrlEndpoints;
@@ -45,6 +49,7 @@ public class SearchActivity extends BaseActivity {
     private Button btn_clear;
     private EditText searchTxt;
 
+    private List<BreadCrump> breadCrumpList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,11 +183,9 @@ public class SearchActivity extends BaseActivity {
     public void updateList(List<Article> articles) {
 
         Log.logInfo("SORT", "" + articles.size());
-        // setNumberOfResults(articles.size());
         ((ArticlesList) getFragmentManager().findFragmentById(R.id.articles_content_list)).updateFragment(articles);
 
-        //  if (articles.size() == 0)
-        // noSearchResults();
+
     }
 
     public void removeKeyboard() {
@@ -194,25 +197,7 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    /*  private void noResults() {
-          mHeader.setVisibility(View.GONE);
-          mFooter.setVisibility(View.GONE);
-          cardBack.setVisibility(View.GONE);
-          cardFace.setVisibility(View.GONE);
 
-          msgNoResults.setVisibility(View.VISIBLE);
-          msgNoResults.setText(getString(R.string.msg_no_articles, mSubCategoryName));
-      }
-
-      private void noSearchResults() {
-          mHeader.setVisibility(View.GONE);
-          cardBack.setVisibility(View.GONE);
-          cardFace.setVisibility(View.GONE);
-
-          msgNoResults.setVisibility(View.VISIBLE);
-          msgNoResults.setText(getString(R.string.msg_no_search_results));
-      }
-  */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -228,6 +213,30 @@ public class SearchActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+    public void getBreadCrupmListByCategoryId(int id, final Intent intent) {
+
+
+        PullWebContent<BreadCrupmByID> content = new PullWebContent<>(BreadCrupmByID.class, UrlEndpoints.getBreadCrump(id), mVolleySingleton);
+        content.setCallbackListener(new WebRequestCallbackInterface<BreadCrupmByID>() {
+            @Override
+            public void webRequestSuccess(boolean success, BreadCrupmByID breadCrumpList) {
+                if (success) {
+
+                    intent.putExtra("breadCrump", (Serializable) breadCrumpList.getBreadCrump());
+                    startActivity(intent);
+
+                }
+            }
+
+
+            @Override
+            public void webRequestError(String error) {
+
+            }
+        });
+        content.pullList();
+
     }
 }
 
