@@ -226,11 +226,6 @@ public class OneArticleActivity extends BaseActivity implements OneArticleImageF
 
 
 
-/*
-        mNumberPicker = (NumberPicker)findViewById(R.id.numberPicker);
-        mNumberPicker.setMinValue(mOneArticle.getArtikal().getMozedaseKupi());
-        mNumberPicker.setMaxValue(9999);
-*/
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs_one_article);
         if (mTabLayout != null) {
             mTabLayout.addTab(mTabLayout.newTab().setText("Opis"));

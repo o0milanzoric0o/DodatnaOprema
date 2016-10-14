@@ -85,15 +85,14 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
         final MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) root.findViewById(R.id.multiSelectionSpinnerBrands);
         if (multiSelectionSpinner != null) {
+            Log.logDebug("BRENDOVI",""+mBrands.size());
             if (brandNames.size() > 0) {
-                Log.logDebug("BRENDOVI",""+mBrands.size());
                 multiSelectionSpinner.setItems(brandNames);
                 multiSelectionSpinner.setListener(this);
+                multiSelectionSpinner.setSelection(SharedPreferencesUtils.getArrayList(getActivity(), AppConfig.SELECTED_BRANDS_KEY));
             } else {
                 multiSelectionSpinner.setVisibility(View.GONE);
             }
-
-            multiSelectionSpinner.setSelection(SharedPreferencesUtils.getArrayList(getActivity(), AppConfig.SELECTED_BRANDS_KEY));
         }
 
         mVolleySingleton = VolleySingleton.getsInstance(getActivity());
