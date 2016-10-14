@@ -85,7 +85,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
         final MultiSelectionSpinner multiSelectionSpinner = (MultiSelectionSpinner) root.findViewById(R.id.multiSelectionSpinnerBrands);
         if (multiSelectionSpinner != null) {
-            Log.logDebug("BRENDOVI",""+mBrands.size());
+            Log.logDebug("BRENDOVI", "" + mBrands.size());
             if (brandNames.size() > 0) {
                 multiSelectionSpinner.setItems(brandNames);
                 multiSelectionSpinner.setListener(this);
@@ -156,7 +156,9 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
                 SharedPreferencesUtils.clearSharedPreferences(getActivity(), AppConfig.SELECTED_BRANDS_KEY);
 
                 //reset spinner with brands
-                if (multiSelectionSpinner != null) multiSelectionSpinner.resetSpinner();
+                if (brandNames.size() > 0) {
+                    if (multiSelectionSpinner != null) multiSelectionSpinner.resetSpinner();
+                }
 
                 //reset spinner with specifications
                 RecyclerViewSubcategorySpecification mAdapter = new RecyclerViewSubcategorySpecification(getActivity(), specifications);

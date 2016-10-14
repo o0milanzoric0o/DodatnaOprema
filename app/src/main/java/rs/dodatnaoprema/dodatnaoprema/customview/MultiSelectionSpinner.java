@@ -102,15 +102,17 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         //simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
-       // mSelection[0] = true;
-       // mSelectionAtStart[0] = true;
+        // mSelection[0] = true;
+        // mSelectionAtStart[0] = true;
     }
 
     public void resetSpinner() {
-        mSelection = new boolean[_items.length];
-        simple_adapter.clear();
-        //simple_adapter.add(_items[0]);
-        Arrays.fill(mSelection, false);
+        if (_items.length != 0) {
+            mSelection = new boolean[_items.length];
+            simple_adapter.clear();
+            //simple_adapter.add(_items[0]);
+            Arrays.fill(mSelection, false);
+        }
         // mSelection[0] = true;
         // mSelectionAtStart[0] = true;
     }
@@ -120,9 +122,9 @@ public class MultiSelectionSpinner extends Spinner implements
         mSelection = new boolean[_items.length];
         mSelectionAtStart = new boolean[_items.length];
         simple_adapter.clear();
-      //  simple_adapter.add(_items[0]);
+        //  simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
-       // mSelection[0] = true;
+        // mSelection[0] = true;
     }
 
     public void setSelection(String[] selection) {
@@ -192,6 +194,7 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(buildSelectedItemString());
     }
+
     public void setSelections(List<Integer> selectedIndices) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;
