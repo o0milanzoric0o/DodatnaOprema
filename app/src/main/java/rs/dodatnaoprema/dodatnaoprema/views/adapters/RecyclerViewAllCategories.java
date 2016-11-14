@@ -85,6 +85,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
         }
     }
+
     @SuppressWarnings("unchecked")
     public RecyclerViewAllCategories(Context context, List<Category> categories, OnItemClickListener listener) {
 
@@ -129,6 +130,7 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
         if (holder instanceof MyViewHolder) {
 
             ((MyViewHolder) holder).bind(categories.get(position - existHistory), listener);
