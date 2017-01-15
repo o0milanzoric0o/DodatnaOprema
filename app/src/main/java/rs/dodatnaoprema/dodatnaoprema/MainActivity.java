@@ -234,31 +234,44 @@ public class MainActivity extends FragmentActivity
     private void setUserDrawerInfo() {
         // Update user email, name and photo
         User user = MyApplication.getInstance().getPrefManager().getUser();
-        ((TextView) findViewById(R.id.id_user_email)).setText(user.getEmail());
+        TextView user_email = (TextView) findViewById(R.id.id_user_email);
+        if (user_email != null)
+            user_email.setText(user.getEmail());
         TextView tv_user_name = (TextView) findViewById(R.id.id_user_name);
-        tv_user_name.setText(user.getName());
-        tv_user_name.setOnClickListener(null);
-        ((ImageView) findViewById(R.id.id_user_photo)).setImageURI(user.getPhoto());
+        if (tv_user_name != null) {
+            tv_user_name.setText(user.getName());
+            tv_user_name.setOnClickListener(null);
+        }
+        ImageView user_photo = (ImageView) findViewById(R.id.id_user_photo);
+        if (user_photo != null)
+            user_photo.setImageURI(user.getPhoto());
     }
 
     private void clearUserDrawerInfo() {
         // Update user email, name and photo
-        ((TextView) findViewById(R.id.id_user_email)).setText("");
-        TextView tv_user_name_unavailable = (TextView) findViewById(R.id.id_user_name);
-        tv_user_name_unavailable.setText(getString(R.string.user_name_unavailable));
-        tv_user_name_unavailable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the login action
-                Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
-                startActivity(intent);
-                // close drawer
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-            }
-        });
 
-        ((ImageView) findViewById(R.id.id_user_photo)).setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.chainsaw_128));
+        TextView user_email = (TextView) findViewById(R.id.id_user_email);
+        if (user_email != null)
+            user_email.setText("");
+        TextView tv_user_name_unavailable = (TextView) findViewById(R.id.id_user_name);
+        if (tv_user_name_unavailable != null) {
+            tv_user_name_unavailable.setText(getString(R.string.user_name_unavailable));
+            tv_user_name_unavailable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle the login action
+                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
+                    startActivity(intent);
+                    // close drawer
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+        }
+        ImageView user_photo = (ImageView) findViewById(R.id.id_user_photo);
+        if (user_photo != null)
+            user_photo.setImageDrawable(ContextCompat.getDrawable(MainActivity.this, R.drawable.chainsaw_128));
+
     }
 
     public void initializeTabs() {

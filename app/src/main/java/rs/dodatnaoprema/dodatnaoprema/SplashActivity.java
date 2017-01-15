@@ -156,8 +156,6 @@ public class SplashActivity extends AppCompatActivity {
                     contact = info.getPodaci();
                     SharedPreferencesUtils.putString(getApplicationContext(), "INFO_HOW_TO_BUY", contact.getOpisKategHeadTekst());
                     response();
-
-                    response();
                 }
             }
 

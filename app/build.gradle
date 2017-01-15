@@ -10,8 +10,8 @@ android {
         applicationId "rs.dodatnaoprema.dodatnaoprema"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 15
-        versionName "1.5.4"
+        versionCode 17
+        versionName "1.5.6"
         // Enabling multidex support.
         multiDexEnabled true
     }
