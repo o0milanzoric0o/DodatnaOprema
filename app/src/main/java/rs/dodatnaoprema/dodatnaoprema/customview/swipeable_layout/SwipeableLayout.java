@@ -816,10 +816,10 @@ public class SwipeableLayout extends ViewGroup {
                         && (absListView.getFirstVisiblePosition() > 0 || absListView.getChildAt(0)
                         .getTop() < absListView.getPaddingTop());
             } else {
-                return ViewCompat.canScrollVertically(mTargetView, -1) || mTargetView.getScrollY() > 0;
+                return mTargetView.canScrollVertically(-1) || mTargetView.getScrollY() > 0;
             }
         } else {
-            return ViewCompat.canScrollVertically(mTargetView, -1);
+            return mTargetView.canScrollVertically(-1);
         }
     }
 
@@ -831,16 +831,16 @@ public class SwipeableLayout extends ViewGroup {
                         && (absListView.getLastVisiblePosition() < absListView.getChildCount() - 1
                         || absListView.getChildAt(absListView.getChildCount() - 1).getBottom() > absListView.getPaddingBottom());
             } else {
-                return ViewCompat.canScrollVertically(mTargetView, 1) || mTargetView.getScrollY() < 0;
+                return mTargetView.canScrollVertically(1) || mTargetView.getScrollY() < 0;
             }
         } else {
-            return ViewCompat.canScrollVertically(mTargetView, 1);
+            return mTargetView.canScrollVertically(1);
         }
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        final int action = MotionEventCompat.getActionMasked(ev);
+        final int action = ev.getAction();
         switch (action) {
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
@@ -858,7 +858,7 @@ public class SwipeableLayout extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        final int action = MotionEventCompat.getActionMasked(event);
+        final int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 // if status is not ing status && not complete status
@@ -924,7 +924,7 @@ public class SwipeableLayout extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        final int action = MotionEventCompat.getActionMasked(event);
+        final int action = event.getAction();
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -964,7 +964,7 @@ public class SwipeableLayout extends ViewGroup {
                 }
                 return true;
             case MotionEvent.ACTION_POINTER_DOWN: {
-                final int pointerIndex = MotionEventCompat.getActionIndex(event);
+                final int pointerIndex = event.getActionIndex();
                 final int pointerId = event.getPointerId(pointerIndex);
                 if (pointerId != INVALID_POINTER) {
                     mActivePointerId = pointerId;
@@ -1152,7 +1152,7 @@ public class SwipeableLayout extends ViewGroup {
     }
 
     private void onSecondaryPointerUp(MotionEvent ev) {
-        final int pointerIndex = MotionEventCompat.getActionIndex(ev);
+        final int pointerIndex = ev.getActionIndex();
         final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
             // This was our active pointer going up. Choose a new

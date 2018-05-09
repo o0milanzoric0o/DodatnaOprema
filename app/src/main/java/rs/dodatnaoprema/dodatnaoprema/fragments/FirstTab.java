@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import rs.dodatnaoprema.dodatnaoprema.MainActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.LinearLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.OnLoadMoreListener;
 import rs.dodatnaoprema.dodatnaoprema.customview.swipeable_layout.SwipeableLayout;
 import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewAdapterFirstTab;
@@ -37,8 +38,7 @@ public class FirstTab extends Fragment implements OnLoadMoreListener {
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setAutoMeasureEnabled(true);
+        LinearLayoutManagerAutoMeasure mLayoutManager = new LinearLayoutManagerAutoMeasure(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         RecyclerViewAdapterFirstTab mAdapter = new RecyclerViewAdapterFirstTab(mainActivity.getFirstTabItems(), getActivity(), mainActivity.getProductsOfTheWeek(), mainActivity.getAllBrands());

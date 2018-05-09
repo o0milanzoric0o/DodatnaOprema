@@ -24,7 +24,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,8 @@ import java.util.List;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
+import rs.dodatnaoprema.dodatnaoprema.customview.StaggeredGridLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.fragments.DeleteHistoryDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
@@ -149,14 +148,13 @@ public class AllCategoriesActivity extends BaseActivity {
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
 
-        StaggeredGridLayoutManager mLayoutManager;
+        StaggeredGridLayoutManagerAutoMeasure mLayoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // use a linear layout manager
-            mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+            mLayoutManager = new StaggeredGridLayoutManagerAutoMeasure(3, StaggeredGridLayoutManager.VERTICAL);
         } else {
-            mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            mLayoutManager = new StaggeredGridLayoutManagerAutoMeasure(2, StaggeredGridLayoutManager.VERTICAL);
         }
-        mLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         RecyclerViewAllCategories mAdapter = new RecyclerViewAllCategories(this, allCategories, new RecyclerViewAllCategories.OnItemClickListener() {
@@ -200,18 +198,9 @@ public class AllCategoriesActivity extends BaseActivity {
         bottomSheet.setVisibility(View.GONE);
         historyList.removeAllViews();
 
+        this.mHistory = SharedPreferencesUtils.getArrayList(this, AppConfig.HISTORY_KEY);
+        this.mHistoryID = SharedPreferencesUtils.getArrayList(this, AppConfig.HISTORY_ID_KEY);
 
-        SharedPreferences prefs = getSharedPreferences(AppConfig.HISTORY_KEY, Context.MODE_PRIVATE);
-        SharedPreferences prefsID = getSharedPreferences(AppConfig.HISTORY_ID_KEY, Context.MODE_PRIVATE);
-        try {
-            this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(AppConfig.HISTORY_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
-            this.mHistoryID = (ArrayList<String>) ObjectSerializer.deserialize(prefsID.getString(AppConfig.HISTORY_ID_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         existHistory = (mHistory.size() != 0) ? 1 : 0;
         Log.logInfo("HISTORY", "" + mHistory.size());
 

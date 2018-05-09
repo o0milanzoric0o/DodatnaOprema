@@ -21,6 +21,7 @@ import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.LinearLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -34,7 +35,7 @@ public class ArticlesList extends Fragment {
 
     private static int firstVisibleInRecyclerView;
     private CustomRecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private LinearLayoutManagerAutoMeasure mLayoutManager;
 
     private Activity activity;
     private FrameLayout mHeader;
@@ -52,15 +53,12 @@ public class ArticlesList extends Fragment {
 
         mRecyclerView = (CustomRecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setFlingFactor(1);
-        // mHeader = (FrameLayout) view.findViewById(R.id.header);
 
-        // mRecyclerView.setNestedScrollingEnabled(true);
         mRecyclerView.setNestedScrollingEnabled(true);
 
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setAutoMeasureEnabled(true);
+        mLayoutManager = new LinearLayoutManagerAutoMeasure(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         firstVisibleInRecyclerView = mLayoutManager.findFirstVisibleItemPosition();
 

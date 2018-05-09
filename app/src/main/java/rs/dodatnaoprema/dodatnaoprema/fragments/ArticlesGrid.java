@@ -17,6 +17,7 @@ import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.GridLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -43,8 +44,7 @@ public class ArticlesGrid extends Fragment {
         mRecyclerView.setNestedScrollingEnabled(true);
 
         // use a linear layout manager
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        mLayoutManager.setAutoMeasureEnabled(true);
+        GridLayoutManagerAutoMeasure mLayoutManager = new GridLayoutManagerAutoMeasure(getActivity(), 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mVolleySingleton = VolleySingleton.getsInstance(this.getActivity());

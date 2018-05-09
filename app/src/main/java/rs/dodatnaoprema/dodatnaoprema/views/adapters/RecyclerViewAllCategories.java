@@ -19,14 +19,13 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.dodatnaoprema.dodatnaoprema.AllCategoriesActivity;
 import rs.dodatnaoprema.dodatnaoprema.R;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
-import rs.dodatnaoprema.dodatnaoprema.common.utils.ObjectSerializer;
+import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.fragments.DeleteHistoryDialog;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Category;
 import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
@@ -94,15 +93,8 @@ public class RecyclerViewAllCategories extends RecyclerView.Adapter<RecyclerView
         this.listener = listener;
         SharedPreferences prefs = context.getSharedPreferences(AppConfig.HISTORY_KEY, Context.MODE_PRIVATE);
         SharedPreferences prefsID = context.getSharedPreferences(AppConfig.HISTORY_ID_KEY, Context.MODE_PRIVATE);
-        try {
-            // unchecked cast here, but guaranteed to work
-            this.mHistory = (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(AppConfig.HISTORY_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
-            // unchecked cast here, but guaranteed to work
-            this.mHistoryID = (ArrayList<String>) ObjectSerializer.deserialize(prefsID.getString(AppConfig.HISTORY_ID_KEY, ObjectSerializer.serialize(new ArrayList<String>())));
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+            this.mHistory = SharedPreferencesUtils.getArrayList(this.context, AppConfig.HISTORY_KEY);
+            this.mHistoryID = SharedPreferencesUtils.getArrayList(this.context, AppConfig.HISTORY_ID_KEY);
         this.existHistory = 0;
     }
 

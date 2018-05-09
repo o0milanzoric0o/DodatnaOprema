@@ -27,6 +27,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.GridLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.all_categories.Child;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.BreadCrump;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.categories_by_id.CategoriesByID;
@@ -101,14 +102,13 @@ public class SubCategoriesActivity extends BaseActivity implements Serializable 
             mRecyclerView.setHasFixedSize(true);
         }
 
-        GridLayoutManager mLayoutManager;
+        GridLayoutManagerAutoMeasure mLayoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // use a linear layout manager
-            mLayoutManager = new GridLayoutManager(this, 6, GridLayoutManager.VERTICAL, false);
+            mLayoutManager = new GridLayoutManagerAutoMeasure(this, 6, GridLayoutManager.VERTICAL, false);
         } else {
-            mLayoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+            mLayoutManager = new GridLayoutManagerAutoMeasure(this, 3, GridLayoutManager.VERTICAL, false);
         }
-        mLayoutManager.setAutoMeasureEnabled(true);
         if (mRecyclerView != null) mRecyclerView.setLayoutManager(mLayoutManager);
 
         RecyclerViewSubCategories mAdapter = new RecyclerViewSubCategories(this, subCategories, new RecyclerViewSubCategories.OnItemClickListener() {

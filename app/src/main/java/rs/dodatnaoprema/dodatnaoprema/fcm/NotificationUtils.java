@@ -38,6 +38,8 @@ public class NotificationUtils {
 
     private static String TAG = NotificationUtils.class.getSimpleName();
 
+    private static String CHANNEL_ID = "59785983789";
+
     private Context mContext;
 
     public NotificationUtils() {
@@ -115,7 +117,7 @@ public class NotificationUtils {
                 );
 
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                mContext);
+                mContext, CHANNEL_ID);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 

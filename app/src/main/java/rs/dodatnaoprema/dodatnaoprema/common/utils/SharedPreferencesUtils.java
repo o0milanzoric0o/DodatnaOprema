@@ -39,12 +39,13 @@ public class SharedPreferencesUtils {
 
         SharedPreferences prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
 
-        try {
-            return (ArrayList<String>) ObjectSerializer.deserialize(prefs.getString(key, ObjectSerializer.serialize(new ArrayList<String>())));
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<>();
+        Gson gson = new Gson();
+        String json = prefs.getString(key, "");
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
+
+        ArrayList<String> arrayList = gson.fromJson(json, type);
+        return arrayList == null ? new ArrayList<String>() : arrayList;
     }
 
 
@@ -52,11 +53,9 @@ public class SharedPreferencesUtils {
 
         SharedPreferences.Editor editor = getEditor(context, key);
 
-        try {
-            editor.putString(key, ObjectSerializer.serialize(mList));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        String json = gson.toJson(mList);
+        editor.putString(key, json);
         editor.apply();
     }
 

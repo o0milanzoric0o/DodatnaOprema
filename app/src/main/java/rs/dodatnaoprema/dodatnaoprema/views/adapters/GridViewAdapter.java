@@ -25,7 +25,7 @@ import rs.dodatnaoprema.dodatnaoprema.network.VolleySingleton;
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
-    private List<GridItem> data = new ArrayList();
+    private List<GridItem> data;
 
     public GridViewAdapter(Context context, int layoutResourceId, List<GridItem> articles) {
         // noinspection unchecked

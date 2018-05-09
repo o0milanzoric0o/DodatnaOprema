@@ -22,6 +22,7 @@ import rs.dodatnaoprema.dodatnaoprema.common.dialogs.ProgressDialogCustom;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.BaseActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.customview.CustomRecyclerView;
+import rs.dodatnaoprema.dodatnaoprema.customview.LinearLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Article;
 import rs.dodatnaoprema.dodatnaoprema.models.one_article.OneArticle;
 import rs.dodatnaoprema.dodatnaoprema.network.PullWebContent;
@@ -33,7 +34,7 @@ import rs.dodatnaoprema.dodatnaoprema.views.adapters.RecyclerViewSelectedProduct
 public class OffersActivity extends BaseActivity {
 
     private CustomRecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private LinearLayoutManagerAutoMeasure mLayoutManager;
     private RecyclerViewSelectedProducts mAdapter;
     private String mSubCategoryName;
 
@@ -76,8 +77,7 @@ public class OffersActivity extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.setAutoMeasureEnabled(true);
+        mLayoutManager = new LinearLayoutManagerAutoMeasure(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mVolleySingleton = VolleySingleton.getsInstance(this);

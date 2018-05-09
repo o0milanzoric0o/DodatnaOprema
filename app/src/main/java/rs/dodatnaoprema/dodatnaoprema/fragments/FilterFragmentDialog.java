@@ -23,6 +23,7 @@ import rs.dodatnaoprema.dodatnaoprema.SubCategoryArticlesActivity;
 import rs.dodatnaoprema.dodatnaoprema.common.config.AppConfig;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.Log;
 import rs.dodatnaoprema.dodatnaoprema.common.utils.SharedPreferencesUtils;
+import rs.dodatnaoprema.dodatnaoprema.customview.LinearLayoutManagerAutoMeasure;
 import rs.dodatnaoprema.dodatnaoprema.customview.MultiSelectionSpinner;
 import rs.dodatnaoprema.dodatnaoprema.models.articles.Brendovus;
 import rs.dodatnaoprema.dodatnaoprema.models.categories.category_specification.CategorySpecification;
@@ -120,8 +121,7 @@ public class FilterFragmentDialog extends DialogFragment implements AdapterView.
 
         mRecyclerView = (RecyclerView) root.findViewById(R.id.recycler_view_specifications);
         // use a linear layout manager
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setAutoMeasureEnabled(true);
+        LinearLayoutManagerAutoMeasure mLayoutManager = new LinearLayoutManagerAutoMeasure(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Button btnApply = (Button) root.findViewById(R.id.applyBtn);
